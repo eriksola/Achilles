@@ -42,64 +42,58 @@ public class KabasujiMainMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 769, 485);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(173, 216, 230));
 		contentPane.setForeground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLUE);
-		contentPane.add(panel, BorderLayout.CENTER);
-		
-		JLabel lblDesignedByNan = new JLabel("Designed by: Nan Zhang, Giovanni Aguila, Barry Wolfson, "
-				+ "Paul-Henry Schoehagen, & Erik Sola");
-		lblDesignedByNan.setForeground(Color.WHITE);
-		
-		JButton btnOurLevels = new JButton("Our Levels");
-		
-		JButton btnYourLevels = new JButton("Your Levels");
+		JButton btnRules = new JButton("Rules");
 		
 		JLabel lblKabasuji = new JLabel("Kabasuji");
 		lblKabasuji.setHorizontalAlignment(SwingConstants.CENTER);
-		lblKabasuji.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
-		lblKabasuji.setForeground(Color.WHITE);
+		lblKabasuji.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
 		
-		JButton btnRules = new JButton("Rules");
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(133, Short.MAX_VALUE)
-					.addComponent(lblDesignedByNan)
-					.addGap(71))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(241)
-					.addComponent(btnOurLevels)
-					.addGap(70)
-					.addComponent(btnYourLevels)
-					.addContainerGap(240, Short.MAX_VALUE))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(330)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnRules)
-						.addComponent(lblKabasuji))
-					.addContainerGap(342, Short.MAX_VALUE))
+		JButton btnYourLevels = new JButton("Your Levels");
+		
+		JButton btnOurLevels = new JButton("Our Levels");
+		
+		JLabel lblDesignedByNan = new JLabel("Designed By: Nan Zhang, Barry Wolfson, Giovanni Aguila, Paul-Henry Schoehagen, Erik Sola");
+		lblDesignedByNan.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		lblDesignedByNan.setHorizontalAlignment(SwingConstants.CENTER);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblKabasuji, GroupLayout.PREFERRED_SIZE, 727, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(226)
+							.addComponent(btnYourLevels)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnRules, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnOurLevels))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblDesignedByNan, GroupLayout.PREFERRED_SIZE, 713, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(23)
-					.addComponent(btnRules)
-					.addGap(35)
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(32, Short.MAX_VALUE)
 					.addComponent(lblKabasuji)
-					.addPreferredGap(ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGap(221)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnYourLevels)
 						.addComponent(btnOurLevels)
-						.addComponent(btnYourLevels))
-					.addGap(27)
-					.addComponent(lblDesignedByNan)
-					.addContainerGap())
+						.addComponent(btnRules))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblDesignedByNan, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addGap(37))
 		);
-		panel.setLayout(gl_panel);
+		contentPane.setLayout(gl_contentPane);
 	}
 }
