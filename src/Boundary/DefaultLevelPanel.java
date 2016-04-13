@@ -9,11 +9,14 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DefaultLevelPanel extends JPanel {
 
 		KabasujiFrame mainFrame;
 		JButton menuBtn;
+		JButton puzzle1Btn;
 	/**
 	 * Create the panel.
 	 */
@@ -35,6 +38,7 @@ public class DefaultLevelPanel extends JPanel {
 		label.setFont(new Font("Comic Sans MS", Font.BOLD, 28));
 		
 		JButton button_1 = new JButton("1");
+		this.puzzle1Btn = button_1;
 		button_1.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		
 		JButton button_2 = new JButton("2");
@@ -93,7 +97,6 @@ public class DefaultLevelPanel extends JPanel {
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 751, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
@@ -121,7 +124,6 @@ public class DefaultLevelPanel extends JPanel {
 							.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_2)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
@@ -133,12 +135,12 @@ public class DefaultLevelPanel extends JPanel {
 							.addComponent(button_14, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(button_15, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-						.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(320, Short.MAX_VALUE))
+						.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(330, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 438, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
@@ -156,14 +158,15 @@ public class DefaultLevelPanel extends JPanel {
 						.addComponent(label))
 					.addGap(40)
 					.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 						.addComponent(button_7, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 						.addComponent(button_8, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 						.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+						.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(40)
 					.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
@@ -172,10 +175,13 @@ public class DefaultLevelPanel extends JPanel {
 						.addComponent(button_13, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 						.addComponent(button_14, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 						.addComponent(button_15, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-					.addGap(34))
+					.addGap(40))
 		);
 		panel.setLayout(gl_panel);
 
+		//activate controllers for buttons
+		menuBtn.addActionListener(new ReturnToPlayerMenuController(mainFrame));
+		puzzle1Btn.addActionListener(new DefLevelMenuToPuzzleLevelController(mainFrame));
 	}
 	public JButton getMenuButton(){
 		return menuBtn;

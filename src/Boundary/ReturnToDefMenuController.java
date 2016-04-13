@@ -4,27 +4,26 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuToDefaultController implements ActionListener{
+public class ReturnToDefMenuController implements ActionListener{
 
 	KabasujiFrame frame;
+
 	
-	public MenuToDefaultController(KabasujiFrame f) {
-		this.frame = f;
+	ReturnToDefMenuController(KabasujiFrame kf){
+		this.frame = kf;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		//remove the rules menu JPanel from the JFrame
 		frame.getContentPane().removeAll();
 		frame.getContentPane().invalidate();
 		
-		// create rules screen
+		// return the main menu JPanel to the JFrame
 		DefaultLevelPanel defLvl = new DefaultLevelPanel(frame);
 		frame.getContentPane().add(defLvl, BorderLayout.CENTER);
 		frame.getContentPane().revalidate();
 		
-		// set controller for previous button
-		defLvl.getMenuButton().addActionListener(new ReturnToPlayerMenuController(frame));
-		
 	}
-
 }

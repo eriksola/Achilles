@@ -4,12 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ReturnToMenuController implements ActionListener{
+public class ReturnToPlayerMenuController implements ActionListener{
 	
 	KabasujiFrame frame;
 
 	
-	ReturnToMenuController(KabasujiFrame kf){
+	ReturnToPlayerMenuController(KabasujiFrame kf){
 		this.frame = kf;
 	}
 
