@@ -23,7 +23,7 @@ public class MenuToBuiltController implements ActionListener{
 		frame.getContentPane().revalidate();
 		
 		// set controller for previous button
-		builtLvl.getMenuButton().addActionListener(new ReturnToMenuController(frame));
+		builtLvl.getMenuButton().addActionListener(new ReturnToPlayerMenuController(frame));
 		
 	}
 

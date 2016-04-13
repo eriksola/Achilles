@@ -4,12 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 
+public class DefLevelMenuToPuzzleLevelController implements ActionListener{
 
-public class MenuToRulesController implements ActionListener{
-	
 	KabasujiFrame frame;
 	
-	public MenuToRulesController(KabasujiFrame f) {
+	public DefLevelMenuToPuzzleLevelController(KabasujiFrame f) {
 		this.frame = f;
 	}
 	
@@ -19,12 +18,9 @@ public class MenuToRulesController implements ActionListener{
 		frame.getContentPane().invalidate();
 		
 		// create rules screen
-		RulesMenuPanel rules = new RulesMenuPanel(frame);
-		frame.getContentPane().add(rules, BorderLayout.CENTER);
+		PuzzleLevelPanel puzzleLevel = new PuzzleLevelPanel(frame);
+		frame.getContentPane().add(puzzleLevel, BorderLayout.CENTER);
 		frame.getContentPane().revalidate();
-		
-		// set controller for previous button
-		rules.getMenuButton().addActionListener(new ReturnToPlayerMenuController(frame));
 		
 	}
 
