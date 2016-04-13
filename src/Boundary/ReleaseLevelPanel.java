@@ -18,10 +18,11 @@ public class ReleaseLevelPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ReleaseLevelPanel() {
+		setBackground(new Color(173, 216, 230));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setBackground(new Color(135, 206, 250));
+		panel.setBackground(new Color(173, 216, 230));
 		add(panel);
 		
 		JButton button = new JButton("Horizontal");
