@@ -5,6 +5,9 @@ import javax.swing.JPanel;
 import java.awt.Color;
 
 import javax.swing.border.EmptyBorder;
+
+import Controller.ReturnToPlayerMenuController;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -135,6 +138,8 @@ public class RulesMenuPanel extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
+		//activate controllers for buttons
+		menuBtn.addActionListener(new ReturnToPlayerMenuController((KabasujiFrame) mainFrame));
 
 	}
 	public JButton getMenuButton() {

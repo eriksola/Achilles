@@ -12,7 +12,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class LightningLevelPanel extends JPanel {
+public class LightningLevelPanel extends JPanel{
 
 	/**
 	 * Create the panel.

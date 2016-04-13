@@ -16,14 +16,6 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-
-
-
-
-import Controller.MenuToBuiltController;
-import Controller.MenuToDefaultController;
-import Controller.MenuToRulesController;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -50,7 +42,7 @@ public class MainMenuPanel extends JPanel {
 		
 		JLabel Title = new JLabel("Kabasuji");
 		Title.setHorizontalAlignment(SwingConstants.CENTER);
-		Title.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
+		Title.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
 		
 		JButton BuiltLevelsButton = new JButton("Your Levels");
 		this.builtBtn = BuiltLevelsButton;
@@ -103,9 +95,9 @@ public class MainMenuPanel extends JPanel {
 		panel.setLayout(gl_panel);
 
 		//activate controllers for buttons
-		rulesBtn.addActionListener(new MenuToRulesController(mainFrame));
-		defaultBtn.addActionListener(new MenuToDefaultController(mainFrame));
-		builtBtn.addActionListener(new MenuToBuiltController(mainFrame));
+		rulesBtn.addActionListener(new SwitchWindowController(mainFrame, new RulesMenuPanel(mainFrame)));
+		defaultBtn.addActionListener(new SwitchWindowController(mainFrame, new DefaultLevelPanel(mainFrame)));
+		builtBtn.addActionListener(new SwitchWindowController(mainFrame, new BuiltLevelPanel(mainFrame)));
 
 	}
 	
