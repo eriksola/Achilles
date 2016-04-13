@@ -25,11 +25,12 @@ public class BuiltLevelPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public BuiltLevelPanel(KabasujiFrame f) {
+		setBackground(new Color(173, 216, 230));
 		this.mainframe = f;
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setBackground(Color.BLUE);
+		panel.setBackground(new Color(173, 216, 230));
 		add(panel);
 		
 		JButton button = new JButton("Main Menu");
@@ -38,18 +39,18 @@ public class BuiltLevelPanel extends JPanel {
 		
 		JLabel label = new JLabel("Built Levels");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setForeground(Color.WHITE);
+		label.setForeground(new Color(0, 0, 0));
 		label.setFont(new Font("Comic Sans MS", Font.BOLD, 28));
 		
 		JLabel label_1 = new JLabel("Puzzle:");
-		label_1.setForeground(Color.WHITE);
+		label_1.setForeground(new Color(0, 0, 0));
 		label_1.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
 		JButton button_1 = new JButton("1");
 		button_1.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		
 		JLabel label_2 = new JLabel("Lightning:");
-		label_2.setForeground(Color.WHITE);
+		label_2.setForeground(new Color(0, 0, 0));
 		label_2.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
 		JButton button_2 = new JButton("1");
@@ -59,7 +60,7 @@ public class BuiltLevelPanel extends JPanel {
 		button_3.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		
 		JLabel label_3 = new JLabel("Release:");
-		label_3.setForeground(Color.WHITE);
+		label_3.setForeground(new Color(0, 0, 0));
 		label_3.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
