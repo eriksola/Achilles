@@ -1,14 +1,17 @@
-package Boundary;
+package Controller;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuToDefaultController implements ActionListener{
+import Boundary.BuiltLevelPanel;
+import Boundary.KabasujiFrame;
+
+public class MenuToBuiltController implements ActionListener{
 
 	KabasujiFrame frame;
 	
-	public MenuToDefaultController(KabasujiFrame f) {
+	public MenuToBuiltController(KabasujiFrame f) {
 		this.frame = f;
 	}
 	
@@ -18,12 +21,12 @@ public class MenuToDefaultController implements ActionListener{
 		frame.getContentPane().invalidate();
 		
 		// create rules screen
-		DefaultLevelPanel defLvl = new DefaultLevelPanel(frame);
-		frame.getContentPane().add(defLvl, BorderLayout.CENTER);
+		BuiltLevelPanel builtLvl = new BuiltLevelPanel(frame);
+		frame.getContentPane().add(builtLvl, BorderLayout.CENTER);
 		frame.getContentPane().revalidate();
 		
 		// set controller for previous button
-		defLvl.getMenuButton().addActionListener(new ReturnToPlayerMenuController(frame));
+		builtLvl.getMenuButton().addActionListener(new ReturnToPlayerMenuController(frame));
 		
 	}
 

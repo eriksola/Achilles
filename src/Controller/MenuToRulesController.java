@@ -1,8 +1,11 @@
-package Boundary;
+package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
+
+import Boundary.KabasujiFrame;
+import Boundary.RulesMenuPanel;
 
 
 public class MenuToRulesController implements ActionListener{

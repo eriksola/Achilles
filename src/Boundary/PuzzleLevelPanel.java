@@ -1,16 +1,22 @@
 package Boundary;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import Controller.ReturnToDefMenuController;
 
 public class PuzzleLevelPanel extends JPanel {
 
@@ -108,7 +114,8 @@ public class PuzzleLevelPanel extends JPanel {
 					.addGap(32))
 		);
 		panel.setLayout(gl_panel);
-
+		ReturnToDefMenuController n; 
+		
 		//activate controllers for buttons
 		lvlMenuBtn.addActionListener(new ReturnToDefMenuController(mainframe));
 	}
