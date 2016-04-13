@@ -24,11 +24,12 @@ public class RulesMenuPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public RulesMenuPanel(KabasujiFrame frame) {
+		setBackground(new Color(173, 216, 230));
 		this.mainFrame = frame;
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setBackground(Color.BLUE);
+		panel.setBackground(new Color(173, 216, 230));
 		add(panel);
 		
 		JButton button = new JButton("Main Menu");
@@ -36,17 +37,17 @@ public class RulesMenuPanel extends JPanel {
 		button.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
 		JLabel label = new JLabel("Rules");
-		label.setForeground(Color.WHITE);
+		label.setForeground(new Color(0, 0, 0));
 		label.setFont(new Font("Comic Sans MS", Font.BOLD, 28));
 		
 		JLabel label_1 = new JLabel("");
 		
 		JLabel label_2 = new JLabel("For All Levels:");
-		label_2.setForeground(Color.WHITE);
+		label_2.setForeground(new Color(0, 0, 0));
 		label_2.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
 		
 		JLabel label_3 = new JLabel("Lightning:");
-		label_3.setForeground(Color.WHITE);
+		label_3.setForeground(new Color(0, 0, 0));
 		label_3.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
 		
 		JTextArea textArea = new JTextArea();
@@ -70,11 +71,11 @@ public class RulesMenuPanel extends JPanel {
 		textArea_3.setEditable(false);
 		
 		JLabel label_4 = new JLabel("Release:");
-		label_4.setForeground(Color.WHITE);
+		label_4.setForeground(new Color(0, 0, 0));
 		label_4.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
 		
 		JLabel label_5 = new JLabel("Puzzle:");
-		label_5.setForeground(Color.WHITE);
+		label_5.setForeground(new Color(0, 0, 0));
 		label_5.setFont(new Font("Comic Sans MS", Font.BOLD, 13));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(

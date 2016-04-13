@@ -20,12 +20,13 @@ public class PuzzleLevelPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public PuzzleLevelPanel(KabasujiFrame f) {
+		setBackground(new Color(173, 216, 230));
 		
 		this.mainframe = f;
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setBackground(new Color(135, 206, 250));
+		panel.setBackground(new Color(173, 216, 230));
 		add(panel);
 		
 		JButton button = new JButton("Back");
