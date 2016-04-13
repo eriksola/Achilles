@@ -1,29 +1,35 @@
 package Boundary;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.ReturnToBuilderMenuController;
+
 public class LevelBuilderReleasePanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
-	JFrame mainframe;
+	JFrame mainFrame;
 	JButton exit;
 	/**
 	 * Create the panel.
 	 */
 	public LevelBuilderReleasePanel(JFrame f) {
 		setBackground(new Color(173, 216, 230));
-		this.mainframe = f;
+		this.mainFrame = f;
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBackground(new Color(173, 216, 230));
@@ -137,7 +143,7 @@ public class LevelBuilderReleasePanel extends JPanel {
 		);
 		panel.setLayout(gl_panel);
 
-
+		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		}
 
 }
