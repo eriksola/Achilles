@@ -1,25 +1,31 @@
 package Boundary;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+
 import java.awt.Font;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.ReturnToPlayerMenuController;
+
 public class BuiltLevelPanel extends JPanel {
 
-	KabasujiFrame mainFrame;
+	KabasujiFrame mainframe;
 	JButton menuBtn;
 	/**
 	 * Create the panel.
 	 */
 	public BuiltLevelPanel(KabasujiFrame f) {
-		this.mainFrame = f;
+		this.mainframe = f;
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -108,6 +114,9 @@ public class BuiltLevelPanel extends JPanel {
 					.addContainerGap(55, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
+		
+		//activate controllers for buttons
+		menuBtn.addActionListener(new ReturnToPlayerMenuController(mainframe));
 
 	}
 	
