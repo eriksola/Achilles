@@ -1,17 +1,23 @@
 package Boundary;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import Controller.ReturnToBuilderMenuController;
 
 public class LevelBuilderLightningPanel extends JPanel {
 	private JTextField textField;
@@ -68,13 +74,12 @@ public class LevelBuilderLightningPanel extends JPanel {
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 751, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-							.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(lblLightningBuild, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+								.addComponent(lblLightningBuild, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGap(18)
 								.addComponent(button))
 							.addGroup(gl_panel.createSequentialGroup()
 								.addComponent(button_1)
@@ -104,12 +109,11 @@ public class LevelBuilderLightningPanel extends JPanel {
 									.addComponent(button_7)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(button_8))))
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 438, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
@@ -135,12 +139,12 @@ public class LevelBuilderLightningPanel extends JPanel {
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
 							.addGap(13)
 							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
-							.addGap(0, 0, Short.MAX_VALUE))
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)))
+							.addGap(0, 10, Short.MAX_VALUE))
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
 		);
 		panel.setLayout(gl_panel);
 		
-		
+		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 	}
 
 }

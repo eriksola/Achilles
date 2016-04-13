@@ -1,19 +1,26 @@
 package Boundary;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.ReturnToBuilderMenuController;
+
 public class LevelBuilderPuzzlePanel extends JPanel {
+	
 	private JTextField textField;
 	private JTextField textField_1;
 	JButton exit;
@@ -34,6 +41,7 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 		
 		JButton button = new JButton("Exit");
 		this.exit = button;
+		
 		JButton button_1 = new JButton("Horizontal");
 		
 		JButton button_2 = new JButton("Vertical");
@@ -137,7 +145,7 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 		);
 		panel.setLayout(gl_panel);
 		
-	
+		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 	}
 
 }
