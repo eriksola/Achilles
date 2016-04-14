@@ -26,7 +26,6 @@ public class SwitchWindowController implements ActionListener {
 		this.panel = levelBuilderPanel;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		frame.getContentPane().removeAll();
 		frame.getContentPane().invalidate();
