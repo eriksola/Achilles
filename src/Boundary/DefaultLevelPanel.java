@@ -1,20 +1,28 @@
 package Boundary;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.Font;
+
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import Controller.ReturnToPlayerMenuController;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class DefaultLevelPanel extends JPanel {
 
-		KabasujiFrame mainFrame;
+		JFrame mainFrame;
 		JButton menuBtn;
 		JButton puzzle1Btn;
 	/**
@@ -181,8 +189,8 @@ public class DefaultLevelPanel extends JPanel {
 		panel.setLayout(gl_panel);
 
 		//activate controllers for buttons
-		menuBtn.addActionListener(new ReturnToPlayerMenuController(mainFrame));
-		puzzle1Btn.addActionListener(new DefLevelMenuToPuzzleLevelController(mainFrame));
+		menuBtn.addActionListener(new ReturnToPlayerMenuController((KabasujiFrame) mainFrame));
+		puzzle1Btn.addActionListener(new DefLevelMenuToPuzzleLevelController((KabasujiFrame)mainFrame));
 	}
 	public JButton getMenuButton(){
 		return menuBtn;

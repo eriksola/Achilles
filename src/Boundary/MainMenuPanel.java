@@ -16,9 +16,11 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.SwitchWindowController;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class MainMenuPanel extends JPanel {
 	
@@ -43,7 +45,7 @@ public class MainMenuPanel extends JPanel {
 		
 		JLabel Title = new JLabel("Kabasuji");
 		Title.setHorizontalAlignment(SwingConstants.CENTER);
-		Title.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
+		Title.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
 		
 		JButton BuiltLevelsButton = new JButton("Your Levels");
 		this.builtBtn = BuiltLevelsButton;
@@ -57,10 +59,12 @@ public class MainMenuPanel extends JPanel {
 		JLabel DesignedBy = new JLabel("Designed By: Nan Zhang, Barry Wolfson, Giovanni Aguila, Paul-Henry Schoehagen, Erik Sola");
 		DesignedBy.setHorizontalAlignment(SwingConstants.CENTER);
 		DesignedBy.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("/Users/ZhangNan/git/Achilles/Image/rsz_1rsz_1rsz_1rhino.png"));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 751, Short.MAX_VALUE)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
@@ -76,15 +80,20 @@ public class MainMenuPanel extends JPanel {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(DesignedBy, GroupLayout.PREFERRED_SIZE, 713, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(18, Short.MAX_VALUE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap(290, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+					.addGap(285))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGap(0, 438, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(32, Short.MAX_VALUE)
+					.addContainerGap(39, Short.MAX_VALUE)
 					.addComponent(Title)
-					.addGap(221)
+					.addGap(75)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+					.addGap(139)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(BuiltLevelsButton)
 						.addComponent(DefaultLevelsButton)
@@ -96,9 +105,9 @@ public class MainMenuPanel extends JPanel {
 		panel.setLayout(gl_panel);
 
 		//activate controllers for buttons
-		rulesBtn.addActionListener(new MenuToRulesController(mainFrame));
-		defaultBtn.addActionListener(new MenuToDefaultController(mainFrame));
-		builtBtn.addActionListener(new MenuToBuiltController(mainFrame));
+		rulesBtn.addActionListener(new SwitchWindowController(mainFrame, new RulesMenuPanel(mainFrame)));
+		defaultBtn.addActionListener(new SwitchWindowController(mainFrame, new DefaultLevelPanel(mainFrame)));
+		builtBtn.addActionListener(new SwitchWindowController(mainFrame, new BuiltLevelPanel(mainFrame)));
 
 	}
 	
