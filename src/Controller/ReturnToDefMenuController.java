@@ -16,7 +16,6 @@ public class ReturnToDefMenuController implements ActionListener{
 		this.frame = kf;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		//remove the rules menu JPanel from the JFrame

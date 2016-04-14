@@ -61,7 +61,7 @@ public class MainMenuPanel extends JPanel {
 		DesignedBy.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("/Users/ZhangNan/git/Achilles/Image/rsz_1rsz_1rsz_1rhino.png"));
+		lblNewLabel.setIcon(new ImageIcon("Image/rsz_1rsz_1rsz_1rhino.png"));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
