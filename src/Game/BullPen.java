@@ -29,7 +29,7 @@ public class BullPen {
 			int oldX = c.x;
 			int oldY = c.y;
 			c.x = (1) * oldY;
-			c.y = (1) * oldX;
+			c.y = (-1) * oldX;
 		}
 	}
 	
