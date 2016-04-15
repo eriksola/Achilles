@@ -22,6 +22,7 @@ public class PuzzleLevelPanel extends JPanel {
 
 	KabasujiFrame mainframe;
 	JButton lvlMenuBtn;
+	JButton helpBtn;
 	/**
 	 * Create the panel.
 	 */
@@ -44,6 +45,7 @@ public class PuzzleLevelPanel extends JPanel {
 		label.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
 		
 		JButton button_1 = new JButton("Help");
+		this.helpBtn = button_1;
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
@@ -118,6 +120,7 @@ public class PuzzleLevelPanel extends JPanel {
 		
 		//activate controllers for buttons
 		lvlMenuBtn.addActionListener(new ReturnToDefMenuController(mainframe));
+		helpBtn.addActionListener(new PlayPuzzletoPuzzleRulesController(mainframe));
 	}
 	
 	public JButton getLevelMenuButton(){
