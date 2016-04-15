@@ -2,11 +2,11 @@ package Game;
 
 public class Piece {
 
-	Square[] squares;
+	Coordinate[] coords = new Coordinate[6];
 	int bpIndex;
 	
-	public Piece(Square[] sqs, int bp){
-		this.squares = sqs;
+	public Piece(Coordinate[] coords, int bp){
+		this.coords = coords;
 		this.bpIndex = bp;
 	}	
 }
