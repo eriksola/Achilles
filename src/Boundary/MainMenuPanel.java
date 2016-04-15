@@ -60,20 +60,16 @@ public class MainMenuPanel extends JPanel {
 		DesignedBy.setHorizontalAlignment(SwingConstants.CENTER);
 		DesignedBy.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("Image/rsz_1rsz_1rsz_1rhino.png"));
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("Image/goodRHino.png"));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(Title, GroupLayout.PREFERRED_SIZE, 727, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(18, Short.MAX_VALUE))
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(291, Short.MAX_VALUE)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
-					.addGap(290))
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
 					.addGap(224)
 					.addComponent(BuiltLevelsButton)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -81,10 +77,14 @@ public class MainMenuPanel extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(DefaultLevelsButton)
 					.addContainerGap(233, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(DesignedBy, GroupLayout.PREFERRED_SIZE, 713, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(32, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addContainerGap(304, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+					.addGap(277))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
