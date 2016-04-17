@@ -15,7 +15,7 @@ import java.awt.event.*;
 public class KabasujiMain {
 	public static void main(String[] args){
 		Stock s = new Stock();
-		final KabasujiFrame frame = new KabasujiFrame();
+		final KabasujiFrame frame = new KabasujiFrame(s);
 
 		
 		frame.addWindowListener(new WindowAdapter() {
