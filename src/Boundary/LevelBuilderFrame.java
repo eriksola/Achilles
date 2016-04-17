@@ -6,38 +6,29 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Game.Stock;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
 
 public class LevelBuilderFrame extends JFrame {
 	
-	private JPanel contentPane;
-	
+	JPanel contentPane;
+	Stock stock;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LevelBuilderFrame frame = new LevelBuilderFrame();
-					LevelBuilderMainMenuPanel main = new LevelBuilderMainMenuPanel(frame);
-					frame.setVisible(true);
-					frame.getContentPane().setLayout(new BorderLayout());
-					frame.getContentPane().add(main, BorderLayout.CENTER);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	public LevelBuilderFrame(Stock s){
+		this.stock = s;
+		initialize();
 	}
-
 	/**
 	 * Create the frame.
 	 */
-	public LevelBuilderFrame() {
+	LevelBuilderFrame() {
 		setBackground(new Color(173, 216, 230));
 		setForeground(new Color(173, 216, 230));
 		setTitle("LevelBuilder");
@@ -63,5 +54,20 @@ public class LevelBuilderFrame extends JFrame {
 		getContentPane().add(mainMenu);
 	}
 	
-	
+	void initialize(){
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LevelBuilderFrame frame = new LevelBuilderFrame();
+					LevelBuilderMainMenuPanel main = new LevelBuilderMainMenuPanel(frame);
+					frame.setVisible(true);
+					frame.getContentPane().setLayout(new BorderLayout());
+					frame.getContentPane().add(main, BorderLayout.CENTER);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }
