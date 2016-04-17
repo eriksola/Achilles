@@ -1,12 +1,22 @@
 package Game;
 
+import Game.Coordinate;
+
 public class Piece {
 
-	Coordinate[] coords = new Coordinate[6];
+	private Coordinate[] coords = new Coordinate[6];
 	int bpIndex;
-	
+
 	public Piece(Coordinate[] coords, int bp){
-		this.coords = coords;
+		this.setCoordinates(coords);
 		this.bpIndex = bp;
 	}	
+	
+	public Coordinate[] getCoordinates(){
+		return this.coords;
+	}
+
+	public void setCoordinates(Coordinate[] coords) {
+		this.coords = coords;
+	}
 }

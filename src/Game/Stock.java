@@ -9,9 +9,7 @@ import javax.swing.JPanel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import Controller.RotateLeftController;
-import Controller.RotateRightController;
-import View.PieceView;
+
 
 public class Stock {
 	
