@@ -60,47 +60,47 @@ public class MainMenuPanel extends JPanel {
 		DesignedBy.setHorizontalAlignment(SwingConstants.CENTER);
 		DesignedBy.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Image/rsz_1rsz_1rsz_1rhino.png"));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(Title, GroupLayout.PREFERRED_SIZE, 727, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(18, Short.MAX_VALUE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap(291, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+					.addGap(290))
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(Title, GroupLayout.PREFERRED_SIZE, 727, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(226)
+							.addGap(214)
 							.addComponent(BuiltLevelsButton)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(RulesButton, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(DefaultLevelsButton))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(DesignedBy, GroupLayout.PREFERRED_SIZE, 713, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(18, Short.MAX_VALUE))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(290, Short.MAX_VALUE)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
-					.addGap(285))
+						.addComponent(DesignedBy, GroupLayout.PREFERRED_SIZE, 713, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(32, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap(39, Short.MAX_VALUE)
 					.addComponent(Title)
-					.addGap(75)
+					.addGap(18)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
-					.addGap(139)
+					.addGap(26)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(BuiltLevelsButton)
 						.addComponent(DefaultLevelsButton)
 						.addComponent(RulesButton))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(DesignedBy, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-					.addGap(37))
+					.addGap(207))
 		);
 		panel.setLayout(gl_panel);
 

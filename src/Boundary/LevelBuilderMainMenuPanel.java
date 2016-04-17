@@ -7,6 +7,7 @@ import java.awt.Color;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import java.awt.Font;
@@ -44,32 +45,42 @@ public class LevelBuilderMainMenuPanel extends JPanel {
 		JLabel label_1 = new JLabel("Designed By: Nan Zhang, Barry Wolfson, Giovanni Aguila, Paul-Henry Schoehagen, Erik Sola");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("Image/hammer.png"));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(116, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(136)
-							.addComponent(button)
-							.addGap(18)
-							.addComponent(button_1)
-							.addGap(18)
-							.addComponent(button_2))
-						.addComponent(label_1))
-					.addGap(87))
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(285)
-					.addComponent(label)
-					.addContainerGap(304, Short.MAX_VALUE))
+					.addContainerGap(170, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addGap(136)
+										.addComponent(button)
+										.addGap(18)
+										.addComponent(button_1)
+										.addGap(18)
+										.addComponent(button_2))
+									.addComponent(label_1))
+								.addGap(87))
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(label)
+								.addGap(299)))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
+							.addGap(179))))
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addGap(31)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(30)
 					.addComponent(label)
-					.addPreferredGap(ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
+					.addGap(44)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(button_1)
 						.addComponent(button)
@@ -84,6 +95,4 @@ public class LevelBuilderMainMenuPanel extends JPanel {
 		lightning.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderLightningPanel(frame)));
 		release.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderReleasePanel(frame)));
 	}
-
-
 }
