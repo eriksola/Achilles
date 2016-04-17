@@ -17,18 +17,25 @@ import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Controller.ReturnToDefMenuController;
+import Game.BullPen;
+import Game.Piece;
+import Game.Stock;
+import View.PieceView;
 
 public class PuzzleLevelPanel extends JPanel {
 
 	KabasujiFrame mainframe;
 	JButton lvlMenuBtn;
 	JButton helpBtn;
+	
+	BullPen bp;
+	Stock stock;
 	/**
 	 * Create the panel.
 	 */
 	public PuzzleLevelPanel(KabasujiFrame f) {
 		setBackground(new Color(173, 216, 230));
-		
+		this.stock = f.stock;
 		this.mainframe = f;
 		
 		JPanel panel = new JPanel();
@@ -36,28 +43,28 @@ public class PuzzleLevelPanel extends JPanel {
 		panel.setBackground(new Color(173, 216, 230));
 		add(panel);
 		
-		JButton button = new JButton("Back");
-		this.lvlMenuBtn = button;
+		JButton back = new JButton("Back");
+		this.lvlMenuBtn = back;
 		
 		JLabel label = new JLabel("Level");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setForeground(Color.BLACK);
 		label.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
 		
-		JButton button_1 = new JButton("Help");
-		this.helpBtn = button_1;
+		JButton help = new JButton("Help");
+		this.helpBtn = help;
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		JButton button_2 = new JButton("Horizontal");
+		JButton horizontal = new JButton("Horizontal");
 		
-		JButton button_3 = new JButton("Vertical");
+		JButton vertical = new JButton("Vertical");
 		
 		BoardView boardView = new BoardView();
 		
-		JButton button_4 = new JButton("90");
+		JButton deg = new JButton("90");
 		
-		JButton button_5 = new JButton("Reset");
+		JButton reset = new JButton("Reset");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -66,12 +73,12 @@ public class PuzzleLevelPanel extends JPanel {
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(button_2)
+							.addComponent(horizontal)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_3)
+							.addComponent(vertical)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_4))
-						.addComponent(button)
+							.addComponent(deg))
+						.addComponent(back)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)))
@@ -82,12 +89,12 @@ public class PuzzleLevelPanel extends JPanel {
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label)
 									.addGap(298)
-									.addComponent(button_1))
+									.addComponent(help))
 								.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE))
 							.addContainerGap())
 						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(button_5)
+							.addComponent(reset)
 							.addGap(112))))
 		);
 		gl_panel.setVerticalGroup(
@@ -95,29 +102,35 @@ public class PuzzleLevelPanel extends JPanel {
 				.addGap(0, 438, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(button)
+						.addComponent(back)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(label))
-						.addComponent(button_1))
+						.addComponent(help))
 					.addGap(21)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_5))
+							.addComponent(reset))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
 							.addGap(16)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button_2)
-								.addComponent(button_3)
-								.addComponent(button_4))))
+								.addComponent(horizontal)
+								.addComponent(vertical)
+								.addComponent(deg))))
 					.addGap(32))
 		);
+		
+		BullPenView bullpen = new BullPenView(f, stock);
+		bullpen.setBackground(Color.WHITE);
+		scrollPane.setViewportView(bullpen);
+		
 		panel.setLayout(gl_panel);
 		ReturnToDefMenuController n; 
 		
+		//-------------
 		//activate controllers for buttons
 		lvlMenuBtn.addActionListener(new ReturnToDefMenuController(mainframe));
 		helpBtn.addActionListener(new PlayPuzzletoPuzzleRulesController(mainframe));

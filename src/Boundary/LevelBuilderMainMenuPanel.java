@@ -7,6 +7,7 @@ import java.awt.Color;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import java.awt.Font;
@@ -31,10 +32,6 @@ public class LevelBuilderMainMenuPanel extends JPanel {
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = frame;
 		
-		JLabel label = new JLabel("LevelBuilder");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-		
 		JButton button = new JButton("Puzzle");
 		this.puzzle = button;
 		JButton button_1 = new JButton("Lightning");
@@ -44,39 +41,53 @@ public class LevelBuilderMainMenuPanel extends JPanel {
 		JLabel label_1 = new JLabel("Designed By: Nan Zhang, Barry Wolfson, Giovanni Aguila, Paul-Henry Schoehagen, Erik Sola");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("Image/goodHammer.png"));
+		
+		JLabel lblLevelbuilder = new JLabel("LevelBuilder");
+		lblLevelbuilder.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLevelbuilder.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(116, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(136)
+							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 740, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(button)
 							.addGap(18)
 							.addComponent(button_1)
 							.addGap(18)
-							.addComponent(button_2))
-						.addComponent(label_1))
-					.addGap(87))
+							.addComponent(button_2)
+							.addGap(237))))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(285)
-					.addComponent(label)
-					.addContainerGap(304, Short.MAX_VALUE))
+					.addContainerGap(217, Short.MAX_VALUE)
+					.addComponent(lblLevelbuilder, GroupLayout.PREFERRED_SIZE, 727, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(505, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
+					.addGap(248))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(31)
-					.addComponent(label)
-					.addPreferredGap(ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(button_1)
+					.addComponent(lblLevelbuilder, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+					.addGap(43)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(button)
+						.addComponent(button_1)
 						.addComponent(button_2))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(18)
 					.addComponent(label_1)
-					.addGap(31))
+					.addGap(90))
 		);
 		setLayout(groupLayout);
 		
@@ -84,6 +95,4 @@ public class LevelBuilderMainMenuPanel extends JPanel {
 		lightning.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderLightningPanel(frame)));
 		release.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderReleasePanel(frame)));
 	}
-
-
 }

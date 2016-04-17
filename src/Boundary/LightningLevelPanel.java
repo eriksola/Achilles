@@ -18,6 +18,7 @@ public class LightningLevelPanel extends JPanel{
 	 * Create the panel.
 	 */
 	public LightningLevelPanel() {
+		setBackground(new Color(173, 216, 230));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
