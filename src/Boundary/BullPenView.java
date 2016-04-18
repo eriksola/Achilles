@@ -58,8 +58,6 @@ public class BullPenView extends JPanel {
 		JPanel pen = new JPanel();
 		
 		pen.add(label);
-		pen.setBackground(Color.WHITE);
-		pen.setVisible(true);
 
 	}
 

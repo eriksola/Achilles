@@ -124,7 +124,6 @@ public class PuzzleLevelPanel extends JPanel {
 		);
 		
 		BullPenView bullpen = new BullPenView(f, stock);
-		bullpen.setBackground(Color.WHITE);
 		scrollPane.setViewportView(bullpen);
 		
 		panel.setLayout(gl_panel);
