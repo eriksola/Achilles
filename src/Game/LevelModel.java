@@ -6,7 +6,7 @@ public class LevelModel {
 	int levelNum;
 	IScore score;
 	
-	LevelModel(Board b, BullPen bp, int ln, IScore s){
+	public LevelModel(Board b, BullPen bp, int ln, IScore s){
 		
 		this.board = b;
 		this.bullpen = bp;
