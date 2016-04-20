@@ -48,7 +48,7 @@ public class BullPenView extends JPanel {
 		setLayout(groupLayout);
 		setBackground(Color.white);
 		addPiecesToPen();
-		/*
+		
 		Coordinate c1 = new Coordinate(0,0);
 		Coordinate c2 = new Coordinate(1,0);
 		Coordinate c3 = new Coordinate(-1,0);
@@ -72,7 +72,7 @@ public class BullPenView extends JPanel {
 		
 		setLayout(new FlowLayout()); 
 		add(label);
-		*/
+		
 	}
 	
 	/**

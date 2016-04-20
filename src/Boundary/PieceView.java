@@ -19,15 +19,15 @@ public class PieceView {
 	}
 	
 	public void draw(){
-		BufferedImage img = new BufferedImage(60, 60, BufferedImage.TYPE_INT_RGB);
+		BufferedImage img = new BufferedImage(65, 65, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = (Graphics2D)img.getGraphics();
 		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, 60, 60);
+		g.fillRect(0, 0, 65, 65);
 		g.setColor(Color.black);
 		for(Coordinate c: getP().getCoordinates()){
 			int newX = 20 + (10 * c.x);
 			int newY = 20 - (10 * c.y);
-			g.fillRect(newX, newY, 10, 10);
+			g.drawRect(newX, newY, 10, 10);
 		}
 
 		bi = img;
