@@ -225,8 +225,8 @@ public class Stock {
 		return this.setOfPieces.get(id);
 	}
 	
-	/*
-	 * Will return a random piece from the stock
+	/**
+	 * Will return a random piece from the stock.
 	 */
 	public Piece getRandomPiece(){
 		Random rand = new Random();
@@ -234,12 +234,11 @@ public class Stock {
 		return setOfPieces.get(randomIndex); 
 	}
 	
-	/*
-	 * Gets 10 random pieces from the stock
+	/**
+	 * Gets 10 random pieces from the stock.
 	 */
 	public Piece[] getRandomPiecesForPen(){
-		Piece[] pieces;
-		pieces = new Piece[10];
+		Piece[] pieces = new Piece[10];
 		
 		for(int i = 0; i < pieces.length; i ++){
 			Random rand = new Random();

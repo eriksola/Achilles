@@ -9,6 +9,8 @@ import Game.Stock;
 import Boundary.PieceView;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
@@ -18,13 +20,22 @@ import javax.swing.GroupLayout.Alignment;
 public class BullPenView extends JPanel {
 	
 	BullPen bp;
-	//bp.selectedPiece = p;
+	Piece[] pieces;
+	PieceView[] pieceView;
+	KabasujiFrame frame;
+	Stock s = new Stock();
 	/**
 	 * Create the panel.
 	 */
-	public BullPenView(KabasujiFrame f, Stock s) {
+	public BullPenView(KabasujiFrame f) {
+		this.frame = f;
+
 		
-		setBackground(new Color(255, 255, 255));
+		pieces = s.getRandomPiecesForPen();
+		pieceView = new PieceView[pieces.length];
+		bp = new BullPen(pieces, pieceView);
+		
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -35,6 +46,9 @@ public class BullPenView extends JPanel {
 				.addGap(0, 133, Short.MAX_VALUE)
 		);
 		setLayout(groupLayout);
+		setBackground(Color.white);
+		addPiecesToPen();
+		/*
 		Coordinate c1 = new Coordinate(0,0);
 		Coordinate c2 = new Coordinate(1,0);
 		Coordinate c3 = new Coordinate(-1,0);
@@ -45,8 +59,6 @@ public class BullPenView extends JPanel {
 		// $ $ $
 		//   $
 		//   $
-		
-		/**NOT FINAL JUST TRYING TO GET TO**/
 		Coordinate[] coords = {c1,c2,c3,c4,c5,c6};
 		Piece p = new Piece(coords, 0);
 		PieceView pv = new PieceView(p);
@@ -55,10 +67,32 @@ public class BullPenView extends JPanel {
 		
 		ImageIcon img = new ImageIcon(pv.getBufferedImage());
 		JLabel label = new JLabel(img);
-		JPanel pen = new JPanel();
-		
-		pen.add(label);
 
+		
+		
+		setLayout(new FlowLayout()); 
+		add(label);
+		*/
+	}
+	
+	/**
+	 * Add random pieces to the bullpen.
+	 */
+	public void addPiecesToPen() {
+		for(int i = 0; i < pieces.length; i++){
+			PieceView pv = new PieceView(pieces[i]);
+			pieceView[i] = pv;	
+		}
+			
+		for(int i = 0; i < pieces.length; i++){
+			bp.selectedPiece = pieces[i];
+			ImageIcon img = new ImageIcon(pieceView[i].getBufferedImage());
+			JLabel label = new JLabel(img);
+			setLayout(new FlowLayout()); 
+			add(label);
+			
+		}
+		
 	}
 
 	

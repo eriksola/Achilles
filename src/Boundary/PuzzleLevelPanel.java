@@ -29,13 +29,12 @@ public class PuzzleLevelPanel extends JPanel {
 	JButton helpBtn;
 	
 	BullPen bp;
-	Stock stock;
+
 	/**
 	 * Create the panel.
 	 */
 	public PuzzleLevelPanel(KabasujiFrame f) {
 		setBackground(new Color(173, 216, 230));
-		this.stock = f.stock;
 		this.mainframe = f;
 		
 		JPanel panel = new JPanel();
@@ -54,8 +53,6 @@ public class PuzzleLevelPanel extends JPanel {
 		JButton help = new JButton("Help");
 		this.helpBtn = help;
 		
-		JScrollPane scrollPane = new JScrollPane();
-		
 		JButton horizontal = new JButton("Horizontal");
 		
 		JButton vertical = new JButton("Vertical");
@@ -65,66 +62,68 @@ public class PuzzleLevelPanel extends JPanel {
 		JButton deg = new JButton("90");
 		
 		JButton reset = new JButton("Reset");
+		
+		JPanel bullpen = new BullPenView(f);
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 751, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel.createSequentialGroup()
+								.addGap(38)
+								.addComponent(back)
+								.addPreferredGap(ComponentPlacement.RELATED))
+							.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(bullpen, GroupLayout.PREFERRED_SIZE, 341, GroupLayout.PREFERRED_SIZE)
+								.addGap(3)))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
+							.addGap(74)
 							.addComponent(horizontal)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(vertical)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(deg))
-						.addComponent(back)
+							.addComponent(deg)))
+					.addGap(3)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(67)
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(label)
-									.addGap(298)
-									.addComponent(help))
-								.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE))
+							.addComponent(label)
+							.addGap(298)
+							.addComponent(help)
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(reset)
-							.addGap(112))))
+							.addGap(112))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
+							.addGap(69))))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 438, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(back)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(label))
-						.addComponent(help))
-					.addGap(21)
+						.addComponent(help)
+						.addComponent(back))
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(reset))
+							.addGap(27)
+							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
-							.addGap(16)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(horizontal)
-								.addComponent(vertical)
-								.addComponent(deg))))
+							.addGap(37)
+							.addComponent(bullpen, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(reset)
+						.addComponent(horizontal)
+						.addComponent(vertical)
+						.addComponent(deg))
 					.addGap(32))
 		);
-		
-		BullPenView bullpen = new BullPenView(f, stock);
-		scrollPane.setViewportView(bullpen);
 		
 		panel.setLayout(gl_panel);
 		ReturnToDefMenuController n; 
