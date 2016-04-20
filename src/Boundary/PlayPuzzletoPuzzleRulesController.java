@@ -11,7 +11,6 @@ KabasujiFrame frame;
 		this.frame = f;
 	}
 	
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		frame.getContentPane().removeAll();
 		frame.getContentPane().invalidate();
