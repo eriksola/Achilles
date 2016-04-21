@@ -22,6 +22,7 @@ import Controller.SaveController;
 import Game.Board;
 import Game.BullPen;
 import Game.Stock;
+import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
@@ -43,6 +44,7 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public LevelBuilderPuzzlePanel(JFrame f) {
+		board = new Board(new Tile[10][10]); //start Board empty
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
 		
@@ -71,7 +73,7 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 		
 		JButton addhint = new JButton("Add Hint");
 		
-		BoardView boardView = new BoardView();
+		BoardView boardView = new BoardView(mainFrame, this.board);
 		
 		JButton undo = new JButton("Undo");
 		
