@@ -27,15 +27,19 @@ public class PuzzleLevelPanel extends JPanel {
 	KabasujiFrame mainframe;
 	JButton lvlMenuBtn;
 	JButton helpBtn;
-	
+	Stock s = new Stock();
 	BullPen bp;
-
 	/**
 	 * Create the panel.
 	 */
 	public PuzzleLevelPanel(KabasujiFrame f) {
 		setBackground(new Color(173, 216, 230));
 		this.mainframe = f;
+		//Add pieces to the bull
+		bp = new BullPen(null, null);
+		bp.setPieces(s.getRandomPiecesForPen());
+		PieceView[] pvs = new PieceView[35];
+		bp.setPvs(pvs);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,7 +67,8 @@ public class PuzzleLevelPanel extends JPanel {
 		
 		JButton reset = new JButton("Reset");
 		
-		JPanel bullpen = new BullPenView(f);
+		
+		JPanel bullpen = new BullPenView(f,bp);
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(

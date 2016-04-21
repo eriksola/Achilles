@@ -1,8 +1,10 @@
 package Game;
 
+import java.io.Serializable;
+
 import Boundary.PieceView;
 
-public class BullPen {
+public class BullPen implements Serializable{
 	
 	Piece[] pieces;
 	private PieceView[] pvs;
@@ -95,19 +97,30 @@ public class BullPen {
 		return this.selectedPiece;
 	}
 
-
+	public Piece[] getPieces(){
+		return this.pieces;
+	}
+	public PieceView[] getPvs() {
+		return pvs;
+	}
+	
+	
 	public void setSelectedPiece(Piece selectedPiece) {
 		this.selectedPiece = selectedPiece;
 	}
 
 
-	public PieceView[] getPvs() {
-		return pvs;
+	public Piece[] setPieces(Piece[] p){
+		return this.pieces = p;
 	}
-
+	
+	public PieceView[] setPieceViews(PieceView[] p){
+		return this.pvs = p;
+	}
 	
 	public void setPvs(PieceView[] pvs) {
 		this.pvs = pvs;
 	}
+	
 	
 }
