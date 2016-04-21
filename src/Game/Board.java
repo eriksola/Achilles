@@ -5,7 +5,7 @@ public class Board {
 
 	Tile[][] tiles;
 		
-	Board(Tile[][] t){
+	public Board(Tile[][] t){
 		
 		this.tiles = t;
 	}
@@ -17,5 +17,9 @@ public class Board {
 			this.tiles[row+c.x][column+c.y] = new Tile(true, row+c.x, column+c.y);
 		}
 		return this;
+	}
+
+	public Tile[][] getTiles() {
+		return this.tiles;
 	}
 }

@@ -18,16 +18,26 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Controller.ReturnToBuilderMenuController;
+import Game.Board;
+import Game.BullPen;
+import Game.Stock;
+import Game.Tile;
 
 public class LevelBuilderReleasePanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
 	JFrame mainFrame;
 	JButton exit;
+	
+	BullPen bp;
+	Board board;
+	Stock s = new Stock();
 	/**
 	 * Create the panel.
 	 */
 	public LevelBuilderReleasePanel(JFrame f) {
+		board = new Board(new Tile[10][10]); //start Board empty
+
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
 		JPanel panel = new JPanel();
@@ -50,7 +60,7 @@ public class LevelBuilderReleasePanel extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		BoardView boardView = new BoardView();
+		BoardView boardView = new BoardView(mainFrame, board);
 		
 		JButton button_5 = new JButton("Undo");
 		

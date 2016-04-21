@@ -17,7 +17,6 @@ public class GetTextController implements ActionListener {
 		this.y = y;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		//Check if we have anything in the text field
 		if(!x.getText().equals("") && !y.getText().equals("")){

@@ -14,7 +14,7 @@ public class PieceView {
 	private Piece p;
 	
 	public PieceView(Piece p){
-		this.setP(p);		
+		this.p = p;		
 		draw();
 	}
 	
