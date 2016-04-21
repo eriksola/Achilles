@@ -1,8 +1,10 @@
 package Game;
 
+import java.io.Serializable;
+
 import Game.Coordinate;
 
-public class Piece {
+public class Piece implements Serializable{
 
 	private Coordinate[] coords = new Coordinate[6];
 	int bpIndex;
