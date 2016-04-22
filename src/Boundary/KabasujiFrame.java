@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,11 +21,30 @@ public class KabasujiFrame extends JFrame {
 	
 	JPanel contentPane;
 	Stock stock;
-
+	int builtPuzzles = 0;
+	int builtLightning = 0;
+	int builtRelease = 0;
+	boolean builtLevels = false;
+	
 
 	public KabasujiFrame(Stock s){
 		this.stock = s;
 		initialize();
+		builtLevels = hasBuiltLevels();
+	}
+
+	public int getBuiltPuzzles() {
+		return this.builtPuzzles;
+	}
+	public int getBuiltLightning() {
+		return this.builtLightning;
+	}
+	public int getBuiltRelease() {
+		return this.builtRelease;
+	}
+	
+	public boolean hasLevels(){
+		return this.builtLevels;
 	}
 	/**
 	 * Create the frame.
@@ -70,7 +90,17 @@ public class KabasujiFrame extends JFrame {
 				}
 			}
 		});
+	}
+	/**
+	 * 
+	 * @return true if there are built levels, will also set number of built levels
+	 */
+	public boolean hasBuiltLevels() {
 		
-
+		this.builtPuzzles = new File("./src/BuiltLevels/PuzzleLevels").list().length;
+		this.builtLightning = new File("./src/BuiltLevels/LightningLevels").list().length;
+		this.builtRelease = new File("./src/BuiltLevels/ReleaseLevels").list().length;
+		
+		return builtPuzzles > 0 || builtLightning > 0 || builtRelease > 0;
 	}
 }
