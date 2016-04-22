@@ -14,18 +14,16 @@ public class Deserialization {
 	Board board = null;
 	
 	/**
-	 * 
 	 * @return true if the deserilization went smoothly
 	 */
-	public boolean Deserialize(){
+	public boolean Deserialize(String filename){
 		try {
-			FileInputStream fileIn = new FileInputStream("./src/Levels/Level.txt");
+			FileInputStream fileIn = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 		
 			
 			pieces = (Piece[]) in.readObject();
-			System.out.println(pieces.length);
-			
+
 			in.close();
 			fileIn.close();
 			return true;

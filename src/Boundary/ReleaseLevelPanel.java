@@ -3,6 +3,12 @@ package Boundary;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.border.EmptyBorder;
+
+import Game.Board;
+import Game.BullPen;
+import Game.Stock;
+import Game.Tile;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -14,15 +20,30 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ReleaseLevelPanel extends JPanel {
 
+	KabasujiFrame mainframe;
+	Stock s = new Stock();
+	//TILES SHOULD NOT BE SET TO NULL
+	Tile[][] tiles = null;
+	Board board;
+
+	BullPen bp;
 	/**
 	 * Create the panel.
 	 */
-	public ReleaseLevelPanel() {
+	public ReleaseLevelPanel(KabasujiFrame f) {
 		setBackground(new Color(173, 216, 230));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBackground(new Color(173, 216, 230));
+		this.mainframe = f;
+		//Add pieces to the bull
+		bp = new BullPen(null, null);
+		bp.setPieces(s.getRandomPiecesForPen());
+		PieceView[] pvs = new PieceView[35];
+		bp.setPvs(pvs);
+		
+		board = new Board(tiles);
 		add(panel);
 		
 		JButton button = new JButton("Horizontal");
@@ -42,7 +63,7 @@ public class ReleaseLevelPanel extends JPanel {
 		
 		JButton button_4 = new JButton("Help");
 		
-		BoardView boardView = new BoardView();
+		BoardView boardView = new BoardView(mainframe, board);
 		
 		JButton button_5 = new JButton("Reset");
 		GroupLayout gl_panel = new GroupLayout(panel);

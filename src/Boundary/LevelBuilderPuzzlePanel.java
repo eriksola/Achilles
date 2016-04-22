@@ -25,6 +25,7 @@ import Game.Stock;
 import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
 import java.awt.event.InputMethodListener;
+import java.io.File;
 import java.awt.event.InputMethodEvent;
 
 public class LevelBuilderPuzzlePanel extends JPanel {
@@ -179,7 +180,10 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 		panel.setLayout(gl_panel);
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
-		this.save.addActionListener(new SaveController(bp.getPieces(), board));
+		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
+		this.save.addActionListener(new SaveController(bp.getPieces(), board, 1, levelCount));
+		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
+		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 		this.btnEnter.addActionListener(new GetTextController(x, y));
 		
 	}

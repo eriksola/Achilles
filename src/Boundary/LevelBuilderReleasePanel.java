@@ -10,6 +10,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,16 +19,19 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Controller.ReturnToBuilderMenuController;
+import Controller.SaveController;
 import Game.Board;
 import Game.BullPen;
 import Game.Stock;
 import Game.Tile;
 
 public class LevelBuilderReleasePanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
+	JTextField x;
+	JTextField y;
 	JFrame mainFrame;
 	JButton exit;
+	JButton btnEnter;
+	JButton save;
 	
 	BullPen bp;
 	Board board;
@@ -38,6 +42,11 @@ public class LevelBuilderReleasePanel extends JPanel {
 	public LevelBuilderReleasePanel(JFrame f) {
 		board = new Board(new Tile[10][10]); //start Board empty
 
+		bp = new BullPen(null, null);
+		bp.setPieces(s.getRandomPiecesForPen());
+		PieceView[] pvs = new PieceView[35];
+		bp.setPvs(pvs);
+		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
 		JPanel panel = new JPanel();
@@ -48,76 +57,82 @@ public class LevelBuilderReleasePanel extends JPanel {
 		JLabel lblLightningLevelbuilder = new JLabel("Release Build");
 		lblLightningLevelbuilder.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
 		
-		JButton button = new JButton("Exit");
-		this.exit = button;
-		JButton button_1 = new JButton("Horizontal");
+		JButton exitbtn = new JButton("Exit");
+		this.exit = exitbtn;
+		JButton horizontal = new JButton("Horizontal");
 		
-		JButton button_2 = new JButton("Vertical");
+		JButton vertical = new JButton("Vertical");
 		
-		JButton button_3 = new JButton("90");
+		JButton rightrotate = new JButton("90");
 		
-		JButton button_4 = new JButton("Add Hint");
+		JButton hint = new JButton("Add Hint");
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
 		BoardView boardView = new BoardView(mainFrame, board);
 		
-		JButton button_5 = new JButton("Undo");
+		JButton undo = new JButton("Undo");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		x = new JTextField();
+		x.setColumns(10);
 		
 		JLabel label_1 = new JLabel("x");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		y = new JTextField();
+		y.setColumns(10);
 		
-		JButton button_6 = new JButton("Redo");
+		JButton redo = new JButton("Redo");
 		
-		JButton button_7 = new JButton("Save");
+		JButton save = new JButton("Save");
+		this.save = save;
 		
-		JButton button_8 = new JButton("Delete Square");
+		JButton delete = new JButton("Delete Square");
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
+		
+		JButton enter = new JButton("Enter n x m");
+		this.btnEnter = enter;
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-							.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+							.addGroup(gl_panel.createSequentialGroup()
 								.addComponent(lblLightningLevelbuilder, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(button))
+								.addComponent(exitbtn))
 							.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(button_1)
+								.addComponent(horizontal)
 								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(button_2)
+								.addComponent(vertical)
 								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(button_3)
+								.addComponent(rightrotate)
 								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(button_4)))
+								.addComponent(hint)))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 396, GroupLayout.PREFERRED_SIZE)
 						.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(button_5)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+								.addComponent(undo)
+								.addComponent(x, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label_1)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+									.addComponent(y, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(enter))
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(button_6)
+									.addComponent(redo)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(button_7)
+									.addComponent(save)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(button_8))))
+									.addComponent(delete))))
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
 					.addContainerGap())
 		);
@@ -127,21 +142,22 @@ public class LevelBuilderReleasePanel extends JPanel {
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblLightningLevelbuilder)
-							.addComponent(button))
+							.addComponent(exitbtn))
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(label_1)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(x, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(y, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(enter)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(button_1)
-						.addComponent(button_2)
-						.addComponent(button_3)
-						.addComponent(button_4)
-						.addComponent(button_8)
-						.addComponent(button_7)
-						.addComponent(button_6)
-						.addComponent(button_5))
+						.addComponent(horizontal)
+						.addComponent(vertical)
+						.addComponent(rightrotate)
+						.addComponent(hint)
+						.addComponent(delete)
+						.addComponent(save)
+						.addComponent(redo)
+						.addComponent(undo))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
@@ -151,9 +167,17 @@ public class LevelBuilderReleasePanel extends JPanel {
 							.addGap(0, 10, Short.MAX_VALUE))
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
 		);
+		
+		JPanel bullpen = new BullPenView(mainFrame, bp);
+		scrollPane.setViewportView(bullpen);
 		panel.setLayout(gl_panel);
 
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
+		int levelCount = ((LevelBuilderFrame) mainFrame).getReleaseLevelCount();
+		this.save.addActionListener(new SaveController(bp.getPieces(), board, 3,levelCount));
+		levelCount = new File("./src/BuiltLevels/ReleaseLevels").list().length;
+		((LevelBuilderFrame) mainFrame).setReleaseLevelCount(levelCount);
+		this.btnEnter.addActionListener(new GetTextController(x, y));
 		}
 
 }

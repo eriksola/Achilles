@@ -17,9 +17,11 @@ import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Controller.ReturnToDefMenuController;
+import Game.Board;
 import Game.BullPen;
 import Game.Piece;
 import Game.Stock;
+import Game.Tile;
 import Boundary.PieceView;
 
 public class PuzzleLevelPanel extends JPanel {
@@ -28,6 +30,10 @@ public class PuzzleLevelPanel extends JPanel {
 	JButton lvlMenuBtn;
 	JButton helpBtn;
 	Stock s = new Stock();
+	//RIGHT NOW THIS TILE SIZE IS DEFAULT, IT WILL CHANGE
+	Tile[][] tiles = new Tile[6][6];
+	Board board;
+
 	BullPen bp;
 	/**
 	 * Create the panel.
@@ -40,6 +46,8 @@ public class PuzzleLevelPanel extends JPanel {
 		bp.setPieces(s.getRandomPiecesForPen());
 		PieceView[] pvs = new PieceView[35];
 		bp.setPvs(pvs);
+		
+		board = new Board(tiles);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,7 +69,7 @@ public class PuzzleLevelPanel extends JPanel {
 		
 		JButton vertical = new JButton("Vertical");
 		
-		BoardView boardView = new BoardView();
+		BoardView boardView = new BoardView(mainframe, board);
 		
 		JButton deg = new JButton("90");
 		

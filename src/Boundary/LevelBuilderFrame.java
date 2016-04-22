@@ -17,7 +17,11 @@ import java.awt.Color;
 public class LevelBuilderFrame extends JFrame {
 	
 	JPanel contentPane;
+	int puzzleLevelCount = 0;
+	int lightningLevelCount = 0;
+	int releaseLevelCount = 0;
 	Stock stock;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -26,6 +30,29 @@ public class LevelBuilderFrame extends JFrame {
 		this.stock = s;
 		initialize();
 	}
+	
+	public int getPuzzleLevelCount() {
+		return this.puzzleLevelCount;
+	}
+	public int getLightningLevelCount() {
+		return this.lightningLevelCount;
+	}
+	public int getReleaseLevelCount() {
+		return this.releaseLevelCount;
+	}
+	
+	public void setPuzzleLevelCount(int puzzleLevelCount) {
+		this.puzzleLevelCount = puzzleLevelCount;
+	}
+
+	public void setLightningLevelCount(int lightningLevelCount) {
+		this.lightningLevelCount = lightningLevelCount;
+	}
+
+	public void setReleaseLevelCount(int releaseLevelCount) {
+		this.releaseLevelCount = releaseLevelCount;
+	}
+	
 	/**
 	 * Create the frame.
 	 */
