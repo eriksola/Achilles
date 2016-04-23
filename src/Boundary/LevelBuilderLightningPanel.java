@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.GetTextController;
 import Controller.ReturnToBuilderMenuController;
 import Controller.SaveController;
 import Game.Board;

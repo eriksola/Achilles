@@ -61,7 +61,7 @@ public class LevelBuilderFrame extends JFrame {
 		setForeground(new Color(173, 216, 230));
 		setTitle("LevelBuilder");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 769, 485);
+		setBounds(100, 100, 934, 579);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(173, 216, 230));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

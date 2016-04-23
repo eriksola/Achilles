@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.GetMovesController;
+import Controller.GetTextController;
 import Controller.SaveController;
 import Game.Board;
 import Game.BullPen;
@@ -41,6 +43,7 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 	JButton save;
 
 	JFrame mainFrame;
+	private JTextField txtMoves;
 	/**
 	 * Create the panel.
 	 */
@@ -99,6 +102,11 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 		btnEnter = new JButton("Enter n x m ");
 		
 		JScrollPane scrollPane = new JScrollPane();
+		
+		txtMoves = new JTextField();
+		txtMoves.setColumns(10);
+		
+		JButton btnEnterMoves = new JButton("enter moves");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -139,8 +147,14 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 									.addComponent(save)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(delete))
-								.addComponent(btnEnter)))
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(btnEnter)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtMoves, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnEnterMoves)))
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
@@ -154,7 +168,9 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 							.addComponent(label_1)
 							.addComponent(x, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(y, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnEnter)))
+							.addComponent(btnEnter)
+							.addComponent(txtMoves, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnEnterMoves)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(horizontal)
@@ -172,7 +188,7 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
 							.addGap(0, 10, Short.MAX_VALUE))
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
 		
 		JPanel bullpen = new BullPenView(mainFrame, bp);
@@ -185,6 +201,7 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
 		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 		this.btnEnter.addActionListener(new GetTextController(x, y));
+		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
 		
 	}
 }
