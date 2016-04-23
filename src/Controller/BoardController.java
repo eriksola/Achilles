@@ -53,8 +53,10 @@ public class BoardController extends java.awt.event.MouseAdapter{
 		Piece piece = view.getSelectedPiece().getP();
 		Board brd = bv.getBoard();
 		if(piece != null){
-			brd.addPiece(row, col, piece);
-			bv.draw();
+			if(brd.addPiece(row,col,piece)){
+				bv.draw();
+				view.setSelected(null);
+			}
 		}
 	}
 }

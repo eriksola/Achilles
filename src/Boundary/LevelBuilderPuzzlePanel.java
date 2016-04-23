@@ -20,7 +20,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Controller.GetMovesController;
 import Controller.GetTextController;
+import Controller.HflipController;
+import Controller.RotateController;
 import Controller.SaveController;
+import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
 import Game.Piece;
@@ -213,6 +216,9 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 		this.btnEnter.addActionListener(new GetTextController(x, y));
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
+		horizontal.addActionListener(new HflipController(this));
+		vertical.addActionListener(new VflipController(this));
+		right.addActionListener(new RotateController(this));
 		
 	}
 	
