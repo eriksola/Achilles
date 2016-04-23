@@ -1,8 +1,11 @@
-package Boundary;
+package Controller;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import Boundary.KabasujiFrame;
+import Boundary.PuzzleLevelPanel;
 
 public class ReturnToLevelController implements ActionListener{
 	KabasujiFrame frame;

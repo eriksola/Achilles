@@ -1,7 +1,11 @@
-package Boundary;
+package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import Boundary.KabasujiFrame;
+import Boundary.PuzzleLevelPanel;
+
 import java.awt.BorderLayout;
 
 public class DefLevelMenuToPuzzleLevelController implements ActionListener{

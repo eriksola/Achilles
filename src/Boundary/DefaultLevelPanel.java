@@ -15,6 +15,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.DefLevelMenuToPuzzleLevelController;
 import Controller.ReturnToPlayerMenuController;
 
 import java.awt.event.ActionListener;
