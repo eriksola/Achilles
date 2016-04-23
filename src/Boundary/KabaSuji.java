@@ -34,7 +34,7 @@ public class KabaSuji extends JPanel {
 	 */
 	public void setUnselected(PieceView pv){
 		selectedPiece.drawUnselected();
-		this.selectedPiece = pv;
+		this.selectedPiece = null;
 	}
 
 	/**
