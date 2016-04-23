@@ -7,9 +7,12 @@ import Game.Coordinate;
 import Game.Piece;
 import Game.Stock;
 import Boundary.PieceView;
+import Controller.PieceController;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,18 +22,20 @@ import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 
 public class BullPenView extends JPanel {
-	Piece pieces[];
-	PieceView pieceViews[];
+	private PieceView pieceViews[];
 	JFrame frame;
 	BullPen bp;
+	KabaSuji view;
 
 	/**
 	 * Create the panel.
 	 */
-	public BullPenView(JFrame f, BullPen p) {
+	public BullPenView(JFrame f, BullPen p, KabaSuji view) {
 		this.frame = f;
 		this.bp = p;
+		this.view = view;
 		
+		/*
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -42,31 +47,23 @@ public class BullPenView extends JPanel {
 		);
 		setLayout(groupLayout);
 		setBackground(Color.white);
-		addPiecesToPen();
+		*/
+		
+		setPieceViews(new PieceView[p.getPieces().length]);
+		for(int i = 0; i < getPieceViews().length; i++){
+			getPieceViews()[i] = new PieceView(p.getPieces()[i],view);
+			add(getPieceViews()[i].label);
+		}
+		
 
 	}
-	
-	/**
-	 * Add random pieces to the bullpen.
-	 */
-	public void addPiecesToPen() {
-		pieceViews = bp.getPvs();
-		pieces = bp.getPieces();
-		
-		for(int i = 0; i < pieces.length; i++){
-			PieceView pv = new PieceView(pieces[i]);
-			pieceViews[i] = pv;	
-		}
-			
-		for(int i = 0; i < pieces.length; i++){
-			bp.selectedPiece = pieces[i];
-			ImageIcon img = new ImageIcon(pieceViews[i].getBufferedImage());
-			JLabel label = new JLabel(img);
-			setLayout(new FlowLayout()); 
-			add(label);
-			
-		}
-		
+
+	public PieceView[] getPieceViews() {
+		return pieceViews;
+	}
+
+	public void setPieceViews(PieceView pieceViews[]) {
+		this.pieceViews = pieceViews;
 	}
 
 	

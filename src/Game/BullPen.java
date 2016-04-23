@@ -7,12 +7,10 @@ import Boundary.PieceView;
 public class BullPen implements Serializable{
 	
 	Piece[] pieces;
-	private PieceView[] pvs;
 	public Piece selectedPiece;
 
-	public BullPen(Piece[] p, PieceView[] pvs){
+	public BullPen(Piece[] p){
 		this.pieces = p;
-		this.setPvs(pvs);
 	}
 
 	
@@ -26,14 +24,6 @@ public class BullPen implements Serializable{
 			c.x = (-1) * oldY;
 			c.y = (1) * oldX;
 		}
-		//look for corresponding PieceView and update BufferedImage
-		PieceView pv = null;
-		for(PieceView view: getPvs()){
-			if(view.getP() == getSelectedPiece()){
-				pv = view;
-			}
-		}
-		pv.draw();
 	}
 
 	/**
@@ -46,14 +36,6 @@ public class BullPen implements Serializable{
 			c.x = (1) * oldY;
 			c.y = (-1) * oldX;
 		}
-		//look for corresponding PieceView and update BufferedImage
-		PieceView pv = null;
-		for(PieceView view: getPvs()){
-			if(view.getP() == getSelectedPiece()){
-				pv = view;
-			}
-		}
-		pv.draw();
 	}
 	
 	/**
@@ -64,14 +46,6 @@ public class BullPen implements Serializable{
 			int oldY = c.y;
 			c.y = (-1) * oldY;
 		}
-		//look for corresponding PieceView and update BufferedImage
-		PieceView pv = null;
-		for(PieceView view: getPvs()){
-			if(view.getP() == getSelectedPiece()){
-				pv = view;
-			}
-		}
-		pv.draw();
 	}
 
 	/**
@@ -82,14 +56,6 @@ public class BullPen implements Serializable{
 			int oldX = c.x;
 			c.x = (-1) * oldX;
 		}
-		//look for corresponding PieceView and update BufferedImage
-		PieceView pv = null;
-		for(PieceView view: getPvs()){
-			if(view.getP() == getSelectedPiece()){
-				pv = view;
-			}
-		}
-		pv.draw();
 	}
 
 
@@ -100,11 +66,7 @@ public class BullPen implements Serializable{
 	public Piece[] getPieces(){
 		return this.pieces;
 	}
-	public PieceView[] getPvs() {
-		return pvs;
-	}
-	
-	
+
 	public void setSelectedPiece(Piece selectedPiece) {
 		this.selectedPiece = selectedPiece;
 	}
@@ -114,13 +76,6 @@ public class BullPen implements Serializable{
 		return this.pieces = p;
 	}
 	
-	public PieceView[] setPieceViews(PieceView[] p){
-		return this.pvs = p;
-	}
-	
-	public void setPvs(PieceView[] pvs) {
-		this.pvs = pvs;
-	}
 	
 	
 }

@@ -25,7 +25,7 @@ import Game.Stock;
 import Game.Tile;
 import Boundary.PieceView;
 
-public class PuzzleLevelPanel extends JPanel {
+public class PuzzleLevelPanel extends KabaSuji {
 
 	KabasujiFrame mainframe;
 	JButton lvlMenuBtn;
@@ -43,12 +43,16 @@ public class PuzzleLevelPanel extends JPanel {
 		setBackground(new Color(173, 216, 230));
 		this.mainframe = f;
 		//Add pieces to the bull
-		bp = new BullPen(null, null);
-		bp.setPieces(s.getRandomPiecesForPen());
-		PieceView[] pvs = new PieceView[35];
-		bp.setPvs(pvs);
+		bp = new BullPen(s.getRandomPiecesForPen());
 		
-		board = new Board(tiles);
+		Tile[][] brdTiles = new Tile[10][10];
+		//start board empty
+		for (int i = 0; i < brdTiles.length; i++) {
+			for (int j = 0; j < brdTiles[0].length; j++) {
+				brdTiles[i][j] = new Tile(false, i, j);
+			}
+		}
+		this.board = new Board(brdTiles);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,14 +74,14 @@ public class PuzzleLevelPanel extends JPanel {
 		
 		JButton vertical = new JButton("Vertical");
 		
-		BoardView boardView = new BoardView(mainframe, board);
+		BoardView boardView = new BoardView(mainframe, board, this);
 		
 		JButton deg = new JButton("90");
 		
 		JButton reset = new JButton("Reset");
 		
 		
-		JPanel bullpen = new BullPenView(f,bp);
+		JPanel bullpen = new BullPenView(f,bp, this);
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(

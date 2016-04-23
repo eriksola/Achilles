@@ -18,7 +18,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class LightningLevelPanel extends JPanel{
+public class LightningLevelPanel extends KabaSuji{
 
 	KabasujiFrame mainframe;
 
@@ -38,12 +38,16 @@ public class LightningLevelPanel extends JPanel{
 		panel.setBackground(new Color(173, 216, 230));
 		this.mainframe = f;
 		//Add pieces to the bull
-		bp = new BullPen(null, null);
-		bp.setPieces(s.getRandomPiecesForPen());
-		PieceView[] pvs = new PieceView[35];
-		bp.setPvs(pvs);
+		bp = new BullPen(s.getRandomPiecesForPen());
 		
-		board = new Board(tiles);
+		Tile[][] brdTiles = new Tile[10][10];
+		//start board empty
+		for (int i = 0; i < brdTiles.length; i++) {
+			for (int j = 0; j < brdTiles[0].length; j++) {
+				brdTiles[i][j] = new Tile(false, i, j);
+			}
+		}
+		this.board = new Board(brdTiles);
 		add(panel);
 		
 		JButton button = new JButton("Horizontal");
@@ -63,7 +67,7 @@ public class LightningLevelPanel extends JPanel{
 		
 		JButton button_4 = new JButton("Help");
 		
-		BoardView boardView = new BoardView(mainframe, board);
+		BoardView boardView = new BoardView(mainframe, board, this);
 		
 		JButton button_5 = new JButton("Reset");
 		GroupLayout gl_panel = new GroupLayout(panel);
