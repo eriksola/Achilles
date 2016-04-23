@@ -26,7 +26,7 @@ import Game.BullPen;
 import Game.Stock;
 import Game.Tile;
 
-public class LevelBuilderReleasePanel extends JPanel {
+public class LevelBuilderReleasePanel extends KabaSuji {
 	JTextField x;
 	JTextField y;
 	JFrame mainFrame;
@@ -41,12 +41,16 @@ public class LevelBuilderReleasePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public LevelBuilderReleasePanel(JFrame f) {
-		board = new Board(new Tile[10][10]); //start Board empty
+		Tile[][] brdTiles = new Tile[10][10];
+		//start board empty
+		for (int i = 0; i < brdTiles.length; i++) {
+			for (int j = 0; j < brdTiles[0].length; j++) {
+				brdTiles[i][j] = new Tile(false, i, j);
+			}
+		}
+		this.board = new Board(brdTiles);
 
-		bp = new BullPen(null, null);
-		bp.setPieces(s.getRandomPiecesForPen());
-		PieceView[] pvs = new PieceView[35];
-		bp.setPvs(pvs);
+		bp = new BullPen(s.getRandomPiecesForPen());
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
@@ -70,7 +74,7 @@ public class LevelBuilderReleasePanel extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		BoardView boardView = new BoardView(mainFrame, board);
+		BoardView boardView = new BoardView(mainFrame, board, this);
 		
 		JButton undo = new JButton("Undo");
 		
@@ -169,7 +173,7 @@ public class LevelBuilderReleasePanel extends JPanel {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
 		);
 		
-		JPanel bullpen = new BullPenView(mainFrame, bp);
+		JPanel bullpen = new BullPenView(mainFrame, bp, this);
 		scrollPane.setViewportView(bullpen);
 		panel.setLayout(gl_panel);
 

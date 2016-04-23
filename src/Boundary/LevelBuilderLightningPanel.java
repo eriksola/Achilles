@@ -26,7 +26,7 @@ import Game.BullPen;
 import Game.Stock;
 import Game.Tile;
 
-public class LevelBuilderLightningPanel extends JPanel {
+public class LevelBuilderLightningPanel extends KabaSuji {
 	
 	JTextField x_text;
 	JTextField y_text;
@@ -43,15 +43,19 @@ public class LevelBuilderLightningPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public LevelBuilderLightningPanel(JFrame f) {
-		this.board = new Board(new Tile[10][10]); //start Board empty
+		Tile[][] brdTiles = new Tile[10][10];
+		//start board empty
+		for (int i = 0; i < brdTiles.length; i++) {
+			for (int j = 0; j < brdTiles[0].length; j++) {
+				brdTiles[i][j] = new Tile(false, i, j);
+			}
+		}
+		this.board = new Board(brdTiles);
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
 		
 		//-----------------ADDING RANDOM PIECES NOW NOT FINAL 
-		bp = new BullPen(null, null);
-		bp.setPieces(s.getRandomPiecesForPen());
-		PieceView[] pvs = new PieceView[35];
-		bp.setPvs(pvs);
+		bp = new BullPen(s.getRandomPiecesForPen());
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,7 +83,7 @@ public class LevelBuilderLightningPanel extends JPanel {
 		x_text = new JTextField();
 		x_text.setColumns(10);
 		
-		BoardView boardView = new BoardView(mainFrame, board);
+		BoardView boardView = new BoardView(mainFrame, board, this);
 		
 		JLabel label_1 = new JLabel("x");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -172,7 +176,7 @@ public class LevelBuilderLightningPanel extends JPanel {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
 		);
 		
-		JPanel bullpen = new BullPenView(mainFrame, bp);
+		JPanel bullpen = new BullPenView(mainFrame, bp, this);
 		scrollPane.setViewportView(bullpen);
 		panel.setLayout(gl_panel);
 		

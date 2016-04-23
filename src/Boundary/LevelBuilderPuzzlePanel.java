@@ -23,6 +23,7 @@ import Controller.GetTextController;
 import Controller.SaveController;
 import Game.Board;
 import Game.BullPen;
+import Game.Piece;
 import Game.Stock;
 import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
@@ -30,7 +31,8 @@ import java.awt.event.InputMethodListener;
 import java.io.File;
 import java.awt.event.InputMethodEvent;
 
-public class LevelBuilderPuzzlePanel extends JPanel {
+
+public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
 	BullPen bp;
 	Board board;
@@ -41,6 +43,7 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 	JButton exit;
 	JButton btnEnter;
 	JButton save;
+	BullPenView bullpen;
 
 	JFrame mainFrame;
 	private JTextField txtMoves;
@@ -48,16 +51,20 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public LevelBuilderPuzzlePanel(JFrame f) {
-		board = new Board(new Tile[10][10]); //start Board empty
+		Tile[][] brdTiles = new Tile[10][10];
+		//start board empty
+		for (int i = 0; i < brdTiles.length; i++) {
+			for (int j = 0; j < brdTiles[0].length; j++) {
+				brdTiles[i][j] = new Tile(false, i, j);
+			}
+		}
+		this.board = new Board(brdTiles);
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
 		
 		//-----------------ADDING RANDOM PIECES NOW NOT FINAL 
-		bp = new BullPen(null, null);
-		bp.setPieces(s.getRandomPiecesForPen());
-		PieceView[] pvs = new PieceView[35];
-		bp.setPvs(pvs);
-		
+		bp = new BullPen(s.getRandomPiecesForPen());
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBackground(new Color(173, 216, 230));
@@ -77,7 +84,7 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 		
 		JButton addhint = new JButton("Add Hint");
 		
-		BoardView boardView = new BoardView(mainFrame, this.board);
+		BoardView boardView = new BoardView(mainFrame, this.board, this);
 		
 		JButton undo = new JButton("Undo");
 		
@@ -191,7 +198,11 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
 		
-		JPanel bullpen = new BullPenView(mainFrame, bp);
+		bullpen = new BullPenView(mainFrame, bp, this);
+		for (int i = 0; i < bullpen.getPieceViews().length; i++) {
+			System.out.println(bullpen.getPieceViews()[i].label);
+		}
+
 		scrollPane.setViewportView(bullpen);
 		panel.setLayout(gl_panel);
 		
@@ -204,4 +215,9 @@ public class LevelBuilderPuzzlePanel extends JPanel {
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
 		
 	}
+	
+	public BullPenView getBullPenView(){
+		return this.bullpen;
+	}
+	
 }
