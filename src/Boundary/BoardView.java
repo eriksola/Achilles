@@ -41,6 +41,7 @@ public class BoardView extends JPanel {
 		this.frame = f;
 		this.brd = brd;
 		this.view = view;
+		
 		/*
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -54,6 +55,7 @@ public class BoardView extends JPanel {
 		setLayout(groupLayout);
 		setBackground(Color.white);
 		*/
+		
 		label = new JLabel();
 		label.addMouseListener(new BoardController(this.view, this));
 		label.setLayout(new FlowLayout()); 
@@ -77,7 +79,7 @@ public class BoardView extends JPanel {
 		for(int i = 0; i < brdRows; i++){
 			for(int j = 0; j < brdCols; j++){
 				g.drawRect(j*10, i*10, 10, 10);
-				if(brd.getTiles()[i][j].isOccupied()){
+				if (brd.getTiles()[i][j].isOccupied()){
 					g.setColor(Color.YELLOW);
 					g.fillRect(j*10 + 1, i*10 + 1, 8, 8);
 					g.setColor(Color.BLACK);

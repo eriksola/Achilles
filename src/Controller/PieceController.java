@@ -34,9 +34,19 @@ public class PieceController extends java.awt.event.MouseAdapter{
 	public void mouseClicked(MouseEvent me){
 		System.out.println("mouse clicked");
 		System.out.println(pv);
+		
+		
 		if(view.getSelectedPiece() != null){
+			if (view.getSelectedPiece() == this.pv){
+				view.setUnselected(view.getSelectedPiece());
+			}
+			else{
 			view.setUnselected(view.getSelectedPiece());
+			view.setSelected(this.pv);
+			}
 		}
-		view.setSelected(this.pv);
+		
+		else{ view.setSelected(this.pv);}
+		
 	}
 }
