@@ -1,11 +1,13 @@
 package Game;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Nan Zhang
  *
  */
-public class Board {
+public class Board implements Serializable{
 
 	Tile[][] tiles;
 	int width;

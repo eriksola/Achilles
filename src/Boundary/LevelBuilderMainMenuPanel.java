@@ -48,39 +48,45 @@ public class LevelBuilderMainMenuPanel extends JPanel {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Image/hammer.png"));
+		
+		JButton btnBuiltLevels = new JButton("Built Levels");
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(170, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addGap(136)
-										.addComponent(button)
-										.addGap(18)
-										.addComponent(button_1)
-										.addGap(18)
-										.addComponent(button_2))
-									.addComponent(label_1))
-								.addGap(87))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(label)
-								.addGap(299)))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGap(124)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(136)
+									.addComponent(button)
+									.addGap(18)
+									.addComponent(button_1)
+									.addGap(18)
+									.addComponent(button_2))
+								.addComponent(label_1))
+							.addGap(87))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(label)
+							.addGap(156)
+							.addComponent(btnBuiltLevels)
+							.addGap(46))
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
-							.addGap(179))))
+							.addGap(179)))
+					.addGap(0, 0, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(30)
-					.addComponent(label)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label)
+						.addComponent(btnBuiltLevels))
 					.addGap(44)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(button_1)
 						.addComponent(button)
@@ -94,5 +100,6 @@ public class LevelBuilderMainMenuPanel extends JPanel {
 		puzzle.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderPuzzlePanel(frame)));
 		lightning.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderLightningPanel(frame)));
 		release.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderReleasePanel(frame)));
+		btnBuiltLevels.addActionListener((new SwitchWindowController(mainFrame, new LevelBuilderBuiltLevelPanel(frame))));
 	}
 }
