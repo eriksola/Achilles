@@ -229,7 +229,7 @@ public class BuiltLevelPanel extends JPanel {
 			
 			for(int i = 0; i < puzzleLevels; i++){
 				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/PuzzleLevels/Level" + i + ".txt")){
+				if(d.Deserialize("./src/BuiltLevels/PuzzleLevels/Level" + (i + 1) + ".txt")){
 					puzzleLevelsButtons[i].setVisible(true);	
 					//use deserialization object to get needed entities
 				}
@@ -239,7 +239,7 @@ public class BuiltLevelPanel extends JPanel {
 			}
 			for(int i = 0; i < lightningLevels; i++){
 				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/LightningLevels/Level" + i + ".txt")){
+				if(d.Deserialize("./src/BuiltLevels/LightningLevels/Level" + (i + 1) + ".txt")){
 					lightningLevelsButtons[i].setVisible(true);
 				}
 				else{
@@ -248,7 +248,7 @@ public class BuiltLevelPanel extends JPanel {
 			}
 			for(int i = 0; i < releaseLevels; i++){
 				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/ReleaseLevels/Level" + i + ".txt")){
+				if(d.Deserialize("./src/BuiltLevels/ReleaseLevels/Level" + (i + 1) + ".txt")){
 					releaseLevelsButtons[i].setVisible(true);
 				}
 				else{
