@@ -48,11 +48,11 @@ public class SaveController implements ActionListener {
 			String filepath = null;
 			switch (levelType) {
 	            case 1:  
-	            		filepath = "./src/BuiltLevels/PuzzleLevels/Level" + (numLevel + 1) + ".txt";
+	            		filepath = "./src/BuiltLevels/PuzzleLevels/Level" + numLevel + ".txt";
 	                     break;
-	            case 2:  filepath = "./src/BuiltLevels/LightningLevels/Level" + (numLevel + 1) + ".txt";
+	            case 2:  filepath = "./src/BuiltLevels/LightningLevels/Level" + numLevel + ".txt";
 	                     break;
-	            case 3:  filepath = "./src/BuiltLevels/ReleaseLevels/Level" + (numLevel + 1) + ".txt";
+	            case 3:  filepath = "./src/BuiltLevels/ReleaseLevels/Level" + numLevel + ".txt";
 	                     break;
 	            default: filepath = null;
 	            break;
@@ -64,7 +64,6 @@ public class SaveController implements ActionListener {
 				
 				//NEED TO ADD MORE ENTITIES
 				out.writeObject(pieces);
-				out.writeObject(board);
 				
 				out.close();
 				fileOut.close();

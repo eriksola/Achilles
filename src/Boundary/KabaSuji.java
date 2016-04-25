@@ -1,3 +1,4 @@
+
 package Boundary;
 
 import javax.swing.JPanel;
@@ -24,19 +25,15 @@ public class KabaSuji extends JPanel {
 	 * @param pv the PieceView to select
 	 */
 	public void setSelected(PieceView pv){
-		pv.drawSelected();
-		this.selectedPiece = pv;
+		if(selectedPiece != null){
+			selectedPiece.drawUnselected();
+		}
+		selectedPiece = pv;
+		if(pv != null){
+			selectedPiece.drawSelected();
+		}
 	}
 	
-	/**
-	 * set a PieceView unselected.
-	 * @param pv
-	 */
-	public void setUnselected(PieceView pv){
-		selectedPiece.drawUnselected();
-		this.selectedPiece = null;
-	}
-
 	/**
 	 * get the selected PieceView
 	 * @return

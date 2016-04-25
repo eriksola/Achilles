@@ -47,8 +47,8 @@ public class PieceView {
 		g.fillRect(0, 0, 65, 65);
 		g.setColor(Color.black);
 		for(Coordinate c: getP().getCoordinates()){
-			int newX = 20 + (10 * c.x);
-			int newY = 20 - (10 * c.y);
+			int newX = 30 + (10 * c.x);
+			int newY = 30 - (10 * c.y);
 			g.drawRect(newX, newY, 10, 10);
 		}
 		ImageIcon icon = new ImageIcon(img);
@@ -65,8 +65,8 @@ public class PieceView {
 		g.fillRect(0, 0, 65, 65);
 		g.setColor(Color.BLACK);
 		for(Coordinate c: getP().getCoordinates()){
-			int newX = 20 + (10 * c.x);
-			int newY = 20 - (10 * c.y);
+			int newX = 30 + (10 * c.x);
+			int newY = 30 - (10 * c.y);
 			g.drawRect(newX, newY, 10, 10);
 			g.setColor(Color.YELLOW);
 			g.fillRect(newX + 1, newY + 1, 8, 8);

@@ -19,3 +19,4 @@ public class Tile implements Serializable{
 	}
 	
 }
+>>>>>>> refs/remotes/origin/master

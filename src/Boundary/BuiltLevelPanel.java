@@ -20,7 +20,7 @@ import Controller.ReturnToPlayerMenuController;
 public class BuiltLevelPanel extends JPanel {
 
 	KabasujiFrame mainframe;
-	
+	Deserialization d = new Deserialization();
 	JButton menuBtn;
 	/**
 	 * Create the panel.
@@ -228,18 +228,15 @@ public class BuiltLevelPanel extends JPanel {
 			int releaseLevels = mainframe.getBuiltRelease();
 			
 			for(int i = 0; i < puzzleLevels; i++){
-				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/PuzzleLevels/Level" + (i + 1) + ".txt")){
-					puzzleLevelsButtons[i].setVisible(true);	
-					//use deserialization object to get needed entities
+				if(d.Deserialize("./src/BuiltLevels/PuzzleLevels/Level" + i + ".txt")){
+					puzzleLevelsButtons[i].setVisible(true);									
 				}
 				else{
 					System.err.println("Error in serialization importing process!");
 				}
 			}
 			for(int i = 0; i < lightningLevels; i++){
-				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/LightningLevels/Level" + (i + 1) + ".txt")){
+				if(d.Deserialize("./src/BuiltLevels/LightningLevels/Level" + i + ".txt")){
 					lightningLevelsButtons[i].setVisible(true);
 				}
 				else{
@@ -247,8 +244,7 @@ public class BuiltLevelPanel extends JPanel {
 				}
 			}
 			for(int i = 0; i < releaseLevels; i++){
-				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/ReleaseLevels/Level" + (i + 1) + ".txt")){
+				if(d.Deserialize("./src/BuiltLevels/ReleaseLevels/Level" + i + ".txt")){
 					releaseLevelsButtons[i].setVisible(true);
 				}
 				else{
