@@ -211,9 +211,14 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 1, levelCount));
+		
+		this.save.addActionListener(new SaveController(bp.getPieces(), board, 1));
+		
+		
 		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
+		
 		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
+		
 		this.btnEnter.addActionListener(new GetTextController(x, y));
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
 		horizontal.addActionListener(new HflipController(this));

@@ -174,7 +174,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		panel.setLayout(gl_panel);
 
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 3, levelNum));
+		this.save.addActionListener(new SaveController(bp.getPieces(), board, 3));
 		this.btnEnter.addActionListener(new GetTextController(x, y));
 		}
 

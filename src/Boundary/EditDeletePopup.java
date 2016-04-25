@@ -73,9 +73,13 @@ public class EditDeletePopup extends JPopupMenu {
         	public void mousePressed(MouseEvent event) {
         		try{          		
             		File file = new File(path);
-                	
+                	String levelName = file.getName(); 
+                	//Removes the file extension
+					if (levelName.indexOf(".") > 0){
+						levelName = levelName.substring(0, levelName.lastIndexOf("."));
+					}
             		if(file.delete()){
-            			currentPanel.removeLevel(levelNumber, levelType);
+            			currentPanel.removeLevel(levelName, levelType);
             			System.out.println(file.getName() + " is deleted!");
             			
             		}else{

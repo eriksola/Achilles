@@ -21,17 +21,25 @@ import Controller.ReturnToBuilderMenuController;
 import Controller.ReturnToPlayerMenuController;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import javax.swing.JScrollPane;
+import java.awt.GridLayout;
+
 
 public class LevelBuilderBuiltLevelPanel extends JPanel {
 
 	LevelBuilderFrame mainframe;
 	JButton menuBtn;
-	JLabel puzzleLevelsLabels[] = new JLabel[5];	
-	JLabel lightningLevelsLabels[] = new JLabel[5];
-	JLabel releaseLevelsLabels[] = new JLabel[5];
-	
+
+	HashMap<String, JLabel> puzzleLevelsLabels = new HashMap<String, JLabel>();
+	HashMap<String, JLabel> lightningLevelsLabels = new HashMap<String, JLabel>();
+	HashMap<String, JLabel> releaseLevelsLabels = new HashMap<String, JLabel>();
 	/**
 	 * Create the panel.
 	 */
@@ -65,70 +73,11 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 		label_3.setForeground(new Color(0, 0, 0));
 		label_3.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
+		JScrollPane puzzleScroll = new JScrollPane();
 		
-	
-		JLabel builtp1 = new JLabel("1");
-		builtp1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtp1.setVisible(false);
-		JLabel builtp2 = new JLabel("2");
-		builtp2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtp2.setVisible(false);
-		JLabel builtp3 = new JLabel("3");
-		builtp3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtp3.setVisible(false);
-		JLabel builtp4 = new JLabel("4");
-		builtp4.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtp4.setVisible(false);
-		JLabel builtp5 = new JLabel("5");
-		builtp5.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtp5.setVisible(false);
-		puzzleLevelsLabels[0] = builtp1;
-		puzzleLevelsLabels[1] = builtp2;
-		puzzleLevelsLabels[2] = builtp3;
-		puzzleLevelsLabels[3] = builtp4;
-		puzzleLevelsLabels[4] = builtp5;
+		JScrollPane lightningScroll = new JScrollPane();
 		
-		JLabel builtl1 = new JLabel("1");
-		builtl1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtl1.setVisible(false);
-		JLabel builtl2 = new JLabel("2");
-		builtl2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtl2.setVisible(false);
-		JLabel builtl3 = new JLabel("3");
-		builtl3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtl3.setVisible(false);
-		JLabel builtl4 = new JLabel("4");
-		builtl4.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtl4.setVisible(false);
-		JLabel builtl5 = new JLabel("5");
-		builtl5.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtl5.setVisible(false);
-		lightningLevelsLabels[0] = builtl1;
-		lightningLevelsLabels[1] = builtl2;
-		lightningLevelsLabels[2] = builtl3;
-		lightningLevelsLabels[3] = builtl4;
-		lightningLevelsLabels[4] = builtl5;
-		
-		JLabel builtr1 = new JLabel("1");
-		builtr1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtr1.setVisible(false);
-		JLabel builtr2 = new JLabel("2");
-		builtr2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtr2.setVisible(false);
-		JLabel builtr3 = new JLabel("3");
-		builtr3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtr3.setVisible(false);
-		JLabel builtr4 = new JLabel("4");
-		builtr4.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtr4.setVisible(false);
-		JLabel builtr5 = new JLabel("5");
-		builtr5.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		builtr5.setVisible(false);
-		releaseLevelsLabels[0] = builtr1;
-		releaseLevelsLabels[1] = builtr2;
-		releaseLevelsLabels[2] = builtr3;
-		releaseLevelsLabels[3] = builtr4;
-		releaseLevelsLabels[4] = builtr5;
+		JScrollPane releaseScroll = new JScrollPane();
 		
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -148,43 +97,17 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 							.addComponent(label_2, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
 							.addGap(556))
 						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(puzzleScroll, GroupLayout.PREFERRED_SIZE, 662, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(84, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap(684, Short.MAX_VALUE))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(builtr1, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(builtr2, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(builtr3, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(builtr4, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(builtr5, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(builtl1, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-										.addComponent(builtp1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panel.createSequentialGroup()
-											.addComponent(builtp2, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(builtp3, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(builtp4, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(builtp5, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_panel.createSequentialGroup()
-											.addComponent(builtl2, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(builtl3, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(builtl4, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(builtl5, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)))))
-							.addGap(495))))
+							.addComponent(lightningScroll, GroupLayout.PREFERRED_SIZE, 662, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(84, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(releaseScroll, GroupLayout.PREFERRED_SIZE, 662, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(84, Short.MAX_VALUE))))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -194,53 +117,67 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(button)
 							.addGap(40)
-							.addComponent(puzzlelabel)
-							.addGap(12)
-							.addComponent(builtp1)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(title)
-							.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(builtp2)
-								.addComponent(builtp3)
-								.addComponent(builtp4)
-								.addComponent(builtp5))
-							.addGap(44)))
+							.addComponent(puzzlelabel))
+						.addComponent(title))
+					.addGap(10)
+					.addComponent(puzzleScroll, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(builtl1)
-						.addComponent(builtl2)
-						.addComponent(builtl3)
-						.addComponent(builtl4)
-						.addComponent(builtl5))
+					.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lightningScroll, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addGap(15)
 					.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(builtr1)
-						.addComponent(builtr2)
-						.addComponent(builtr3)
-						.addComponent(builtr4)
-						.addComponent(builtr5))
-					.addContainerGap(572, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(releaseScroll, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(434, Short.MAX_VALUE))
 		);
 		
+		JPanel releasePanel = new JPanel();
+		releasePanel.setBackground(Color.WHITE);
+		releaseScroll.setViewportView(releasePanel);
+		releasePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		JPanel lightningPanel = new JPanel();
+		lightningPanel.setBackground(Color.WHITE);
+		lightningScroll.setViewportView(lightningPanel);
+		lightningPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		JPanel puzzlePanel = new JPanel();
+		puzzleScroll.setViewportView(puzzlePanel);
+		puzzlePanel.setBackground(Color.WHITE);
+		puzzlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
 		panel.setLayout(gl_panel);
 		
 		//activate controllers for buttons
 		menuBtn.addActionListener(new ReturnToBuilderMenuController(mainframe));
 		if(mainframe.hasBuiltLevels()){			
 			int puzzleLevels = mainframe.getPuzzleLevelCount();
+			File puzzlePath = new File("./src/BuiltLevels/PuzzleLevels");
+			ArrayList<File> puzzleFiles = new ArrayList<File>(Arrays.asList(puzzlePath.listFiles()));
+					
 			int lightningLevels = mainframe.getLightningLevelCount();
+			File lightningPath = new File("./src/BuiltLevels/LightningLevels");
+			ArrayList<File> lightningFiles = new ArrayList<File>(Arrays.asList(lightningPath.listFiles()));
+			
 			int releaseLevels = mainframe.getReleaseLevelCount();
+			File releasePath = new File("./src/BuiltLevels/ReleaseLevels");
+			ArrayList<File> releaseFiles = new ArrayList<File>(Arrays.asList(releasePath.listFiles()));
 			
 			for(int i = 0; i < puzzleLevels; i++){
 				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/PuzzleLevels/Level" + i + ".txt")){
-					puzzleLevelsLabels[i].setVisible(true);	
-					puzzleLevelsLabels[i].addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/PuzzleLevels/Level" + i + ".txt",this, i, 1, d)));
+				String levelName;
+				if(d.Deserialize(puzzleFiles.get(i).getPath())){
+					levelName = puzzleFiles.get(i).getName();
+					//Removes the file extension
+					if (levelName.indexOf(".") > 0){
+						levelName = levelName.substring(0, levelName.lastIndexOf("."));
+					}
+					puzzleLevelsLabels.put(levelName, new JLabel(levelName));
+					puzzleLevelsLabels.get(levelName).setVisible(true);	
+					puzzlePanel.add(puzzleLevelsLabels.get(levelName));
+					puzzleLevelsLabels.get(levelName).addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/PuzzleLevels/" + levelName + ".txt", this, i, 1, d)));
+					puzzlePanel.revalidate();
 				}
 				else{
 					System.err.println("Error in serialization importing process!");
@@ -248,9 +185,18 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 			}
 			for(int i = 0; i < lightningLevels; i++){
 				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/LightningLevels/Level" + i + ".txt")){
-					lightningLevelsLabels[i].setVisible(true);
-					lightningLevelsLabels[i].addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/LightningLevels/Level" + i + ".txt",this, i,2, d)));
+				String levelName;
+				if(d.Deserialize(lightningFiles.get(i).getPath())){
+					levelName = lightningFiles.get(i).getName();
+					//Removes the file extension
+					if (levelName.indexOf(".") > 0){
+						levelName = levelName.substring(0, levelName.lastIndexOf("."));
+					}
+					lightningLevelsLabels.put(levelName, new JLabel(levelName));
+					lightningLevelsLabels.get(levelName).setVisible(true);	
+					lightningPanel.add(lightningLevelsLabels.get(levelName));
+					lightningLevelsLabels.get(levelName).addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/LightningLevels/" + levelName + ".txt", this, i, 2, d)));
+					lightningPanel.revalidate();
 				}
 				else{
 					System.err.println("Error in serialization importing process!");
@@ -258,9 +204,18 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 			}
 			for(int i = 0; i < releaseLevels; i++){
 				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/ReleaseLevels/Level" + i + ".txt")){
-					releaseLevelsLabels[i].setVisible(true);
-					releaseLevelsLabels[i].addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/ReleaseLevels/Level" + i + ".txt", this, i,3,d)));
+				String levelName;
+				if(d.Deserialize(releaseFiles.get(i).getPath())){
+					levelName = releaseFiles.get(i).getName();
+					//Removes the file extension
+					if (levelName.indexOf(".") > 0){
+						levelName = levelName.substring(0, levelName.lastIndexOf("."));
+					}
+					releaseLevelsLabels.put(levelName, new JLabel(levelName));
+					releaseLevelsLabels.get(levelName).setVisible(true);	
+					releasePanel.add(releaseLevelsLabels.get(levelName));
+					releaseLevelsLabels.get(levelName).addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/ReleaseLevels/" + levelName + ".txt", this, i, 3, d)));
+					releasePanel.revalidate();
 				}
 				else{
 					System.err.println("Error in serialization importing process!");
@@ -270,15 +225,19 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 		}
 	}
 	
-	public void removeLevel(int levelNum, int levelType) {
+	public void removeLevel(String levelName, int levelType) {
 		if(levelType == 1){
-			puzzleLevelsLabels[levelNum].setVisible(false);		
+			puzzleLevelsLabels.get(levelName).setVisible(false);
+			puzzleLevelsLabels.remove(levelName);
+			
 		}
 		else if(levelType == 2){
-			lightningLevelsLabels[levelNum].setVisible(false);
+			lightningLevelsLabels.get(levelName).setVisible(false);
+			lightningLevelsLabels.remove(levelName);
 		}
 		else if(levelType == 3){
-			releaseLevelsLabels[levelNum].setVisible(false);
+			releaseLevelsLabels.get(levelName).setVisible(false);
+			releaseLevelsLabels.remove(levelName);
 		}
 		else{
 			System.err.println("Error, no such " + levelType + "level type!");

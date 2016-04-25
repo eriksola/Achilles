@@ -179,7 +179,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getReleaseLevelCount();
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 3,levelCount));
+		this.save.addActionListener(new SaveController(bp.getPieces(), board, 3));
 		levelCount = new File("./src/BuiltLevels/ReleaseLevels").list().length;
 		((LevelBuilderFrame) mainFrame).setReleaseLevelCount(levelCount);
 		this.btnEnter.addActionListener(new GetTextController(x, y));

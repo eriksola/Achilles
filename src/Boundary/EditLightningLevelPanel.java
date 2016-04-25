@@ -175,7 +175,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		panel.setLayout(gl_panel);
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 2, levelNum));
+		this.save.addActionListener(new SaveController(bp.getPieces(), board, 2));
 		this.btnEnter.addActionListener(new GetTextController(x_text, y_text));
 	}
 }
