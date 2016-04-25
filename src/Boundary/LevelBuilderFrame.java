@@ -2,6 +2,7 @@ package Boundary;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,6 +21,7 @@ public class LevelBuilderFrame extends JFrame {
 	int puzzleLevelCount = 0;
 	int lightningLevelCount = 0;
 	int releaseLevelCount = 0;
+	boolean builtLevels = false;
 	Stock stock;
 	
 	/**
@@ -29,6 +31,7 @@ public class LevelBuilderFrame extends JFrame {
 	public LevelBuilderFrame(Stock s){
 		this.stock = s;
 		initialize();
+		builtLevels = hasBuiltLevels();	
 	}
 	
 	public int getPuzzleLevelCount() {
@@ -97,5 +100,17 @@ public class LevelBuilderFrame extends JFrame {
 				}
 			}
 		});
+	}
+	/**
+	 * 
+	 * @return true if there are built levels, will also set number of built levels
+	 */
+	public boolean hasBuiltLevels() {
+		
+		this.puzzleLevelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
+		this.lightningLevelCount = new File("./src/BuiltLevels/LightningLevels").list().length;
+		this.releaseLevelCount = new File("./src/BuiltLevels/ReleaseLevels").list().length;
+		
+		return puzzleLevelCount > 0 || lightningLevelCount > 0 || releaseLevelCount > 0;
 	}
 }

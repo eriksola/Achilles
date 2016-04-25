@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import Boundary.BuiltLevelPanel;
 import Boundary.DefaultLevelPanel;
 import Boundary.KabasujiFrame;
+import Boundary.LevelBuilderBuiltLevelPanel;
 import Boundary.LevelBuilderFrame;
 import Boundary.LevelBuilderLightningPanel;
 import Boundary.LevelBuilderMainMenuPanel;
@@ -63,6 +64,11 @@ public class SwitchWindowController implements ActionListener {
 		}
 		else if(panel instanceof LevelBuilderMainMenuPanel){
 			LevelBuilderMainMenuPanel p = new LevelBuilderMainMenuPanel((LevelBuilderFrame)frame);
+			frame.getContentPane().add(p, BorderLayout.CENTER);
+			frame.getContentPane().revalidate();
+		}
+		else if(panel instanceof LevelBuilderBuiltLevelPanel){
+			LevelBuilderBuiltLevelPanel p = new LevelBuilderBuiltLevelPanel((LevelBuilderFrame)frame);
 			frame.getContentPane().add(p, BorderLayout.CENTER);
 			frame.getContentPane().revalidate();
 		}

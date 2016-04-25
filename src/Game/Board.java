@@ -1,16 +1,22 @@
 package Game;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Nan Zhang
  *
  */
-public class Board {
+public class Board implements Serializable{
 
 	Tile[][] tiles;
+	int width;
+	int height;
 		
 	public Board(Tile[][] t){
 		this.tiles = t;
+		this.height = t.length;
+		this.width = t[0].length;
 	}
 	
 	public boolean addPiece(int row, int column, Piece piece){
@@ -27,9 +33,12 @@ public class Board {
 	}
 	
 	public boolean isValid(int row, int col){
-		if(row < 0 || row > tiles.length || col < 0 || col > tiles[0].length){
+		if(row < 0 || row > this.height || col < 0 || col > this.width){
 			return false;
 		}
+		//if the tile is occupied, invalid move
+		if (this.tiles[row][col].isOccupied()){ return false;}
+		
 		return true;
 	}
 

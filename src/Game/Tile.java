@@ -1,6 +1,8 @@
 package Game;
 
-public class Tile {
+import java.io.Serializable;
+
+public class Tile implements Serializable{
 	
 	boolean isOccupied;
 	int row;
@@ -17,3 +19,4 @@ public class Tile {
 	}
 	
 }
+>>>>>>> refs/remotes/origin/master

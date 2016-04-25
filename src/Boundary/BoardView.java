@@ -41,6 +41,7 @@ public class BoardView extends JPanel {
 		this.frame = f;
 		this.brd = brd;
 		this.view = view;
+		
 		/*
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -54,6 +55,7 @@ public class BoardView extends JPanel {
 		setLayout(groupLayout);
 		setBackground(Color.white);
 		*/
+		
 		label = new JLabel();
 		label.addMouseListener(new BoardController(this.view, this));
 		label.setLayout(new FlowLayout()); 
