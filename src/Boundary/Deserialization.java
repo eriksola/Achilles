@@ -23,7 +23,8 @@ public class Deserialization {
 		
 			
 			pieces = (Piece[]) in.readObject();
-
+			board = (Board) in.readObject();
+			
 			in.close();
 			fileIn.close();
 			return true;
@@ -37,10 +38,10 @@ public class Deserialization {
 		}
 	}
 	public Piece[] getPieces() {
-		return pieces;
+		return this.pieces;
 	}
 	public Board getBoard() {
-		return board;
+		return this.board;
 	}
 	
 	

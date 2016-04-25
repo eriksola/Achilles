@@ -238,9 +238,9 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 			
 			for(int i = 0; i < puzzleLevels; i++){
 				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/PuzzleLevels/Level" + (i + 1) + ".txt")){
+				if(d.Deserialize("./src/BuiltLevels/PuzzleLevels/Level" + i + ".txt")){
 					puzzleLevelsLabels[i].setVisible(true);	
-					puzzleLevelsLabels[i].addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/PuzzleLevels/Level" + (i + 1) + ".txt",this, i, 1, d)));
+					puzzleLevelsLabels[i].addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/PuzzleLevels/Level" + i + ".txt",this, i, 1, d)));
 				}
 				else{
 					System.err.println("Error in serialization importing process!");
@@ -248,9 +248,9 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 			}
 			for(int i = 0; i < lightningLevels; i++){
 				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/LightningLevels/Level" + (i + 1) + ".txt")){
+				if(d.Deserialize("./src/BuiltLevels/LightningLevels/Level" + i + ".txt")){
 					lightningLevelsLabels[i].setVisible(true);
-					lightningLevelsLabels[i].addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/LightningLevels/Level" + (i + 1) + ".txt",this, i,2, d)));
+					lightningLevelsLabels[i].addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/LightningLevels/Level" + i + ".txt",this, i,2, d)));
 				}
 				else{
 					System.err.println("Error in serialization importing process!");
@@ -258,9 +258,9 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 			}
 			for(int i = 0; i < releaseLevels; i++){
 				Deserialization d = new Deserialization();
-				if(d.Deserialize("./src/BuiltLevels/ReleaseLevels/Level" + (i + 1) + ".txt")){
+				if(d.Deserialize("./src/BuiltLevels/ReleaseLevels/Level" + i + ".txt")){
 					releaseLevelsLabels[i].setVisible(true);
-					releaseLevelsLabels[i].addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/ReleaseLevels/Level" + (i + 1) + ".txt", this, i,3,d)));
+					releaseLevelsLabels[i].addMouseListener(new EditDeletePopupListener(new EditDeletePopup("./src/BuiltLevels/ReleaseLevels/Level" + i + ".txt", this, i,3,d)));
 				}
 				else{
 					System.err.println("Error in serialization importing process!");
@@ -272,8 +272,7 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 	
 	public void removeLevel(int levelNum, int levelType) {
 		if(levelType == 1){
-			puzzleLevelsLabels[levelNum].setVisible(false);
-			
+			puzzleLevelsLabels[levelNum].setVisible(false);		
 		}
 		else if(levelType == 2){
 			lightningLevelsLabels[levelNum].setVisible(false);

@@ -64,6 +64,8 @@ public class SaveController implements ActionListener {
 				
 				//NEED TO ADD MORE ENTITIES
 				out.writeObject(pieces);
+				out.writeObject(board);
+				
 				
 				out.close();
 				fileOut.close();
