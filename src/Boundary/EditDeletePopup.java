@@ -41,7 +41,7 @@ public class EditDeletePopup extends JPopupMenu {
         		JPanel editableLevel = null;
         		
         		switch(levelType){
-        			case 1:;
+        			case 1:
         				editableLevel = new EditPuzzleLevelPanel(currentPanel.getMainFrame(), de, levelNumber);
         				break;
         			case 2:

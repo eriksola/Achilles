@@ -17,6 +17,7 @@ public class Tile implements Serializable{
 	public boolean isOccupied(){
 		return this.isOccupied;
 	}
+
 	
 }
->>>>>>> refs/remotes/origin/master
+//>>>>>>> refs/remotes/origin/master
