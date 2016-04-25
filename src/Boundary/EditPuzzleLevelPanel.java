@@ -205,7 +205,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 
 		/**MAKE SURE YOU PASS IN THE LEVEL TYPE**/
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 1, levelNum));
+		this.save.addActionListener(new SaveController(bp.getPieces(), board, 1));
 		this.btnEnter.addActionListener(new GetTextController(x, y));
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
 		

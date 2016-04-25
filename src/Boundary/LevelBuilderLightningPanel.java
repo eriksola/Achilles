@@ -182,7 +182,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getLightningLevelCount();
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 2, levelCount));
+		this.save.addActionListener(new SaveController(bp.getPieces(), board, 2));
 		levelCount = new File("./src/BuiltLevels/LightningLevels").list().length;
 		((LevelBuilderFrame) mainFrame).setLightningLevelCount(levelCount);
 		this.btnEnter.addActionListener(new GetTextController(x_text, y_text));
