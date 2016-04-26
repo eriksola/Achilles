@@ -30,9 +30,7 @@ public class BullPenView extends JPanel {
 	KabaSuji view;
 	ArrayList<PieceView> pvs;
 
-	/**
-	 * Create the panel.
-	 */
+
 	public BullPenView(JFrame f, BullPen p, KabaSuji view) {
 		this.frame = f;
 		this.bp = p;
@@ -68,11 +66,9 @@ public class BullPenView extends JPanel {
 	}
 	
 	public void addPiece(PieceView pv){
-		//create clone of PieceView, then add that to BullPen
-		PieceView newPiece = new PieceView(pv);
-		this.pvs.add(newPiece);
-		bp.getPieces().add(newPiece.getP());
-		add(newPiece.label);
+		this.pvs.add(pv);
+		bp.getPieces().add(pv.getP());
+		add(pv.label);
 	}
 
 	public ArrayList<PieceView> getPieceViews() {

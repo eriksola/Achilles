@@ -26,7 +26,7 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 		System.out.println("mouse clicked from bullpen");
 		if(view.getSelectedPiece() != null){
 			bpv.addPiece(new PieceView(view.getSelectedPiece().getP(), view));
-			((LevelBuilderPuzzlePanel)view).getScrollPane().setViewportView(bpv);
+			view.getScrollPane().setViewportView(bpv);
 		}
 	}
 

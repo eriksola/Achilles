@@ -39,17 +39,18 @@ import java.awt.event.InputMethodEvent;
 public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
 	BullPen bp;
+	Stock stock;
 	Board board;
-	Stock s = new Stock();
 	
 	JTextField x;
 	JTextField y;
 	JButton exit;
 	JButton btnEnter;
 	JButton save;
+	
 	BullPenView bullpen;
 	BoardView boardView;
-	StockView stock;
+	StockView stockView;
 
 	JFrame mainFrame;
 	private JTextField txtMoves;
@@ -66,12 +67,18 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 				brdTiles[i][j] = new Tile(false, i, j);
 			}
 		}
+		
 		this.board = new Board(brdTiles);
+		this.stock = new Stock();
+		this.bp = new BullPen();
+		
+		this.bullpen = new BullPenView(mainFrame, bp, this);
+		this.stockView = new StockView(mainFrame, stock, this);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
+		this.scrollPane = new JScrollPane();
+		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
-		
-	
-		bp = new BullPen();
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,10 +98,6 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		JButton right = new JButton("90");
 		
 		JButton addhint = new JButton("Add Hint");
-		
-		bullpen = new BullPenView(mainFrame, bp, this);
-		
-		boardView = new BoardView(mainFrame, this.board, this, bullpen);
 		
 		JButton undo = new JButton("Undo");
 		
@@ -117,9 +120,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		
 		btnEnter = new JButton("Enter n x m ");
-		
-		scrollPane = new JScrollPane();
-		
+				
 		txtMoves = new JTextField();
 		txtMoves.setColumns(10);
 		
@@ -209,15 +210,15 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		);
 		
 		bullpen.addMouseListener(new BullPenController(this, bullpen));
-		stock = new StockView(mainFrame, s, this);
+		stockView = new StockView(mainFrame, stock, this);
 		scrollPane.setViewportView(bullpen);
-		scrollPane_1.setViewportView(stock);
+		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
 		
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 1));
+		this.save.addActionListener(new SaveController(bp, stock, board, 1));
 		
 		
 		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;

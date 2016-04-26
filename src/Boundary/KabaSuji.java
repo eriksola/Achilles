@@ -2,6 +2,7 @@
 package Boundary;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * Top-level boundary object for both the builder and player.
@@ -9,7 +10,7 @@ import javax.swing.JPanel;
  *
  */
 
-public class KabaSuji extends JPanel {
+public abstract class KabaSuji extends JPanel {
 	
 	PieceView selectedPiece; /** the one selected piece. **/
 	
@@ -19,6 +20,8 @@ public class KabaSuji extends JPanel {
 	public KabaSuji(){
 		selectedPiece = null;
 	}
+	
+	public abstract JScrollPane getScrollPane();
 
 	/**
 	 * set a selected PieceView.

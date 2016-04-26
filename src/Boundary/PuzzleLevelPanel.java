@@ -37,6 +37,7 @@ public class PuzzleLevelPanel extends KabaSuji {
 
 	BullPen bp;
 	BullPenView bullpen;
+	JScrollPane scrollPane;
 	/**
 	 * Create the panel.
 	 */
@@ -155,5 +156,9 @@ public class PuzzleLevelPanel extends KabaSuji {
 	
 	public JButton getLevelMenuButton(){
 		return lvlMenuBtn;
+	}
+
+	public JScrollPane getScrollPane() {
+		return this.scrollPane;
 	}
 }

@@ -62,7 +62,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 		if(piece != null){
 			if(brd.addPiece(row,col,piece)){
 				bpv.remove(pv);
-				((LevelBuilderPuzzlePanel)view).getScrollPane().setViewportView(bpv);
+				view.getScrollPane().setViewportView(bpv);
 				bv.draw();
 				view.setSelected(null);
 			}

@@ -130,5 +130,10 @@ public class ReleaseLevelPanel extends KabaSuji {
 		panel.setLayout(gl_panel);
 
 	}
+	@Override
+	public JScrollPane getScrollPane() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

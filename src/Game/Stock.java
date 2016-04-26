@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import Boundary.PieceView;
 import sun.security.action.GetBooleanAction;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Random;
 
 
 
-public class Stock {
+public class Stock implements Serializable{
 	
 	/** Set of pieces **/
 	List<Piece> setOfPieces;

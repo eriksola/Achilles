@@ -18,9 +18,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.BullPenController;
 import Controller.GetBoardDimensionsController;
+import Controller.HflipController;
 import Controller.ReturnToBuilderMenuController;
+import Controller.RotateController;
 import Controller.SaveController;
+import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
 import Game.Stock;
@@ -34,10 +38,15 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	JButton btnEnter;
 	JButton save;
 	int levelNum;
+	
 	BullPen bp;
+	Stock stock;
 	Board board;
+	
 	BullPenView bullpen;
-	Stock s = new Stock();
+	StockView stockView;
+	BoardView boardView;
+	JScrollPane scrollPane;
 	/**
 	 * Create the panel.
 	 */
@@ -46,8 +55,13 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 		this.levelNum = levelNumber;
 		this.board = d.getBoard();
-
-		bp = new BullPen();
+		this.stock = d.getStock();
+		this.bp = d.getBullPen();
+		
+		this.bullpen = new BullPenView(mainFrame, bp, this);
+		this.stockView = new StockView(mainFrame, stock, this);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
+		this.scrollPane = new JScrollPane();
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
@@ -68,11 +82,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		JButton rightrotate = new JButton("90");
 		
 		JButton hint = new JButton("Add Hint");
-		
-		JScrollPane scrollPane = new JScrollPane();
-		
-		BoardView boardView = new BoardView(mainFrame, board, this, bullpen);
-		
+						
 		JButton undo = new JButton("Undo");
 		
 		x = new JTextField();
@@ -170,13 +180,23 @@ public class EditReleaseLevelPanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
 		);
 		
-		bullpen = new BullPenView(mainFrame, bp, this);
+		bullpen.addMouseListener(new BullPenController(this, bullpen));
+		stockView = new StockView(mainFrame, stock, this);
 		scrollPane.setViewportView(bullpen);
+		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 3));
+		this.save.addActionListener(new SaveController(bp, stock, board, 3));
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
+		horizontal.addActionListener(new HflipController(this));
+		vertical.addActionListener(new VflipController(this));
+		rightrotate.addActionListener(new RotateController(this));
+		
 		}
+	
+	public JScrollPane getScrollPane(){
+		return this.scrollPane;
+	}
 
 }

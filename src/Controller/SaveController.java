@@ -19,10 +19,12 @@ import Boundary.LevelBuilderMainMenuPanel;
 import Game.Board;
 import Game.BullPen;
 import Game.Piece;
+import Game.Stock;
 
 public class SaveController implements ActionListener {
 	
-	ArrayList<Piece> pieces;
+	BullPen bullPen;
+	Stock stock;
 	Board board;
 	int levelType;
 
@@ -33,8 +35,9 @@ public class SaveController implements ActionListener {
 	 * 2 = Lightning
 	 * 3 = Release
 	 */
-	public SaveController(ArrayList<Piece> pieces, Board board, int levelType){
-		this.pieces = pieces;
+	public SaveController(BullPen bullPen,Stock stock, Board board, int levelType){
+		this.bullPen = bullPen;
+		this.stock = stock;
 		this.board = board;
 		this.levelType = levelType;
 	}
@@ -134,8 +137,8 @@ public class SaveController implements ActionListener {
 					FileOutputStream fileOut = new FileOutputStream(filepath);
 					ObjectOutputStream out = new ObjectOutputStream(fileOut);
 					
-					//NEED TO ADD MORE ENTITIES
-					out.writeObject(pieces);
+					out.writeObject(bullPen);
+					out.writeObject(stock);
 					out.writeObject(board);
 					
 					

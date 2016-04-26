@@ -20,15 +20,19 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class LightningLevelPanel extends KabaSuji{
 
-	KabasujiFrame mainframe;
+	KabasujiFrame mainFrame;
 
 	Stock s = new Stock();
 	//TILES SHOULD NOT BE SET TO NULL
 	Tile[][] tiles = null;
 	Board board;
-
 	BullPen bp;
+	
+	BoardView boardView;
 	BullPenView bullpen;
+	JScrollPane scrollPane;
+
+	
 	/**
 	 * Create the panel.
 	 */
@@ -37,9 +41,8 @@ public class LightningLevelPanel extends KabaSuji{
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBackground(new Color(173, 216, 230));
-		this.mainframe = f;
+		this.mainFrame = f;
 		//Add pieces to the bull
-		bp = new BullPen();
 		
 		Tile[][] brdTiles = new Tile[10][10];
 		//start board empty
@@ -51,6 +54,13 @@ public class LightningLevelPanel extends KabaSuji{
 		this.board = new Board(brdTiles);
 		add(panel);
 		
+		this.board = new Board(brdTiles);
+		this.bp = new BullPen();
+		
+		this.bullpen = new BullPenView(mainFrame, bp, this);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
+		scrollPane = new JScrollPane();
+		
 		JButton button = new JButton("Horizontal");
 		
 		JButton button_1 = new JButton("Vertical");
@@ -58,18 +68,14 @@ public class LightningLevelPanel extends KabaSuji{
 		JButton button_2 = new JButton("90");
 		
 		JButton button_3 = new JButton("Back");
-		
-		JScrollPane scrollPane = new JScrollPane();
-		
+				
 		JLabel label = new JLabel("Level");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setForeground(Color.BLACK);
 		label.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
 		
 		JButton button_4 = new JButton("Help");
-		
-		BoardView boardView = new BoardView(mainframe, board, this, bullpen);
-		
+				
 		JButton button_5 = new JButton("Reset");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -129,6 +135,10 @@ public class LightningLevelPanel extends KabaSuji{
 		);
 		panel.setLayout(gl_panel);
 
+	}
+
+	public JScrollPane getScrollPane() {
+		return this.scrollPane;
 	}
 
 }
