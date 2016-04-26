@@ -10,7 +10,9 @@ public class Piece implements Serializable{
 	int bpIndex;
 
 	public Piece(Coordinate[] coords, int bp){
-		this.setCoordinates(coords);
+		for (int i = 0; i < coords.length; i++) {
+			this.coords[i] = new Coordinate(coords[i]);
+		}
 		this.bpIndex = bp;
 	}	
 	

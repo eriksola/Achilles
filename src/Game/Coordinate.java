@@ -10,4 +10,9 @@ public class Coordinate implements Serializable{
 		this.x = x;
 		this.y = y;
 	}
+
+	public Coordinate(Coordinate coordinate) {
+		this.x = coordinate.x;
+		this.y = coordinate.y;
+	}
 }

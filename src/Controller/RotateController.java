@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Boundary.KabaSuji;
-import Boundary.LevelBuilderPuzzlePanel;
 import Boundary.PieceView;
 import Game.Piece;
 
@@ -23,11 +22,6 @@ public class RotateController implements ActionListener{
 			Piece p = selected.getP();
 			p.rotateRight();
 			selected.drawSelected();
-			for(PieceView pv: ((LevelBuilderPuzzlePanel)view).getBullPenView().getPieceViews()){
-				if(pv != selected){
-					pv.drawUnselected();
-				}
-			}
 		}
 	}
 	
