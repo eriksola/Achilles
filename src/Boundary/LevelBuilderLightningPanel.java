@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import Controller.GetTextController;
+import Controller.GetBoardDimensionsController;
 import Controller.ReturnToBuilderMenuController;
 import Controller.SaveController;
 import Game.Board;
@@ -185,6 +185,6 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		this.save.addActionListener(new SaveController(bp.getPieces(), board, 2));
 		levelCount = new File("./src/BuiltLevels/LightningLevels").list().length;
 		((LevelBuilderFrame) mainFrame).setLightningLevelCount(levelCount);
-		this.btnEnter.addActionListener(new GetTextController(x_text, y_text));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x_text, y_text, boardView));
 	}
 }

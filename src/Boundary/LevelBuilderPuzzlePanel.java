@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Controller.GetMovesController;
-import Controller.GetTextController;
+import Controller.GetBoardDimensionsController;
 import Controller.HflipController;
 import Controller.RotateController;
 import Controller.SaveController;
@@ -47,6 +47,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	JButton btnEnter;
 	JButton save;
 	BullPenView bullpen;
+	BoardView boardView;
 
 	JFrame mainFrame;
 	private JTextField txtMoves;
@@ -87,7 +88,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		JButton addhint = new JButton("Add Hint");
 		
-		BoardView boardView = new BoardView(mainFrame, this.board, this);
+		boardView = new BoardView(mainFrame, this.board, this);
 		
 		JButton undo = new JButton("Undo");
 		
@@ -202,9 +203,6 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		);
 		
 		bullpen = new BullPenView(mainFrame, bp, this);
-		for (int i = 0; i < bullpen.getPieceViews().length; i++) {
-		}
-
 		scrollPane.setViewportView(bullpen);
 		panel.setLayout(gl_panel);
 		
@@ -218,7 +216,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 		
-		this.btnEnter.addActionListener(new GetTextController(x, y));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));

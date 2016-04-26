@@ -93,5 +93,16 @@ public class BoardView extends JPanel {
 	public Board getBoard(){
 		return this.brd;
 	}
+	
+	public void setBoard(int row, int col){
+		Tile[][] brdTiles = new Tile[row][col];
+		//start board empty
+		for (int i = 0; i < brdTiles.length; i++) {
+			for (int j = 0; j < brdTiles[0].length; j++) {
+				brdTiles[i][j] = new Tile(false, i, j);
+			}
+		}
+		this.brd = new Board(brdTiles);
+	}
 
 }

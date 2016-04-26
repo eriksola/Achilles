@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import Controller.GetTextController;
+import Controller.GetBoardDimensionsController;
 import Controller.ReturnToBuilderMenuController;
 import Controller.SaveController;
 import Game.Board;
@@ -175,7 +175,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		this.save.addActionListener(new SaveController(bp.getPieces(), board, 3));
-		this.btnEnter.addActionListener(new GetTextController(x, y));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
 		}
 
 }
