@@ -16,6 +16,15 @@ public class Piece implements Serializable{
 		this.bpIndex = bp;
 	}	
 	
+	
+	/**
+	 * getter for coordinates
+	 * @return coords the Coordinates of this Piece
+	 */
+	public Coordinate[] getCoordinates(){
+		return this.coords;
+	}
+	
 	/**
 	 * rotate the selected piece ninety degrees counterclockwise
 	 */
@@ -60,12 +69,13 @@ public class Piece implements Serializable{
 		}
 	}
 
-	
-	public Coordinate[] getCoordinates(){
-		return this.coords;
+	public String toString () {
+		String s = "";
+		for (Coordinate c : coords) {
+			s += c.toString() + " ";
+		}
+		
+		return s;
 	}
 
-	public void setCoordinates(Coordinate[] coords) {
-		this.coords = coords;
-	}
 }

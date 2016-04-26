@@ -15,4 +15,9 @@ public class Coordinate implements Serializable{
 		this.x = coordinate.x;
 		this.y = coordinate.y;
 	}
+	
+	
+	public String toString () {
+		return "(" + x + "," + y + ")";
+	}
 }
