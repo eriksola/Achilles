@@ -1,6 +1,9 @@
 package Controller;
 
+import Boundary.BullPenView;
 import Boundary.KabaSuji;
+import Boundary.LevelBuilderPuzzlePanel;
+import Boundary.PieceView;
 import Game.Board;
 import Game.Piece;
 
@@ -18,15 +21,18 @@ public class BoardController extends java.awt.event.MouseAdapter{
 	
 	KabaSuji view; /** the main KabaSuji view. **/
 	BoardView bv; /** the view of the Piece being controlled. **/
+	BullPenView bpv; /** the view of the BullPen that the Piece possibly came from **/
 	
 	/**
 	 * Constructor for a BoardController.
 	 * @param view
 	 * @param bv
+	 * @param bpv
 	 */
-	public BoardController(KabaSuji view, BoardView bv){
+	public BoardController(KabaSuji view, BoardView bv, BullPenView bpv){
 		this.view = view;
 		this.bv = bv;
+		this.bpv = bpv;
 	}
 
 	/**
@@ -51,9 +57,12 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			}
 		}
 		Piece piece = view.getSelectedPiece().getP();
+		PieceView pv = view.getSelectedPiece();
 		Board brd = bv.getBoard();
 		if(piece != null){
 			if(brd.addPiece(row,col,piece)){
+				bpv.remove(pv);
+				((LevelBuilderPuzzlePanel)view).getScrollPane().setViewportView(bpv);
 				bv.draw();
 				view.setSelected(null);
 			}

@@ -92,7 +92,9 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		JButton addhint = new JButton("Add Hint");
 		
-		boardView = new BoardView(mainFrame, this.board, this);
+		bullpen = new BullPenView(mainFrame, bp, this);
+		
+		boardView = new BoardView(mainFrame, this.board, this, bullpen);
 		
 		JButton undo = new JButton("Undo");
 		
@@ -206,7 +208,6 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
 		
-		bullpen = new BullPenView(mainFrame, bp, this);
 		bullpen.addMouseListener(new BullPenController(this, bullpen));
 		stock = new StockView(mainFrame, s, this);
 		scrollPane.setViewportView(bullpen);

@@ -80,7 +80,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		
 		JButton addhint = new JButton("Add Hint");
 		
-		BoardView boardView = new BoardView(mainFrame, this.board, this);
+		BoardView boardView = new BoardView(mainFrame, this.board, this, bullpen);
 		
 		JButton undo = new JButton("Undo");
 		
@@ -195,10 +195,6 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		);
 		
 		bullpen = new BullPenView(mainFrame, bp, this);
-		for (int i = 0; i < bullpen.getPieceViews().length; i++) {
-			System.out.println(bullpen.getPieceViews()[i].label);
-		}
-
 		scrollPane.setViewportView(bullpen);
 		panel.setLayout(gl_panel);
 		

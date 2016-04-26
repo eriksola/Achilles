@@ -2,10 +2,12 @@ package Boundary;
 
 import javax.swing.JPanel;
 
+import Game.Board;
 import Game.BullPen;
 import Game.Coordinate;
 import Game.Piece;
 import Game.Stock;
+import Game.Tile;
 import Boundary.PieceView;
 import Controller.PieceController;
 
@@ -23,7 +25,6 @@ import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 
 public class BullPenView extends JPanel {
-	private PieceView pieceViews[];
 	JFrame frame;
 	BullPen bp;
 	KabaSuji view;
@@ -54,17 +55,26 @@ public class BullPenView extends JPanel {
 		*/
 	}
 	
+	public void remove(PieceView pv){
+		for (int i = 0; i < pvs.size(); i++) {
+			if(pvs.get(i) == pv){
+				pvs.remove(i);
+				bp.getPieces().remove(i);
+				remove(pv.label);
+				System.out.println("found the piece to remove");
+				break;
+			}
+		}
+	}
+	
 	public void addPiece(PieceView pv){
 		this.pvs.add(pv);
+		bp.getPieces().add(pv.getP());
 		add(pv.label);
 	}
 
-	public PieceView[] getPieceViews() {
-		return pieceViews;
-	}
-
-	public void setPieceViews(PieceView pieceViews[]) {
-		this.pieceViews = pieceViews;
+	public ArrayList<PieceView> getPieceViews() {
+		return pvs;
 	}
 
 	

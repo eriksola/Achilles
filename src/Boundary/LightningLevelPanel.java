@@ -28,6 +28,7 @@ public class LightningLevelPanel extends KabaSuji{
 	Board board;
 
 	BullPen bp;
+	BullPenView bullpen;
 	/**
 	 * Create the panel.
 	 */
@@ -67,7 +68,7 @@ public class LightningLevelPanel extends KabaSuji{
 		
 		JButton button_4 = new JButton("Help");
 		
-		BoardView boardView = new BoardView(mainframe, board, this);
+		BoardView boardView = new BoardView(mainframe, board, this, bullpen);
 		
 		JButton button_5 = new JButton("Reset");
 		GroupLayout gl_panel = new GroupLayout(panel);

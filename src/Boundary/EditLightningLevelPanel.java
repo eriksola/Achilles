@@ -37,6 +37,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 	int levelNum;
 	BullPen bp;
 	Board board;
+	BullPenView bullpen;
 	Stock s = new Stock();
 	
 	/**
@@ -77,7 +78,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		x_text = new JTextField();
 		x_text.setColumns(10);
 		
-		BoardView boardView = new BoardView(mainFrame, board, this);
+		BoardView boardView = new BoardView(mainFrame, board, this, bullpen);
 		
 		JLabel label_1 = new JLabel("x");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -170,7 +171,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
 		);
 		
-		JPanel bullpen = new BullPenView(mainFrame, bp, this);
+		bullpen = new BullPenView(mainFrame, bp, this);
 		scrollPane.setViewportView(bullpen);
 		panel.setLayout(gl_panel);
 		

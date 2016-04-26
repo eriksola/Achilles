@@ -36,6 +36,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	int levelNum;
 	BullPen bp;
 	Board board;
+	BullPenView bullpen;
 	Stock s = new Stock();
 	/**
 	 * Create the panel.
@@ -70,7 +71,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		BoardView boardView = new BoardView(mainFrame, board, this);
+		BoardView boardView = new BoardView(mainFrame, board, this, bullpen);
 		
 		JButton undo = new JButton("Undo");
 		
@@ -169,7 +170,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
 		);
 		
-		JPanel bullpen = new BullPenView(mainFrame, bp, this);
+		bullpen = new BullPenView(mainFrame, bp, this);
 		scrollPane.setViewportView(bullpen);
 		panel.setLayout(gl_panel);
 

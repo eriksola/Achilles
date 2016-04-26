@@ -36,6 +36,7 @@ public class PuzzleLevelPanel extends KabaSuji {
 	Board board;
 
 	BullPen bp;
+	BullPenView bullpen;
 	/**
 	 * Create the panel.
 	 */
@@ -74,7 +75,7 @@ public class PuzzleLevelPanel extends KabaSuji {
 		
 		JButton vertical = new JButton("Vertical");
 		
-		BoardView boardView = new BoardView(mainframe, board, this);
+		BoardView boardView = new BoardView(mainframe, board, this, bullpen);
 		
 		JButton deg = new JButton("90");
 		

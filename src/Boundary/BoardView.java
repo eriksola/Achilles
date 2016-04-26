@@ -30,18 +30,20 @@ public class BoardView extends JPanel {
 	JFrame frame; /** the JFrame the BoardView belongs to. **/
 	JLabel label; /** the label representing the Board. **/
 	KabaSuji view; /** the top-level boundary object. **/
+	BullPenView bpv; /** the BullPenView **/
 	
 	/**
 	 * Constructor for the BoardView.
 	 * @param f
 	 * @param brd
 	 * @param view
+	 * @param bpv the BullPenView
 	 */
-	public BoardView(JFrame f, Board brd, KabaSuji view) {
+	public BoardView(JFrame f, Board brd, KabaSuji view, BullPenView bpv) {
 		this.frame = f;
 		this.brd = brd;
 		this.view = view;
-		
+		this.bpv = bpv;
 		/*
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -57,7 +59,7 @@ public class BoardView extends JPanel {
 		*/
 		
 		label = new JLabel();
-		label.addMouseListener(new BoardController(this.view, this));
+		label.addMouseListener(new BoardController(this.view, this, this.bpv));
 		label.setLayout(new FlowLayout()); 
 		add(label);
 		draw();

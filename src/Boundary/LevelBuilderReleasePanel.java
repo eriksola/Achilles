@@ -35,6 +35,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 	JButton save;
 	
 	BullPen bp;
+	BullPenView bullpen;
 	Board board;
 	Stock s = new Stock();
 	/**
@@ -74,7 +75,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		BoardView boardView = new BoardView(mainFrame, board, this);
+		BoardView boardView = new BoardView(mainFrame, board, this, bullpen);
 		
 		JButton undo = new JButton("Undo");
 		
