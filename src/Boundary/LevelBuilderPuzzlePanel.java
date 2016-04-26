@@ -203,7 +203,6 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		bullpen = new BullPenView(mainFrame, bp, this);
 		for (int i = 0; i < bullpen.getPieceViews().length; i++) {
-			System.out.println(bullpen.getPieceViews()[i].label);
 		}
 
 		scrollPane.setViewportView(bullpen);
