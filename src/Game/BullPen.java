@@ -17,25 +17,27 @@ public class BullPen implements Serializable{
 	/**
 	 * rotate the selected piece ninety degrees counterclockwise
 	 */
-	public void rotateLeft(){
+	public Piece rotateLeft(){
 		for(Coordinate c: getSelectedPiece().getCoordinates()){
 			int oldX = c.x;
 			int oldY = c.y;
 			c.x = (-1) * oldY;
 			c.y = (1) * oldX;
 		}
+		return this.getSelectedPiece();
 	}
 
 	/**
 	 * rotate the selected piece ninety degrees clockwise
 	 */
-	public void rotateRight(){
+	public Piece rotateRight(){
 		for(Coordinate c: getSelectedPiece().getCoordinates()){
 			int oldX = c.x;
 			int oldY = c.y;
 			c.x = (1) * oldY;
 			c.y = (-1) * oldX;
 		}
+		return this.getSelectedPiece();
 	}
 	
 	/**
