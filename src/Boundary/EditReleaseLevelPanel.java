@@ -46,7 +46,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		this.levelNum = levelNumber;
 		this.board = d.getBoard();
 
-		bp = new BullPen(d.getPieces());
+		bp = new BullPen();
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;

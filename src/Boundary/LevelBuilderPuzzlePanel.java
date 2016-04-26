@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.BullPenController;
 import Controller.GetMovesController;
 import Controller.GetBoardDimensionsController;
 import Controller.HflipController;
@@ -52,6 +53,8 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 
 	JFrame mainFrame;
 	private JTextField txtMoves;
+	
+	JScrollPane scrollPane;
 	/**
 	 * Create the panel.
 	 */
@@ -67,9 +70,8 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
 		
-		
-		//-----------------ADDING RANDOM PIECES NOW NOT FINAL 
-		bp = new BullPen(s.getRandomPiecesForPen());
+	
+		bp = new BullPen();
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -114,7 +116,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		btnEnter = new JButton("Enter n x m ");
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		
 		txtMoves = new JTextField();
 		txtMoves.setColumns(10);
@@ -205,6 +207,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		);
 		
 		bullpen = new BullPenView(mainFrame, bp, this);
+		bullpen.addMouseListener(new BullPenController(this, bullpen));
 		stock = new StockView(mainFrame, s, this);
 		scrollPane.setViewportView(bullpen);
 		scrollPane_1.setViewportView(stock);
@@ -230,6 +233,10 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
 	public BullPenView getBullPenView(){
 		return this.bullpen;
+	}
+	
+	public JScrollPane getScrollPane(){
+		return this.scrollPane;
 	}
 	
 }

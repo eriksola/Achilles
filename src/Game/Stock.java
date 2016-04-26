@@ -237,13 +237,13 @@ public class Stock {
 	/**
 	 * Gets 10 random pieces from the stock.
 	 */
-	public Piece[] getRandomPiecesForPen(){
-		Piece[] pieces = new Piece[10];
+	public ArrayList<Piece> getRandomPiecesForPen(){
+		ArrayList<Piece> pieces = new ArrayList<Piece>();
 		
-		for(int i = 0; i < pieces.length; i ++){
+		for(int i = 0; i < 10; i ++){
 			Random rand = new Random();
 			int  randomIndex = rand.nextInt(35);
-			pieces[i] = setOfPieces.get(randomIndex);
+			pieces.add(setOfPieces.get(randomIndex));
 		}
 		return pieces;
 	}

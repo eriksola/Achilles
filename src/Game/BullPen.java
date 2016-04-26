@@ -1,33 +1,29 @@
 package Game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import Boundary.PieceView;
 
 public class BullPen implements Serializable{
 	
-	Piece[] pieces;
+	ArrayList<Piece> pieces;
 	public Piece selectedPiece;
 
-	public BullPen(Piece[] p){
-		this.pieces = p;
+	public BullPen(){
+		this.pieces = new ArrayList<Piece>();
 	}
 
 	public Piece getSelectedPiece() {
 		return this.selectedPiece;
 	}
 
-	public Piece[] getPieces(){
+	public ArrayList<Piece> getPieces(){
 		return this.pieces;
 	}
 
 	public void setSelectedPiece(Piece selectedPiece) {
 		this.selectedPiece = selectedPiece;
-	}
-
-
-	public Piece[] setPieces(Piece[] p){
-		return this.pieces = p;
 	}
 	
 	

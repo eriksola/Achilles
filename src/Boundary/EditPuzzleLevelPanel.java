@@ -59,7 +59,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		this.mainFrame = f;
 		this.levelNum = levelNumber;
 
-		bp = new BullPen(d.getPieces());
+		bp = new BullPen();
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));

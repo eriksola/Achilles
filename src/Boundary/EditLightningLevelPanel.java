@@ -49,7 +49,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
 		
-		bp = new BullPen(d.getPieces());
+		bp = new BullPen();
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));

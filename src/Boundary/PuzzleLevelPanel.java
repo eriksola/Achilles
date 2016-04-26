@@ -43,7 +43,7 @@ public class PuzzleLevelPanel extends KabaSuji {
 		setBackground(new Color(173, 216, 230));
 		this.mainframe = f;
 		//Add pieces to the bull
-		bp = new BullPen(s.getRandomPiecesForPen());
+		bp = new BullPen();
 		
 		Tile[][] brdTiles = new Tile[10][10];
 		//start board empty

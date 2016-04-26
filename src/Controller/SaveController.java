@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,7 +22,7 @@ import Game.Piece;
 
 public class SaveController implements ActionListener {
 	
-	Piece[] pieces;
+	ArrayList<Piece> pieces;
 	Board board;
 	int levelType;
 
@@ -32,7 +33,7 @@ public class SaveController implements ActionListener {
 	 * 2 = Lightning
 	 * 3 = Release
 	 */
-	public SaveController(Piece[] pieces, Board board, int levelType){
+	public SaveController(ArrayList<Piece> pieces, Board board, int levelType){
 		this.pieces = pieces;
 		this.board = board;
 		this.levelType = levelType;

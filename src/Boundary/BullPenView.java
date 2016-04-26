@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,6 +27,7 @@ public class BullPenView extends JPanel {
 	JFrame frame;
 	BullPen bp;
 	KabaSuji view;
+	ArrayList<PieceView> pvs;
 
 	/**
 	 * Create the panel.
@@ -34,6 +36,7 @@ public class BullPenView extends JPanel {
 		this.frame = f;
 		this.bp = p;
 		this.view = view;
+		this.pvs = new ArrayList<PieceView>();
 		
 		/*
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -49,13 +52,11 @@ public class BullPenView extends JPanel {
 		setBackground(Color.white);
 		
 		*/
-		setPieceViews(new PieceView[p.getPieces().length]);
-		for(int i = 0; i < getPieceViews().length; i++){
-			getPieceViews()[i] = new PieceView(p.getPieces()[i],view);
-			add(getPieceViews()[i].label);
-		}
-		
-
+	}
+	
+	public void addPiece(PieceView pv){
+		this.pvs.add(pv);
+		add(pv.label);
 	}
 
 	public PieceView[] getPieceViews() {
