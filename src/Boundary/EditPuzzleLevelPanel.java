@@ -29,6 +29,7 @@ import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
 import java.awt.event.InputMethodListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
 
@@ -37,7 +38,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	BullPen bp;
 	Board board;
 	Stock s = new Stock();
-	
+	ArrayList<Object> entities;
 	JTextField x;
 	JTextField y;
 	JButton exit;
@@ -204,13 +205,24 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 
-		/**MAKE SURE YOU PASS IN THE LEVEL TYPE**/
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 1));
+		getEntities();
+		this.save.addActionListener(new SaveController(entities, 1));
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
 		
 	}
 	
+	public void getEntities() {
+		entities = new ArrayList<Object>();
+		entities.add(bp.getPieces());
+		entities.add(board);
+		
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
+	}
+
 	public BullPenView getBullPenView(){
 		return this.bullpen;
 	}

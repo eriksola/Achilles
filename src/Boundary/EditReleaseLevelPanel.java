@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,6 +33,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	JFrame mainFrame;
 	JButton exit;
 	JButton btnEnter;
+	ArrayList<Object> entities;
 	JButton save;
 	int levelNum;
 	BullPen bp;
@@ -173,9 +175,23 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		scrollPane.setViewportView(bullpen);
 		panel.setLayout(gl_panel);
 
+		getEntities();
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 3));
+		this.save.addActionListener(new SaveController(entities, 3));
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
 		}
+
+	public void getEntities() {
+		entities = new ArrayList<Object>();
+		entities.add(bp.getPieces());
+		entities.add(board);
+		
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
+	}
+
+	
 
 }

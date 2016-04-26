@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,8 +22,7 @@ import Game.Piece;
 
 public class SaveController implements ActionListener {
 	
-	Piece[] pieces;
-	Board board;
+	ArrayList<Object> entities;
 	int levelType;
 
 	/**
@@ -32,9 +32,8 @@ public class SaveController implements ActionListener {
 	 * 2 = Lightning
 	 * 3 = Release
 	 */
-	public SaveController(Piece[] pieces, Board board, int levelType){
-		this.pieces = pieces;
-		this.board = board;
+	public SaveController(ArrayList<Object> ent, int levelType){
+		this.entities = ent;
 		this.levelType = levelType;
 	}
 	
@@ -129,15 +128,81 @@ public class SaveController implements ActionListener {
 					canWriteFile = true;
 				}
 				
+				//Now check if we have a valid level, we can do this by checking the arraylists of objects
+				switch (levelType) {
+	            case 1: 
+	            		boolean hasBoard = false;
+	            		boolean hasPieces = false;
+	            		//A puzzle level will have three objects, board, bullpen, and number of moves
+	            		if(entities.size() != 2){//Make two for right now
+	            			canWriteFile = false;
+	            			System.err.println("This level does not have everything it needs to be playable!");
+	            			System.err.println("Remember, for a puzzle level you need, board, pieces, and number of moves.");
+	            		}
+	            		else{
+		            		for(Object j: entities){
+		            			if(j instanceof Board){
+		            				hasBoard = true;
+		            			}
+		            			else if(j instanceof Piece[]){
+		            				hasPieces = true;
+		            			}
+		            		}
+	            		}
+	            		
+	            		if(!hasBoard || !hasPieces){
+	            			canWriteFile = false;
+	            		}
+	                    break;
+	            case 2:  
+	            	boolean hasboard = false;
+            		boolean haspieces = false;
+            		boolean hastimer = false;
+            		//A lightning level will have three objects, board, bullpen, and a time
+            		if(entities.size() != 3){
+            			canWriteFile = false;
+            			System.err.println("This level does not have everything it needs to be playable!");
+            			System.err.println("Remember for a lightning level you need board, pieces, and a time that is not 0.");
+            		}
+            		else{
+	            		for(Object j: entities){
+	            			if(j instanceof Board){
+	            				hasboard = true;
+	            			}
+	            			else if(j instanceof Piece[]){
+	            				haspieces = true;
+	            			}
+	            			else if(j instanceof Integer){
+	            				hastimer = true;
+	            			}
+	            		}
+            		}
+            		
+            		if(!hasboard || !haspieces || !hastimer){
+            			canWriteFile = false;
+            		}
+	                     break;
+	            case 3:  
+	            		//TODO
+	            		//Need to add validity for release
+	                     break;
+	            default:
+	            	System.err.println("Level not found!");
+	            	break;
+				}
+				
 				if(canWriteFile){
 					FileOutputStream fileOut = new FileOutputStream(filepath);
 					ObjectOutputStream out = new ObjectOutputStream(fileOut);
 					
-					//NEED TO ADD MORE ENTITIES
-					out.writeObject(pieces);
-					out.writeObject(board);
 					
 					
+					//Add all entities given to the controller
+					for(Object j: entities){
+						out.writeObject(j);
+					}
+					
+							
 					out.close();
 					fileOut.close();
 					System.out.println("Serialized data is saved in " + filepath + " file");

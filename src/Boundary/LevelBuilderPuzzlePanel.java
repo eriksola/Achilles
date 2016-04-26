@@ -32,6 +32,7 @@ import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
 import java.awt.event.InputMethodListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
 
@@ -45,6 +46,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	JTextField y;
 	JButton exit;
 	JButton btnEnter;
+	ArrayList<Object> entities;
 	JButton save;
 	BullPenView bullpen;
 	BoardView boardView;
@@ -117,7 +119,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		txtMoves = new JTextField();
 		txtMoves.setColumns(10);
 		
-		JButton btnEnterMoves = new JButton("enter moves");
+		JButton btnEnterMoves = new JButton("Enter moves");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -209,7 +211,8 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
 		
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 1));
+		getEntities();
+		this.save.addActionListener(new SaveController(entities, 1));
 		
 		
 		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
@@ -224,8 +227,15 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 	}
 	
-	public BullPenView getBullPenView(){
-		return this.bullpen;
+	public void getEntities() {
+		entities = new ArrayList<Object>();
+		entities.add(bp.getPieces());
+		entities.add(board);
+		
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
 	}
 	
 }
