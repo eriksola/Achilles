@@ -38,6 +38,17 @@ public class PieceView {
 	}
 	
 	/**
+	 * Copy constructor
+	 */
+	public PieceView(PieceView another){
+		this.p = another.p;
+		this.view = another.view;
+		this.label = another.label;
+		label.setLayout(new FlowLayout());
+		drawUnselected();
+	}
+	
+	/**
 	 * draw a hexominoe representing the Piece of 6 Coordinates.
 	 */
 	public void drawUnselected(){

@@ -36,6 +36,8 @@ public class StockView extends JPanel {
 		setLayout(groupLayout);
 		*/
 		
+		//GroupLayout groupLayout = new GroupLayout(this);
+		//setLayout(groupLayout);
 		setPieceViews(new PieceView[s.getPieces().size()]);
 		for(int i = 0; i < getPieceViews().length; i++){
 			getPieceViews()[i] = new PieceView(s.getPieces().get(i),view);

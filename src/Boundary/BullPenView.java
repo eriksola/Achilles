@@ -68,9 +68,11 @@ public class BullPenView extends JPanel {
 	}
 	
 	public void addPiece(PieceView pv){
-		this.pvs.add(pv);
-		bp.getPieces().add(pv.getP());
-		add(pv.label);
+		//create clone of PieceView, then add that to BullPen
+		PieceView newPiece = new PieceView(pv);
+		this.pvs.add(newPiece);
+		bp.getPieces().add(newPiece.getP());
+		add(newPiece.label);
 	}
 
 	public ArrayList<PieceView> getPieceViews() {
