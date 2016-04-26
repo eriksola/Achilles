@@ -50,7 +50,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		}
 		this.board = new Board(brdTiles);
 
-		bp = new BullPen(s.getRandomPiecesForPen());
+		bp = new BullPen(null, s.getRandomPiecesForPen());
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;

@@ -23,10 +23,15 @@ import Controller.GetTextController;
 import Controller.SaveController;
 import Game.Board;
 import Game.BullPen;
+import Game.IScore;
+import Game.LightningScore;
 import Game.Piece;
+import Game.PuzzleLevelModel;
+import Game.PuzzleScore;
 import Game.Stock;
 import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
+
 import java.awt.event.InputMethodListener;
 import java.io.File;
 import java.awt.event.InputMethodEvent;
@@ -34,16 +39,17 @@ import java.awt.event.InputMethodEvent;
 
 public class EditPuzzleLevelPanel extends KabaSuji {
 	
-	BullPen bp;
-	Board board;
-	Stock s = new Stock();
-	
 	JTextField x;
 	JTextField y;
 	JButton exit;
 	JButton btnEnter;
 	JButton save;
-	BullPenView bullpen;
+	
+	PuzzleLevelModel model;
+	BullPen bp;
+	Board board;
+	Stock s = new Stock();
+	BullPenView bpView;
 	int levelNum;
 
 	JFrame mainFrame;
@@ -54,12 +60,15 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	public EditPuzzleLevelPanel(JFrame f, Deserialization d, int levelNumber) {
 		Tile[][] brdTiles = d.getBoard().getTiles();
 				
-		this.board = d.getBoard();
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
+		
+		
 		this.levelNum = levelNumber;
-
-		bp = new BullPen(d.getPieces());
+		this.board = d.getBoard();
+		this.bp = new BullPen(null, d.getPieces());
+		int totPieces = this.bp.getPieces().length;
+		this.model = new PuzzleLevelModel(this.board, this.bp, this.levelNum, new PuzzleScore(totPieces), 0);
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -194,12 +203,12 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
 		
-		bullpen = new BullPenView(mainFrame, bp, this);
-		for (int i = 0; i < bullpen.getPieceViews().length; i++) {
-			System.out.println(bullpen.getPieceViews()[i].label);
+		bpView = new BullPenView(mainFrame, bp, this);
+		for (int i = 0; i < bpView.getPieceViews().length; i++) {
+			System.out.println(bpView.getPieceViews()[i].label);
 		}
 
-		scrollPane.setViewportView(bullpen);
+		scrollPane.setViewportView(bpView);
 		panel.setLayout(gl_panel);
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
@@ -212,7 +221,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	}
 	
 	public BullPenView getBullPenView(){
-		return this.bullpen;
+		return this.bpView;
 	}
 	
 }

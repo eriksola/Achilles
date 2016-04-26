@@ -1,11 +1,14 @@
 package Boundary;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
 
 import Game.Board;
 import Game.BullPen;
+import Game.LightningLevelModel;
 import Game.Stock;
 import Game.Tile;
 
@@ -14,14 +17,16 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class LightningLevelPanel extends KabaSuji{
 
+	LightningLevelModel model;
 	KabasujiFrame mainframe;
-
 	Stock s = new Stock();
 	//TILES SHOULD NOT BE SET TO NULL
 	Tile[][] tiles = null;
@@ -31,14 +36,14 @@ public class LightningLevelPanel extends KabaSuji{
 	/**
 	 * Create the panel.
 	 */
-	public LightningLevelPanel(KabasujiFrame f) {
+	public LightningLevelPanel(KabasujiFrame f, LightningLevelModel m) {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBackground(new Color(173, 216, 230));
 		this.mainframe = f;
 		//Add pieces to the bull
-		bp = new BullPen(s.getRandomPiecesForPen());
+		bp = new BullPen(null, s.getRandomPiecesForPen());
 		
 		Tile[][] brdTiles = new Tile[10][10];
 		//start board empty

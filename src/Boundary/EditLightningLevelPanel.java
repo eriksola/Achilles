@@ -23,6 +23,9 @@ import Controller.ReturnToBuilderMenuController;
 import Controller.SaveController;
 import Game.Board;
 import Game.BullPen;
+import Game.IScore;
+import Game.LightningLevelModel;
+import Game.LightningScore;
 import Game.Stock;
 import Game.Tile;
 
@@ -34,6 +37,8 @@ public class EditLightningLevelPanel extends KabaSuji {
 	JButton save;
 	JButton btnEnter;
 	JFrame mainFrame;
+	
+	LightningLevelModel levelModel;
 	int levelNum;
 	BullPen bp;
 	Board board;
@@ -46,10 +51,13 @@ public class EditLightningLevelPanel extends KabaSuji {
 		Tile[][] brdTiles = d.getBoard().getTiles();
 	
 		this.board = d.getBoard();
+		this.bp = new BullPen(null, d.getPieces());
+		int totTiles = brdTiles.length * brdTiles[0].length;
+		this.levelModel = new LightningLevelModel(d.getBoard(), bp, levelNumber, new LightningScore(totTiles), 0);
+		this.bp.setModel(this.levelModel);
+		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
-		
-		bp = new BullPen(d.getPieces());
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));

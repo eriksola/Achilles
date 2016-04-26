@@ -21,7 +21,7 @@ public class DefLevelMenuToPuzzleLevelController implements ActionListener{
 		frame.getContentPane().invalidate();
 		
 		// create rules screen
-		PuzzleLevelPanel puzzleLevel = new PuzzleLevelPanel(frame);
+		PuzzleLevelPanel puzzleLevel = new PuzzleLevelPanel(frame, null);
 		frame.getContentPane().add(puzzleLevel, BorderLayout.CENTER);
 		frame.getContentPane().revalidate();
 		

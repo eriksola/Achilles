@@ -55,7 +55,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		this.mainFrame = f;
 		
 		//-----------------ADDING RANDOM PIECES NOW NOT FINAL 
-		bp = new BullPen(s.getRandomPiecesForPen());
+		bp = new BullPen(null, s.getRandomPiecesForPen());
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));

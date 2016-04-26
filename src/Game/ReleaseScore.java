@@ -5,7 +5,7 @@ public class ReleaseScore implements IScore{
 	boolean[] yellow;
 	boolean[] green;
 	
-	ReleaseScore(){
+	public ReleaseScore(){
 		this.red = new boolean[6];
 		this.yellow = new boolean[6];
 		this.green = new boolean[6];

@@ -22,14 +22,13 @@ public class Board implements Serializable{
 	public boolean addPiece(int row, int column, Piece piece){
 		//right now basically a Lightning Level implementation
 		
-		//
 		Coordinate[] newOccCoords = new Coordinate[5];
 		
 		//makes sure every coordinate in the piece has a corresponding empty tile
 		for (int i = 1; i < 6; i++){
 			Coordinate c = piece.getCoordinates()[i];
 			if(isValid(row - c.y, column + c.x)){
-				newOccCoords[i] = new Coordinate(column+c.x, row-c.y);
+				newOccCoords[i-1] = new Coordinate(column+c.x, row-c.y);
 			}
 			else return false;
 		}
@@ -37,8 +36,8 @@ public class Board implements Serializable{
 		//if true then mark those tiles as occupied
 		this.tiles[row][column] = new Tile(true, row, column);
 		for(int i = 1; i < 6; i++){
-			int newX = newOccCoords[i].x;
-			int newY = newOccCoords[i].y;
+			int newX = newOccCoords[i-1].x;
+			int newY = newOccCoords[i-1].y;
 			this.tiles[newY][newX] = new Tile(true, newY, newX);
 		}
 		

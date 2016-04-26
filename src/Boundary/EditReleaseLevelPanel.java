@@ -23,6 +23,9 @@ import Controller.ReturnToBuilderMenuController;
 import Controller.SaveController;
 import Game.Board;
 import Game.BullPen;
+import Game.IScore;
+import Game.LevelModel;
+import Game.ReleaseScore;
 import Game.Stock;
 import Game.Tile;
 
@@ -33,6 +36,8 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	JButton exit;
 	JButton btnEnter;
 	JButton save;
+	
+	LevelModel model;
 	int levelNum;
 	BullPen bp;
 	Board board;
@@ -45,8 +50,9 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 		this.levelNum = levelNumber;
 		this.board = d.getBoard();
-
-		bp = new BullPen(d.getPieces());
+		this.bp = new BullPen(null, d.getPieces());
+		this.model = new LevelModel(this.board, this.bp, levelNumber, new ReleaseScore());
+		this.bp.setModel(this.model);
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
