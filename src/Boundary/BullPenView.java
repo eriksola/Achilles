@@ -47,8 +47,8 @@ public class BullPenView extends JPanel {
 		);
 		setLayout(groupLayout);
 		setBackground(Color.white);
-		*/
 		
+		*/
 		setPieceViews(new PieceView[p.getPieces().length]);
 		for(int i = 0; i < getPieceViews().length; i++){
 			getPieceViews()[i] = new PieceView(p.getPieces()[i],view);

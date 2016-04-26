@@ -48,6 +48,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	JButton save;
 	BullPenView bullpen;
 	BoardView boardView;
+	StockView stock;
 
 	JFrame mainFrame;
 	private JTextField txtMoves;
@@ -65,6 +66,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		this.board = new Board(brdTiles);
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
+		
 		
 		//-----------------ADDING RANDOM PIECES NOW NOT FINAL 
 		bp = new BullPen(s.getRandomPiecesForPen());
@@ -203,7 +205,9 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		);
 		
 		bullpen = new BullPenView(mainFrame, bp, this);
+		stock = new StockView(mainFrame, s, this);
 		scrollPane.setViewportView(bullpen);
+		scrollPane_1.setViewportView(stock);
 		panel.setLayout(gl_panel);
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
