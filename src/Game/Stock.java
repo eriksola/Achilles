@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Boundary.PieceView;
+import Boundary.Both.PieceView;
 import sun.security.action.GetBooleanAction;
 
 import java.io.Serializable;

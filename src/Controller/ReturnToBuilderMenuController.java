@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-import Boundary.DefaultLevelPanel;
-import Boundary.KabasujiFrame;
-import Boundary.LevelBuilderFrame;
-import Boundary.LevelBuilderMainMenuPanel;
+import Boundary.Builder.LevelBuilderFrame;
+import Boundary.Builder.LevelBuilderMainMenuPanel;
+import Boundary.Player.DefaultLevelPanel;
+import Boundary.Player.KabasujiFrame;
 
 public class ReturnToBuilderMenuController implements ActionListener{
 

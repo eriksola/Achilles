@@ -7,16 +7,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Boundary.BuiltLevelPanel;
-import Boundary.DefaultLevelPanel;
-import Boundary.KabasujiFrame;
-import Boundary.LevelBuilderBuiltLevelPanel;
-import Boundary.LevelBuilderFrame;
-import Boundary.LevelBuilderLightningPanel;
-import Boundary.LevelBuilderMainMenuPanel;
-import Boundary.LevelBuilderPuzzlePanel;
-import Boundary.LevelBuilderReleasePanel;
-import Boundary.RulesMenuPanel;
+import Boundary.Builder.LevelBuilderBuiltLevelPanel;
+import Boundary.Builder.LevelBuilderFrame;
+import Boundary.Builder.LevelBuilderLightningPanel;
+import Boundary.Builder.LevelBuilderMainMenuPanel;
+import Boundary.Builder.LevelBuilderPuzzlePanel;
+import Boundary.Builder.LevelBuilderReleasePanel;
+import Boundary.Player.BuiltLevelPanel;
+import Boundary.Player.DefaultLevelPanel;
+import Boundary.Player.KabasujiFrame;
+import Boundary.Player.RulesMenuPanel;
 
 public class SwitchWindowController implements ActionListener {
 	

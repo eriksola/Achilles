@@ -3,8 +3,8 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Boundary.KabasujiFrame;
-import Boundary.PuzzleLevelPanel;
+import Boundary.Player.KabasujiFrame;
+import Boundary.Player.PuzzleLevelPanel;
 
 import java.awt.BorderLayout;
 

@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Boundary.BoardView;
-import Boundary.KabaSuji;
-import Boundary.LevelBuilderPuzzlePanel;
+import Boundary.Both.BoardView;
+import Boundary.Both.KabaSuji;
+import Boundary.Builder.LevelBuilderPuzzlePanel;
 
 public class GetBoardDimensionsController implements ActionListener {
 	JTextField x;

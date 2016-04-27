@@ -2,7 +2,8 @@ package Controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import Boundary.EditDeletePopup;
+
+import Boundary.Builder.EditDeletePopup;
 
 public class EditDeletePopupListener extends MouseAdapter {
 

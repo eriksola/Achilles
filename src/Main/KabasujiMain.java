@@ -2,11 +2,9 @@ package Main;
 
 import javax.swing.*;
 
-import Boundary.KabasujiFrame;
-import Boundary.MainMenuPanel;
-
+import Boundary.Player.KabasujiFrame;
+import Boundary.Player.MainMenuPanel;
 import Game.Stock;
-
 
 import java.awt.*;
 import java.awt.event.*;
