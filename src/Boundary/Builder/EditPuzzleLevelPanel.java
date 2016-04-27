@@ -232,7 +232,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		getEntities();
 		/*MAKE SURE YOU PASS IN THE LEVEL TYPE*/
 		this.save.addActionListener(new SaveController(entities, 1));
-		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves, this));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
@@ -252,6 +252,10 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	
 	public BullPenView getBullPenView(){
 		return this.bullpen;
+	}
+	
+	public BoardView getBoardView(){
+		return this.boardView;
 	}
 	
 	public JScrollPane getScrollPane(){

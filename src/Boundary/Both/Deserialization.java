@@ -20,34 +20,29 @@ public class Deserialization {
 	/**
 	 * @return true if the deserialization went smoothly
 	 */
-	@SuppressWarnings("unchecked")
 	public boolean Deserialize(String filename, int levelType){
 		try {
 			FileInputStream fileIn = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 		
 			//TODO add more entities as needed
+			bullPen = (BullPen) in.readObject();
+			board = (Board) in.readObject();
 			
 			switch(levelType){
 			
 			//Puzzle level
 			case 1:
-				bullPen = (BullPen) in.readObject();
-				board = (Board) in.readObject();
 				numMoves = (Integer) in.readObject();
 				break;
 			
 			//Lightning level
 			case 2:
-				bullPen = (BullPen) in.readObject();
-				board = (Board) in.readObject();
 				timer = (Integer) in.readObject();
 				break;
 				
 			//Release level
 			case 3:
-				bullPen = (BullPen) in.readObject();
-				board = (Board) in.readObject();
 				numMoves = (Integer) in.readObject();
 				break;
 				

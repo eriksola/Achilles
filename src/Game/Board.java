@@ -60,4 +60,8 @@ public class Board implements Serializable{
 	public Tile[][] getTiles() {
 		return this.tiles;
 	}
+	
+	public void setTiles(Tile[][] tiles){
+		this.tiles = tiles;
+	}
 }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Boundary.Both.KabaSuji;
 import Boundary.Builder.LevelBuilderFrame;
 import Boundary.Builder.LevelBuilderMainMenuPanel;
 import Game.Board;

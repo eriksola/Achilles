@@ -229,7 +229,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		this.save.addActionListener(new SaveController(entities, 2));
-		this.btnEnter.addActionListener(new GetBoardDimensionsController(x_text, y_text, boardView));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x_text, y_text, this));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
@@ -247,6 +247,10 @@ public class EditLightningLevelPanel extends KabaSuji {
 	
 	public void addEntity(Object addition){
 		entities.add(addition);			
+	}
+	
+	public BoardView getBoardView(){
+		return this.boardView;
 	}
 	
 	public JScrollPane getScrollPane(){

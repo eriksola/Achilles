@@ -226,7 +226,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		this.save.addActionListener(new SaveController(entities, 3));
-		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
 		btnEnterMoves.addActionListener(new GetMovesController(entertext, this));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
@@ -242,6 +242,10 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	
 	public void addEntity(Object addition){
 		entities.add(addition);			
+	}
+	
+	public BoardView getBoardView(){
+		return this.boardView;
 	}
 	
 	public JScrollPane getScrollPane(){

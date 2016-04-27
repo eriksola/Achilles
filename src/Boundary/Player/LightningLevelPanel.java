@@ -149,5 +149,9 @@ public class LightningLevelPanel extends KabaSuji{
 	public JScrollPane getScrollPane() {
 		return this.scrollPane;
 	}
+	
+	public BoardView getBoardView(){
+		return this.boardView;
+	}
 
 }

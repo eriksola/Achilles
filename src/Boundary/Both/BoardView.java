@@ -104,7 +104,8 @@ public class BoardView extends JPanel {
 				brdTiles[i][j] = new Tile(false, i, j);
 			}
 		}
-		this.brd = new Board(brdTiles);
+		
+		this.brd.setTiles(brdTiles);
 	}
 
 }

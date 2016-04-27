@@ -236,7 +236,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		
 		((LevelBuilderFrame) mainFrame).setReleaseLevelCount(levelCount);
 		
-		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves, this));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
@@ -256,6 +256,10 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 	
 	public BullPenView getBullPenView(){
 		return this.bullpen;
+	}
+	
+	public BoardView getBoardView(){
+		return this.boardView;
 	}
 	
 	public JScrollPane getScrollPane(){
