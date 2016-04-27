@@ -39,6 +39,8 @@ public class PuzzleLevelPanel extends KabaSuji {
 	Board board;
 
 	BullPen bp;
+	BullPenView bullpen;
+	JScrollPane scrollPane;
 	/**
 	 * Create the panel.
 	 */
@@ -47,7 +49,8 @@ public class PuzzleLevelPanel extends KabaSuji {
 		this.mainframe = f;
 		this.levelModel = (PuzzleLevelModel) model;
 		//Add pieces to the bull
-		bp = new BullPen(this.levelModel, s.getRandomPiecesForPen());
+
+		bp = new BullPen();
 		
 		Tile[][] brdTiles = new Tile[10][10];
 		//start board empty
@@ -82,7 +85,7 @@ public class PuzzleLevelPanel extends KabaSuji {
 		
 		JButton vertical = new JButton("Vertical");
 		
-		BoardView boardView = new BoardView(mainframe, board, this);
+		BoardView boardView = new BoardView(mainframe, board, this, bullpen);
 		
 		JButton deg = new JButton("90");
 		
@@ -162,5 +165,9 @@ public class PuzzleLevelPanel extends KabaSuji {
 	
 	public JButton getLevelMenuButton(){
 		return lvlMenuBtn;
+	}
+
+	public JScrollPane getScrollPane() {
+		return this.scrollPane;
 	}
 }

@@ -31,26 +31,29 @@ public class ReleaseLevelPanel extends KabaSuji {
 	LevelModel model;
 	Stock s = new Stock();
 	//TILES SHOULD NOT BE SET TO NULL
-	Tile[][] tiles = null;
+	Tile[][] brdTiles;
 	Board board;
 
 	BullPen bp;
+	BullPenView bullpen;
 	/**
 	 * Create the panel.
 	 */
 	public ReleaseLevelPanel(KabasujiFrame f, LevelModel m) {
 		
 		this.mainframe = f;
-		//Add pieces to the bull
-		this.bp = new BullPen(null, s.getRandomPiecesForPen());
+
+
+		bp = new BullPen();
 		
-		Tile[][] brdTiles = new Tile[10][10];
+		this.brdTiles = new Tile[10][10];
 		//start board empty
 		for (int i = 0; i < brdTiles.length; i++) {
 			for (int j = 0; j < brdTiles[0].length; j++) {
 				brdTiles[i][j] = new Tile(false, i, j);
 			}
 		}
+		
 		this.board = new Board(brdTiles);
 		
 		
@@ -79,7 +82,7 @@ public class ReleaseLevelPanel extends KabaSuji {
 		
 		JButton button_4 = new JButton("Help");
 		
-		BoardView boardView = new BoardView(mainframe, board, this);
+		BoardView boardView = new BoardView(mainframe, board, this, bullpen);
 		
 		JButton button_5 = new JButton("Reset");
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -140,6 +143,11 @@ public class ReleaseLevelPanel extends KabaSuji {
 		);
 		panel.setLayout(gl_panel);
 
+	}
+	@Override
+	public JScrollPane getScrollPane() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

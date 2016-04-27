@@ -28,7 +28,7 @@ public class Board implements Serializable{
 		for (int i = 1; i < 6; i++){
 			Coordinate c = piece.getCoordinates()[i];
 			if(isValid(row - c.y, column + c.x)){
-				newOccCoords[i-1] = new Coordinate(column+c.x, row-c.y);
+				newOccCoords[i - 1] = new Coordinate(column+c.x, row-c.y);
 			}
 			else return false;
 		}
@@ -36,8 +36,8 @@ public class Board implements Serializable{
 		//if true then mark those tiles as occupied
 		this.tiles[row][column] = new Tile(true, row, column);
 		for(int i = 1; i < 6; i++){
-			int newX = newOccCoords[i-1].x;
-			int newY = newOccCoords[i-1].y;
+			int newX = newOccCoords[i - 1].x;
+			int newY = newOccCoords[i - 1].y;
 			this.tiles[newY][newX] = new Tile(true, newY, newX);
 		}
 		
@@ -45,12 +45,15 @@ public class Board implements Serializable{
 	}
 	
 	public boolean isValid(int row, int col){
+		//if the tile extends off the coordinates of the board, invalid move
 		if(row < 0 || row > this.height || col < 0 || col > this.width){
 			return false;
 		}
+		
 		//if the tile is occupied, invalid move
 		if (this.tiles[row][col].isOccupied()){ return false;}
 		
+		//otherwise, valid move 
 		return true;
 	}
 

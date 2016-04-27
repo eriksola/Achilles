@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,30 +19,38 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import Controller.GetTextController;
+import Controller.BullPenController;
+import Controller.GetBoardDimensionsController;
+import Controller.HflipController;
 import Controller.ReturnToBuilderMenuController;
+import Controller.RotateController;
 import Controller.SaveController;
+import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
-import Game.IScore;
-import Game.LevelModel;
-import Game.ReleaseScore;
 import Game.Stock;
 import Game.Tile;
 
 public class EditReleaseLevelPanel extends KabaSuji {
+	
+	ArrayList<Object> entities;
+	
 	JTextField x;
 	JTextField y;
 	JFrame mainFrame;
 	JButton exit;
 	JButton btnEnter;
 	JButton save;
-	
-	LevelModel model;
 	int levelNum;
+	
 	BullPen bp;
+	Stock stock;
 	Board board;
-	Stock s = new Stock();
+	
+	BullPenView bullpen;
+	StockView stockView;
+	BoardView boardView;
+	JScrollPane scrollPane;
 	/**
 	 * Create the panel.
 	 */
@@ -50,9 +59,13 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 		this.levelNum = levelNumber;
 		this.board = d.getBoard();
-		this.bp = new BullPen(null, d.getPieces());
-		this.model = new LevelModel(this.board, this.bp, levelNumber, new ReleaseScore());
-		this.bp.setModel(this.model);
+		this.stock = d.getStock();
+		this.bp = d.getBullPen();
+		
+		this.bullpen = new BullPenView(mainFrame, bp, this);
+		this.stockView = new StockView(mainFrame, stock, this);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
+		this.scrollPane = new JScrollPane();
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
@@ -73,11 +86,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		JButton rightrotate = new JButton("90");
 		
 		JButton hint = new JButton("Add Hint");
-		
-		JScrollPane scrollPane = new JScrollPane();
-		
-		BoardView boardView = new BoardView(mainFrame, board, this);
-		
+						
 		JButton undo = new JButton("Undo");
 		
 		x = new JTextField();
@@ -175,13 +184,38 @@ public class EditReleaseLevelPanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
 		);
 		
-		JPanel bullpen = new BullPenView(mainFrame, bp, this);
+		bullpen.addMouseListener(new BullPenController(this, bullpen));
+		stockView = new StockView(mainFrame, stock, this);
 		scrollPane.setViewportView(bullpen);
+		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 
+		getEntities();
+		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 3));
-		this.btnEnter.addActionListener(new GetTextController(x, y));
+		this.save.addActionListener(new SaveController(entities, 3));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
+		horizontal.addActionListener(new HflipController(this));
+		vertical.addActionListener(new VflipController(this));
+		rightrotate.addActionListener(new RotateController(this));
+		
 		}
+	
+	public void getEntities() {
+		entities = new ArrayList<Object>();
+		entities.add(bp);
+		entities.add(board);
+		entities.add(stock);
+		
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
+	}
+	
+	public JScrollPane getScrollPane(){
+		return this.scrollPane;
+	}
 
 }
+

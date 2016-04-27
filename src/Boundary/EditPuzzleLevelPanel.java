@@ -18,26 +18,32 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.BullPenController;
 import Controller.GetMovesController;
-import Controller.GetTextController;
+import Controller.GetBoardDimensionsController;
+import Controller.HflipController;
+import Controller.RotateController;
 import Controller.SaveController;
+import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
-import Game.IScore;
-import Game.LightningScore;
 import Game.Piece;
-import Game.PuzzleLevelModel;
-import Game.PuzzleScore;
 import Game.Stock;
 import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
-
 import java.awt.event.InputMethodListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
 
 public class EditPuzzleLevelPanel extends KabaSuji {
+	
+	ArrayList<Object> entities;
+	
+	BullPen bp;
+	Board board;
+	Stock stock;
 	
 	JTextField x;
 	JTextField y;
@@ -45,12 +51,14 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	JButton btnEnter;
 	JButton save;
 	
-	PuzzleLevelModel model;
-	BullPen bp;
-	Board board;
-	Stock s = new Stock();
-	BullPenView bpView;
+	BullPenView bullpen;
+	StockView stockView;
+	BoardView boardView;
+	
+	JScrollPane scrollPane;
+	
 	int levelNum;
+	
 
 	JFrame mainFrame;
 	private JTextField txtMoves;
@@ -58,17 +66,19 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	 * Create the panel.
 	 */
 	public EditPuzzleLevelPanel(JFrame f, Deserialization d, int levelNumber) {
-		Tile[][] brdTiles = d.getBoard().getTiles();
-				
+
+		this.bp = d.getBullPen();
+		this.stock = d.getStock();
+		this.board = d.getBoard();
+		
+		this.bullpen = new BullPenView(mainFrame, bp, this);
+		this.stockView = new StockView(mainFrame, stock, this);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
+		this.scrollPane = new JScrollPane();
+		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
-		
-		
 		this.levelNum = levelNumber;
-		this.board = d.getBoard();
-		this.bp = new BullPen(null, d.getPieces());
-		int totPieces = this.bp.getPieces().length;
-		this.model = new PuzzleLevelModel(this.board, this.bp, this.levelNum, new PuzzleScore(totPieces), 0);
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -88,8 +98,6 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		JButton right = new JButton("90");
 		
 		JButton addhint = new JButton("Add Hint");
-		
-		BoardView boardView = new BoardView(mainFrame, this.board, this);
 		
 		JButton undo = new JButton("Undo");
 		
@@ -112,9 +120,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		
 		btnEnter = new JButton("Enter n x m ");
-		
-		JScrollPane scrollPane = new JScrollPane();
-		
+				
 		txtMoves = new JTextField();
 		txtMoves.setColumns(10);
 		
@@ -203,25 +209,48 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
 		
-		bpView = new BullPenView(mainFrame, bp, this);
-		for (int i = 0; i < bpView.getPieceViews().length; i++) {
-			System.out.println(bpView.getPieceViews()[i].label);
+		bullpen.addMouseListener(new BullPenController(this, bullpen));
+		stockView = new StockView(mainFrame, stock, this);
+		scrollPane.setViewportView(bullpen);
+		//load up PieceViews from BullPen
+		for (int i = 0; i < bp.getPieces().size(); i++) {
+			PieceView view = new PieceView(bp.getPieces().get(i), this);
+			bullpen.addPiece(view);
 		}
-
-		scrollPane.setViewportView(bpView);
+		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 
-		/**MAKE SURE YOU PASS IN THE LEVEL TYPE**/
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 1));
-		this.btnEnter.addActionListener(new GetTextController(x, y));
+		getEntities();
+		/*MAKE SURE YOU PASS IN THE LEVEL TYPE*/
+		this.save.addActionListener(new SaveController(entities, 1));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
+		horizontal.addActionListener(new HflipController(this));
+		vertical.addActionListener(new VflipController(this));
+		right.addActionListener(new RotateController(this));
 		
 	}
 	
+	public void getEntities() {
+		entities = new ArrayList<Object>();
+		entities.add(bp);
+		entities.add(board);
+		entities.add(stock);
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
+	}
+	
 	public BullPenView getBullPenView(){
-		return this.bpView;
+		return this.bullpen;
+	}
+	
+	public JScrollPane getScrollPane(){
+		return this.scrollPane;
 	}
 	
 }
+

@@ -18,8 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.BullPenController;
 import Controller.GetMovesController;
-import Controller.GetTextController;
+import Controller.GetBoardDimensionsController;
 import Controller.HflipController;
 import Controller.RotateController;
 import Controller.SaveController;
@@ -32,24 +33,32 @@ import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
 import java.awt.event.InputMethodListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
 
 public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
+	ArrayList<Object> entities;
+	
 	BullPen bp;
+	Stock stock;
 	Board board;
-	Stock s = new Stock();
 	
 	JTextField x;
 	JTextField y;
 	JButton exit;
 	JButton btnEnter;
 	JButton save;
+	
 	BullPenView bullpen;
+	BoardView boardView;
+	StockView stockView;
 
 	JFrame mainFrame;
 	private JTextField txtMoves;
+	
+	JScrollPane scrollPane;
 	/**
 	 * Create the panel.
 	 */
@@ -61,12 +70,18 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 				brdTiles[i][j] = new Tile(false, i, j);
 			}
 		}
+		
 		this.board = new Board(brdTiles);
+		this.stock = new Stock();
+		this.bp = new BullPen();
+		
+		this.bullpen = new BullPenView(mainFrame, bp, this);
+		this.stockView = new StockView(mainFrame, stock, this);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
+		this.scrollPane = new JScrollPane();
+		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
-		
-		//-----------------ADDING RANDOM PIECES NOW NOT FINAL 
-		bp = new BullPen(null, s.getRandomPiecesForPen());
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -86,8 +101,6 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		JButton right = new JButton("90");
 		
 		JButton addhint = new JButton("Add Hint");
-		
-		BoardView boardView = new BoardView(mainFrame, this.board, this);
 		
 		JButton undo = new JButton("Undo");
 		
@@ -110,9 +123,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		
 		btnEnter = new JButton("Enter n x m ");
-		
-		JScrollPane scrollPane = new JScrollPane();
-		
+				
 		txtMoves = new JTextField();
 		txtMoves.setColumns(10);
 		
@@ -201,25 +212,25 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
 		
-		bullpen = new BullPenView(mainFrame, bp, this);
-		for (int i = 0; i < bullpen.getPieceViews().length; i++) {
-			System.out.println(bullpen.getPieceViews()[i].label);
-		}
-
+		bullpen.addMouseListener(new BullPenController(this, bullpen));
+		stockView = new StockView(mainFrame, stock, this);
 		scrollPane.setViewportView(bullpen);
+		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
 		
-		this.save.addActionListener(new SaveController(bp.getPieces(), board, 1));
+		
+		getEntities();
+		this.save.addActionListener(new SaveController(entities, 1));
 		
 		
 		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
 		
 		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 		
-		this.btnEnter.addActionListener(new GetTextController(x, y));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
@@ -227,8 +238,25 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 	}
 	
+	public void getEntities() {
+		entities = new ArrayList<Object>();
+		entities.add(bp);
+		entities.add(board);
+		entities.add(stock);
+		
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
+	}
+	
+	
 	public BullPenView getBullPenView(){
 		return this.bullpen;
+	}
+	
+	public JScrollPane getScrollPane(){
+		return this.scrollPane;
 	}
 	
 }
