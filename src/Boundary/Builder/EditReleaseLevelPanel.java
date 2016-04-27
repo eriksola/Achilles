@@ -26,6 +26,7 @@ import Boundary.Both.KabaSuji;
 import Boundary.Both.StockView;
 import Controller.BullPenController;
 import Controller.GetBoardDimensionsController;
+import Controller.GetMovesController;
 import Controller.HflipController;
 import Controller.ReturnToBuilderMenuController;
 import Controller.RotateController;
@@ -42,11 +43,13 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	
 	JTextField x;
 	JTextField y;
+	JTextField enterMovesText;
 	JFrame mainFrame;
 	JButton exit;
 	JButton btnEnter;
 	JButton save;
 	int levelNum;
+	int numMoves;
 	
 	BullPen bp;
 	Stock stock;
@@ -56,6 +59,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	StockView stockView;
 	BoardView boardView;
 	JScrollPane scrollPane;
+	JTextField entertext;
 	/**
 	 * Create the panel.
 	 */
@@ -66,7 +70,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		this.board = d.getBoard();
 		this.stock = new Stock();
 		this.bp = d.getBullPen();
-		
+		this.numMoves = d.getNumMoves();
 		this.bullpen = new BullPenView(mainFrame, bp, this);
 		this.stockView = new StockView(mainFrame, stock, this);
 		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
@@ -114,6 +118,12 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 		JButton enter = new JButton("Enter n x m");
 		this.btnEnter = enter;
+		
+		entertext = new JTextField();
+		entertext.setColumns(10);
+	
+		
+		JButton btnEnterMoves = new JButton("Enter moves");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -147,7 +157,11 @@ public class EditReleaseLevelPanel extends KabaSuji {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(y, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(enter))
+									.addComponent(enter)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(entertext, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+									.addGap(7)
+									.addComponent(btnEnterMoves, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(redo)
 									.addPreferredGap(ComponentPlacement.RELATED)
@@ -160,7 +174,13 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel.createSequentialGroup()
+								.addGap(1)
+								.addComponent(entertext, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnEnterMoves))
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblLightningLevelbuilder)
 							.addComponent(exitbtn))
@@ -200,6 +220,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		this.save.addActionListener(new SaveController(entities, 3));
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
+		btnEnterMoves.addActionListener(new GetMovesController(entertext, this));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
@@ -210,8 +231,6 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		entities.add(stock);
-		
 	}
 	
 	public void addEntity(Object addition){

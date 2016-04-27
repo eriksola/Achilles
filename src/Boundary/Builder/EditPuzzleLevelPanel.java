@@ -65,7 +65,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	JScrollPane scrollPane;
 	
 	int levelNum;
-	
+	int numMoves;
 
 	JFrame mainFrame;
 	private JTextField txtMoves;
@@ -77,7 +77,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		this.bp = d.getBullPen();
 		this.stock = new Stock();
 		this.board = d.getBoard();
-		
+		this.numMoves = d.getNumMoves();
 		this.bullpen = new BullPenView(mainFrame, bp, this);
 		this.stockView = new StockView(mainFrame, stock, this);
 		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
@@ -233,7 +233,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		/*MAKE SURE YOU PASS IN THE LEVEL TYPE*/
 		this.save.addActionListener(new SaveController(entities, 1));
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
-		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
+		btnEnterMoves.addActionListener(new GetMovesController(txtMoves, this));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
