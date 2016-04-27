@@ -14,18 +14,20 @@ public class Deserialization {
 
 	BullPen bullPen;
 	Board board;
-	int moves = 0;
 	int timer = 0;
+	int numMoves = 0;
 	
 	/**
 	 * @return true if the deserialization went smoothly
 	 */
 	@SuppressWarnings("unchecked")
+	
 	public boolean Deserialize(String filename, int levelType){
 		try {
 			FileInputStream fileIn = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 		
+			//TODO add more entities as needed
 			
 			switch(levelType){
 			
@@ -33,7 +35,7 @@ public class Deserialization {
 			case 1:
 				bullPen = (BullPen) in.readObject();
 				board = (Board) in.readObject();
-				moves = (Integer) in.readObject();
+				numMoves = (Integer) in.readObject();
 				break;
 			
 			//Lightning level
@@ -72,14 +74,17 @@ public class Deserialization {
 	public BullPen getBullPen(){
 		return this.bullPen;
 	}
-	
+
 	public Board getBoard() {
 		return this.board;
 	}
 	
-	public int getTimer() {
+
+	public int getTime(){
 		return this.timer;
 	}
-	
-	
+
+	public int getNumMoves(){
+		return this.numMoves;
+	}
 }

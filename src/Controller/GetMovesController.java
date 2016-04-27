@@ -6,13 +6,21 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Boundary.Builder.EditLightningLevelPanel;
+import Boundary.Builder.EditPuzzleLevelPanel;
+import Boundary.Builder.EditReleaseLevelPanel;
+import Boundary.Builder.LevelBuilderLightningPanel;
+import Boundary.Builder.LevelBuilderPuzzlePanel;
+import Boundary.Builder.LevelBuilderReleasePanel;
+
 public class GetMovesController implements ActionListener {
 	JTextField moves;
+	JPanel panel;
 	int numMoves;
 	
-	public GetMovesController(JTextField moves) {
+	public GetMovesController(JTextField moves, JPanel p) {
 		this.moves = moves;
-		this.numMoves = 0;
+		this.panel = p;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -29,7 +37,23 @@ public class GetMovesController implements ActionListener {
 			    {
 			      System.out.println("NumberFormatException: " + nfe.getMessage());
 			    }
+			 
+			if(panel instanceof LevelBuilderPuzzlePanel){
+					((LevelBuilderPuzzlePanel) panel).addEntity(numMoves);	
+			}
+			else if (panel instanceof EditPuzzleLevelPanel){
+				((EditPuzzleLevelPanel) panel).addEntity(numMoves);
+			}
+			else if(panel instanceof LevelBuilderReleasePanel){
+				((LevelBuilderReleasePanel) panel).addEntity(numMoves);
+			}
+			else if(panel instanceof EditReleaseLevelPanel){
+				((EditReleaseLevelPanel) panel).addEntity(numMoves);
+			}
 		}
+	}
+	public boolean hasMoves(){
+		return this.numMoves > 0;
 	}
 	
 	public int getMoves(){

@@ -24,26 +24,13 @@ public class StockView extends JPanel {
 		this.frame = f;
 		this.s = s;
 		this.view = view;
-		/*
-		setBackground(new Color(255, 255, 255));
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 349, Short.MAX_VALUE)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 400, Short.MAX_VALUE)
-		);
-		setLayout(groupLayout);
-		*/
-		
-		//GroupLayout groupLayout = new GroupLayout(this);
-		//setLayout(groupLayout);
+	
+		setBackground(Color.WHITE);
 		setPieceViews(new PieceView[s.getPieces().size()]);
 		for(int i = 0; i < getPieceViews().length; i++){
 			getPieceViews()[i] = new PieceView(s.getPieces().get(i),view);
 			add(getPieceViews()[i].getLabel());
+			repaint();
 		}
 		
 

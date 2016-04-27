@@ -36,20 +36,13 @@ public class BullPenView extends JPanel {
 		this.view = view;
 		this.pvs = new ArrayList<PieceView>();
 		
-		/*
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 450, Short.MAX_VALUE)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 133, Short.MAX_VALUE)
-		);
-		setLayout(groupLayout);
-		setBackground(Color.white);
-		
-		*/
+		for(int i = 0; i < bp.getPieces().size(); i++){
+			Piece piece = bp.getPieces().get(i);
+			PieceView pieceView = new PieceView(piece, view);
+			pvs.add(pieceView);
+			repaint();
+		}
+		setBackground(Color.WHITE);
 	}
 	
 	public void remove(PieceView pv){
@@ -68,11 +61,15 @@ public class BullPenView extends JPanel {
 		this.pvs.add(pv);
 		bp.getPieces().add(pv.getP());
 		add(pv.getLabel());
+		repaint();
 	}
 
 	public ArrayList<PieceView> getPieceViews() {
 		return pvs;
 	}
 
+	public BullPen getBullPen(){
+		return this.bp;
+	}
 	
 }

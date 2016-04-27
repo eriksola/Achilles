@@ -156,6 +156,7 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 		
 		//activate controllers for buttons
 		menuBtn.addActionListener(new ReturnToBuilderMenuController(mainframe));
+		
 		if(mainframe.hasBuiltLevels()){			
 			int puzzleLevels = mainframe.getPuzzleLevelCount();
 			File puzzlePath = new File("./src/BuiltLevels/PuzzleLevels");

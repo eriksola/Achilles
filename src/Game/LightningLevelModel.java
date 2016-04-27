@@ -11,4 +11,9 @@ public class LightningLevelModel extends LevelModel{
 			this.timeUsed = 0;
 	}
 
+	public int getTime(){
+		return this.timeGiven;
+	}
+	
+
 }

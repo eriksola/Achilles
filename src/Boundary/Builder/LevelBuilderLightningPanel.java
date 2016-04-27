@@ -45,7 +45,6 @@ import java.awt.event.InputMethodEvent;
 
 public class LevelBuilderLightningPanel extends KabaSuji {
 	
-	
 	ArrayList<Object> entities;
 	
 	GetTimeController getTimer;
@@ -64,7 +63,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 	JButton save;
 	JButton btnTime;
 	
-	BullPenView bullpen;
+	BullPenView bullPenView;
 	BoardView boardView;
 	StockView stockView;
 
@@ -88,9 +87,9 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		this.board = new Board(brdTiles);
 		
 		//WINDOW BUILDER
-		this.bullpen = new BullPenView(mainFrame, bp, this);
+		this.bullPenView = new BullPenView(mainFrame, bp, this);
 		this.stockView = new StockView(mainFrame, stock, this);
-		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
 		this.scrollPane = new JScrollPane();
 		
 		setBackground(new Color(173, 216, 230));
@@ -228,9 +227,9 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
 		
-		bullpen.addMouseListener(new BullPenController(this, bullpen));
+		bullPenView.addMouseListener(new BullPenController(this, bullPenView));
 		stockView = new StockView(mainFrame, stock, this);
-		scrollPane.setViewportView(bullpen);
+		scrollPane.setViewportView(bullPenView);
 		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 		
@@ -257,8 +256,9 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
+		if (getTimer.hasTime()){
 		entities.add(getTimer.getTime());
-		
+		}
 	}
 	
 	public void addEntity(Object addition){
@@ -266,7 +266,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 	}
 	
 	public BullPenView getBullPenView(){
-		return this.bullpen;
+		return this.bullPenView;
 	}
 	
 	public JScrollPane getScrollPane(){

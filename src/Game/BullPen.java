@@ -29,6 +29,14 @@ public class BullPen implements Serializable{
 	public ArrayList<Piece> getPieces(){
 		return this.pieces;
 	}
+	
+	public void addPiece(Piece p){
+		this.pieces.add(p);
+	}
+	
+	public boolean removePiece(Piece p){
+		return this.pieces.remove(p);
+	}
 
 	public void setSelectedPiece(Piece selectedPiece) {
 		this.selectedPiece = selectedPiece;
