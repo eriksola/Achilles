@@ -15,13 +15,13 @@ public class GetBoardDimensionsController implements ActionListener {
 	JTextField y;
 	int xNum;
 	int yNum;
-	BoardView bv;
+	KabaSuji view;
 	
 	
-	public GetBoardDimensionsController(JTextField x, JTextField y, BoardView bv) {
+	public GetBoardDimensionsController(JTextField x, JTextField y, KabaSuji view) {
 		this.x = x;
 		this.y = y;
-		this.bv = bv;
+		this.view = view;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -29,6 +29,8 @@ public class GetBoardDimensionsController implements ActionListener {
 		if(!x.getText().equals("") && !y.getText().equals("")){
 			 try
 			    {
+				 
+				  BoardView bv = view.getBoardView();
 			      //Try to convert the string in the text in an int
 			      xNum = Integer.parseInt(x.getText());
 			      yNum = Integer.parseInt(y.getText());

@@ -233,8 +233,9 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 		
-		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
+
 		this.getMoves = new GetMovesController(txtMoves, this);
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
 		btnEnterMoves.addActionListener(getMoves);
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
@@ -242,6 +243,10 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		getEntities();
 		this.save.addActionListener(new SaveController(entities, 1));
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
 	}
 	
 	public void getEntities() {
@@ -253,13 +258,12 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		}
 	}
 	
-	public void addEntity(Object addition){
-		entities.add(addition);			
-	}
-	
-	
 	public BullPenView getBullPenView(){
 		return this.bullPenView;
+	}
+	
+	public BoardView getBoardView(){
+		return this.boardView;
 	}
 	
 	public JScrollPane getScrollPane(){

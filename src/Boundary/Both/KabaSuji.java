@@ -22,6 +22,7 @@ public abstract class KabaSuji extends JPanel {
 	}
 	
 	public abstract JScrollPane getScrollPane();
+	public abstract BoardView getBoardView();
 
 	/**
 	 * set a selected PieceView.

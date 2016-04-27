@@ -23,6 +23,7 @@ import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.Deserialization;
 import Boundary.Both.KabaSuji;
+import Boundary.Both.PieceView;
 import Boundary.Both.StockView;
 import Controller.BullPenController;
 import Controller.GetBoardDimensionsController;
@@ -218,11 +219,17 @@ public class EditLightningLevelPanel extends KabaSuji {
 		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 		
+		//load up PieceViews from BullPen
+		for (int i = 0; i < bp.getPieces().size(); i++) {
+			PieceView view = new PieceView(bp.getPieces().get(i), this);
+			bullpen.addView(view);
+		}
+		
 		getEntities();
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		this.save.addActionListener(new SaveController(entities, 2));
-		this.btnEnter.addActionListener(new GetBoardDimensionsController(x_text, y_text, boardView));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x_text, y_text, this));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
@@ -240,6 +247,10 @@ public class EditLightningLevelPanel extends KabaSuji {
 	
 	public void addEntity(Object addition){
 		entities.add(addition);			
+	}
+	
+	public BoardView getBoardView(){
+		return this.boardView;
 	}
 	
 	public JScrollPane getScrollPane(){

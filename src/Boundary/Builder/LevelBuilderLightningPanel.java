@@ -240,7 +240,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		
 		((LevelBuilderFrame) mainFrame).setLightningLevelCount(levelCount);
 		
-		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
+		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
@@ -267,6 +267,10 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 	
 	public BullPenView getBullPenView(){
 		return this.bullPenView;
+	}
+	
+	public BoardView getBoardView(){
+		return this.boardView;
 	}
 	
 	public JScrollPane getScrollPane(){

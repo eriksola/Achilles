@@ -39,6 +39,7 @@ public class ReleaseLevelPanel extends KabaSuji {
 
 	BullPen bp;
 	BullPenView bullpen;
+	BoardView boardView;
 	/**
 	 * Create the panel.
 	 */
@@ -58,8 +59,8 @@ public class ReleaseLevelPanel extends KabaSuji {
 		}
 		
 		this.board = new Board(brdTiles);
-		
-		
+		BoardView boardView = new BoardView(mainframe, board, this, bullpen);
+
 		//WINDOWBUILDER - DONT TOUCH
 		setBackground(new Color(173, 216, 230));
 		
@@ -84,9 +85,7 @@ public class ReleaseLevelPanel extends KabaSuji {
 		label.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
 		
 		JButton button_4 = new JButton("Help");
-		
-		BoardView boardView = new BoardView(mainframe, board, this, bullpen);
-		
+				
 		JButton button_5 = new JButton("Reset");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -153,4 +152,7 @@ public class ReleaseLevelPanel extends KabaSuji {
 		return null;
 	}
 
+	public BoardView getBoardView(){
+		return this.boardView;
+	}
 }

@@ -61,7 +61,11 @@ public class BullPenView extends JPanel {
 		this.pvs.add(pv);
 		bp.getPieces().add(pv.getP());
 		add(pv.getLabel());
-		repaint();
+	}
+	
+	public void addView(PieceView pv){
+		this.pvs.add(pv);
+		add(pv.getLabel());
 	}
 
 	public ArrayList<PieceView> getPieceViews() {

@@ -42,6 +42,8 @@ public class PuzzleLevelPanel extends KabaSuji {
 	JButton lvlMenuBtn;
 	JButton helpBtn;
 	BullPenView bullPenView;
+	Stock s = new Stock();
+
 	BoardView boardView;
 	JScrollPane scrollPane;
 	/**
@@ -54,6 +56,19 @@ public class PuzzleLevelPanel extends KabaSuji {
 		this.bp = levelModel.getBullPen();
 		this.board = levelModel.getBoard();
 		this.numMoves = levelModel.getMovesAllowed();
+		//Add pieces to the bull
+
+		bp = new BullPen();
+		
+		Tile[][] brdTiles = new Tile[10][10];
+		//start board empty
+		for (int i = 0; i < brdTiles.length; i++) {
+			for (int j = 0; j < brdTiles[0].length; j++) {
+				brdTiles[i][j] = new Tile(false, i, j);
+			}
+		}
+		this.board = new Board(brdTiles);
+		this.boardView = new BoardView(mainframe, board, this, bullPenView);
 		
 		//WINDOWBUILDER - DONT TOUCH
 		setBackground(new Color(173, 216, 230));
@@ -84,7 +99,7 @@ public class PuzzleLevelPanel extends KabaSuji {
 		
 		BoardView boardView = new BoardView(this.mainframe, this.board, this, bullPenView);
 		this.boardView = boardView;
-		
+
 		JButton deg = new JButton("90");
 		
 		JButton reset = new JButton("Reset");
@@ -185,5 +200,9 @@ public class PuzzleLevelPanel extends KabaSuji {
 
 	public JScrollPane getScrollPane() {
 		return this.scrollPane;
+	}
+	
+	public BoardView getBoardView(){
+		return this.boardView;
 	}
 }
