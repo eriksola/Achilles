@@ -247,8 +247,6 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		entities.add(stock);
-		
 	}
 	
 	public void addEntity(Object addition){

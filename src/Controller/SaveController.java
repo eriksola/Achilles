@@ -133,9 +133,8 @@ public class SaveController implements ActionListener {
 	            case 1: 
 	            		boolean hasBoard = false;
 	            		boolean hasPen = false;
-	            		boolean hasStock = false;
-	            		//A puzzle level will have four objects, board, bullpen, stock,  and number of moves
-	            		if(entities.size() != 3){//Make three for right now
+	            		//A puzzle level will have four objects, board, bullpen, and number of moves
+	            		if(entities.size() != 2){//Make two for right now
 	            			canWriteFile = false;
 	            			System.err.println("This level does not have everything it needs to be playable!");
 	            			System.err.println("Remember, for a puzzle level you need, board, pieces, and number of moves.");
@@ -148,13 +147,10 @@ public class SaveController implements ActionListener {
 		            			else if(j instanceof BullPen){
 		            				hasPen = true;
 		            			}
-		            			else if(j instanceof Stock){
-		            				hasStock = true;
-		            			}
 		            		}
 	            		}
 	            		
-	            		if(!hasBoard || !hasPen || !hasStock){
+	            		if(!hasBoard || !hasPen){
 	            			canWriteFile = false;
 	            		}
 	                    break;
@@ -162,9 +158,8 @@ public class SaveController implements ActionListener {
 	            	boolean hasboard = false;
             		boolean haspen = false;
             		boolean hastimer = false;
-            		boolean hasstock = false;
-            		//A lightning level will have four objects, board, stock, bullpen, and a time
-            		if(entities.size() != 4){
+            		//A lightning level will have three objects, board, bullpen, and a time
+            		if(entities.size() != 3){
             			canWriteFile = false;
             			System.err.println("This level does not have everything it needs to be playable!");
             			System.err.println("Remember for a lightning level you need board, pieces, and a time that is not 0.");
@@ -180,13 +175,10 @@ public class SaveController implements ActionListener {
 	            			else if(j instanceof Integer){
 	            				hastimer = true;
 	            			}
-	            			else if(j instanceof Stock){
-	            				hasstock = true;
-	            			}
 	            		}
             		}
             		
-            		if(!hasboard || !haspen || !hastimer || !hasstock){
+            		if(!hasboard || !haspen || !hastimer){
             			canWriteFile = false;
             		}
 	                     break;

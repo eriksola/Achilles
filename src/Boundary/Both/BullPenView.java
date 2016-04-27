@@ -47,9 +47,10 @@ public class BullPenView extends JPanel {
 				.addGap(0, 133, Short.MAX_VALUE)
 		);
 		setLayout(groupLayout);
-		setBackground(Color.white);
+		
 		
 		*/
+		setBackground(Color.WHITE);
 	}
 	
 	public void remove(PieceView pv){
@@ -68,6 +69,7 @@ public class BullPenView extends JPanel {
 		this.pvs.add(pv);
 		bp.getPieces().add(pv.getP());
 		add(pv.getLabel());
+		repaint();
 	}
 
 	public ArrayList<PieceView> getPieceViews() {

@@ -75,7 +75,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	public EditPuzzleLevelPanel(JFrame f, Deserialization d, int levelNumber) {
 
 		this.bp = d.getBullPen();
-		this.stock = d.getStock();
+		this.stock = new Stock();
 		this.board = d.getBoard();
 		
 		this.bullpen = new BullPenView(mainFrame, bp, this);
@@ -244,7 +244,6 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		entities.add(stock);
 	}
 	
 	public void addEntity(Object addition){

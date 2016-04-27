@@ -40,10 +40,12 @@ public class StockView extends JPanel {
 		
 		//GroupLayout groupLayout = new GroupLayout(this);
 		//setLayout(groupLayout);
+		setBackground(Color.WHITE);
 		setPieceViews(new PieceView[s.getPieces().size()]);
 		for(int i = 0; i < getPieceViews().length; i++){
 			getPieceViews()[i] = new PieceView(s.getPieces().get(i),view);
 			add(getPieceViews()[i].getLabel());
+			repaint();
 		}
 		
 
