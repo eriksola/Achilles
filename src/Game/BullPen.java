@@ -3,7 +3,7 @@ package Game;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import Boundary.PieceView;
+import Boundary.Both.PieceView;
 
 public class BullPen implements Serializable{
 	

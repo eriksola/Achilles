@@ -1,16 +1,16 @@
 package Controller;
 
-import Boundary.BullPenView;
-import Boundary.KabaSuji;
-import Boundary.LevelBuilderPuzzlePanel;
-import Boundary.PieceView;
 import Game.Board;
 import Game.Piece;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
-import Boundary.BoardView;
+import Boundary.Both.BoardView;
+import Boundary.Both.BullPenView;
+import Boundary.Both.KabaSuji;
+import Boundary.Both.PieceView;
+import Boundary.Builder.LevelBuilderPuzzlePanel;
 
 /**
  * Controller for the Board entity class.

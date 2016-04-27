@@ -2,7 +2,6 @@ package Controller;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,8 +13,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Boundary.LevelBuilderFrame;
-import Boundary.LevelBuilderMainMenuPanel;
+import Boundary.Builder.LevelBuilderFrame;
+import Boundary.Builder.LevelBuilderMainMenuPanel;
 import Game.Board;
 import Game.BullPen;
 import Game.Piece;

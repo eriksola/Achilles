@@ -2,12 +2,10 @@ package Main;
 
 import javax.swing.*;
 
-import Boundary.KabasujiFrame;
-import Boundary.LevelBuilderFrame;
-import Boundary.MainMenuPanel;
-
+import Boundary.Builder.LevelBuilderFrame;
+import Boundary.Player.KabasujiFrame;
+import Boundary.Player.MainMenuPanel;
 import Game.Stock;
-
 
 import java.awt.*;
 import java.awt.event.*;

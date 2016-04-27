@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Boundary.EditLightningLevelPanel;
-import Boundary.LevelBuilderLightningPanel;
+import Boundary.Builder.EditLightningLevelPanel;
+import Boundary.Builder.LevelBuilderLightningPanel;
 
 public class GetTimeController implements ActionListener {
 

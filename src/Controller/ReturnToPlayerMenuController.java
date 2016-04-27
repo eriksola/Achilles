@@ -4,8 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Boundary.KabasujiFrame;
-import Boundary.MainMenuPanel;
+import Boundary.Player.KabasujiFrame;
+import Boundary.Player.MainMenuPanel;
 
 public class ReturnToPlayerMenuController implements ActionListener{
 	

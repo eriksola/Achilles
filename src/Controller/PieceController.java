@@ -4,9 +4,9 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
-import Boundary.KabaSuji;
-import Boundary.LevelBuilderPuzzlePanel;
-import Boundary.PieceView;
+import Boundary.Both.KabaSuji;
+import Boundary.Both.PieceView;
+import Boundary.Builder.LevelBuilderPuzzlePanel;
 
 /**
  * Controller class for Pieces - main function is highlighting a selected Piece.
