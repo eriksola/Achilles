@@ -13,7 +13,6 @@ import Game.Stock;
 public class Deserialization {
 
 	BullPen bullPen;
-	Stock stock;
 	Board board;
 	int timer = 0;
 	
@@ -33,14 +32,12 @@ public class Deserialization {
 			case 1:
 				bullPen = (BullPen) in.readObject();
 				board = (Board) in.readObject();
-				stock = (Stock) in.readObject();
 				break;
 			
 			//Lightning level
 			case 2:
 				bullPen = (BullPen) in.readObject();
 				board = (Board) in.readObject();
-				stock = (Stock) in.readObject();
 				timer = (Integer) in.readObject();
 				break;
 				
@@ -48,7 +45,6 @@ public class Deserialization {
 			case 3:
 				bullPen = (BullPen) in.readObject();
 				board = (Board) in.readObject();
-				stock = (Stock) in.readObject();
 				break;
 				
 			default:
@@ -70,10 +66,6 @@ public class Deserialization {
 	
 	public BullPen getBullPen(){
 		return this.bullPen;
-	}
-	
-	public Stock getStock(){
-		return this.stock;
 	}
 	
 	
