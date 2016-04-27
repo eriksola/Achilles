@@ -11,6 +11,7 @@ import Controller.ReturnToPlayerMenuController;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 import java.awt.Font;
 
@@ -21,12 +22,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class RulesMenuPanel extends JPanel {
 	
-	KabasujiFrame mainFrame;
+	JFrame mainFrame;
 	JButton menuBtn;
 	/**
 	 * Create the panel.
 	 */
-	public RulesMenuPanel(KabasujiFrame frame) {
+	public RulesMenuPanel(JFrame frame) {
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = frame;
 		

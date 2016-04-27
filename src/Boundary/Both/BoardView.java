@@ -37,13 +37,13 @@ public class BoardView extends JPanel {
 	 * @param f
 	 * @param brd
 	 * @param view
-	 * @param bpv the BullPenView
+	 * @param bullPenView the BullPenView
 	 */
-	public BoardView(JFrame f, Board brd, KabaSuji view, BullPenView bpv) {
+	public BoardView(JFrame f, Board brd, KabaSuji view, BullPenView bullPenView) {
 		this.frame = f;
 		this.brd = brd;
 		this.view = view;
-		this.bpv = bpv;
+		this.bpv = bullPenView;
 		/*
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

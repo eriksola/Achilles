@@ -21,7 +21,7 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 	public BullPenController(KabaSuji view, BullPenView bpv){
 		this.view = view;
 		this.bpv = bpv;
-		this.bp = bp;
+		this.bp = bpv.getBullPen();
 	}
 	
 	public void mouseClicked(MouseEvent me){
@@ -29,6 +29,7 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 		System.out.println("mouse clicked from bullpen");
 		if(view.getSelectedPiece() != null){
 			bpv.addPiece(new PieceView(view.getSelectedPiece().getP(), view));
+			bp.addPiece(view.getSelectedPiece().getP());
 			view.getScrollPane().setViewportView(bpv);
 		}
 	}

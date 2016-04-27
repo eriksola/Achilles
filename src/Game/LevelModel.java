@@ -13,4 +13,20 @@ public class LevelModel {
 		this.levelNum = ln;
 		this.score = s;
 	}
+	
+	public Board getBoard(){
+		return this.board;
+	}
+	
+	public BullPen getBullPen(){
+		return this.bullpen;
+	}
+	
+	public int getLevelNum(){
+		return this.levelNum;
+	}
+	
+	public IScore getScore(){
+		return this.score;
+	}
 }

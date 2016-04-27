@@ -52,6 +52,9 @@ public class GetMovesController implements ActionListener {
 			}
 		}
 	}
+	public boolean hasMoves(){
+		return this.numMoves > 0;
+	}
 	
 	public int getMoves(){
 		return this.numMoves;

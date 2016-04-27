@@ -101,7 +101,7 @@ public class KabasujiFrame extends JFrame {
 		this.builtPuzzles = new File("./src/BuiltLevels/PuzzleLevels").list().length;
 		this.builtLightning = new File("./src/BuiltLevels/LightningLevels").list().length;
 		this.builtRelease = new File("./src/BuiltLevels/ReleaseLevels").list().length;
-		
-		return builtPuzzles > 0 || builtLightning > 0 || builtRelease > 0;
+		boolean hasBuiltLvl = builtPuzzles > 0 || builtLightning > 0 || builtRelease > 0;
+		return hasBuiltLvl;
 	}
 }

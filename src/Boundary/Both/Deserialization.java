@@ -20,6 +20,7 @@ public class Deserialization {
 	/**
 	 * @return true if the deserialization went smoothly
 	 */
+
 	public boolean Deserialize(String filename, int levelType){
 		try {
 			FileInputStream fileIn = new FileInputStream(filename);
@@ -43,7 +44,9 @@ public class Deserialization {
 				
 			//Release level
 			case 3:
-				numMoves = (Integer) in.readObject();
+				bullPen = (BullPen) in.readObject();
+				board = (Board) in.readObject();
+
 				break;
 				
 			default:
@@ -53,12 +56,15 @@ public class Deserialization {
 			in.close();
 			fileIn.close();
 			return true;
+			
 		} catch (IOException i) {
-		
+			
+			System.out.println(i.getMessage());
 			return false;
+			
 		} catch (ClassNotFoundException c) {
+			
 			System.out.println("Class not found");
-
 			return false;
 		}
 	}
@@ -66,16 +72,16 @@ public class Deserialization {
 	public BullPen getBullPen(){
 		return this.bullPen;
 	}
-	
-	
+
 	public Board getBoard() {
 		return this.board;
 	}
 	
+
 	public int getTime(){
 		return this.timer;
 	}
-	
+
 	public int getNumMoves(){
 		return this.numMoves;
 	}

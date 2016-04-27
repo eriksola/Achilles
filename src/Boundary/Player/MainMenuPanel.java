@@ -8,6 +8,7 @@ import java.awt.Color;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.Font;
@@ -36,8 +37,9 @@ public class MainMenuPanel extends JPanel {
 	public MainMenuPanel(KabasujiFrame kabasujiFrame) {
 		
 		this.mainFrame = kabasujiFrame;
-		setBackground(new Color(173, 216, 230));
 		
+		
+		setBackground(new Color(173, 216, 230));
 		JPanel panel = new JPanel();
 		panel.setForeground(Color.BLACK);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));

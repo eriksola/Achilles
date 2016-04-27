@@ -45,10 +45,11 @@ import java.awt.event.InputMethodEvent;
 public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
 	ArrayList<Object> entities;
+	GetMovesController getMoves;
 	
 	BullPen bp;
-	Stock stock;
 	Board board;
+	Stock stock = new Stock();
 	
 	JTextField x;
 	JTextField y;
@@ -56,7 +57,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	JButton btnEnter;
 	JButton save;
 	
-	BullPenView bullpen;
+	BullPenView bullPenView;
 	BoardView boardView;
 	StockView stockView;
 
@@ -68,6 +69,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	 * Create the panel.
 	 */
 	public LevelBuilderPuzzlePanel(JFrame f) {
+		
 		Tile[][] brdTiles = new Tile[10][10];
 		//start board empty
 		for (int i = 0; i < brdTiles.length; i++) {
@@ -77,12 +79,12 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		}
 		
 		this.board = new Board(brdTiles);
-		this.stock = new Stock();
+		
 		this.bp = new BullPen();
 		
-		this.bullpen = new BullPenView(mainFrame, bp, this);
+		this.bullPenView = new BullPenView(mainFrame, this.bp, this);
 		this.stockView = new StockView(mainFrame, stock, this);
-		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
 		this.scrollPane = new JScrollPane();
 		
 		setBackground(new Color(173, 216, 230));
@@ -133,6 +135,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		txtMoves.setColumns(10);
 		
 		JButton btnEnterMoves = new JButton("enter moves");
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -217,30 +220,29 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
 		
-		bullpen.addMouseListener(new BullPenController(this, bullpen));
+		bullPenView.addMouseListener(new BullPenController(this, bullPenView));
 		stockView = new StockView(mainFrame, stock, this);
-		scrollPane.setViewportView(bullpen);
+		scrollPane.setViewportView(bullPenView);
 		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
-		
-		
-		getEntities();
-		this.save.addActionListener(new SaveController(entities, 1));
-		
-		
+	
 		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
 		
 		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 		
+
+		this.getMoves = new GetMovesController(txtMoves, this);
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
-		btnEnterMoves.addActionListener(new GetMovesController(txtMoves, this));
+		btnEnterMoves.addActionListener(getMoves);
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
 		
+		getEntities();
+		this.save.addActionListener(new SaveController(entities, 1));
 	}
 	
 	public void addEntity(Object addition){
@@ -251,10 +253,13 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
+		if (getMoves.hasMoves()){
+		entities.add(getMoves.getMoves());
+		}
 	}
 	
 	public BullPenView getBullPenView(){
-		return this.bullpen;
+		return this.bullPenView;
 	}
 	
 	public BoardView getBoardView(){

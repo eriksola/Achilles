@@ -56,12 +56,17 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				}
 			}
 		}
-		Piece piece = view.getSelectedPiece().getP();
-		PieceView pv = view.getSelectedPiece();
-		Board brd = bv.getBoard();
-		if(piece != null){
+		if (view.getSelectedPiece().getP() != null){
+			Piece piece = view.getSelectedPiece().getP();
+			PieceView pv = view.getSelectedPiece();
+			Board brd = bv.getBoard();
 			if(brd.addPiece(row,col,piece)){
+				
+				//remove piece from bullpen
 				bpv.remove(pv);
+				bpv.getBullPen().removePiece(piece);
+				
+				//update view
 				view.getScrollPane().setViewportView(bpv);
 				bv.draw();
 				view.setSelected(null);

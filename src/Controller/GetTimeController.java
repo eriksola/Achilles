@@ -40,6 +40,10 @@ public class GetTimeController implements ActionListener {
 	 * Getter to return the time set by a user for a lightning level
 	 * @return time as an int
 	 */
+	
+	public boolean hasTime(){
+		return this.timeSet > 0;
+	}
 	public int getTime(){
 		return this.timeSet;
 	}

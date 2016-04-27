@@ -97,9 +97,9 @@ public class LevelBuilderMainMenuPanel extends JPanel {
 		);
 		setLayout(groupLayout);
 		
-		puzzle.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderPuzzlePanel(frame)));
-		lightning.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderLightningPanel(frame)));
-		release.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderReleasePanel(frame)));
-		btnBuiltLevels.addActionListener((new SwitchWindowController(mainFrame, new LevelBuilderBuiltLevelPanel(frame))));
+		puzzle.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderPuzzlePanel(mainFrame)));
+		lightning.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderLightningPanel(mainFrame)));
+		release.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderReleasePanel(mainFrame)));
+		btnBuiltLevels.addActionListener((new SwitchWindowController(mainFrame, new LevelBuilderBuiltLevelPanel(mainFrame))));
 	}
 }

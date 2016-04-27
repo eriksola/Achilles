@@ -68,6 +68,7 @@ public class SaveController implements ActionListener {
 		}
 		return levelName;
 	}
+	
 	/**
 	 * Action to save a file given a level type.
 	 * This will place the level in the appropriate package with the corresponding filename
@@ -136,6 +137,11 @@ public class SaveController implements ActionListener {
 	            		boolean hasPen = false;
 	            		boolean hasNumMoves = false;
 	            		//A puzzle level will have three objects, board, bullpen, and number of moves
+	            		//PRINT FOR TESTING
+	            		for (int i = 0; i < entities.size(); i++){
+	            			System.out.println(entities.get(i));
+	            			
+	            		}
 	            		if(entities.size() != 3){//Make two for right now
 	            			canWriteFile = false;
 	            			System.err.println("This level does not have everything it needs to be playable!");
@@ -160,10 +166,15 @@ public class SaveController implements ActionListener {
 	            		}
 	                    break;
 	            case 2:  
-	            	boolean hasboard = false;
-            		boolean haspen = false;
-            		boolean hastimer = false;
-            		//A lightning level will have three objects, board, bullpen, and a time
+	            	hasBoard = false;
+            		hasPen = false;
+            		boolean hasTimer = false;
+            		//A lightning level will have three objects: board, bullpen, and a time
+            		//PRINT FOR TESTING
+            		for (int i = 0; i < entities.size(); i++){
+            			System.out.println(entities.get(i));
+            			
+            		}
             		if(entities.size() != 3){
             			canWriteFile = false;
             			System.err.println("This level does not have everything it needs to be playable!");
@@ -172,18 +183,18 @@ public class SaveController implements ActionListener {
             		else{
 	            		for(Object j: entities){
 	            			if(j instanceof Board){
-	            				hasboard = true;
+	            				hasBoard = true;
 	            			}
 	            			else if(j instanceof BullPen){
-	            				haspen = true;
+	            				hasPen = true;
 	            			}
 	            			else if(j instanceof Integer){
-	            				hastimer = true;
+	            				hasTimer = true;
 	            			}
 	            		}
             		}
             		
-            		if(!hasboard || !haspen || !hastimer){
+            		if(!hasBoard || !hasPen || !hasTimer){
             			canWriteFile = false;
             		}
 	                     break;
@@ -223,7 +234,6 @@ public class SaveController implements ActionListener {
 				if(canWriteFile){
 					FileOutputStream fileOut = new FileOutputStream(filepath);
 					ObjectOutputStream out = new ObjectOutputStream(fileOut);
-					
 					
 					
 					//Add all entities given to the controller

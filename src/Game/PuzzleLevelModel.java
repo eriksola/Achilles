@@ -10,5 +10,8 @@ public class PuzzleLevelModel extends LevelModel{
 		this.movesGiven = mg;
 		this.movesUsed = 0;
 	}
-
+	
+	public int getMovesAllowed(){
+		return this.movesGiven;
+	}
 }
