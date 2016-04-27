@@ -33,10 +33,13 @@ import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
 import java.awt.event.InputMethodListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
 
 public class LevelBuilderReleasePanel extends KabaSuji {
+	
+	ArrayList<Object> entities;
 	
 	BullPen bp;
 	Stock stock;
@@ -85,7 +88,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		panel.setBackground(new Color(173, 216, 230));
 		add(panel);
 		
-		JLabel lblLightningLevelbuilder = new JLabel("Puzzle Build");
+		JLabel lblLightningLevelbuilder = new JLabel("Release Build");
 		lblLightningLevelbuilder.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
 		
 		JButton button = new JButton("Exit");
@@ -218,7 +221,9 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getReleaseLevelCount();
 		
-		this.save.addActionListener(new SaveController(bp, stock, board, 3));
+		
+		getEntities();
+		this.save.addActionListener(new SaveController(entities, 3));
 		
 		
 		levelCount = new File("./src/BuiltLevels/ReleaseLevels").list().length;
@@ -231,6 +236,18 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
 		
+	}
+	
+	public void getEntities() {
+		entities = new ArrayList<Object>();
+		entities.add(bp);
+		entities.add(board);
+		entities.add(stock);
+		
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
 	}
 	
 	public BullPenView getBullPenView(){

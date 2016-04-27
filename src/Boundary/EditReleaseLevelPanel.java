@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,6 +32,9 @@ import Game.Stock;
 import Game.Tile;
 
 public class EditReleaseLevelPanel extends KabaSuji {
+	
+	ArrayList<Object> entities;
+	
 	JTextField x;
 	JTextField y;
 	JFrame mainFrame;
@@ -186,14 +190,28 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 
+		getEntities();
+		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
-		this.save.addActionListener(new SaveController(bp, stock, board, 3));
+		this.save.addActionListener(new SaveController(entities, 3));
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
 		
 		}
+	
+	public void getEntities() {
+		entities = new ArrayList<Object>();
+		entities.add(bp);
+		entities.add(board);
+		entities.add(stock);
+		
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
+	}
 	
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
