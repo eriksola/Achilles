@@ -218,3 +218,4 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	}
 
 }
+

@@ -5,7 +5,7 @@ public class PuzzleScore implements IScore{
 	int totalPieces;
 	int piecesUsed;
 	
-	PuzzleScore(int total){
+	public PuzzleScore(int total){
 		this.totalPieces = total;
 		this.piecesUsed = 0;
 	}

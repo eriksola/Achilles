@@ -22,7 +22,6 @@ public class Board implements Serializable{
 	public boolean addPiece(int row, int column, Piece piece){
 		//right now basically a Lightning Level implementation
 		
-		//
 		Coordinate[] newOccCoords = new Coordinate[5];
 		
 		//makes sure every coordinate in the piece has a corresponding empty tile
@@ -46,12 +45,15 @@ public class Board implements Serializable{
 	}
 	
 	public boolean isValid(int row, int col){
+		//if the tile extends off the coordinates of the board, invalid move
 		if(row < 0 || row > this.height || col < 0 || col > this.width){
 			return false;
 		}
+		
 		//if the tile is occupied, invalid move
 		if (this.tiles[row][col].isOccupied()){ return false;}
 		
+		//otherwise, valid move 
 		return true;
 	}
 

@@ -7,9 +7,17 @@ import Boundary.PieceView;
 
 public class BullPen implements Serializable{
 	
+	LevelModel model;
 	ArrayList<Piece> pieces;
+	
 	public Piece selectedPiece;
 
+
+	public BullPen(LevelModel m, ArrayList<Piece> p){
+		this.model = m;
+		this.pieces = p;
+	}
+	
 	public BullPen(){
 		this.pieces = new ArrayList<Piece>();
 	}
@@ -26,6 +34,12 @@ public class BullPen implements Serializable{
 		this.selectedPiece = selectedPiece;
 	}
 	
+	public LevelModel getModel(){
+		return this.model;
+	}
 	
+	public void setModel(LevelModel m){
+		this.model = m;
+	}
 	
 }

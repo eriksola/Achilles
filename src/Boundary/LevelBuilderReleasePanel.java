@@ -79,6 +79,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		this.stockView = new StockView(mainFrame, stock, this);
 		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
 		this.scrollPane = new JScrollPane();
+
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;

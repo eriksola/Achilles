@@ -22,7 +22,7 @@ public class ReturnToLevelController implements ActionListener{
 		frame.getContentPane().invalidate();
 		
 		// return the main menu JPanel to the JFrame
-		PuzzleLevelPanel puzzleLvl = new PuzzleLevelPanel(frame);
+		PuzzleLevelPanel puzzleLvl = new PuzzleLevelPanel(frame, null);
 		frame.getContentPane().add(puzzleLvl, BorderLayout.CENTER);
 		frame.getContentPane().revalidate();
 		

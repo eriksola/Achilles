@@ -20,7 +20,9 @@ import Controller.PlayPuzzletoPuzzleRulesController;
 import Controller.ReturnToDefMenuController;
 import Game.Board;
 import Game.BullPen;
+import Game.LevelModel;
 import Game.Piece;
+import Game.PuzzleLevelModel;
 import Game.Stock;
 import Game.Tile;
 import Boundary.PieceView;
@@ -28,6 +30,7 @@ import Boundary.PieceView;
 public class PuzzleLevelPanel extends KabaSuji {
 
 	KabasujiFrame mainframe;
+	PuzzleLevelModel levelModel;
 	JButton lvlMenuBtn;
 	JButton helpBtn;
 	Stock s = new Stock();
@@ -41,10 +44,12 @@ public class PuzzleLevelPanel extends KabaSuji {
 	/**
 	 * Create the panel.
 	 */
-	public PuzzleLevelPanel(KabasujiFrame f) {
-		setBackground(new Color(173, 216, 230));
+	public PuzzleLevelPanel(KabasujiFrame f, LevelModel model) {
+
 		this.mainframe = f;
+		this.levelModel = (PuzzleLevelModel) model;
 		//Add pieces to the bull
+
 		bp = new BullPen();
 		
 		Tile[][] brdTiles = new Tile[10][10];
@@ -55,6 +60,10 @@ public class PuzzleLevelPanel extends KabaSuji {
 			}
 		}
 		this.board = new Board(brdTiles);
+		
+		
+		//WINDOWBUILDER - DONT TOUCH
+		setBackground(new Color(173, 216, 230));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));

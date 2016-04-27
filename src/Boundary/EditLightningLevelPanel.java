@@ -240,3 +240,4 @@ public class EditLightningLevelPanel extends KabaSuji {
 		return this.scrollPane;
 	}
 }
+

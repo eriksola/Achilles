@@ -78,11 +78,12 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 				brdTiles[i][j] = new Tile(false, i, j);
 			}
 		}
-		
+		this.bp = new BullPen();
 		this.board = new Board(brdTiles);
 		this.stock = new Stock();
-		this.bp = new BullPen();
 		
+		
+		//WINDOW BUILDER
 		this.bullpen = new BullPenView(mainFrame, bp, this);
 		this.stockView = new StockView(mainFrame, stock, this);
 		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);

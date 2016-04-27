@@ -253,3 +253,4 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	}
 	
 }
+

@@ -1,11 +1,14 @@
 package Boundary;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
 
 import Game.Board;
 import Game.BullPen;
+import Game.LevelModel;
 import Game.Stock;
 import Game.Tile;
 
@@ -14,16 +17,21 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ReleaseLevelPanel extends KabaSuji {
 
 	KabasujiFrame mainframe;
+	
+	
+	LevelModel model;
 	Stock s = new Stock();
 	//TILES SHOULD NOT BE SET TO NULL
-	Tile[][] tiles = null;
+	Tile[][] brdTiles;
 	Board board;
 
 	BullPen bp;
@@ -31,24 +39,30 @@ public class ReleaseLevelPanel extends KabaSuji {
 	/**
 	 * Create the panel.
 	 */
-	public ReleaseLevelPanel(KabasujiFrame f) {
-		setBackground(new Color(173, 216, 230));
+	public ReleaseLevelPanel(KabasujiFrame f, LevelModel m) {
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setBackground(new Color(173, 216, 230));
 		this.mainframe = f;
-		//Add pieces to the bull
+
+
 		bp = new BullPen();
 		
-		Tile[][] brdTiles = new Tile[10][10];
+		this.brdTiles = new Tile[10][10];
 		//start board empty
 		for (int i = 0; i < brdTiles.length; i++) {
 			for (int j = 0; j < brdTiles[0].length; j++) {
 				brdTiles[i][j] = new Tile(false, i, j);
 			}
 		}
+		
 		this.board = new Board(brdTiles);
+		
+		
+		//WINDOWBUILDER - DONT TOUCH
+		setBackground(new Color(173, 216, 230));
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setBackground(new Color(173, 216, 230));
 		add(panel);
 		
 		JButton button = new JButton("Horizontal");

@@ -18,9 +18,11 @@ public class VflipController implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 		//check if selected piece is in bullpen (otherwise moves not allowed)
 		PieceView selected = view.getSelectedPiece();
-		Piece p = selected.getP();
-		p.verticalFlip();
-		selected.drawSelected();
+		if (selected != null){
+			Piece p = selected.getP();
+			p.verticalFlip();
+			selected.drawSelected();
+		}
 	}
 	
 }

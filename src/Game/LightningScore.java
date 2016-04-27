@@ -4,7 +4,7 @@ public class LightningScore implements IScore{
 	int totalTiles;
 	int totalMarked;
 	
-	LightningScore(int total){
+	public LightningScore(int total){
 		this.totalTiles = total;
 		this.totalMarked = 0;
 	}
