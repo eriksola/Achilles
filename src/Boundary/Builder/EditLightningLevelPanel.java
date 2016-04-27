@@ -58,6 +58,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 	BullPenView bullpen;
 	StockView stockView;
 	BoardView boardView;
+	int time;
 	JScrollPane scrollPane;
 	private JTextField timeTextField;
 
@@ -71,7 +72,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		this.board = d.getBoard();
 		this.stock = new Stock();
 		this.bp = d.getBullPen();
-		
+		this.time = d.getTime();
 		this.bullpen = new BullPenView(mainFrame, bp, this);
 		this.stockView = new StockView(mainFrame, stock, this);
 		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);

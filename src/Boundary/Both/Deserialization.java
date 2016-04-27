@@ -15,6 +15,7 @@ public class Deserialization {
 	BullPen bullPen;
 	Board board;
 	int timer = 0;
+	int numMoves = 0;
 	
 	/**
 	 * @return true if the deserialization went smoothly
@@ -25,6 +26,7 @@ public class Deserialization {
 			FileInputStream fileIn = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 		
+			//TODO add more entities as needed
 			
 			switch(levelType){
 			
@@ -32,6 +34,7 @@ public class Deserialization {
 			case 1:
 				bullPen = (BullPen) in.readObject();
 				board = (Board) in.readObject();
+				numMoves = (Integer) in.readObject();
 				break;
 			
 			//Lightning level
@@ -45,6 +48,7 @@ public class Deserialization {
 			case 3:
 				bullPen = (BullPen) in.readObject();
 				board = (Board) in.readObject();
+				numMoves = (Integer) in.readObject();
 				break;
 				
 			default:
@@ -73,5 +77,11 @@ public class Deserialization {
 		return this.board;
 	}
 	
+	public int getTime(){
+		return this.timer;
+	}
 	
+	public int getNumMoves(){
+		return this.numMoves;
+	}
 }

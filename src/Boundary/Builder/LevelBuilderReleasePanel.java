@@ -237,7 +237,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		((LevelBuilderFrame) mainFrame).setReleaseLevelCount(levelCount);
 		
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
-		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
+		btnEnterMoves.addActionListener(new GetMovesController(txtMoves, this));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
