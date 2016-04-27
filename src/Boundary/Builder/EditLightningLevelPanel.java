@@ -23,6 +23,7 @@ import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.Deserialization;
 import Boundary.Both.KabaSuji;
+import Boundary.Both.PieceView;
 import Boundary.Both.StockView;
 import Controller.BullPenController;
 import Controller.GetBoardDimensionsController;
@@ -217,6 +218,12 @@ public class EditLightningLevelPanel extends KabaSuji {
 		scrollPane.setViewportView(bullpen);
 		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
+		
+		//load up PieceViews from BullPen
+		for (int i = 0; i < bp.getPieces().size(); i++) {
+			PieceView view = new PieceView(bp.getPieces().get(i), this);
+			bullpen.addView(view);
+		}
 		
 		getEntities();
 		

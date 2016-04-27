@@ -219,16 +219,16 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		bullpen.addMouseListener(new BullPenController(this, bullpen));
 		stockView = new StockView(mainFrame, stock, this);
 		scrollPane.setViewportView(bullpen);
+		scrollPane_1.setViewportView(stockView);
+		panel.setLayout(gl_panel);
+		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
+
 		//load up PieceViews from BullPen
 		for (int i = 0; i < bp.getPieces().size(); i++) {
 			PieceView view = new PieceView(bp.getPieces().get(i), this);
-			bullpen.addPiece(view);
+			bullpen.addView(view);
 		}
-		scrollPane_1.setViewportView(stockView);
-		panel.setLayout(gl_panel);
 		
-		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
-
 		getEntities();
 		/*MAKE SURE YOU PASS IN THE LEVEL TYPE*/
 		this.save.addActionListener(new SaveController(entities, 1));
