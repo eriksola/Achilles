@@ -64,7 +64,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 		this.levelNum = levelNumber;
 		this.board = d.getBoard();
-		this.stock = d.getStock();
+		this.stock = new Stock();
 		this.bp = d.getBullPen();
 		
 		this.bullpen = new BullPenView(mainFrame, bp, this);

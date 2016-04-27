@@ -34,35 +34,22 @@ public class PuzzleLevelPanel extends KabaSuji {
 
 	KabasujiFrame mainframe;
 	PuzzleLevelModel levelModel;
+	Board board;
+	BullPen bp;
+	
 	JButton lvlMenuBtn;
 	JButton helpBtn;
-	Stock s = new Stock();
-	//RIGHT NOW THIS TILE SIZE IS DEFAULT, IT WILL CHANGE
-	Tile[][] tiles = new Tile[6][6];
-	Board board;
-
-	BullPen bp;
-	BullPenView bullpen;
+	BullPenView bullPenView;
 	JScrollPane scrollPane;
 	/**
 	 * Create the panel.
 	 */
-	public PuzzleLevelPanel(KabasujiFrame f, LevelModel model) {
+	public PuzzleLevelPanel(KabasujiFrame f, PuzzleLevelModel model) {
 
 		this.mainframe = f;
-		this.levelModel = (PuzzleLevelModel) model;
-		//Add pieces to the bull
-
-		bp = new BullPen();
-		
-		Tile[][] brdTiles = new Tile[10][10];
-		//start board empty
-		for (int i = 0; i < brdTiles.length; i++) {
-			for (int j = 0; j < brdTiles[0].length; j++) {
-				brdTiles[i][j] = new Tile(false, i, j);
-			}
-		}
-		this.board = new Board(brdTiles);
+		this.levelModel = model;
+		this.bp = levelModel.getBullPen();
+		this.board = levelModel.getBoard();
 		
 		
 		//WINDOWBUILDER - DONT TOUCH
@@ -76,7 +63,8 @@ public class PuzzleLevelPanel extends KabaSuji {
 		JButton back = new JButton("Back");
 		this.lvlMenuBtn = back;
 		
-		JLabel label = new JLabel("Level");
+		JLabel label = new JLabel();
+		label.setText("Level #" + this.levelModel.getLevelNum());
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setForeground(Color.BLACK);
 		label.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
@@ -88,14 +76,14 @@ public class PuzzleLevelPanel extends KabaSuji {
 		
 		JButton vertical = new JButton("Vertical");
 		
-		BoardView boardView = new BoardView(mainframe, board, this, bullpen);
+		BoardView boardView = new BoardView(mainframe, board, this, bullPenView);
 		
 		JButton deg = new JButton("90");
 		
 		JButton reset = new JButton("Reset");
 		
 		
-		JPanel bullpen = new BullPenView(f,bp, this);
+		JPanel bullPenView = new BullPenView(f,bp, this);
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -109,7 +97,7 @@ public class PuzzleLevelPanel extends KabaSuji {
 								.addPreferredGap(ComponentPlacement.RELATED))
 							.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
 								.addContainerGap()
-								.addComponent(bullpen, GroupLayout.PREFERRED_SIZE, 341, GroupLayout.PREFERRED_SIZE)
+								.addComponent(bullPenView, GroupLayout.PREFERRED_SIZE, 341, GroupLayout.PREFERRED_SIZE)
 								.addGap(3)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(74)
@@ -147,7 +135,7 @@ public class PuzzleLevelPanel extends KabaSuji {
 							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(37)
-							.addComponent(bullpen, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+							.addComponent(bullPenView, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(reset)

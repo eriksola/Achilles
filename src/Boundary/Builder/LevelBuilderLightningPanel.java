@@ -51,8 +51,9 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 	GetTimeController getTimer;
 	
 	BullPen bp;
-	Stock stock;
+	Stock stock = new Stock();
 	Board board;
+	
 	
 	JTextField x;
 	JTextField y;
@@ -68,7 +69,6 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 	StockView stockView;
 
 	JFrame mainFrame;
-	private JTextField txtMoves;
 	
 	JScrollPane scrollPane;
 	private JTextField time_text;
@@ -76,6 +76,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 	 * Create the panel.
 	 */
 	public LevelBuilderLightningPanel(JFrame f) {
+		
 		Tile[][] brdTiles = new Tile[10][10];
 		//start board empty
 		for (int i = 0; i < brdTiles.length; i++) {
@@ -85,8 +86,6 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		}
 		this.bp = new BullPen();
 		this.board = new Board(brdTiles);
-		this.stock = new Stock();
-		
 		
 		//WINDOW BUILDER
 		this.bullpen = new BullPenView(mainFrame, bp, this);
@@ -137,11 +136,6 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		
 		btnEnter = new JButton("Enter n x m ");
-				
-		txtMoves = new JTextField();
-		txtMoves.setColumns(10);
-		
-		JButton btnEnterMoves = new JButton("enter moves");
 		
 		time_text = new JTextField();
 		time_text.setColumns(10);
@@ -149,6 +143,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		
 		JButton timerBtn = new JButton("Set Time");
 		btnTime = timerBtn;
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -194,12 +189,8 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 									.addComponent(save)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(delete))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(btnEnter)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtMoves, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnEnterMoves))))
+								.addComponent(btnEnter))
+							.addGap(77))
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
 					.addContainerGap())
 		);
@@ -215,9 +206,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 							.addComponent(label_1)
 							.addComponent(x, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(y, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnEnter)
-							.addComponent(txtMoves, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnEnterMoves)))
+							.addComponent(btnEnter)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(horizontal)
@@ -248,21 +237,19 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getLightningLevelCount();
 		
-		getEntities();
-		this.save.addActionListener(new SaveController(entities, 2));
-		
-		
 		levelCount = new File("./src/BuiltLevels/LightningLevels").list().length;
 		
 		((LevelBuilderFrame) mainFrame).setLightningLevelCount(levelCount);
 		
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, boardView));
-		btnEnterMoves.addActionListener(new GetMovesController(txtMoves));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
-		getTimer = new GetTimeController(time_text, this);
+		this.getTimer = new GetTimeController(time_text, this);
 		this.btnTime.addActionListener(getTimer);
+		
+		getEntities();
+		this.save.addActionListener(new SaveController(entities, 2));
 		
 	}
 	
@@ -270,7 +257,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		entities.add(stock);
+		entities.add(getTimer.getTime());
 		
 	}
 	

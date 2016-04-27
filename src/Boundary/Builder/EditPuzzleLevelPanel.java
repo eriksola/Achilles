@@ -75,7 +75,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	public EditPuzzleLevelPanel(JFrame f, Deserialization d, int levelNumber) {
 
 		this.bp = d.getBullPen();
-		this.stock = d.getStock();
+		this.stock = new Stock();
 		this.board = d.getBoard();
 		
 		this.bullpen = new BullPenView(mainFrame, bp, this);
@@ -219,6 +219,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		bullpen.addMouseListener(new BullPenController(this, bullpen));
 		stockView = new StockView(mainFrame, stock, this);
 		scrollPane.setViewportView(bullpen);
+		
 		//load up PieceViews from BullPen
 		for (int i = 0; i < bp.getPieces().size(); i++) {
 			PieceView view = new PieceView(bp.getPieces().get(i), this);

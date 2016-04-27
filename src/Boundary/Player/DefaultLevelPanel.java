@@ -16,21 +16,39 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Boundary.Both.Deserialization;
 import Controller.DefLevelMenuToPuzzleLevelController;
 import Controller.ReturnToPlayerMenuController;
 import Controller.TimerController;
+import Game.LevelModel;
+import Game.LightningLevelModel;
+import Game.LightningScore;
+import Game.PuzzleLevelModel;
+import Game.PuzzleScore;
+import Game.ReleaseScore;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.swing.JTextArea;
 
 public class DefaultLevelPanel extends JPanel {
 
-		KabasujiFrame mainFrame;
+		KabasujiFrame mainframe;
+		PuzzleLevelModel[] puzzleLevels;
+		LightningLevelModel[] lightLevels;
+		LevelModel[] releaseLevels;
+		
 		JButton menuBtn;
-		JButton puzzle1Btn;
+		JButton[] puzzleBtns = new JButton[5];
 		JTextArea timerView;
+		HashMap<String, JLabel> puzzleLevelsLabels = new HashMap<String, JLabel>();
+		HashMap<String, JLabel> lightningLevelsLabels = new HashMap<String, JLabel>();
+		HashMap<String, JLabel> releaseLevelsLabels = new HashMap<String, JLabel>();
 		
 	/**
 	 * Create the panel.
@@ -38,7 +56,7 @@ public class DefaultLevelPanel extends JPanel {
 	public DefaultLevelPanel(KabasujiFrame f) {
 		setBackground(new Color(173, 216, 230));
 		
-		this.mainFrame = f;
+		this.mainframe = f;
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -54,7 +72,8 @@ public class DefaultLevelPanel extends JPanel {
 		label.setFont(new Font("Comic Sans MS", Font.BOLD, 28));
 		
 		JButton button_1 = new JButton("1");
-		this.puzzle1Btn = button_1;
+		this.puzzleBtns[0] = button_1;
+		
 		button_1.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		
 		JButton button_2 = new JButton("2");
@@ -111,10 +130,6 @@ public class DefaultLevelPanel extends JPanel {
 		label_3.setForeground(new Color(0, 0, 0));
 		label_3.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		this.timerView = textArea;
-		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -124,43 +139,45 @@ public class DefaultLevelPanel extends JPanel {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(button)
 							.addGap(115)
-							.addComponent(label)
-							.addPreferredGap(ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
-							.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
+							.addComponent(label))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_7, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_8, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+								.addComponent(label_2)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_12, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_13, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_14, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(button_15, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+								.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap(422, Short.MAX_VALUE))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_7, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_8, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-						.addComponent(label_2)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_12, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_13, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_14, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(button_15, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-						.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(648, Short.MAX_VALUE))))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -181,40 +198,83 @@ public class DefaultLevelPanel extends JPanel {
 										.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 										.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
 								.addComponent(label))
-							.addGap(40)
+							.addGap(18)
 							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 								.addComponent(button_7, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 								.addComponent(button_8, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 								.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+							.addGap(47)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 								.addComponent(button_12, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 								.addComponent(button_13, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 								.addComponent(button_14, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 								.addComponent(button_15, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(40, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(258)
+							.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(26, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 
 		//activate controllers for buttons
-		menuBtn.addActionListener(new ReturnToPlayerMenuController((KabasujiFrame) mainFrame));
-		puzzle1Btn.addActionListener(new DefLevelMenuToPuzzleLevelController((KabasujiFrame)mainFrame));
+		
+		File puzzlePath = new File("./src/DefaultLevels/PuzzleLevels");
+		ArrayList<File> puzzleFiles = new ArrayList<File>(Arrays.asList(puzzlePath.listFiles()));
+		
+		File lightningPath = new File("./src/DefaultLevels/LightningLevels");
+		ArrayList<File> lightningFiles = new ArrayList<File>(Arrays.asList(lightningPath.listFiles()));
+		
+		File releasePath = new File("./src/DefaultLevels/ReleaseLevels");
+		ArrayList<File> releaseFiles = new ArrayList<File>(Arrays.asList(releasePath.listFiles()));
+		
+		for(int i = 0; i < 1; i++){
+			Deserialization d = new Deserialization();
+			if(d.Deserialize(puzzleFiles.get(i).getPath(), 1)){
+				//fake movesGiven until deserialization edited
+				int movesGiven = 10;
+				puzzleLevels[i] = new PuzzleLevelModel(d.getBoard(), d.getBullPen(), i, new PuzzleScore(movesGiven), movesGiven);
+			}
+			else{
+				System.err.println("Error in serialization importing process!");
+			}
+		}
+		for(int i = 0; i < 0; i++){
+			Deserialization d = new Deserialization();
+			if(d.Deserialize(lightningFiles.get(i).getPath(), 2)){
+				lightLevels[i] = new LightningLevelModel(d.getBoard(), d.getBullPen(), i, new LightningScore(d.getTimer()), d.getTimer());
+			}
+			else{
+				System.err.println("Error in serialization importing process!");
+			}
+		}
+		for(int i = 0; i < 0; i++){
+			Deserialization d = new Deserialization();
+			if(d.Deserialize(releaseFiles.get(i).getPath(), 3)){
+				releaseLevels[i] = new LevelModel(d.getBoard(), d.getBullPen(), i, new ReleaseScore());
+			}
+			else{
+				System.err.println("Error in serialization importing process!");
+			}
+		}
+		System.out.println("Levels Loaded!");
+		
+		
+		
+		this.menuBtn.addActionListener(new ReturnToPlayerMenuController(mainframe));
+		this.puzzleBtns[0].addActionListener(new DefLevelMenuToPuzzleLevelController(mainframe, puzzleLevels[0]));
+		for (int i = 0; i < 5 ; i++){
+			//puzzleBtns[i].addActionListener(new DefLevelMenuToPuzzleLevelController( (KabasujiFrame) mainframe, puzzleLevels[i]));
+			//lightBtns[i].addActionListener(new DefLevelMenuToLightningLevelController( (KabasujiFrame) mainframe, lightLevels[i]));
+			//releaseBtns[i].addActionListener(new DefLevelMenuToReleaseLevelController( (KabasujiFrame) mainframe, releaseLevels[i]));
+		} 
 	}
+	
 	public JButton getMenuButton(){
 		return menuBtn;
-	}
-	
-	
-	public void activateTimer(){
-		Timer t = new Timer(1000, new TimerController(mainFrame, timerView, 10));
-		t.start();
 	}
 }

@@ -133,9 +133,9 @@ public class SaveController implements ActionListener {
 	            case 1: 
 	            		boolean hasBoard = false;
 	            		boolean hasPen = false;
-	            		boolean hasStock = false;
-	            		//A puzzle level will have four objects, board, bullpen, stock,  and number of moves
-	            		if(entities.size() != 3){//Make three for right now
+	            		boolean hasMoves = false;
+	            		//A puzzle level will have three objects: board, bullpen, and number of moves
+	            		if(entities.size() != 3){
 	            			canWriteFile = false;
 	            			System.err.println("This level does not have everything it needs to be playable!");
 	            			System.err.println("Remember, for a puzzle level you need, board, pieces, and number of moves.");
@@ -148,23 +148,22 @@ public class SaveController implements ActionListener {
 		            			else if(j instanceof BullPen){
 		            				hasPen = true;
 		            			}
-		            			else if(j instanceof Stock){
-		            				hasStock = true;
+		            			else if(j instanceof Integer){
+		            				hasMoves = true;
 		            			}
 		            		}
 	            		}
 	            		
-	            		if(!hasBoard || !hasPen || !hasStock){
+	            		if(!hasBoard || !hasPen || !hasMoves){
 	            			canWriteFile = false;
 	            		}
 	                    break;
 	            case 2:  
-	            	boolean hasboard = false;
-            		boolean haspen = false;
-            		boolean hastimer = false;
-            		boolean hasstock = false;
-            		//A lightning level will have four objects, board, stock, bullpen, and a time
-            		if(entities.size() != 4){
+	            	hasBoard = false;
+            		hasPen = false;
+            		boolean hasTimer = false;
+            		//A lightning level will have three objects: board, bullpen, and a time
+            		if(entities.size() != 3){
             			canWriteFile = false;
             			System.err.println("This level does not have everything it needs to be playable!");
             			System.err.println("Remember for a lightning level you need board, pieces, and a time that is not 0.");
@@ -172,21 +171,18 @@ public class SaveController implements ActionListener {
             		else{
 	            		for(Object j: entities){
 	            			if(j instanceof Board){
-	            				hasboard = true;
+	            				hasBoard = true;
 	            			}
 	            			else if(j instanceof BullPen){
-	            				haspen = true;
+	            				hasPen = true;
 	            			}
 	            			else if(j instanceof Integer){
-	            				hastimer = true;
-	            			}
-	            			else if(j instanceof Stock){
-	            				hasstock = true;
+	            				hasTimer = true;
 	            			}
 	            		}
             		}
             		
-            		if(!hasboard || !haspen || !hastimer || !hasstock){
+            		if(!hasBoard || !hasPen || !hasTimer){
             			canWriteFile = false;
             		}
 	                     break;
@@ -201,8 +197,9 @@ public class SaveController implements ActionListener {
 				
 				if(canWriteFile){
 					FileOutputStream fileOut = new FileOutputStream(filepath);
+					System.out.println(fileOut);
 					ObjectOutputStream out = new ObjectOutputStream(fileOut);
-					
+					System.out.println(out);
 					
 					
 					//Add all entities given to the controller

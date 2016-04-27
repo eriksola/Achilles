@@ -19,6 +19,7 @@ public class GetTimeController implements ActionListener {
 	public GetTimeController(JTextField t, JPanel p){
 		this.time = t;
 		this.panel = p;
+		this.timeSet = 0;
 		
 	}
 	

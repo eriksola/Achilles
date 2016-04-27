@@ -12,6 +12,7 @@ public class GetMovesController implements ActionListener {
 	
 	public GetMovesController(JTextField moves) {
 		this.moves = moves;
+		this.numMoves = 0;
 	}
 
 	public void actionPerformed(ActionEvent e) {

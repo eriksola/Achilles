@@ -69,7 +69,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		Tile[][] brdTiles = d.getBoard().getTiles();
 	
 		this.board = d.getBoard();
-		this.stock = d.getStock();
+		this.stock = new Stock();
 		this.bp = d.getBullPen();
 		
 		this.bullpen = new BullPenView(mainFrame, bp, this);
