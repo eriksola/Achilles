@@ -167,7 +167,7 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 			for(int i = 0; i < puzzleLevels; i++){
 				Deserialization d = new Deserialization();
 				String levelName;
-				if(d.Deserialize(puzzleFiles.get(i).getPath())){
+				if(d.Deserialize(puzzleFiles.get(i).getPath(), 1)){
 					levelName = puzzleFiles.get(i).getName();
 					//Removes the file extension
 					if (levelName.indexOf(".") > 0){
@@ -186,7 +186,7 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 			for(int i = 0; i < lightningLevels; i++){
 				Deserialization d = new Deserialization();
 				String levelName;
-				if(d.Deserialize(lightningFiles.get(i).getPath())){
+				if(d.Deserialize(lightningFiles.get(i).getPath(), 2)){
 					levelName = lightningFiles.get(i).getName();
 					//Removes the file extension
 					if (levelName.indexOf(".") > 0){
@@ -205,7 +205,7 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 			for(int i = 0; i < releaseLevels; i++){
 				Deserialization d = new Deserialization();
 				String levelName;
-				if(d.Deserialize(releaseFiles.get(i).getPath())){
+				if(d.Deserialize(releaseFiles.get(i).getPath(), 3)){
 					levelName = releaseFiles.get(i).getName();
 					//Removes the file extension
 					if (levelName.indexOf(".") > 0){

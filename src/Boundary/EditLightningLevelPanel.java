@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,6 +21,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Controller.BullPenController;
 import Controller.GetBoardDimensionsController;
+import Controller.GetTimeController;
 import Controller.HflipController;
 import Controller.ReturnToBuilderMenuController;
 import Controller.RotateController;
@@ -32,11 +34,17 @@ import Game.Tile;
 
 public class EditLightningLevelPanel extends KabaSuji {
 	
+	GetTimeController getTimer;
+	ArrayList<Object> entities;
+	
 	JTextField x_text;
 	JTextField y_text;
+	JTextField time_text;
+	
 	JButton exit;
 	JButton save;
 	JButton btnEnter;
+	JButton setTime;
 	JFrame mainFrame;
 	int levelNum;
 	BullPen bp;
@@ -46,6 +54,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 	StockView stockView;
 	BoardView boardView;
 	JScrollPane scrollPane;
+	private JTextField timeTextField;
 
 	
 	/**
@@ -107,24 +116,37 @@ public class EditLightningLevelPanel extends KabaSuji {
 		
 		JButton enter = new JButton("Enter n x m");
 		this.btnEnter = enter;
+		
+		timeTextField = new JTextField();
+		timeTextField.setColumns(10);
+		time_text = timeTextField;
+		
+		JButton timebtn = new JButton("Set Time");
+		setTime = timebtn;
+		timebtn.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-							.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(lblLightningBuild, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addGap(18)
-								.addComponent(exitbtn))
-							.addGroup(gl_panel.createSequentialGroup()
-								.addComponent(horizontal)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(vertical)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(rightrotate)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(hint)))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(lblLightningBuild, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addGap(18)
+									.addComponent(exitbtn))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(horizontal)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(vertical)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(rightrotate)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(hint)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(timebtn, GroupLayout.PREFERRED_SIZE, 76, Short.MAX_VALUE)
+								.addComponent(timeTextField, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 396, GroupLayout.PREFERRED_SIZE)
 						.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -156,7 +178,8 @@ public class EditLightningLevelPanel extends KabaSuji {
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblLightningBuild)
-							.addComponent(exitbtn))
+							.addComponent(exitbtn)
+							.addComponent(timeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(label_1)
 							.addComponent(x_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -171,7 +194,8 @@ public class EditLightningLevelPanel extends KabaSuji {
 						.addComponent(delete)
 						.addComponent(save)
 						.addComponent(redo)
-						.addComponent(undo))
+						.addComponent(undo)
+						.addComponent(timebtn))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
@@ -188,12 +212,28 @@ public class EditLightningLevelPanel extends KabaSuji {
 		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 		
+		getEntities();
+		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
-		this.save.addActionListener(new SaveController(bp, stock, board, 2));
+		this.save.addActionListener(new SaveController(entities, 2));
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x_text, y_text, boardView));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
+		getTimer = new GetTimeController(time_text, this);
+		this.setTime.addActionListener(getTimer);
+	}
+	
+	public void getEntities() {
+		entities = new ArrayList<Object>();
+		entities.add(bp);
+		entities.add(board);
+		entities.add(stock);
+		
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
 	}
 	
 	public JScrollPane getScrollPane(){

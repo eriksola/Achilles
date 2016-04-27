@@ -15,20 +15,45 @@ public class Deserialization {
 	BullPen bullPen;
 	Stock stock;
 	Board board;
+	int timer = 0;
 	
 	/**
 	 * @return true if the deserialization went smoothly
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean Deserialize(String filename){
+	public boolean Deserialize(String filename, int levelType){
 		try {
 			FileInputStream fileIn = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 		
 			
-			bullPen = (BullPen) in.readObject();
-			stock = (Stock) in.readObject();
-			board = (Board) in.readObject();
+			switch(levelType){
+			
+			//Puzzle level
+			case 1:
+				bullPen = (BullPen) in.readObject();
+				board = (Board) in.readObject();
+				stock = (Stock) in.readObject();
+				break;
+			
+			//Lightning level
+			case 2:
+				bullPen = (BullPen) in.readObject();
+				board = (Board) in.readObject();
+				stock = (Stock) in.readObject();
+				timer = (Integer) in.readObject();
+				break;
+				
+			//Release level
+			case 3:
+				bullPen = (BullPen) in.readObject();
+				board = (Board) in.readObject();
+				stock = (Stock) in.readObject();
+				break;
+				
+			default:
+				System.err.println("Level type" + levelType + "not found!");		
+		}
 			
 			in.close();
 			fileIn.close();

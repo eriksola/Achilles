@@ -33,10 +33,13 @@ import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
 import java.awt.event.InputMethodListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
 
 public class LevelBuilderPuzzlePanel extends KabaSuji {
+	
+	ArrayList<Object> entities;
 	
 	BullPen bp;
 	Stock stock;
@@ -218,7 +221,9 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
 		
-		this.save.addActionListener(new SaveController(bp, stock, board, 1));
+		
+		getEntities();
+		this.save.addActionListener(new SaveController(entities, 1));
 		
 		
 		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
@@ -232,6 +237,19 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		right.addActionListener(new RotateController(this));
 		
 	}
+	
+	public void getEntities() {
+		entities = new ArrayList<Object>();
+		entities.add(bp);
+		entities.add(board);
+		entities.add(stock);
+		
+	}
+	
+	public void addEntity(Object addition){
+		entities.add(addition);			
+	}
+	
 	
 	public BullPenView getBullPenView(){
 		return this.bullpen;

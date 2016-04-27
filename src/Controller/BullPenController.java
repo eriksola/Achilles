@@ -9,16 +9,19 @@ import Boundary.KabaSuji;
 import Boundary.LevelBuilderPuzzlePanel;
 import Boundary.PieceView;
 import Game.Board;
+import Game.BullPen;
 import Game.Piece;
 
 public class BullPenController extends java.awt.event.MouseAdapter{
 	
 	KabaSuji view;
 	BullPenView bpv;
+	BullPen bp;
 	
 	public BullPenController(KabaSuji view, BullPenView bpv){
 		this.view = view;
 		this.bpv = bpv;
+		this.bp = bp;
 	}
 	
 	public void mouseClicked(MouseEvent me){
