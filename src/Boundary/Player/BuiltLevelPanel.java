@@ -217,7 +217,7 @@ public class BuiltLevelPanel extends JPanel {
 					System.err.println("Error in serialization importing process!");
 				}
 			}
-			System.out.println("Levels Loaded!");
+			System.out.println(" Built Levels Loaded!");
 		}
 	}
 	

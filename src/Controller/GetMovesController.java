@@ -21,6 +21,9 @@ public class GetMovesController implements ActionListener {
 	public GetMovesController(JTextField moves, JPanel p) {
 		this.moves = moves;
 		this.panel = p;
+		if(!moves.getText().equals("")){
+			numMoves = Integer.parseInt(moves.getText());
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {

@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
+import Boundary.Both.KabaSujiPlayer;
 import Game.Board;
 import Game.BullPen;
 import Game.LevelModel;
@@ -26,7 +27,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class ReleaseLevelPanel extends KabaSuji {
+public class ReleaseLevelPanel extends KabaSujiPlayer{
 
 	KabasujiFrame mainframe;
 	
@@ -36,8 +37,8 @@ public class ReleaseLevelPanel extends KabaSuji {
 	//TILES SHOULD NOT BE SET TO NULL
 	Tile[][] brdTiles;
 	Board board;
-
 	BullPen bp;
+	
 	BullPenView bullpen;
 	BoardView boardView;
 	/**
@@ -154,5 +155,9 @@ public class ReleaseLevelPanel extends KabaSuji {
 
 	public BoardView getBoardView(){
 		return this.boardView;
+	}
+	@Override
+	public void updateScore() {
+	
 	}
 }

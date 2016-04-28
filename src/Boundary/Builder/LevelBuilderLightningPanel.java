@@ -87,10 +87,13 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		this.board = new Board(brdTiles);
 		
 		//WINDOW BUILDER
-		this.bullPenView = new BullPenView(mainFrame, bp, this);
 		this.stockView = new StockView(mainFrame, stock, this);
-		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
 		this.scrollPane = new JScrollPane();
+		this.bullPenView = new BullPenView(mainFrame, bp, this);
+		scrollPane.setViewportView(bullPenView);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setViewportView(stockView);
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
@@ -131,8 +134,6 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		this.save = new JButton("Save");
 		
 		JButton delete = new JButton("Delete Square");
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
 		
 		btnEnter = new JButton("Enter n x m ");
 		
@@ -227,12 +228,9 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
 		
-		bullPenView.addMouseListener(new BullPenController(this, bullPenView));
-		stockView = new StockView(mainFrame, stock, this);
-		scrollPane.setViewportView(bullPenView);
-		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 		
+		//activate controllers
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getLightningLevelCount();
 		
@@ -276,5 +274,5 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
 	}
-	
+
 }

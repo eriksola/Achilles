@@ -44,9 +44,6 @@ public class Deserialization {
 				
 			//Release level
 			case 3:
-				bullPen = (BullPen) in.readObject();
-				board = (Board) in.readObject();
-
 				break;
 				
 			default:

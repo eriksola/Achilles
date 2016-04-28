@@ -56,7 +56,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 	BullPen bp;
 	Stock stock;
 	Board board;
-	BullPenView bullpen;
+	BullPenView bullPenView;
 	StockView stockView;
 	BoardView boardView;
 	int time;
@@ -74,10 +74,13 @@ public class EditLightningLevelPanel extends KabaSuji {
 		this.stock = new Stock();
 		this.bp = d.getBullPen();
 		this.time = d.getTime();
-		this.bullpen = new BullPenView(mainFrame, bp, this);
 		this.stockView = new StockView(mainFrame, stock, this);
-		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
 		this.scrollPane = new JScrollPane();
+		this.bullPenView = new BullPenView(mainFrame, bp, this);
+		scrollPane.setViewportView(bullPenView);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setViewportView(stockView);
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
@@ -117,9 +120,8 @@ public class EditLightningLevelPanel extends KabaSuji {
 		
 		JButton save = new JButton("Save");
 		this.save = save;
-		JButton delete = new JButton("Delete Square");
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
+		JButton delete = new JButton("Delete Square");
 		
 		JButton enter = new JButton("Enter n x m");
 		this.btnEnter = enter;
@@ -212,13 +214,11 @@ public class EditLightningLevelPanel extends KabaSuji {
 							.addGap(0, 10, Short.MAX_VALUE))
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
 		);
-		
-		bullpen.addMouseListener(new BullPenController(this, bullpen));
-		stockView = new StockView(mainFrame, stock, this);
-		scrollPane.setViewportView(bullpen);
-		scrollPane_1.setViewportView(stockView);
-		panel.setLayout(gl_panel);
 
+		panel.setLayout(gl_panel);
+		
+		
+		//activate controllers
 		getEntities();
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
@@ -235,7 +235,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		entities.add(stock);
+		entities.add(getTimer.getTime());
 		
 	}
 	
