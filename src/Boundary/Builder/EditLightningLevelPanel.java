@@ -217,6 +217,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 
 		panel.setLayout(gl_panel);
 		
+		
 		//activate controllers
 		getEntities();
 		
