@@ -64,7 +64,6 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				
 				//remove piece from bullpen
 				bpv.remove(pv);
-				bpv.getBullPen().removePiece(piece);
 				
 				//update view
 				view.getScrollPane().setViewportView(bpv);
