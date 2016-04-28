@@ -39,7 +39,7 @@ public class ReleaseLevelPanel extends KabaSujiPlayer{
 	Board board;
 	BullPen bp;
 	
-	BullPenView bullpen;
+	BullPenView bullPenView;
 	BoardView boardView;
 	/**
 	 * Create the panel.
@@ -55,12 +55,12 @@ public class ReleaseLevelPanel extends KabaSujiPlayer{
 		//start board empty
 		for (int i = 0; i < brdTiles.length; i++) {
 			for (int j = 0; j < brdTiles[0].length; j++) {
-				brdTiles[i][j] = new Tile(false, i, j);
+				brdTiles[i][j] = new Tile(i, j);
 			}
 		}
 		
 		this.board = new Board(brdTiles);
-		BoardView boardView = new BoardView(mainframe, board, this, bullpen);
+		BoardView boardView = new BoardView(mainframe, board, this, bullPenView);
 
 		//WINDOWBUILDER - DONT TOUCH
 		setBackground(new Color(173, 216, 230));
@@ -146,6 +146,7 @@ public class ReleaseLevelPanel extends KabaSujiPlayer{
 		);
 		panel.setLayout(gl_panel);
 
+		//activate controllers **TO DO**
 	}
 	@Override
 	public JScrollPane getScrollPane() {

@@ -22,6 +22,7 @@ import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
 import Boundary.Both.StockView;
+import Controller.BoardController;
 import Controller.BullPenController;
 import Controller.GetMovesController;
 import Controller.GetBoardDimensionsController;
@@ -77,7 +78,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		Tile[][] brdTiles = new Tile[10][10];
 		for (int i = 0; i < brdTiles.length; i++) {
 			for (int j = 0; j < brdTiles[0].length; j++) {
-				brdTiles[i][j] = new Tile(false, i, j);
+				brdTiles[i][j] = new Tile(i, j);
 			}
 		}
 		
@@ -90,14 +91,16 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
 		
+		//generate the BoardView
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		
 		//generate the BullPenView (with scroll panel)
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, this.bp, this);
 		scrollPane.setViewportView(bullPenView);
 		
-		//generate the BoardView
-		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
-	
+		//bullPenView was previously null, set it to actual view
+		this.boardView.setBullPenView(bullPenView);
 		
 		setBackground(new Color(173, 216, 230));
 
@@ -242,6 +245,8 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 
 		this.getMoves = new GetMovesController(txtMoves, this);
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
+		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
+		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
 		btnEnterMoves.addActionListener(getMoves);
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));

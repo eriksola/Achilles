@@ -22,6 +22,7 @@ import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
 import Boundary.Both.StockView;
+import Controller.BoardController;
 import Controller.BullPenController;
 import Controller.GetMovesController;
 import Controller.GetTimeController;
@@ -80,7 +81,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		//start board empty
 		for (int i = 0; i < brdTiles.length; i++) {
 			for (int j = 0; j < brdTiles[0].length; j++) {
-				brdTiles[i][j] = new Tile(false, i, j);
+				brdTiles[i][j] = new Tile(i, j);
 			}
 		}
 		this.bp = new BullPen();
@@ -88,12 +89,17 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		
 		//WINDOW BUILDER
 		this.stockView = new StockView(mainFrame, stock, this);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setViewportView(stockView);
+		
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, bp, this);
 		scrollPane.setViewportView(bullPenView);
-		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setViewportView(stockView);
+		
+		//bullPenView was previously null, set it to actual view
+		this.boardView.setBullPenView(bullPenView);
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
@@ -239,6 +245,8 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		((LevelBuilderFrame) mainFrame).setLightningLevelCount(levelCount);
 		
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
+		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
+		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));

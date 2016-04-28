@@ -1,10 +1,12 @@
 package Controller;
 
 import Game.Board;
+import Game.Coordinate;
 import Game.Piece;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
@@ -41,9 +43,11 @@ public class BoardController extends java.awt.event.MouseAdapter{
 	 * depicts adding a PieceView to the board if one was selected prior.
 	 */
 	public void mouseClicked(MouseEvent me){
+		
+		Point p = me.getPoint();
+		
 		if (view.getSelectedPiece() != null){
 			System.out.println("Mouse clicked from board");
-			Point p = me.getPoint();
 			System.out.println(p.x);
 			System.out.println(p.y);
 			int row = -1;
@@ -64,7 +68,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				Piece piece = view.getSelectedPiece().getP();
 				PieceView pv = view.getSelectedPiece();
 				Board brd = bv.getBoard();
-				if(brd.addPiece(row,col,piece)){
+				if(brd.addPiece(row,col,pv)){
 					
 					bpv.remove(pv);
 				
@@ -82,5 +86,29 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				}
 			}
 		}
+		if (view instanceof PuzzleLevelPanel){
+			//add code for ability to remove piece from board (ONLY WHILE NO PIECE IS SELECTED)
+			HashMap<Coordinate, PieceView> piecesOnBoard = bv.getBoard().getPieces();
+			int row = -1;
+			int col = -1;
+			for(int i = 0; i < bv.getBoard().getTiles().length; i++){
+				for(int j = 0; j < bv.getBoard().getTiles()[0].length; j++){
+					int leftX = j * 10;
+					int rightX = j * 10 + 10;
+					int topY = i * 10;
+					int botY = i * 10 + 10;
+					if(p.x >= leftX && p.x <= rightX && p.y >= topY && p.y <= botY){
+						row = i;
+						col = j;
+					}
+				}
+			}
+			Coordinate coordClicked = new Coordinate(col, row);
+			if (piecesOnBoard.containsKey(coordClicked)){
+				PieceView pv = piecesOnBoard.get(coordClicked);
+				view.setSelected(pv);
+			}
+		}
 	}
+	
 }

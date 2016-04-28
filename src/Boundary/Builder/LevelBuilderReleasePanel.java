@@ -22,6 +22,7 @@ import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
 import Boundary.Both.StockView;
+import Controller.BoardController;
 import Controller.BullPenController;
 import Controller.GetMovesController;
 import Controller.GetBoardDimensionsController;
@@ -72,7 +73,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		//start board empty
 		for (int i = 0; i < brdTiles.length; i++) {
 			for (int j = 0; j < brdTiles[0].length; j++) {
-				brdTiles[i][j] = new Tile(false, i, j);
+				brdTiles[i][j] = new Tile(i, j);
 			}
 		}
 		
@@ -81,13 +82,18 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		this.bp = new BullPen();
 		
 		this.stockView = new StockView(mainFrame, stock, this);
-		this.scrollPane = new JScrollPane();
-		this.bullPenView = new BullPenView(mainFrame, bp, this);
-		scrollPane.setViewportView(bullPenView);
-		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
 		
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		
+		this.scrollPane = new JScrollPane();
+		this.bullPenView = new BullPenView(mainFrame, bp, this);
+		scrollPane.setViewportView(bullPenView);
+		
+		//bullPenView was previously null, set it to actual view
+		this.boardView.setBullPenView(bullPenView);
+				
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
 
@@ -233,6 +239,8 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		((LevelBuilderFrame) mainFrame).setReleaseLevelCount(levelCount);
 		
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
+		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
+		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
 		btnEnterMoves.addActionListener(new GetMovesController(txtMoves, this));
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));

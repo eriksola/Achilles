@@ -46,7 +46,6 @@ public class BoardView extends JPanel {
 		this.bpv = bullPenView;
 		
 		label = new JLabel();
-		label.addMouseListener(new BoardController(this.view, this, this.bpv));
 		label.setLayout(new FlowLayout()); 
 		add(label);
 		draw();
@@ -64,12 +63,12 @@ public class BoardView extends JPanel {
 		Graphics2D g = (Graphics2D)img.getGraphics();
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, brdWidth + 5, brdHeight + 5);
-		g.setColor(Color.black);
+		g.setColor(Color.BLACK);
 		for(int i = 0; i < brdRows; i++){
 			for(int j = 0; j < brdCols; j++){
 				g.drawRect(j*10, i*10, 10, 10);
 				if(brd.getTiles()[i][j].isOccupied()){
-					g.setColor(Color.YELLOW);
+					g.setColor(Color.RED);
 					g.fillRect(j*10 + 1, i*10 + 1, 8, 8);
 					g.setColor(Color.BLACK);
 				}
@@ -89,11 +88,18 @@ public class BoardView extends JPanel {
 		//start board empty
 		for (int i = 0; i < brdTiles.length; i++) {
 			for (int j = 0; j < brdTiles[0].length; j++) {
-				brdTiles[i][j] = new Tile(false, i, j);
+				brdTiles[i][j] = new Tile(i, j);
 			}
 		}
 		
 		this.brd.setTiles(brdTiles);
 	}
-
+	
+	public void setBullPenView(BullPenView bpv){
+		this.bpv = bpv;
+	}
+	
+	public JLabel getLabel(){
+		return this.label;
+	}
 }
