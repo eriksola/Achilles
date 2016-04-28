@@ -29,7 +29,6 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 		System.out.println("mouse clicked from bullpen");
 		if(view.getSelectedPiece() != null){
 			bpv.addPiece(new PieceView(view.getSelectedPiece().getP(), view));
-			bp.addPiece(view.getSelectedPiece().getP());
 			view.getScrollPane().setViewportView(bpv);
 		}
 	}
