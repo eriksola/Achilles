@@ -63,5 +63,7 @@ public class Board implements Serializable{
 	
 	public void setTiles(Tile[][] tiles){
 		this.tiles = tiles;
+		this.height = tiles.length;
+		this.width = tiles[0].length;
 	}
 }

@@ -56,7 +56,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	Stock stock;
 	Board board;
 	
-	BullPenView bullpen;
+	BullPenView bullPenView;
 	StockView stockView;
 	BoardView boardView;
 	JScrollPane scrollPane;
@@ -72,10 +72,13 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		this.stock = new Stock();
 		this.bp = d.getBullPen();
 		this.numMoves = d.getNumMoves();
-		this.bullpen = new BullPenView(mainFrame, bp, this);
 		this.stockView = new StockView(mainFrame, stock, this);
-		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
 		this.scrollPane = new JScrollPane();
+		this.bullPenView = new BullPenView(mainFrame, bp, this);
+		scrollPane.setViewportView(bullPenView);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setViewportView(stockView);
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
@@ -114,8 +117,6 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		this.save = save;
 		
 		JButton delete = new JButton("Delete Square");
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
 		
 		JButton enter = new JButton("Enter n x m");
 		this.btnEnter = enter;
@@ -210,20 +211,10 @@ public class EditReleaseLevelPanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)))
 		);
 		
-		bullpen.addMouseListener(new BullPenController(this, bullpen));
-		stockView = new StockView(mainFrame, stock, this);
-		scrollPane.setViewportView(bullpen);
-		scrollPane_1.setViewportView(stockView);
+
 		panel.setLayout(gl_panel);
-		
-		//load up PieceViews from BullPen
-		for (int i = 0; i < bp.getPieces().size(); i++) {
-			PieceView view = new PieceView(bp.getPieces().get(i), this);
-			bullpen.addView(view);
-		}
 
 		getEntities();
-		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		this.save.addActionListener(new SaveController(entities, 3));
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));

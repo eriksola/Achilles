@@ -36,11 +36,6 @@ public class LightningLevelPanel extends KabaSuji{
 
 
 	KabasujiFrame mainFrame;
-
-
-	Stock s = new Stock();
-	//TILES SHOULD NOT BE SET TO NULL
-	Tile[][] tiles = null;
 	Board board;
 	BullPen bp;
 	int time;
@@ -62,16 +57,16 @@ public class LightningLevelPanel extends KabaSuji{
 		this.bp = m.getBullPen();
 		this.time = m.getTime();
 		
-		this.bullPenView = new BullPenView(mainFrame, bp, this);
-		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
-		
-		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBackground(new Color(173, 216, 230));
 		add(panel);
 		
 		scrollPane = new JScrollPane();
+		this.bullPenView = new BullPenView(mainFrame, bp, this);
+		scrollPane.setViewportView(bullPenView);
+		
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
 		
 		JButton button = new JButton("Horizontal");
 		

@@ -8,6 +8,8 @@ import Game.Coordinate;
 import Game.Piece;
 import Game.Stock;
 import Game.Tile;
+import Controller.BoardController;
+import Controller.BullPenController;
 import Controller.PieceController;
 
 import java.awt.Color;
@@ -22,13 +24,15 @@ import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JScrollPane;
 
 public class BullPenView extends JPanel {
+	
 	JFrame frame;
 	BullPen bp;
 	KabaSuji view;
 	ArrayList<PieceView> pvs;
-
+	JLabel label;
 
 	public BullPenView(JFrame f, BullPen p, KabaSuji view) {
 		this.frame = f;
@@ -36,13 +40,17 @@ public class BullPenView extends JPanel {
 		this.view = view;
 		this.pvs = new ArrayList<PieceView>();
 		
-		for(int i = 0; i < bp.getPieces().size(); i++){
-			Piece piece = bp.getPieces().get(i);
-			PieceView pieceView = new PieceView(piece, view);
-			pvs.add(pieceView);
-			repaint();
+		addMouseListener(new BullPenController(this.view, this));
+		draw();
+	}
+	
+	public void draw(){
+		removeAll();
+		for (int i = 0; i < bp.getPieces().size(); i++) {
+			PieceView view = new PieceView(bp.getPieces().get(i), this.view);
+			pvs.add(view);
+			add(view.getLabel());
 		}
-		setBackground(Color.WHITE);
 	}
 	
 	public void remove(PieceView pv){
@@ -50,17 +58,13 @@ public class BullPenView extends JPanel {
 			if(pvs.get(i) == pv){
 				pvs.remove(i);
 				bp.getPieces().remove(i);
+				JLabel c = pv.getLabel();
+				int compX = (int) c.getAlignmentX();
+				int compY = (int) c.getAlignmentY();
 				remove(pv.getLabel());
-				System.out.println("found the piece to remove");
 				break;
 			}
 		}
-	}
-	
-	public void addPiece(PieceView pv){
-		this.pvs.add(pv);
-		bp.getPieces().add(pv.getP());
-		add(pv.getLabel());
 	}
 	
 	public void addView(PieceView pv){
@@ -74,6 +78,12 @@ public class BullPenView extends JPanel {
 
 	public BullPen getBullPen(){
 		return this.bp;
+	}
+
+	public void addPiece(PieceView pv) {
+		this.pvs.add(pv);
+		this.bp.addPiece(pv.getP());
+		add(pv.getLabel());
 	}
 	
 }

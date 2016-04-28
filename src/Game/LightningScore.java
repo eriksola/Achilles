@@ -30,5 +30,18 @@ public class LightningScore implements IScore{
 		//otherwise 0 stars earned
 		else return 0;
 	}
+	
+	public void updateScore(LevelModel lightLvl){
+		
+		int countMarked = 0;
+		Tile[][] tile = lightLvl.getBoard().getTiles();
+		
+		for (int i = 0; i < tile.length; i++){
+			for (int j = 0; j < tile[0].length; j++){
+				if (tile[i][j].isOccupied){ countMarked++; }
+			}
+		}
+		totalMarked = countMarked;
+	}
 }
 

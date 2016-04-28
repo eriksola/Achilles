@@ -27,4 +27,14 @@ public class PuzzleScore implements IScore{
 		if (piecesLeft == 0) return 3;
 		else return 0;
 	}
+	
+	public void updateScore(LevelModel puzzleLvl){
+		
+		//counts the number of pieces left in the BullPen
+		int piecesInBullPen = puzzleLvl.getBullPen().getPieces().size();
+		//difference between pieces left and total pieces is the amount used
+		piecesUsed = totalPieces - piecesInBullPen;
+		
+	}
+	
 }

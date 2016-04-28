@@ -44,19 +44,6 @@ public class BoardView extends JPanel {
 		this.brd = brd;
 		this.view = view;
 		this.bpv = bullPenView;
-		/*
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 450, Short.MAX_VALUE)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 133, Short.MAX_VALUE)
-		);
-		setLayout(groupLayout);
-		setBackground(Color.white);
-		*/
 		
 		label = new JLabel();
 		label.addMouseListener(new BoardController(this.view, this, this.bpv));
@@ -98,6 +85,7 @@ public class BoardView extends JPanel {
 	
 	public void setBoard(int row, int col){
 		Tile[][] brdTiles = new Tile[row][col];
+		
 		//start board empty
 		for (int i = 0; i < brdTiles.length; i++) {
 			for (int j = 0; j < brdTiles[0].length; j++) {

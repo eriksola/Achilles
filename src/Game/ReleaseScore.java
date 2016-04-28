@@ -57,4 +57,8 @@ public class ReleaseScore implements IScore{
 		
 		return result;
 	}
+	
+	public void updateScore(LevelModel releaseLvl){
+		//TO-DO
+	}
 }

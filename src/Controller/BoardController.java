@@ -11,6 +11,7 @@ import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
 import Boundary.Both.PieceView;
 import Boundary.Builder.LevelBuilderPuzzlePanel;
+import Boundary.Player.PuzzleLevelPanel;
 
 /**
  * Controller for the Board entity class.
@@ -39,6 +40,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 	 * depicts adding a PieceView to the board if one was selected prior.
 	 */
 	public void mouseClicked(MouseEvent me){
+		System.out.println("Mouse clicked from board");
 		Point p = me.getPoint();
 		System.out.println(p.x);
 		System.out.println(p.y);
@@ -62,13 +64,13 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			Board brd = bv.getBoard();
 			if(brd.addPiece(row,col,piece)){
 				
-				//remove piece from bullpen
 				bpv.remove(pv);
-				bpv.getBullPen().removePiece(piece);
 				
 				//update view
+				bpv.repaint();
 				view.getScrollPane().setViewportView(bpv);
 				bv.draw();
+				
 				view.setSelected(null);
 			}
 		}

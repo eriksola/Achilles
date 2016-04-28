@@ -254,8 +254,6 @@ public class DefaultLevelPanel extends JPanel {
 		for(int i = 0; i < puzzleFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(puzzleFiles.get(i).getPath(), 1)){
-				//test check
-				System.out.println("Board: " + d.getBoard() + "\nBullpen: " + d.getBullPen() + "\nMoves: " + d.getNumMoves());
 				puzzleLevels[i] = new PuzzleLevelModel(d.getBoard(), d.getBullPen(), i + 1, new PuzzleScore(d.getNumMoves()), d.getNumMoves());
 				puzzleBtns[i].addActionListener(new DefLevelMenuToPuzzleLevelController( (KabasujiFrame) mainframe, puzzleLevels[i]));
 			}
@@ -283,7 +281,7 @@ public class DefaultLevelPanel extends JPanel {
 				System.err.println("Error in serialization importing process!");
 			}
 		}
-		System.out.println("Levels Loaded!");
+		System.out.println("Default Levels Loaded!");
 		
 		
 		

@@ -56,7 +56,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 	JButton btnEnter;
 	JButton save;
 	
-	BullPenView bullpen;
+	BullPenView bullPenView;
 	BoardView boardView;
 	StockView stockView;
 
@@ -80,11 +80,13 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		this.stock = new Stock();
 		this.bp = new BullPen();
 		
-		this.bullpen = new BullPenView(mainFrame, bp, this);
 		this.stockView = new StockView(mainFrame, stock, this);
-		this.boardView = new BoardView(mainFrame, this.board, this, bullpen);
 		this.scrollPane = new JScrollPane();
-
+		this.bullPenView = new BullPenView(mainFrame, bp, this);
+		scrollPane.setViewportView(bullPenView);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setViewportView(stockView);
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
@@ -125,8 +127,6 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		this.save = new JButton("Save");
 		
 		JButton delete = new JButton("Delete Square");
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
 		
 		btnEnter = new JButton("Enter n x m ");
 				
@@ -218,20 +218,16 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
 		
-		bullpen.addMouseListener(new BullPenController(this, bullpen));
-		stockView = new StockView(mainFrame, stock, this);
-		scrollPane.setViewportView(bullpen);
-		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
 		
+		
+		//activate controllers
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getReleaseLevelCount();
-		
-		
 		getEntities();
 		this.save.addActionListener(new SaveController(entities, 3));
 		
-		
+	
 		levelCount = new File("./src/BuiltLevels/ReleaseLevels").list().length;
 		
 		((LevelBuilderFrame) mainFrame).setReleaseLevelCount(levelCount);
@@ -255,7 +251,7 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 	}
 	
 	public BullPenView getBullPenView(){
-		return this.bullpen;
+		return this.bullPenView;
 	}
 	
 	public BoardView getBoardView(){
