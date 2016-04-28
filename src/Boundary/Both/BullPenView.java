@@ -40,7 +40,6 @@ public class BullPenView extends JPanel {
 		this.view = view;
 		this.pvs = new ArrayList<PieceView>();
 		
-		addMouseListener(new BullPenController(this.view, this));
 		draw();
 	}
 	

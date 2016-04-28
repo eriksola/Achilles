@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.BoardController;
 import Controller.BullPenController;
 import Controller.DefLevelMenuToPuzzleLevelController;
 import Controller.PlayPuzzletoPuzzleRulesController;
@@ -189,6 +190,8 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		//activate controllers for buttons
 		lvlMenuBtn.addActionListener(new ReturnToDefMenuController(mainframe));
 		resetBtn.addActionListener(new DefLevelMenuToPuzzleLevelController(mainframe, initLevel));
+		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
+		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
 	}
 	
 	public JButton getLevelMenuButton(){

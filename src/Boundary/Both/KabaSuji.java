@@ -45,6 +45,7 @@ public abstract class KabaSuji extends JPanel {
 	}
 	
 	public void removeSelected(){
+		selectedPiece.drawUnselected();
 		selectedPiece = null;
 	}
 	/**

@@ -24,6 +24,7 @@ import Boundary.Both.Deserialization;
 import Boundary.Both.KabaSuji;
 import Boundary.Both.PieceView;
 import Boundary.Both.StockView;
+import Controller.BoardController;
 import Controller.BullPenController;
 import Controller.GetMovesController;
 import Controller.GetBoardDimensionsController;
@@ -78,18 +79,18 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		this.board = d.getBoard();
 		this.numMoves = d.getNumMoves();
 		
-		//generate the StockView (with scroll panel)
 		this.stockView = new StockView(mainFrame, stock, this);
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
 		
-		//generate the BullPenView (with scroll panel)
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, bp, this);
 		scrollPane.setViewportView(bullPenView);
 		
-		//generate BoardView
-		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		//bullPenView was previously null, set it to actual view
+		this.boardView.setBullPenView(bullPenView);
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
@@ -232,6 +233,8 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		/*MAKE SURE YOU PASS IN THE LEVEL TYPE*/
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
 		this.gmController = new GetMovesController(txtMoves, this);
+		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
+		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
 		getEntities();
 		this.save.addActionListener(new SaveController(entities, 1));
 		btnEnterMoves.addActionListener(gmController);

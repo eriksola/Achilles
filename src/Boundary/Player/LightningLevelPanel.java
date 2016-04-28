@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSujiPlayer;
+import Controller.BoardController;
 import Controller.BullPenController;
 import Controller.PlayPuzzletoPuzzleRulesController;
 import Controller.ReturnToDefMenuController;
@@ -152,8 +153,8 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		//activate controllers
 		button_3.addActionListener(new ReturnToDefMenuController(mainFrame));
 		button_4.addActionListener(new PlayPuzzletoPuzzleRulesController(mainFrame));
-		bullPenView.addMouseListener(new BullPenController(this, bullPenView));
-		scrollPane.setViewportView(bullPenView);
+		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
+		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
 
 		//start timer
 		TimerController timerController = new TimerController(mainFrame, this.timerView, this.time);
