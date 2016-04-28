@@ -218,13 +218,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		scrollPane.setViewportView(bullpen);
 		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
-		
-		//load up PieceViews from BullPen
-		for (int i = 0; i < bp.getPieces().size(); i++) {
-			PieceView view = new PieceView(bp.getPieces().get(i), this);
-			bullpen.addView(view);
-		}
-		
+
 		getEntities();
 		
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));

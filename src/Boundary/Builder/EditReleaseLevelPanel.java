@@ -215,12 +215,6 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		scrollPane.setViewportView(bullpen);
 		scrollPane_1.setViewportView(stockView);
 		panel.setLayout(gl_panel);
-		
-		//load up PieceViews from BullPen
-		for (int i = 0; i < bp.getPieces().size(); i++) {
-			PieceView view = new PieceView(bp.getPieces().get(i), this);
-			bullpen.addView(view);
-		}
 
 		getEntities();
 		
