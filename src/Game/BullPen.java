@@ -41,5 +41,8 @@ public class BullPen implements Serializable{
 	public void setModel(LevelModel m){
 		this.model = m;
 	}
+	public int getNumOfPieces(){
+		return this.pieces.size();
+	}
 	
 }

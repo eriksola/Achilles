@@ -49,12 +49,13 @@ public class PuzzleLevelPanel extends KabaSuji {
 	 * Create the panel.
 	 */
 	public PuzzleLevelPanel(KabasujiFrame f, LevelModel model) {
-
+		
+		
 		this.mainframe = f;
 		this.levelModel = (PuzzleLevelModel) model;
 		//Add pieces to the bull
 
-		bp = new BullPen();
+		bp = ((PuzzleLevelModel) model).getBullPen();
 		
 		Tile[][] brdTiles = new Tile[10][10];
 		//start board empty
@@ -63,10 +64,10 @@ public class PuzzleLevelPanel extends KabaSuji {
 				brdTiles[i][j] = new Tile(false, i, j);
 			}
 		}
-		this.board = new Board(brdTiles);
+		this.board = ((PuzzleLevelModel) model).getBoard();
 		this.boardView = new BoardView(mainframe, board, this, bullpen);
 
-		
+		//ADD MOVES LEFT
 		
 		//WINDOWBUILDER - DONT TOUCH
 		setBackground(new Color(173, 216, 230));

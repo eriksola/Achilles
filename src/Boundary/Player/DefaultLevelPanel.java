@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Controller.DefLevelMenuToPuzzleLevelController;
+import Controller.LoadLevelController;
 import Controller.ReturnToPlayerMenuController;
 import Controller.TimerController;
 
@@ -30,6 +31,7 @@ public class DefaultLevelPanel extends JPanel {
 		KabasujiFrame mainFrame;
 		JButton menuBtn;
 		JButton puzzle1Btn;
+		JButton lightning1Btn;
 		JTextArea timerView;
 		
 	/**
@@ -71,7 +73,7 @@ public class DefaultLevelPanel extends JPanel {
 		
 		JButton button_6 = new JButton("1");
 		button_6.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-		
+		this.lightning1Btn = button_6;
 		JButton button_7 = new JButton("2");
 		button_7.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		
@@ -206,7 +208,10 @@ public class DefaultLevelPanel extends JPanel {
 
 		//activate controllers for buttons
 		menuBtn.addActionListener(new ReturnToPlayerMenuController((KabasujiFrame) mainFrame));
-		puzzle1Btn.addActionListener(new DefLevelMenuToPuzzleLevelController((KabasujiFrame)mainFrame));
+		puzzle1Btn.addActionListener(new LoadLevelController((KabasujiFrame)mainFrame, 1, 1));
+		
+		
+		lightning1Btn.addActionListener(new LoadLevelController((KabasujiFrame)mainFrame, 2, 1));
 	}
 	public JButton getMenuButton(){
 		return menuBtn;
