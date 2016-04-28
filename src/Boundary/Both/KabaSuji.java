@@ -23,7 +23,6 @@ public abstract class KabaSuji extends JPanel {
 	
 	public abstract JScrollPane getScrollPane();
 	public abstract BoardView getBoardView();
-
 	/**
 	 * set a selected PieceView.
 	 * @param pv the PieceView to select
@@ -45,6 +44,9 @@ public abstract class KabaSuji extends JPanel {
 		}
 	}
 	
+	public void removeSelected(){
+		selectedPiece = null;
+	}
 	/**
 	 * get the selected PieceView
 	 * @return

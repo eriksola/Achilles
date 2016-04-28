@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
-import Boundary.Both.KabaSuji;
+import Boundary.Both.KabaSujiPlayer;
 import Controller.BullPenController;
 import Controller.PlayPuzzletoPuzzleRulesController;
 import Controller.ReturnToDefMenuController;
@@ -16,8 +16,7 @@ import Controller.TimerController;
 import Game.Board;
 import Game.BullPen;
 import Game.LightningLevelModel;
-import Game.Stock;
-import Game.Tile;
+import Game.LightningScore;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -32,13 +31,15 @@ import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
 
-public class LightningLevelPanel extends KabaSuji{
+public class LightningLevelPanel extends KabaSujiPlayer{
 
 
 	KabasujiFrame mainFrame;
+	LightningLevelModel levelModel;
 	Board board;
 	BullPen bp;
 	int time;
+	LightningScore score;
 	
 	BoardView boardView;
 	BullPenView bullPenView;
@@ -53,9 +54,11 @@ public class LightningLevelPanel extends KabaSuji{
 		
 		
 		this.mainFrame = f;
+		this.levelModel = m;
 		this.board = m.getBoard();
 		this.bp = m.getBullPen();
 		this.time = m.getTime();
+		this.score = (LightningScore) m.getScore();
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -163,6 +166,11 @@ public class LightningLevelPanel extends KabaSuji{
 
 	public BoardView getBoardView(){
 		return this.boardView;
+	}
+
+	@Override
+	public void updateScore() {
+		score.updateScore(levelModel);
 	}
 
 }

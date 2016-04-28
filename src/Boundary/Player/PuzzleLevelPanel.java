@@ -25,23 +25,26 @@ import Game.BullPen;
 import Game.LevelModel;
 import Game.Piece;
 import Game.PuzzleLevelModel;
+import Game.PuzzleScore;
 import Game.Stock;
 import Game.Tile;
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
+import Boundary.Both.KabaSujiPlayer;
 import Boundary.Both.PieceView;
 
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 
-public class PuzzleLevelPanel extends KabaSuji {
+public class PuzzleLevelPanel extends KabaSujiPlayer {
 
 	KabasujiFrame mainframe;
 	PuzzleLevelModel levelModel;
 	Board board;
 	BullPen bp;
 	int numMoves;
+	PuzzleScore score;
 	
 	JButton lvlMenuBtn;
 	JButton helpBtn;
@@ -60,8 +63,9 @@ public class PuzzleLevelPanel extends KabaSuji {
 		this.bp = levelModel.getBullPen();
 		this.board = levelModel.getBoard();
 		this.numMoves = levelModel.getMovesAllowed();
+		this.score = (PuzzleScore) levelModel.getScore();
 		
-		
+		PuzzleLevelModel initLevel = new PuzzleLevelModel(this.board, this.bp, model.getLevelNum(), new PuzzleScore(this.numMoves), this.numMoves);
 		//WINDOWBUILDER - DONT TOUCH
 		
 		setBackground(new Color(173, 216, 230));
@@ -109,7 +113,6 @@ public class PuzzleLevelPanel extends KabaSuji {
 		
 		JButton reset = new JButton("Reset");
 		this.resetBtn = reset;
-		resetBtn.addActionListener(new DefLevelMenuToPuzzleLevelController(mainframe, levelModel));
 		
 		JButton vertical = new JButton("Vertical");
 		
@@ -118,13 +121,14 @@ public class PuzzleLevelPanel extends KabaSuji {
 		JButton deg = new JButton("90");
 		
 		
+		//generate the BullPenView (with scroll panel)
 		JScrollPane scrollPane_2 = new JScrollPane();
 		this.scrollPane = scrollPane_2;
-		
 		BullPenView bpView = new BullPenView(this.mainframe, this.bp, this);
 		this.bullPenView = bpView;
 		scrollPane.setViewportView(bullPenView);
 		
+		//generate the bullPenView
 		BoardView boardView_1 = new BoardView(this.mainframe, this.board, this, this.bullPenView);
 		this.boardView = boardView_1;
 		
@@ -184,6 +188,7 @@ public class PuzzleLevelPanel extends KabaSuji {
 		//-------------
 		//activate controllers for buttons
 		lvlMenuBtn.addActionListener(new ReturnToDefMenuController(mainframe));
+		resetBtn.addActionListener(new DefLevelMenuToPuzzleLevelController(mainframe, initLevel));
 	}
 	
 	public JButton getLevelMenuButton(){
@@ -200,5 +205,10 @@ public class PuzzleLevelPanel extends KabaSuji {
 	
 	public LevelModel getLevelModel(){
 		return this.levelModel;
+	}
+
+	@Override
+	public void updateScore() {
+		score.updateScore(levelModel);
 	}
 }

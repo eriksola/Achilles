@@ -33,7 +33,6 @@ public class PieceController extends java.awt.event.MouseAdapter{
 	 */
 	public void mouseClicked(MouseEvent me){
 		System.out.println("mouse clicked on piece");
-		System.out.println(pv);
 		view.setSelected(pv);
 
 	}

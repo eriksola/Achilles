@@ -56,12 +56,14 @@ public class BullPenView extends JPanel {
 	public void remove(PieceView pv){
 		for (int i = 0; i < pvs.size(); i++) {
 			if(pvs.get(i) == pv){
+				frame.getContentPane().invalidate();
 				pvs.remove(i);
 				bp.getPieces().remove(i);
 				JLabel c = pv.getLabel();
 				int compX = (int) c.getAlignmentX();
 				int compY = (int) c.getAlignmentY();
 				remove(pv.getLabel());
+				frame.getContentPane().revalidate();
 				break;
 			}
 		}

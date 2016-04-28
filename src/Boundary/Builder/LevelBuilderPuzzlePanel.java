@@ -49,7 +49,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
 	BullPen bp;
 	Board board;
-	Stock stock = new Stock();
+	Stock stock;
 	
 	JTextField x;
 	JTextField y;
@@ -71,9 +71,10 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	public LevelBuilderPuzzlePanel(JFrame f) {
 		
 		this.mainFrame = f;
+		this.stock = new Stock();
 		
+		//start with a 10 by 10 board
 		Tile[][] brdTiles = new Tile[10][10];
-		//start board empty
 		for (int i = 0; i < brdTiles.length; i++) {
 			for (int j = 0; j < brdTiles[0].length; j++) {
 				brdTiles[i][j] = new Tile(false, i, j);
@@ -84,16 +85,19 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		this.bp = new BullPen();
 		
+		//generate the StockView (with scroll panel)
 		this.stockView = new StockView(mainFrame, stock, this);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setViewportView(stockView);
 		
+		//generate the BullPenView (with scroll panel)
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, this.bp, this);
 		scrollPane.setViewportView(bullPenView);
 		
+		//generate the BoardView
 		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setViewportView(stockView);
+	
 		
 		setBackground(new Color(173, 216, 230));
 

@@ -20,7 +20,6 @@ public class Board implements Serializable{
 	}
 	
 	public boolean addPiece(int row, int column, Piece piece){
-		//right now basically a Lightning Level implementation
 		
 		Coordinate[] newOccCoords = new Coordinate[5];
 		

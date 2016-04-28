@@ -77,15 +77,19 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		this.stock = new Stock();
 		this.board = d.getBoard();
 		this.numMoves = d.getNumMoves();
-		System.out.println("Moves = " + numMoves);
 		
+		//generate the StockView (with scroll panel)
 		this.stockView = new StockView(mainFrame, stock, this);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setViewportView(stockView);
+		
+		//generate the BullPenView (with scroll panel)
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, bp, this);
 		scrollPane.setViewportView(bullPenView);
+		
+		//generate BoardView
 		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setViewportView(stockView);
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;

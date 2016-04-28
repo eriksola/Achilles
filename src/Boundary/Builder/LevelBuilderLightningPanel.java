@@ -274,5 +274,5 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
 	}
-	
+
 }
