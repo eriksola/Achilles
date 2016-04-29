@@ -166,8 +166,8 @@ public class SaveController implements ActionListener {
 	            		}
 	                    break;
 	            case 2:  
-	            	hasBoard = false;
-            		hasPen = false;
+	            	boolean hasboard = false;
+            		boolean haspen = false;
             		boolean hasTimer = false;
             		//A lightning level will have three objects: board, bullpen, and a time
             		//PRINT FOR TESTING
@@ -183,10 +183,10 @@ public class SaveController implements ActionListener {
             		else{
 	            		for(Object j: entities){
 	            			if(j instanceof Board){
-	            				hasBoard = true;
+	            				hasboard = true;
 	            			}
 	            			else if(j instanceof BullPen){
-	            				hasPen = true;
+	            				haspen = true;
 	            			}
 	            			else if(j instanceof Integer){
 	            				hasTimer = true;
@@ -194,7 +194,7 @@ public class SaveController implements ActionListener {
 	            		}
             		}
             		
-            		if(!hasBoard || !hasPen || !hasTimer){
+            		if(!hasboard || !haspen || !hasTimer){
             			canWriteFile = false;
             		}
 	                     break;

@@ -259,9 +259,6 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		if (getTimer.hasTime()){
-		entities.add(getTimer.getTime());
-		}
 	}
 	
 	public void addEntity(Object addition){

@@ -23,14 +23,14 @@ public class TestBoard extends TestCase {
 	public void testIsValid(){
 		for (int i =0; i < 6; i++){
 			for (int y = 0; y < 6; y++){
-				t[i][y] = new Tile(false, i, y);
+				t[i][y] = new Tile(i, y);
 			}
 		}
 		assertFalse(board.isValid(7, 6));
 		assertTrue(board.isValid(5, 5));
 		assertFalse(board.isValid(-1, 1));
 
-		t[5][5] = new Tile(true,5, 5);
+		t[5][5].setOccupied(true);;
 		assertFalse(board.isValid(5, 5));
 
 	}
