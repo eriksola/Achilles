@@ -32,7 +32,7 @@ public class BoardView extends JPanel {
 	JLabel label; /** the label representing the Board. **/
 	KabaSuji view; /** the top-level boundary object. **/
 	BullPenView bpv; /** the BullPenView **/
-	Coordinate selectedCoord;
+	Tile selectedTile;
 	
 	/**
 	 * Constructor for the BoardView.
@@ -46,7 +46,7 @@ public class BoardView extends JPanel {
 		this.brd = brd;
 		this.view = view;
 		this.bpv = bullPenView;
-		this.selectedCoord = null;
+		this.selectedTile = null;
 		
 		label = new JLabel();
 		label.setLayout(new FlowLayout()); 
@@ -70,13 +70,15 @@ public class BoardView extends JPanel {
 		for(int i = 0; i < brdRows; i++){
 			for(int j = 0; j < brdCols; j++){
 				g.drawRect(j*10, i*10, 10, 10);
-				if(brd.getTiles()[i][j].isSelected()){
-					g.setColor(Color.YELLOW);
+				
+				if(brd.getTiles()[i][j].isOccupied()){
+					g.setColor(Color.RED);
 					g.fillRect(j*10 + 1, i*10 + 1, 8, 8);
 					g.setColor(Color.BLACK);
 				}
-				if(brd.getTiles()[i][j].isOccupied()){
-					g.setColor(Color.RED);
+				
+				if(brd.getTiles()[i][j].isSelected()){
+					g.setColor(Color.YELLOW);
 					g.fillRect(j*10 + 1, i*10 + 1, 8, 8);
 					g.setColor(Color.BLACK);
 				}
@@ -111,11 +113,11 @@ public class BoardView extends JPanel {
 		return this.label;
 	}
 	
-	public Coordinate getSelectedCoord(){
-		return this.selectedCoord;
+	public Tile getSelectedTile(){
+		return this.selectedTile;
 	}
 	
-	public void setSelectedCoord(Coordinate c){
-		this.selectedCoord = c;
+	public void setSelectedTile(Tile t){
+		this.selectedTile = t;
 	}
 }

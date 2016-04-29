@@ -44,13 +44,20 @@ public class BullPenView extends JPanel {
 	}
 	
 	public BullPenView draw(){
+		
+		//clear the pieceViews and their labels from the system
 		pieceViews.clear();
 		removeAll();
+		
+		//check for updated piece info from the bullpen entity 
+		//create new PieceViews
 		for (int i = 0; i < bp.getPieces().size(); i++) {
 			PieceView view = new PieceView(bp.getPieces().get(i), this.view);
 			pieceViews.add(view);
 			add(view.getLabel());
 		}
+		
+		//revalidate the BullPenView
 		revalidate();
 		repaint();
 		return this;

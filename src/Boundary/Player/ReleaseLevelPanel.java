@@ -26,6 +26,7 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.BevelBorder;
 
 public class ReleaseLevelPanel extends KabaSujiPlayer{
 
@@ -61,6 +62,7 @@ public class ReleaseLevelPanel extends KabaSujiPlayer{
 		
 		this.board = new Board(brdTiles);
 		BoardView boardView = new BoardView(mainframe, board, this, bullPenView);
+		boardView.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
 		//WINDOWBUILDER - DONT TOUCH
 		setBackground(new Color(173, 216, 230));

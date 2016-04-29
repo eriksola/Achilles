@@ -11,6 +11,11 @@ public class LightningLevelModel extends LevelModel{
 			this.timeUsed = 0;
 	}
 
+	public LightningLevelModel(LightningLevelModel m) {
+		super(m);
+		this.timeGiven = m.timeGiven;
+	}
+
 	public int getTime(){
 		return this.timeGiven;
 	}

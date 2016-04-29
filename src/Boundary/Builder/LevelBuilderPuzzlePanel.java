@@ -262,7 +262,9 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		addEntity(getMoves.getMoves());
+		if (getMoves.hasMoves()){
+			entities.add(getMoves.getMoves());
+		}
 	}
 	
 	public BullPenView getBullPenView(){
