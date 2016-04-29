@@ -45,6 +45,8 @@ import Boundary.Both.PieceView;
 
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 public class PuzzleLevelPanel extends KabaSujiPlayer {
 
@@ -82,15 +84,17 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		
 		scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, bp, this);
+		bullPenView.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		scrollPane.setViewportView(bullPenView);
 		
 		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		boardView.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JButton button = new JButton("Horizontal");
+		JButton horBtn = new JButton("Horizontal");
 		
-		JButton button_1 = new JButton("Vertical");
+		JButton vertBtn = new JButton("Vertical");
 		
-		JButton button_2 = new JButton("90");
+		JButton rotateBtn = new JButton("90");
 		
 		JButton button_3 = new JButton("Back");
 				
@@ -103,7 +107,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 				
 		JButton button_5 = new JButton("Reset");
 		
-		JTextArea textArea = new JTextArea(Integer.toString(numMoves));
+		JTextArea textArea = new JTextArea("Moves Left: " + Integer.toString(numMoves));
 		textArea.setEditable(false);
 		this.movesView = textArea;
 		
@@ -114,27 +118,29 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(button)
+							.addComponent(horBtn)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_1)
+							.addComponent(vertBtn)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_2))
+							.addComponent(rotateBtn))
 						.addComponent(button_3)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label)
 									.addGap(298)
-									.addComponent(button_4))
-								.addComponent(textArea, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+									.addComponent(button_4)))
 							.addContainerGap())
 						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(60)
+							.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
 							.addComponent(button_5)
 							.addGap(112))))
 		);
@@ -157,9 +163,9 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
 							.addGap(16)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button)
-								.addComponent(button_1)
-								.addComponent(button_2)
+								.addComponent(horBtn)
+								.addComponent(vertBtn)
+								.addComponent(rotateBtn)
 								.addComponent(textArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 					.addGap(32))
 		);
@@ -170,7 +176,9 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		button_4.addActionListener(new PlayPuzzletoPuzzleRulesController(mainFrame));
 		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
 		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
-
+		horBtn.addActionListener(new HflipController(this));
+		vertBtn.addActionListener(new VflipController(this));
+		rotateBtn.addActionListener(new RotateController(this));
 
 	}
 
@@ -186,5 +194,12 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 	public void updateScore() {
 		score.updateScore(levelModel);
 	}
-
+	
+	//called by BoardController when successfully using addPiece()
+	public void useMove(){
+		//decrement the number of moves left and change to a string
+		String strMoves = Integer.toString(--numMoves);
+		//update the boundary view of moves left
+		this.movesView.setText("Moves Left: " + strMoves);
+	}
 }

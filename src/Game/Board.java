@@ -13,7 +13,7 @@ import Boundary.Both.PieceView;
 public class Board implements Serializable{
 	
 	Tile[][] tiles;
-	HashMap<Coordinate,PieceView> pieces;
+	HashMap<Tile,PieceView> pieces;
 	int width;
 	int height;
 		
@@ -21,7 +21,7 @@ public class Board implements Serializable{
 		this.tiles = t;
 		this.height = t.length;
 		this.width = t[0].length;
-		this.pieces = new HashMap<Coordinate,PieceView>();
+		this.pieces = new HashMap<Tile,PieceView>();
 	}
 	
 	public boolean addPiece(int row, int column, PieceView pv){
@@ -45,8 +45,9 @@ public class Board implements Serializable{
 		for(int i = 0; i < 6; i++){
 			int newX = newOccCoords[i].x;
 			int newY = newOccCoords[i].y;
-			this.tiles[newY][newX].setOccupied(true);
-			this.pieces.put(new Coordinate(newX,newY), pv);
+			Tile t = this.tiles[newY][newX];
+			t.setOccupied(true);
+			this.pieces.put(t, pv);
 		}
 		
 		return true;
@@ -56,27 +57,51 @@ public class Board implements Serializable{
 		
 		Coordinate[] newUnoccCoords = new Coordinate[6];
 		
-		//makes sure every square in the Piece has a valid Tile
+		//get coordinates of the piece on the board
 		for (int i = 0; i < 6; i++){
 			Coordinate c = pv.getP().getCoordinates()[i];
-			if (isValid(row - c.y, column + c.x)){
-				newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
-			}
-			else return false;
+			newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
 		}
 		
-		//if true then mark those tiles as occupied
+		//if true then mark the tiles with those coordinates as unoccupied
+		//first mark the tile that was clicked on
+		//then mark the other tiles based on the coordinates of the Pieces squares
+		//and remove the tile from the HashMap 
+		for(int i = 0; i < 6; i++){
+			int newX = newUnoccCoords[i].x;
+			int newY = newUnoccCoords[i].y;
+			Tile t = this.tiles[newY][newX];
+			t.setOccupied(false);
+			t.setSelected(false);
+			this.pieces.remove(t);
+		}
+		
+		return true;
+	}
+	
+	public boolean selectPiece(int row, int column, PieceView pv){
+		
+		Coordinate[] newUnoccCoords = new Coordinate[6];
+		
+		//get coordinates of the piece on the board
+		for (int i = 0; i < 6; i++){
+			Coordinate c = pv.getP().getCoordinates()[i];
+			newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
+		}
+		
+		//if true then mark those tiles as selected 
 		//first mark the tile that was clicked on
 		//then mark the other tiles based on the coordinates of the Pieces squares
 		for(int i = 0; i < 6; i++){
 			int newX = newUnoccCoords[i].x;
 			int newY = newUnoccCoords[i].y;
-			this.tiles[newY][newX].setOccupied(false);
-			this.pieces.remove(new Coordinate(newX,newY));
+			Tile t = this.tiles[newY][newX];
+			t.setSelected(true);
 		}
 		
 		return true;
 	}
+	
 	public boolean isValid(int row, int col){
 		//if the tile extends off the coordinates of the board, invalid move
 		if(row < 0 || row > this.height || col < 0 || col > this.width){
@@ -94,7 +119,7 @@ public class Board implements Serializable{
 		return this.tiles;
 	}
 	
-	public HashMap<Coordinate, PieceView> getPieces() {
+	public HashMap<Tile, PieceView> getPieces() {
 		return this.pieces;
 	}
 	

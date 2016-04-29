@@ -14,6 +14,7 @@ import Game.Board;
 import Game.BullPen;
 import Game.Coordinate;
 import Game.Piece;
+import Game.Tile;
 
 public class BullPenController extends java.awt.event.MouseAdapter{
 	
@@ -38,20 +39,20 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 			view.getScrollPane().setViewportView(bpv);
 			
 			//if its from the board, remove it from the board
-			HashMap<Coordinate,PieceView> piecesOnBoard = bv.getBoard().getPieces();
+			HashMap<Tile,PieceView> piecesOnBoard = bv.getBoard().getPieces();
 			if (piecesOnBoard.containsValue(view.getSelectedPiece())){
 				
 				//get info for removing piece from board -
 				//location of the anchor point of the piece
 				
-				Coordinate c = bv.getSelectedCoord();
+				Tile c = bv.getSelectedTile();
 				Piece piece = piecesOnBoard.get(c).getP();
 				Coordinate pieceAnchor = piece.getAnchorOnBoard();
-				int x = pieceAnchor.x;
-				int y = pieceAnchor.y;
+				int col = pieceAnchor.x;
+				int row = pieceAnchor.y;
 				Board board = bv.getBoard();
-				board.removePiece(y, x, view.getSelectedPiece());
-				
+				board.removePiece(row, col, view.getSelectedPiece());
+				bv.draw();
 			}
 			//make the piece unselected
 			view.removeSelected();

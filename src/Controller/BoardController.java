@@ -3,6 +3,7 @@ package Controller;
 import Game.Board;
 import Game.Coordinate;
 import Game.Piece;
+import Game.Tile;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -80,14 +81,23 @@ public class BoardController extends java.awt.event.MouseAdapter{
 					if (view instanceof KabaSujiPlayer){
 						KabaSujiPlayer player = (KabaSujiPlayer) view;
 						player.updateScore();
+						if (player instanceof PuzzleLevelPanel){
+							PuzzleLevelPanel puzzlePlayer = (PuzzleLevelPanel) player;
+							puzzlePlayer.useMove();
+						}
 					}
+					
 				}
 			}
+			//if there was a selected piece end the function here
+			return;
 		}
 		
 		if (view instanceof PuzzleLevelPanel){
+			
 			//add code for ability to remove piece from board (ONLY WHILE NO PIECE IS SELECTED)
-			HashMap<Coordinate, PieceView> piecesOnBoard = bv.getBoard().getPieces();
+			HashMap<Tile, PieceView> piecesOnBoard = bv.getBoard().getPieces();
+			System.out.println("pieces on board = " + piecesOnBoard.size()/6);
 			int row = -1;
 			int col = -1;
 			for(int i = 0; i < bv.getBoard().getTiles().length; i++){
@@ -102,11 +112,21 @@ public class BoardController extends java.awt.event.MouseAdapter{
 					}
 				}
 			}
-			Coordinate coordClicked = new Coordinate(col, row);
-			bv.setSelectedCoord(coordClicked);
-			if (piecesOnBoard.containsKey(coordClicked)){
-				PieceView pv = piecesOnBoard.get(coordClicked);
+			
+			Tile t = bv.getBoard().getTiles()[row][col];
+			bv.setSelectedTile(t);
+			System.out.println("Selected tile :" + t);
+			System.out.println("Tiles in HashMap: " + piecesOnBoard.keySet());
+			System.out.println(piecesOnBoard.get(t));
+			if (piecesOnBoard.containsKey(t)){
+				System.out.println("Board coordinate contains piece");
+				PieceView pv = piecesOnBoard.get(t);
 				view.setSelected(pv);
+				Coordinate c = pv.getP().getAnchorOnBoard();
+				col = c.x;
+				row = c.y;
+				bv.getBoard().selectPiece(row, col, pv);
+				bv.draw();
 			}
 		}
 	}

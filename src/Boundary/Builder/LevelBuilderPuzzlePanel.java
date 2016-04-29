@@ -46,7 +46,7 @@ import java.awt.event.InputMethodEvent;
 public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
 	ArrayList<Object> entities;
-	GetMovesController getMoves;
+	GetMovesController movesController;
 	
 	BullPen bp;
 	Board board;
@@ -241,11 +241,11 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 		
 
-		this.getMoves = new GetMovesController(txtMoves, this);
+		this.movesController = new GetMovesController(txtMoves, this);
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
 		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
 		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
-		btnEnterMoves.addActionListener(getMoves);
+		btnEnterMoves.addActionListener(movesController);
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
@@ -262,6 +262,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
+		addEntity(movesController.getMoves());
 	}
 	
 	public BullPenView getBullPenView(){

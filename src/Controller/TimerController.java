@@ -4,12 +4,17 @@ package Controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
+import Boundary.Both.KabaSuji;
 import Boundary.Player.KabasujiFrame;
+import Boundary.Player.LightningLevelPanel;
+import Boundary.Player.TimeUpScreen;
 
 /**
  * 
@@ -18,22 +23,26 @@ import Boundary.Player.KabasujiFrame;
  */
 public class TimerController implements ActionListener{
 	
-	KabasujiFrame mainframe; /** the top level boundary object **/
+	KabasujiFrame frame;
+	LightningLevelPanel view; /** the top level boundary object **/
 	JTextArea timerView; /** the swing element displaying the time left **/
-	int timeGiven; /** total time given **/
 	int timeLeft; /** time left on the timer CURRENTLY **/
+	Timer t;
 	
-	public TimerController(KabasujiFrame mf, JTextArea tp, int tg){
-		this.mainframe = mf;
+	public TimerController(KabasujiFrame frame, LightningLevelPanel view, JTextArea tp, int tg){
+		this.frame = frame;
+		this.view = view;
 		this.timerView = tp;
-		this.timeGiven = tg;
-		this.timeLeft = this.timeGiven;
+		this.timeLeft = tg;
 		
 		//set the swing element to display the time given
-		mainframe.getContentPane().invalidate();
-		String stringTime = Integer.toString(timeGiven);
+		timerView.invalidate();
+		String stringTime = Integer.toString(timeLeft);
 		timerView.setText(stringTime);
-		mainframe.getContentPane().revalidate();
+		timerView.revalidate();
+		
+		t = new Timer(1000, this);
+		t.start();
 	}
 
 	@Override
@@ -45,16 +54,28 @@ public class TimerController implements ActionListener{
 		
 		--timeLeft;
 		
-		mainframe.getContentPane().invalidate();
+		//if there is time left, update the timer view
+		if (timeLeft >= 0){
+			timerView.invalidate();
+			
+			//if less than 20 seconds left, change color of numbers to red
+			if (timeLeft < 20) { timerView.setForeground( new Color(255,0,0)); }
 		
-		//if less than 20 seconds left, change color of numbers to red
-		if (timeLeft < 20) { timerView.setForeground( new Color(255,0,0)); }
+			//update timeLeft and print to JTextArea
+			String stringTimeLeft = Integer.toString(timeLeft);
+			timerView.setText(stringTimeLeft);
 		
-		//update timeLeft and print to JTextArea
-		String stringTimeLeft = Integer.toString(timeLeft);
-		timerView.setText(stringTimeLeft);
-		
-		mainframe.getContentPane().revalidate();
-		
+			timerView.revalidate();
+		}
+		//if there is no time left, open a new window and stop play
+		else {
+			t.stop();
+			TimeUpScreen timeUp = new TimeUpScreen(frame, view.getInitial());
+			timeUp.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					frame.dispose();
+				}      
+			});
+		}
 	}
 }
