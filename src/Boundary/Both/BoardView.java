@@ -69,17 +69,17 @@ public class BoardView extends JPanel {
 		g.setColor(Color.BLACK);
 		for(int i = 0; i < brdRows; i++){
 			for(int j = 0; j < brdCols; j++){
-				g.drawRect(j*10, i*10, 10, 10);
 				if(brd.getTiles()[i][j].isSelected()){
 					g.setColor(Color.YELLOW);
-					g.fillRect(j*10 + 1, i*10 + 1, 8, 8);
+					g.fillRect(j*10, i*10, 10, 10);
 					g.setColor(Color.BLACK);
 				}
 				if(brd.getTiles()[i][j].isOccupied()){
 					g.setColor(Color.RED);
-					g.fillRect(j*10 + 1, i*10 + 1, 8, 8);
+					g.fillRect(j*10, i*10, 10, 10);
 					g.setColor(Color.BLACK);
 				}
+				g.drawRect(j*10, i*10, 10, 10);
 			}
 		}
 		ImageIcon img1 = new ImageIcon(img);
