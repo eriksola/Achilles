@@ -11,6 +11,12 @@ public class PuzzleLevelModel extends LevelModel{
 		this.movesUsed = 0;
 	}
 	
+	public PuzzleLevelModel(PuzzleLevelModel plm){
+		super(plm);
+		this.movesGiven = plm.movesGiven;
+		this.movesUsed = 0;
+	}
+	
 	public int getMovesAllowed(){
 		return this.movesGiven;
 	}

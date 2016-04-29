@@ -69,23 +69,22 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				PieceView pv = view.getSelectedPiece();
 				Board brd = bv.getBoard();
 				if(brd.addPiece(row,col,pv)){
-					
+					//redraw the board then remove the piece from the bullpen
+					bv.draw();
 					bpv.remove(pv);
-				
+					
+					view.getScrollPane().setViewportView(bpv);
+					view.removeSelected();
+					
 					//update view (and score if in a player)
 					if (view instanceof KabaSujiPlayer){
 						KabaSujiPlayer player = (KabaSujiPlayer) view;
 						player.updateScore();
 					}
-				
-					bpv.repaint();
-					view.getScrollPane().setViewportView(bpv);
-					bv.draw();
-				
-					view.removeSelected();
 				}
 			}
 		}
+		
 		if (view instanceof PuzzleLevelPanel){
 			//add code for ability to remove piece from board (ONLY WHILE NO PIECE IS SELECTED)
 			HashMap<Coordinate, PieceView> piecesOnBoard = bv.getBoard().getPieces();
@@ -104,6 +103,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				}
 			}
 			Coordinate coordClicked = new Coordinate(col, row);
+			bv.setSelectedCoord(coordClicked);
 			if (piecesOnBoard.containsKey(coordClicked)){
 				PieceView pv = piecesOnBoard.get(coordClicked);
 				view.setSelected(pv);

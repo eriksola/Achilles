@@ -27,6 +27,8 @@ public class Board implements Serializable{
 	public boolean addPiece(int row, int column, PieceView pv){
 		
 		Coordinate[] newOccCoords = new Coordinate[6];
+		Coordinate anchor = new Coordinate(column, row);
+		pv.getP().setAnchorOnBoard(anchor);
 		
 		//makes sure every square in the Piece has a valid Tile
 		for (int i = 0; i < 6; i++){

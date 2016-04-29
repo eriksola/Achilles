@@ -7,6 +7,7 @@ import Game.Coordinate;
 public class Piece implements Serializable{
 
 	private Coordinate[] coords = new Coordinate[6];
+	private Coordinate anchorOnBoard = null; /** Represents the location of the anchor if the piece is on the board **/
 	int bpIndex;
 
 	public Piece(Coordinate[] coords, int bp){
@@ -77,5 +78,12 @@ public class Piece implements Serializable{
 		
 		return s;
 	}
-
+	
+	public Coordinate getAnchorOnBoard(){
+		return this.anchorOnBoard;
+	}
+	
+	public void setAnchorOnBoard(Coordinate c){
+		this.anchorOnBoard = c;
+	}
 }
