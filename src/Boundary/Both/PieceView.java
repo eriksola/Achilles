@@ -74,14 +74,13 @@ public class PieceView {
 		Graphics2D g = (Graphics2D)img.getGraphics();
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, 65, 65);
-		g.setColor(Color.BLACK);
 		for(Coordinate c: getP().getCoordinates()){
 			int newX = 20 + (10 * c.x);
 			int newY = 20 - (10 * c.y);
-			g.drawRect(newX, newY, 10, 10);
 			g.setColor(Color.YELLOW);
-			g.fillRect(newX + 1, newY + 1, 8, 8);
+			g.fillRect(newX, newY, 10, 10);
 			g.setColor(Color.BLACK);
+			g.drawRect(newX, newY, 10, 10);
 		}
 
 		ImageIcon icon = new ImageIcon(img);
