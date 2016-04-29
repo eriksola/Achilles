@@ -13,6 +13,12 @@ public class LevelModel {
 		this.levelNum = ln;
 		this.score = s;
 	}
+	public LevelModel(LevelModel lm){
+		this.board = lm.board;
+		this.bullpen = lm.bullpen;
+		this.levelNum = lm.levelNum;
+		this.score = lm.score;
+	}
 	
 	public Board getBoard(){
 		return this.board;

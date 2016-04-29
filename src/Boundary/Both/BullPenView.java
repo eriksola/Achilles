@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.LayoutManager;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -31,50 +32,53 @@ public class BullPenView extends JPanel {
 	JFrame frame;
 	BullPen bp;
 	KabaSuji view;
-	ArrayList<PieceView> pvs;
+	ArrayList<PieceView> pieceViews;
 	JLabel label;
 
 	public BullPenView(JFrame f, BullPen p, KabaSuji view) {
 		this.frame = f;
 		this.bp = p;
 		this.view = view;
-		this.pvs = new ArrayList<PieceView>();
-		
+		this.pieceViews = new ArrayList<PieceView>();
 		draw();
 	}
 	
-	public void draw(){
+	public BullPenView draw(){
+		pieceViews.clear();
 		removeAll();
 		for (int i = 0; i < bp.getPieces().size(); i++) {
 			PieceView view = new PieceView(bp.getPieces().get(i), this.view);
-			pvs.add(view);
+			pieceViews.add(view);
 			add(view.getLabel());
 		}
+		revalidate();
+		repaint();
+		return this;
 	}
 	
 	public void remove(PieceView pv){
-		for (int i = 0; i < pvs.size(); i++) {
-			if(pvs.get(i) == pv){
-				frame.getContentPane().invalidate();
-				pvs.remove(i);
+		for (int i = 0; i < pieceViews.size(); i++) {
+			if(pieceViews.get(i) == pv){
+				//remove the pieceview/piece from the bullpenview/bullpen
+				JLabel c = pieceViews.get(i).getLabel();
+				System.out.println(c);
 				bp.getPieces().remove(i);
-				JLabel c = pv.getLabel();
-				int compX = (int) c.getAlignmentX();
-				int compY = (int) c.getAlignmentY();
-				remove(pv.getLabel());
-				frame.getContentPane().revalidate();
+				pieceViews.remove(i);
+				remove(c);
+				revalidate();
+				repaint();
 				break;
 			}
 		}
 	}
 	
 	public void addView(PieceView pv){
-		this.pvs.add(pv);
+		this.pieceViews.add(pv);
 		add(pv.getLabel());
 	}
 
 	public ArrayList<PieceView> getPieceViews() {
-		return pvs;
+		return pieceViews;
 	}
 
 	public BullPen getBullPen(){
@@ -82,7 +86,7 @@ public class BullPenView extends JPanel {
 	}
 
 	public void addPiece(PieceView pv) {
-		this.pvs.add(pv);
+		this.pieceViews.add(pv);
 		this.bp.addPiece(pv.getP());
 		add(pv.getLabel());
 	}

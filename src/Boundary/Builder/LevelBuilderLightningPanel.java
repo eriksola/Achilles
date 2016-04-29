@@ -92,14 +92,11 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
 		
-		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
-		
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, bp, this);
 		scrollPane.setViewportView(bullPenView);
 		
-		//bullPenView was previously null, set it to actual view
-		this.boardView.setBullPenView(bullPenView);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;

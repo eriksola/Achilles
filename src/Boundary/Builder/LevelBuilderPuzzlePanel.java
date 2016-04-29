@@ -91,16 +91,14 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
 		
-		//generate the BoardView
-		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+
 		
 		//generate the BullPenView (with scroll panel)
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, this.bp, this);
 		scrollPane.setViewportView(bullPenView);
 		
-		//bullPenView was previously null, set it to actual view
-		this.boardView.setBullPenView(bullPenView);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
 		
 		setBackground(new Color(173, 216, 230));
 
@@ -264,9 +262,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		if (getMoves.hasMoves()){
-		entities.add(getMoves.getMoves());
-		}
+		addEntity(getMoves.getMoves());
 	}
 	
 	public BullPenView getBullPenView(){

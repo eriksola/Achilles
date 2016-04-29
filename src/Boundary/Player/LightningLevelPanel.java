@@ -90,6 +90,7 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		JButton button_5 = new JButton("Reset");
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		this.timerView = textArea;
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
