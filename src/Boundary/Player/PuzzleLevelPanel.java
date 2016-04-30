@@ -48,6 +48,11 @@ import java.util.ArrayList;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
+/**
+ * JPanel to hold a PuzzleLevel in the <b> Kabasuji </b> game.
+ * @author User
+ *
+ */
 public class PuzzleLevelPanel extends KabaSujiPlayer {
 
 

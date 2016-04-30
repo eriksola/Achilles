@@ -6,8 +6,8 @@ import java.util.HashMap;
 import Boundary.Both.PieceView;
 
 /**
- * 
- * @author Nan Zhang
+ * Board will hold a number of pieces must be able to be filled with 6n pieces.
+ * @author Achilles
  *
  */
 public class Board implements Serializable{
@@ -17,6 +17,10 @@ public class Board implements Serializable{
 	int width;
 	int height;
 		
+	/**
+	 * Creates a Board with a two dimensional array of Tiles.
+	 * @param t Matrix of tiles that will create the board.
+	 */
 	public Board(Tile[][] t){
 		this.tiles = t;
 		this.height = t.length;
@@ -24,6 +28,13 @@ public class Board implements Serializable{
 		this.pieces = new HashMap<Tile,PieceView>();
 	}
 	
+	/**
+	 * Add a piece to the board if it is valid.
+	 * @param row <i> x </i> coordinate for the Piece.
+	 * @param column <i> y </i> coordinate for the Piece.
+	 * @param pv View of the Piece that is being added. 
+	 * @return True if the piece was added successfully.
+	 */
 	public boolean addPiece(int row, int column, PieceView pv){
 		
 		Coordinate[] newOccCoords = new Coordinate[6];
@@ -53,6 +64,13 @@ public class Board implements Serializable{
 		return true;
 	}
 	
+	/**
+	 * Remove a piece to the board if it is valid.
+	 * @param row <i> x </i> coordinate for the Piece.
+	 * @param column <i> y </i> coordinate for the Piece.
+	 * @param pv View of the Piece that is being removed. 
+	 * @return True if the piece was removed successfully.
+	 */
 	public boolean removePiece(int row, int column, PieceView pv){
 		
 		Coordinate[] newUnoccCoords = new Coordinate[6];
@@ -79,6 +97,13 @@ public class Board implements Serializable{
 		return true;
 	}
 	
+	/**
+	 * Select a Piece from the board. 
+	 * @param row <i> x </i> coordinate for the Piece.
+	 * @param column <i> y </i> coordinate for the Piece.
+	 * @param pv View of the Piece that is being selected. 
+	 * @return True if piece was selected.
+	 */
 	public boolean selectPiece(int row, int column, PieceView pv){
 		
 		Coordinate[] newUnoccCoords = new Coordinate[6];
@@ -102,8 +127,13 @@ public class Board implements Serializable{
 		return true;
 	}
 	
+	/**
+	 * If the tile extends off the coordinates of the board, invalid move.
+	 * @param row <i> x </i> coordinate for the Piece.
+	 * @param column <i> y </i> coordinate for the Piece.
+	 * @return True if piece is valid.
+	 */
 	public boolean isValid(int row, int col){
-		//if the tile extends off the coordinates of the board, invalid move
 		if(row < 0 || row > this.height || col < 0 || col > this.width){
 			return false;
 		}

@@ -7,13 +7,27 @@ import java.awt.event.ActionListener;
 import Boundary.Player.KabasujiFrame;
 import Boundary.Player.RulesPuzzle;
 
+/**
+ * Controller to bring a player from a to the puzzle rules.
+ * @author Achilles
+ *
+ */
 public class PlayPuzzletoPuzzleRulesController implements ActionListener{
-KabasujiFrame frame;
 	
+	KabasujiFrame frame;
+	
+	/**
+	 * Creates a PlayPuzzletoPuzzleRulesController that will change to the correct panel with a given frame.
+	 * @param kf Frame where the game is currently held.
+	 */	
 	public PlayPuzzletoPuzzleRulesController(KabasujiFrame f) {
 		this.frame = f;
 	}
 	
+	
+	/**
+	 * Invoked when the button is pressed to see the rules for a level.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		frame.getContentPane().removeAll();
 		frame.getContentPane().invalidate();

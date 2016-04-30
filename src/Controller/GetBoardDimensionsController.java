@@ -10,6 +10,11 @@ import Boundary.Both.BoardView;
 import Boundary.Both.KabaSuji;
 import Boundary.Builder.LevelBuilderPuzzlePanel;
 
+/**
+ * Controller to retrieve the dimensions set for a board in the level builder.
+ * @author Wolfson
+ *
+ */
 public class GetBoardDimensionsController implements ActionListener {
 	JTextField x;
 	JTextField y;
@@ -17,13 +22,21 @@ public class GetBoardDimensionsController implements ActionListener {
 	int yNum;
 	KabaSuji view;
 	
-	
+	/**
+	 * Creates a GetBoardDimensionsController.
+	 * @param x JTextField where x coordinate can be entered.
+	 * @param y TextField where y coordinate can be entered.
+	 * @param view Panel where the controller resides.
+	 */
 	public GetBoardDimensionsController(JTextField x, JTextField y, KabaSuji view) {
 		this.x = x;
 		this.y = y;
 		this.view = view;
 	}
 
+	/**
+	 * Invoked when the set board button is pressed.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		//Check if we have anything in the text field
 		if(!x.getText().equals("") && !y.getText().equals("")){

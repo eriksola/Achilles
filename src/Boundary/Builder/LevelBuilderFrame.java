@@ -16,6 +16,11 @@ import javax.swing.GroupLayout.Alignment;
 
 import java.awt.Color;
 
+/**
+ * Frame that holds any panel that may be used in the <b> LevelBuilder. </b>
+ * @author Achilles
+ *
+ */
 public class LevelBuilderFrame extends JFrame {
 	
 	JPanel contentPane;
@@ -103,8 +108,8 @@ public class LevelBuilderFrame extends JFrame {
 		});
 	}
 	/**
-	 * 
-	 * @return true if there are built levels, will also set number of built levels
+	 * Checks if there are any built levels in the directories.
+	 * @return true if there are built levels, will also set number of built levels.
 	 */
 	public boolean hasBuiltLevels() {
 		

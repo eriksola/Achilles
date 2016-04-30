@@ -18,6 +18,7 @@ import Boundary.Player.TimeUpScreen;
 
 /**
  * 
+ * Allows the functionality of a timer for a lightning level.
  * @author gaguila
  *
  */
@@ -29,6 +30,13 @@ public class TimerController implements ActionListener{
 	int timeLeft; /** time left on the timer CURRENTLY **/
 	Timer t;
 	
+	/**
+	 * Creates a timer controller that will set a countdown time for a lightning level.
+	 * @param frame Frame that the level is currently in.
+	 * @param view LightningLevelPanel the timer is in.
+	 * @param tp Text where timer will be.
+	 * @param tg Amount of time given for a timer.
+	 */
 	public TimerController(KabasujiFrame frame, LightningLevelPanel view, JTextArea tp, int tg){
 		this.frame = frame;
 		this.view = view;
@@ -47,7 +55,7 @@ public class TimerController implements ActionListener{
 
 	@Override
 	/**
-	 * set a selected PieceView.
+	 * Sets a selected PieceView.
 	 * @param arg0 the actionEvent that triggers the method (in this case a swing Timer)
 	 */
 	public void actionPerformed(ActionEvent arg0) {

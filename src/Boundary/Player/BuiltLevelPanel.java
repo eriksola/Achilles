@@ -26,6 +26,11 @@ import Controller.ReturnToPlayerMenuController;
 
 import javax.swing.JScrollPane;
 
+/**
+ * Panel for the built static levels in the <b> Kabasuji </b> game.
+ * @author Achilles
+ *
+ */
 public class BuiltLevelPanel extends JPanel {
 
 	KabasujiFrame mainframe;
