@@ -48,7 +48,7 @@ public class GetMovesController implements ActionListener {
 			      //Try to convert the string in the text in an int
 			      numMoves = Integer.parseInt(moves.getText());
 			      // print out the value after the conversion
-			      System.out.println("int numMoves = " + numMoves);
+			      System.out.println("numMoves = " + numMoves);
 			    }
 			    catch (NumberFormatException nfe)
 			    {
