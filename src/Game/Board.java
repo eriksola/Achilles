@@ -102,9 +102,32 @@ public class Board implements Serializable{
 		return true;
 	}
 	
+	public boolean deselectPiece(int row, int column, PieceView pv){
+		
+		Coordinate[] newUnoccCoords = new Coordinate[6];
+		
+		//get coordinates of the piece on the board
+		for (int i = 0; i < 6; i++){
+			Coordinate c = pv.getP().getCoordinates()[i];
+			newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
+		}
+		
+		//if true then mark those tiles as selected 
+		//first mark the tile that was clicked on
+		//then mark the other tiles based on the coordinates of the Pieces squares
+		for(int i = 0; i < 6; i++){
+			int newX = newUnoccCoords[i].x;
+			int newY = newUnoccCoords[i].y;
+			Tile t = this.tiles[newY][newX];
+			t.setSelected(false);
+		}
+		
+		return true;
+	}
+	
 	public boolean isValid(int row, int col){
 		//if the tile extends off the coordinates of the board, invalid move
-		if(row < 0 || row > this.height || col < 0 || col > this.width){
+		if(row < 0 || row > this.height - 1|| col < 0 || col > this.width - 1){
 			return false;
 		}
 		
