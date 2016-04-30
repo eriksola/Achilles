@@ -19,7 +19,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-
+/**
+ * Panel to display all of the rules for the <b> Kabasuji </b> game.
+ * @author Achilles
+ *
+ */
 public class RulesMenuPanel extends JPanel {
 	
 	JFrame mainFrame;

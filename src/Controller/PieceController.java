@@ -36,7 +36,7 @@ public class PieceController extends java.awt.event.MouseAdapter{
 	}
 	
 	/**
-	 * highlight the clicked PieceView, unmark previously selected PieceView if present.
+	 * Highlights the clicked PieceView, unmarks previously selected PieceView if present.
 	 */
 	public void mouseClicked(MouseEvent me){
 		System.out.println("mouse clicked on piece");

@@ -42,7 +42,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
-
+/**
+ * Panel to build a Release level in the <b> LevelBuilder. </b>
+ * @author User
+ *
+ */
 public class LevelBuilderReleasePanel extends KabaSuji {
 	
 	ArrayList<Object> entities;
@@ -252,6 +256,10 @@ public class LevelBuilderReleasePanel extends KabaSuji {
 		entities.add(board);
 	}
 	
+	/**
+	 * Adds any entity that may need to be serialized for a level.
+	 * @param addition Object to be serialzied.
+	 */
 	public void addEntity(Object addition){
 		entities.add(addition);			
 	}

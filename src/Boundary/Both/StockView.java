@@ -11,6 +11,11 @@ import javax.swing.JFrame;
 
 import Game.Stock;
 
+/**
+ * Boundary object to represent the stock.
+ * @author Achilles
+ *
+ */
 public class StockView extends JPanel {
 
 	private PieceView pieceViews[];

@@ -10,6 +10,11 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * Rules for the lightning level.
+ * @author Paul-Henry
+ *
+ */
 public class RulesLightning extends JPanel {
 
 	/**

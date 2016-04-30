@@ -39,6 +39,11 @@ import Game.BullPen;
 import Game.Stock;
 import Game.Tile;
 
+/**
+ * Panel to hold any edits in a lightning level in the <b> LevelBuilder. </b>
+ * @author Achilles
+ *
+ */
 public class EditLightningLevelPanel extends KabaSuji {
 	
 	GetTimeController getTimer;
@@ -245,6 +250,10 @@ public class EditLightningLevelPanel extends KabaSuji {
 		
 	}
 	
+	/**
+	 * Adds any entity that may need to be serialized as well.
+	 * @param addition Object to be serialized.
+	 */
 	public void addEntity(Object addition){
 		entities.add(addition);			
 	}

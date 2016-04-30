@@ -18,15 +18,30 @@ import Boundary.Player.DefaultLevelPanel;
 import Boundary.Player.KabasujiFrame;
 import Boundary.Player.RulesMenuPanel;
 
+/**
+ * 
+ * Controller to switch a panel on one frame from one panel to another.
+ * @author Sola
+ *
+ */
 public class SwitchWindowController implements ActionListener {
 	
 	JFrame frame;
 	JPanel panel;
+	
+	/**
+	 * Creates a SwitchWindowController to switch a window from one panel to another.
+	 * @param mainFrame Current frame the previous panel is in.
+	 * @param levelBuilderPanel Panel that we want to switch to.
+	 */
 	public SwitchWindowController(JFrame mainFrame, JPanel levelBuilderPanel) {
 		this.frame = mainFrame;
 		this.panel = levelBuilderPanel;
 	}
 
+	/**
+	 * Invoked when a button is pressed that is meant to go from one panel to another.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		frame.getContentPane().removeAll();
 		frame.getContentPane().invalidate();
