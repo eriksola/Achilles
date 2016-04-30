@@ -14,7 +14,6 @@ import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
 import Boundary.Both.KabaSujiPlayer;
 import Boundary.Both.PieceView;
-import Boundary.Builder.LevelBuilderPuzzlePanel;
 import Boundary.Player.PuzzleLevelPanel;
 
 /**
@@ -47,12 +46,15 @@ public class BoardController extends java.awt.event.MouseAdapter{
 		
 		Point p = me.getPoint();
 		
+		//if there is a selected piece
 		if (view.getSelectedPiece() != null){
 			System.out.println("Mouse clicked from board");
 			System.out.println(p.x);
 			System.out.println(p.y);
 			int row = -1;
 			int col = -1;
+			
+			//get the row and column of the tile that was clicked on
 			for(int i = 0; i < bv.getBoard().getTiles().length; i++){
 				for(int j = 0; j < bv.getBoard().getTiles()[0].length; j++){
 					int leftX = j * 10;
@@ -65,40 +67,89 @@ public class BoardController extends java.awt.event.MouseAdapter{
 					}
 				}
 			}
-			if (view.getSelectedPiece().getP() != null){
-				Piece piece = view.getSelectedPiece().getP();
-				PieceView pv = view.getSelectedPiece();
-				Board brd = bv.getBoard();
-				if(brd.addPiece(row,col,pv)){
-					//redraw the board then remove the piece from the bullpen
-					bv.draw();
-					bpv.remove(pv);
+			
+			PieceView pv = view.getSelectedPiece();
+			Board brd = bv.getBoard();
+			
+			//check if this is a puzzle level
+			if(view instanceof PuzzleLevelPanel){
+				
+				HashMap<Tile,PieceView> piecesOnBoard = bv.getBoard().getPieces();
+				
+				//check if the piece is coming from the board
+				if (piecesOnBoard.containsValue(view.getSelectedPiece())){
 					
-					view.getScrollPane().setViewportView(bpv);
-					view.removeSelected();
+					//get info for removing piece from board -
+					//location of the anchor point of the piece
+					Tile c = bv.getSelectedTile();
+					Piece piece = piecesOnBoard.get(c).getP();
+					Coordinate pieceAnchor = piece.getAnchorOnBoard();
+					int oldCol = pieceAnchor.getX();
+					int oldRow = pieceAnchor.getY();
 					
-					//update view (and score if in a player)
-					if (view instanceof KabaSujiPlayer){
-						KabaSujiPlayer player = (KabaSujiPlayer) view;
-						player.updateScore();
-						if (player instanceof PuzzleLevelPanel){
-							PuzzleLevelPanel puzzlePlayer = (PuzzleLevelPanel) player;
-							puzzlePlayer.useMove();
+					//add the piece to the board in the new location
+					if(brd.addPiece(row,col,pv)){
+						
+						//remove the piece from the old location
+						brd.removePiece(oldRow, oldCol, pv);
+
+						//if this is the player, update the score of the level
+						if (view instanceof KabaSujiPlayer){
+							KabaSujiPlayer player = (KabaSujiPlayer) view;
+							player.updateScore();
+							
+							//if this is a puzzle level, decrement the moves left
+							if (player instanceof PuzzleLevelPanel){
+								PuzzleLevelPanel puzzlePlayer = (PuzzleLevelPanel) player;
+								puzzlePlayer.useMove();
+							}
 						}
+						//unselect the piece and draw
+						view.removeSelected();
+						bv.draw();
 					}
-					
 				}
+				//draw in case of edge cases (always keep bullpenview up to date)
+				bv.draw();
+			}
+			
+			//otherwise the piece must be from the bullpen
+			if(brd.addPiece(row,col,pv)){
+					
+				//redraw the board
+				bv.draw();
+				
+				//remove the piece from the bullpen
+				bpv.remove(pv);
+				
+				view.getScrollPane().setViewportView(bpv);
+				view.removeSelected();
+				
+				//if this is the player, update the score of the level
+				if (view instanceof KabaSujiPlayer){
+					KabaSujiPlayer player = (KabaSujiPlayer) view;
+					player.updateScore();
+					
+					//if this is a puzzle level, decrement the moves left
+					if (player instanceof PuzzleLevelPanel){
+						PuzzleLevelPanel puzzlePlayer = (PuzzleLevelPanel) player;
+						puzzlePlayer.useMove();
+					}
+				}	
 			}
 			//if there was a selected piece end the function here
 			return;
 		}
 		
-		if (view instanceof PuzzleLevelPanel){
+		//if this is a puzzle level
+		else if (view instanceof PuzzleLevelPanel){
 			
-			//add code for ability to remove piece from board (ONLY WHILE NO PIECE IS SELECTED)
+			//pieces can be removed from the board while no piece is selected
 			HashMap<Tile, PieceView> piecesOnBoard = bv.getBoard().getPieces();
 			int row = -1;
 			int col = -1;
+			
+			//get the row and column of the tile that was clicked on
 			for(int i = 0; i < bv.getBoard().getTiles().length; i++){
 				for(int j = 0; j < bv.getBoard().getTiles()[0].length; j++){
 					int leftX = j * 10;
@@ -112,6 +163,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				}
 			}
 			
+			//select the piece on the board
 			Tile t = bv.getBoard().getTiles()[row][col];
 			bv.setSelectedTile(t);
 			System.out.println(piecesOnBoard.get(t));
@@ -126,5 +178,4 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			}
 		}
 	}
-	
 }

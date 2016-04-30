@@ -38,8 +38,6 @@ public class Board implements Serializable{
 	public boolean addPiece(int row, int column, PieceView pv){
 		
 		Coordinate[] newOccCoords = new Coordinate[6];
-		Coordinate anchor = new Coordinate(column, row);
-		pv.getP().setAnchorOnBoard(anchor);
 		
 		//makes sure every square in the Piece has a valid Tile
 		for (int i = 0; i < 6; i++){
@@ -53,6 +51,10 @@ public class Board implements Serializable{
 		//if true then mark those tiles as occupied
 		//first mark the tile that was clicked on
 		//then mark the other tiles based on the coordinates of the Pieces squares
+		
+		Coordinate anchor = new Coordinate(column, row);
+		pv.getP().setAnchorOnBoard(anchor);
+		
 		for(int i = 0; i < 6; i++){
 			int newX = newOccCoords[i].x;
 			int newY = newOccCoords[i].y;
