@@ -39,6 +39,11 @@ import java.util.HashMap;
 
 import javax.swing.JTextArea;
 
+/**
+ * Panel for the default levels in the <b> Kabasuji </b> game.
+ * @author Achilles
+ *
+ */
 public class DefaultLevelPanel extends JPanel {
 
 		KabasujiFrame mainframe;

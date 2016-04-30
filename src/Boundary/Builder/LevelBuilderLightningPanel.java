@@ -43,7 +43,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
-
+/**
+ * Panel for a Lightning level type to be built in the <b> LevelBuilder. </b>
+ * @author Achilles
+ *
+ */
 public class LevelBuilderLightningPanel extends KabaSuji {
 	
 	ArrayList<Object> entities;
@@ -261,6 +265,10 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		entities.add(board);
 	}
 	
+	/**
+	 * Adds any entity that may need to be serialized as well.
+	 * @param addition Object to be serialized.
+	 */
 	public void addEntity(Object addition){
 		entities.add(addition);			
 	}

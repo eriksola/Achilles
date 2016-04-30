@@ -18,6 +18,11 @@ import javax.swing.GroupLayout.Alignment;
 
 import java.awt.Color;
 
+/**
+ * JFrame to hold any panel in the <b> Kabasuji </b> game.
+ * @author Achilles
+ *
+ */
 public class KabasujiFrame extends JFrame {
 	
 	JPanel contentPane;
@@ -27,7 +32,10 @@ public class KabasujiFrame extends JFrame {
 	int builtRelease = 0;
 	boolean builtLevels = false;
 	
-
+	/**
+	 * Constructs a KabasujiFrame.
+	 * @param s Stock of pieces for the game.
+	 */
 	public KabasujiFrame(Stock s){
 		this.stock = s;
 		initialize();
@@ -76,6 +84,9 @@ public class KabasujiFrame extends JFrame {
 		getContentPane().add(mainMenu);
 	}
 	
+	/**
+	 * Initialize the game with the main menu panel.
+	 */
 	void initialize(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -92,8 +103,9 @@ public class KabasujiFrame extends JFrame {
 			}
 		});
 	}
+	
 	/**
-	 * 
+	 * Checks to see if there are any built levels to be imported.
 	 * @return true if there are built levels, will also set number of built levels
 	 */
 	public boolean hasBuiltLevels() {

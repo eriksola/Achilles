@@ -41,7 +41,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 	}
 
 	/**
-	 * depicts adding a PieceView to the board if one was selected prior.
+	 * Depicts adding a PieceView to the board if one was selected prior.
 	 */
 	public void mouseClicked(MouseEvent me){
 		

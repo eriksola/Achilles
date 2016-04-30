@@ -27,6 +27,11 @@ import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 
+/**
+ * Visual manifestation of the BullPen entity.
+ * @author Wolfson
+ *
+ */
 public class BullPenView extends JPanel {
 	
 	JFrame frame;
@@ -35,6 +40,9 @@ public class BullPenView extends JPanel {
 	ArrayList<PieceView> pieceViews;
 	JLabel label;
 
+	/**
+	 * Constructor for bullpenview.
+	 */
 	public BullPenView(JFrame f, BullPen p, KabaSuji view) {
 		this.frame = f;
 		this.bp = p;
@@ -43,6 +51,10 @@ public class BullPenView extends JPanel {
 		draw();
 	}
 	
+	/**
+	 * Draws the all of the PieceViews in the BullPenView.
+	 * @return The drawn BullPenView.
+	 */
 	public BullPenView draw(){
 		
 		//clear the pieceViews and their labels from the system
@@ -92,6 +104,10 @@ public class BullPenView extends JPanel {
 		return this.bp;
 	}
 
+	/**
+	 * Add a PieceView to the BullPenView.
+	 * @param pv PieceView to be added.
+	 */
 	public void addPiece(PieceView pv) {
 		this.pieceViews.add(pv);
 		this.bp.addPiece(pv.getP());

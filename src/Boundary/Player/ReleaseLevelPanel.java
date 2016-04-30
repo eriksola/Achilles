@@ -28,6 +28,11 @@ import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.BevelBorder;
 
+/**
+ * Panel to hold a Release Level in the <b> Kabasuji </b> game.
+ * @author Achilles
+ *
+ */
 public class ReleaseLevelPanel extends KabaSujiPlayer{
 
 	KabasujiFrame mainframe;

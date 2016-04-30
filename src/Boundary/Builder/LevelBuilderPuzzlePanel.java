@@ -42,7 +42,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
-
+/**
+ * Panel for a Puzzle level type to be built in the <b> LevelBuilder. </b>
+ * @author Achilles
+ *
+ */
 public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
 	ArrayList<Object> entities;
@@ -254,6 +258,10 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		this.save.addActionListener(new SaveController(entities, 1));
 	}
 	
+	/**
+	 * Adds any entity that may need to be serialized as well.
+	 * @param addition Object to be serialized.
+	 */
 	public void addEntity(Object addition){
 		entities.add(addition);			
 	}

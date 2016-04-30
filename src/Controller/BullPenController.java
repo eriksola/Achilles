@@ -16,18 +16,30 @@ import Game.Coordinate;
 import Game.Piece;
 import Game.Tile;
 
+/**
+ * 
+ * Controller to specify actions for when a piece is clicked in the bullpen.
+ * @author Wolfson
+ *
+ */
 public class BullPenController extends java.awt.event.MouseAdapter{
 	
 	KabaSuji view;
 	BullPenView bpv;
 	BoardView bv;
 	
+	/**
+	 * Constructor.
+	 */
 	public BullPenController(KabaSuji view, BullPenView bpv, BoardView bv){
 		this.view = view;
 		this.bpv = bpv;
 		this.bv = bv;
 	}
 	
+	/**
+	 * When a piece is clicked select it.
+	 */
 	public void mouseClicked(MouseEvent me){
 		System.out.println("mouse clicked from bullpen");
 		

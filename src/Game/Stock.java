@@ -16,12 +16,20 @@ import java.util.List;
 import java.util.Random;
 
 
-
+/**
+ * 
+ * Stock contains all of the pieces used in the <b> Kabasuji </b> game.
+ * @author Sola
+ *
+ */
 public class Stock implements Serializable{
 	
-	/** Set of pieces **/
+	/** Set of pieces */
 	List<Piece> setOfPieces;
 	
+	/**
+	 * Constructs a Stock that has all of the coordinates and pieces used in <b> Kabasuji. </b> 
+	 */
 	public Stock(){
 		
 		
@@ -161,73 +169,18 @@ public class Stock implements Serializable{
 		setOfPieces.add(p35);		
 	}
 	
-	/*
-	public static void main(String[] args) {
-		Stock s = new Stock();
-		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		Piece [] pieces = new Piece[35];
-		PieceView [] piecesV = new PieceView[35];
-		
-		frame.setSize(600, 600);
-		for(int i = 0; i < s.setOfPieces.size(); i++){
-			Piece p = s.getPiece(i);
-			PieceView pv = new PieceView(p);
-			pieces[i] = p;
-			piecesV[i] = pv;
-			
-		}
-		BullPen bp = new BullPen(pieces, piecesV);
-		for(int i = 0; i < s.setOfPieces.size(); i++){
-			bp.selectedPiece = pieces[i];
-			ImageIcon img = new ImageIcon(piecesV[i].getBufferedImage());
-			JLabel label = new JLabel(img);
-			//frame.getContentPane().add(new JLabel(img));
-			panel.add(label);
-		}
-		frame.add(panel);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		//-------------------------------------------------
-		//Test getting random pieces
-		JFrame frame2 = new JFrame();
-		JPanel panel2 = new JPanel();
-		Piece [] pieces2 = s.getRandomPiecesForPen();
-		PieceView [] piecesV2 = new PieceView[pieces2.length];
-		frame2.setSize(600, 600);
-		
-		for(int i = 0; i < pieces2.length; i++){
-			
-			PieceView pv = new PieceView(pieces2[i]);
-			piecesV2[i] = pv;
-			
-		}
-		
-		BullPen bp2 = new BullPen(pieces2, piecesV2);
-		
-		for(int i = 0; i < pieces2.length; i++){
-			bp2.selectedPiece = pieces2[i];
-			ImageIcon img = new ImageIcon(piecesV2[i].getBufferedImage());
-			JLabel label = new JLabel(img);
-			//frame.getContentPane().add(new JLabel(img));
-			panel2.add(label);
-		}
-		frame2.add(panel2);
-		frame2.setVisible(true);
-		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
-	}
-	*/
+
 	public List<Piece> getPieces(){
 		return this.setOfPieces;
 	}
+	
 	public Piece getPiece(int id){
 		return this.setOfPieces.get(id);
 	}
 	
 	/**
-	 * Will return a random piece from the stock.
+	 * Generates a random number and then will grab the Piece associated with that random index.
+	 * @return A random piece from the stock.
 	 */
 	public Piece getRandomPiece(){
 		Random rand = new Random();
@@ -236,7 +189,8 @@ public class Stock implements Serializable{
 	}
 	
 	/**
-	 * Gets 10 random pieces from the stock.
+	 * Generates ten random numbers and adds all of those associated pieces to a list of Pieces.
+	 * @return A list of pieces grabbed randomly from the stock.
 	 */
 	public ArrayList<Piece> getRandomPiecesForPen(){
 		ArrayList<Piece> pieces = new ArrayList<Piece>();

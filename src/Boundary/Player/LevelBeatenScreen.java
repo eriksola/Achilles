@@ -16,6 +16,11 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * JFrame to show that the level has been beaten in the <b> Kabasuji </b> game.
+ * @author User
+ *
+ */
 public class LevelBeatenScreen extends JFrame {
 
 	private JPanel contentPane;

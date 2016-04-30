@@ -14,6 +14,12 @@ import java.awt.Font;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * 
+ * Rules for the Puzzle Level.
+ * @author Paul-Henry
+ *
+ */
 public class RulesPuzzle extends JPanel {
 
 	KabasujiFrame mainframe;

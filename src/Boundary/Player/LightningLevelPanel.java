@@ -36,6 +36,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 
+/**
+ * JPanel to hold a lightning level in the <b> Kabasuji </b> game.
+ * @author Achilles
+ *
+ */
 public class LightningLevelPanel extends KabaSujiPlayer{
 
 

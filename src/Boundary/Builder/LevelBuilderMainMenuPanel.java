@@ -19,6 +19,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Controller.SwitchWindowController;
 
+/**
+ * Main Menu panel in the <b> LevelBuilder. </b>
+ * @author Achilles
+ *
+ */
 public class LevelBuilderMainMenuPanel extends JPanel {
 
 	LevelBuilderFrame mainFrame;

@@ -36,7 +36,11 @@ import javax.swing.JScrollPane;
 
 import java.awt.GridLayout;
 
-
+/**
+ * Panel to hold all of the built levels so far in the <b> LevelBuilder. </b>
+ * @author Achilles
+ *
+ */
 public class LevelBuilderBuiltLevelPanel extends JPanel {
 
 	LevelBuilderFrame mainframe;

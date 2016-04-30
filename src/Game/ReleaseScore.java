@@ -1,28 +1,39 @@
 package Game;
 
+/**
+ * A ReleaseScore will have the logic for how to win a release level type in the <b> Kabasuji</b> game.
+ * @author Aguila
+ *
+ */
 public class ReleaseScore implements IScore{
+	/** Arrays of booleans for colors for a Release Level */
 	boolean[] red;
 	boolean[] yellow;
 	boolean[] green;
 	
+	/**
+	 * Constructs a release score with the Color on the tiles are all initialized to false.
+	 */
 	public ReleaseScore(){
 		this.red = new boolean[6];
 		this.yellow = new boolean[6];
 		this.green = new boolean[6];
 	}
 	
-	//checks whether the score is the max
+	/**
+	 * Checks to see if a player has won a release level.
+	 * A player has won when if at least one star is earned, otherwise they lose.
+	 */
 	public boolean hasWon(){
-		
-		
-		//if at least one star is earned, the game is won
 		if (scoreToStars() > 0) return true;
-		
-		//otherwise the game is incomplete/lost
 		else return false;
 	}
 	
-	//converts the score into the number of stars earned
+	
+	/**
+	 * Will convert the score into the number of stars earned for a level.
+	 * @return The number of stars that the score corresponds to.
+	 */
 	public int scoreToStars(){
 		int stars = 0;
 		
@@ -45,7 +56,11 @@ public class ReleaseScore implements IScore{
 		return stars;
 	}
 	
-	//check nums 1-6 of a certain color tile has been marked
+	/**
+	 * Check an array of booleans to see if a 1-6 of a certain color tile has been marked.
+	 * @param nums array of booleans that represents a color.
+	 * @return True if all of the colors have been marked for a color.
+	 */
 	public boolean allNum(boolean[] nums){
 		
 		boolean result = true;
@@ -57,7 +72,10 @@ public class ReleaseScore implements IScore{
 		
 		return result;
 	}
-	
+	/**
+	 * Updates the score of a level.
+	 * @param releaseLvl LevelModel that describes the current level 
+	 */
 	public void updateScore(LevelModel releaseLvl){
 		//TO-DO
 	}

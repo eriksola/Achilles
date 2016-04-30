@@ -18,6 +18,7 @@ public class Deserialization {
 	int numMoves = 0;
 	
 	/**
+	 * Deserializes a previously serialized level.
 	 * @return true if the deserialization went smoothly
 	 */
 

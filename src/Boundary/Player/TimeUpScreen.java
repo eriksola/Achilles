@@ -21,7 +21,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-
+/**
+ * Frame to be displayed when the time is up for a lightning level.
+ * @author Wolfson
+ *
+ */
 public class TimeUpScreen extends JFrame {
 
 	private JPanel contentPane;
@@ -45,6 +49,9 @@ public class TimeUpScreen extends JFrame {
 		});
 	}
 	
+	/**
+	 * Constructor.
+	 */
 	public TimeUpScreen(KabasujiFrame frame, LightningLevelModel llm){
 		this.playerFrame = frame;
 		this.levelModel = llm;
@@ -54,7 +61,6 @@ public class TimeUpScreen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	
 	public TimeUpScreen() {
 				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

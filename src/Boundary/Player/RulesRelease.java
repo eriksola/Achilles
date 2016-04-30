@@ -10,6 +10,12 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * 
+ * Rules for the Release level.
+ * @author Paul-Henry
+ *
+ */
 public class RulesRelease extends JPanel {
 
 	/**

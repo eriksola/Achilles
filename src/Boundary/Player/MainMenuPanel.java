@@ -24,6 +24,11 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 
+/**
+ * JPanel to hold the Main Menu in the <b> Kabasuji </b> game.
+ * @author Achilles
+ *
+ */
 public class MainMenuPanel extends JPanel {
 	
 	KabasujiFrame mainFrame;
