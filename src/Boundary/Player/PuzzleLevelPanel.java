@@ -73,6 +73,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 	 * Create the panel.
 	 */
 	public PuzzleLevelPanel(KabasujiFrame f, PuzzleLevelModel m) {
+		setBackground(new Color(173, 216, 230));
 		
 		
 		this.mainFrame = f;
@@ -116,6 +117,11 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		textArea.setEditable(false);
 		this.movesView = textArea;
 		
+		/** Starview for score */
+		StarView stars = new StarView();
+		//To add a star simply call the addStars
+		stars.setBackground(new Color(173, 216, 230));
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -132,12 +138,16 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(18)
+									.addComponent(stars, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
 									.addComponent(label)
 									.addGap(298)
 									.addComponent(button_4)))
@@ -165,7 +175,9 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(button_5))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+								.addComponent(stars, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
 							.addGap(16)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(horBtn)

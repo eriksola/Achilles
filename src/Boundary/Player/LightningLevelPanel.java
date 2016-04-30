@@ -62,6 +62,7 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	 * Create the panel.
 	 */
 	public LightningLevelPanel(KabasujiFrame f, LightningLevelModel m) {
+		setBackground(new Color(173, 216, 230));
 		
 		
 		this.mainFrame = f;
@@ -106,6 +107,12 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		textArea.setEditable(false);
 		this.timerView = textArea;
 		
+		/** Starview for score */
+		StarView starView = new StarView();
+		//To add a star simply call the addStars method
+		
+		starView.setBackground(new Color(173, 216, 230));
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -136,6 +143,10 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(button_5)
 							.addGap(112))))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(272)
+					.addComponent(starView, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(293, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -153,7 +164,11 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(button_5))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(11)
+									.addComponent(starView, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
 							.addGap(16)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(horBtn)
@@ -193,5 +208,4 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	public void updateScore() {
 		score.updateScore(currentModel);
 	}
-
 }
