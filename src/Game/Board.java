@@ -13,7 +13,7 @@ import Boundary.Both.PieceView;
 public class Board implements Serializable{
 	
 	Tile[][] tiles;
-	HashMap<Tile,PieceView> pieces;
+	HashMap<Tile,Piece> pieces;
 	int width;
 	int height;
 		
@@ -25,7 +25,7 @@ public class Board implements Serializable{
 		this.tiles = t;
 		this.height = t.length;
 		this.width = t[0].length;
-		this.pieces = new HashMap<Tile,PieceView>();
+		this.pieces = new HashMap<Tile,Piece>();
 	}
 	
 	/**
@@ -60,7 +60,7 @@ public class Board implements Serializable{
 			int newY = newOccCoords[i].y;
 			Tile t = this.tiles[newY][newX];
 			t.setOccupied(true);
-			this.pieces.put(t, pv);
+			this.pieces.put(t, pv.getP());
 		}
 		
 		return true;
@@ -177,7 +177,7 @@ public class Board implements Serializable{
 		return this.tiles;
 	}
 	
-	public HashMap<Tile, PieceView> getPieces() {
+	public HashMap<Tile, Piece> getPieces() {
 		return this.pieces;
 	}
 	

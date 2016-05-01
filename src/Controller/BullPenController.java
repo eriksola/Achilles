@@ -51,14 +51,14 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 			view.getScrollPane().setViewportView(bpv);
 			
 			//if its from the board, remove it from the board
-			HashMap<Tile,PieceView> piecesOnBoard = bv.getBoard().getPieces();
-			if (piecesOnBoard.containsValue(view.getSelectedPiece())){
+			HashMap<Tile,Piece> piecesOnBoard = bv.getBoard().getPieces();
+			if (piecesOnBoard.containsValue(view.getSelectedPiece().getP())){
 				
 				//get info for removing piece from board -
 				//location of the anchor point of the piece
 				
 				Tile c = bv.getSelectedTile();
-				Piece piece = piecesOnBoard.get(c).getP();
+				Piece piece = piecesOnBoard.get(c);
 				Coordinate pieceAnchor = piece.getAnchorOnBoard();
 				int col = pieceAnchor.x;
 				int row = pieceAnchor.y;
