@@ -37,6 +37,7 @@ import Controller.SaveController;
 import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
+import Game.LevelModel;
 import Game.Stock;
 import Game.Tile;
 
@@ -262,6 +263,18 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
+	}
+
+	@Override
+	public void addLevelModel() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public LevelModel getLastLevelModel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

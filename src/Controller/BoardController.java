@@ -55,6 +55,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 		
 		//if there is a selected piece
 		if (view.getSelectedPiece() != null){
+
 			System.out.println("Mouse clicked from board");
 			System.out.println(p.x);
 			System.out.println(p.y);
@@ -85,8 +86,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				HashMap<Tile,Piece> piecesOnBoard = bv.getBoard().getPieces();
 				
 				//check if the piece is coming from the board
-				if (piecesOnBoard.containsValue(view.getSelectedPiece())){
-					
+				if (piecesOnBoard.containsValue(view.getSelectedPiece().getP())){
 					//get info for removing piece from board -
 					//location of the anchor point of the piece
 					Tile c = bv.getSelectedTile();
@@ -96,8 +96,9 @@ public class BoardController extends java.awt.event.MouseAdapter{
 					int oldRow = pieceAnchor.getY();
 					
 					//add the piece to the board in the new location
-					if(brd.addPiece(row,col,pv)){
-						
+					if(brd.isValidToAdd(row,col,pv)){
+						view.addLevelModel();
+						brd.addPiece(row,col,pv);
 						//remove the piece from the old location
 						brd.removePiece(oldRow, oldCol, pv);
 
@@ -122,8 +123,10 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			}
 			
 			//otherwise the piece must be from the bullpen
-			if(brd.addPiece(row,col,pv)){
-					
+			
+			if(brd.isValidToAdd(row, col, pv)){
+				view.addLevelModel();
+				brd.addPiece(row,col,pv);
 				//redraw the board
 				bv.draw();
 				
@@ -176,6 +179,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			bv.setSelectedTile(t);
 			System.out.println(piecesOnBoard.get(t));
 			if (piecesOnBoard.containsKey(t)){
+				view.addLevelModel();
 				Piece piece = piecesOnBoard.get(t);
 				PieceView pv = new PieceView(piece, this.view);
 				view.setSelected(pv);

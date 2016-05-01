@@ -181,4 +181,14 @@ public class ReleaseLevelPanel extends KabaSujiPlayer{
 	public void updateScore() {
 	
 	}
+	@Override
+	public void addLevelModel() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public LevelModel getLastLevelModel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

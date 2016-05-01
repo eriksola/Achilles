@@ -42,7 +42,8 @@ public class GetBoardDimensionsController implements ActionListener {
 		if(!x.getText().equals("") && !y.getText().equals("")){
 			 try
 			    {
-				 
+			      view.addLevelModel();
+
 				  BoardView bv = view.getBoardView();
 			      //Try to convert the string in the text in an int
 			      xNum = Integer.parseInt(x.getText());
@@ -59,6 +60,7 @@ public class GetBoardDimensionsController implements ActionListener {
 			    {
 			      System.out.println("NumberFormatException: " + nfe.getMessage());
 			    }
+			 
 		}
 	}
 	

@@ -45,7 +45,8 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 		
 		//if there is a selected Piece
 		if(view.getSelectedPiece() != null){
-			
+			view.addLevelModel();
+
 			//add the piece to the bullpen
 			bpv.addPiece(new PieceView(view.getSelectedPiece().getP(), view));
 			view.getScrollPane().setViewportView(bpv);

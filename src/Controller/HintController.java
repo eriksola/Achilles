@@ -17,6 +17,7 @@ public class HintController implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){
 		//check if selected piece is in bullpen (otherwise moves not allowed)
+		view.addLevelModel();
 		PieceView selected = view.getSelectedPiece();
 		view.getBoardView().getBoard().registerHintPiece(selected.getP());
 		view.getBoardView().draw();

@@ -219,4 +219,16 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		//update the boundary view of moves left
 		this.movesView.setText("Moves Left: " + strMoves);
 	}
+
+	@Override
+	public void addLevelModel() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public LevelModel getLastLevelModel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

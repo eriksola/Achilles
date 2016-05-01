@@ -32,6 +32,7 @@ public class RotateController implements ActionListener{
 		//check if selected piece is in bullpen (otherwise moves not allowed)
 		PieceView selected = view.getSelectedPiece();
 		if(selected != null){
+			view.addLevelModel();
 			Piece p = selected.getP();
 			p.rotateRight();
 			selected.drawSelected();

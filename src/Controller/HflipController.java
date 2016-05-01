@@ -32,6 +32,7 @@ public class HflipController implements ActionListener{
 		//check if selected piece is in bullpen (otherwise moves not allowed)
 		PieceView selected = view.getSelectedPiece();
 		if(selected != null){
+			view.addLevelModel();
 			Piece p = selected.getP();
 			p.horizontalFlip();
 			selected.drawSelected();

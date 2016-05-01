@@ -37,6 +37,7 @@ import Controller.SaveController;
 import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
+import Game.LevelModel;
 import Game.Stock;
 import Game.Tile;
 
@@ -242,7 +243,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		rightrotate.addActionListener(new RotateController(this));
 		hint.addActionListener(new HintController(this));
 
-		getTimer = new GetTimeController(time_text, this);
+		getTimer = new GetTimeController(time_text, this, this);
 		this.setTime.addActionListener(getTimer);
 	}
 	
@@ -267,6 +268,18 @@ public class EditLightningLevelPanel extends KabaSuji {
 	
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
+	}
+
+	@Override
+	public void addLevelModel() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public LevelModel getLastLevelModel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

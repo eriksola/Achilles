@@ -19,6 +19,7 @@ import Controller.TimerController;
 import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
+import Game.LevelModel;
 import Game.LightningLevelModel;
 import Game.LightningScore;
 
@@ -207,5 +208,17 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	@Override
 	public void updateScore() {
 		score.updateScore(currentModel);
+	}
+
+	@Override
+	public void addLevelModel() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public LevelModel getLastLevelModel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

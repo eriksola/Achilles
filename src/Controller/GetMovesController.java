@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Boundary.Both.KabaSuji;
 import Boundary.Builder.EditLightningLevelPanel;
 import Boundary.Builder.EditPuzzleLevelPanel;
 import Boundary.Builder.EditReleaseLevelPanel;
@@ -21,7 +22,7 @@ import Boundary.Builder.LevelBuilderReleasePanel;
  */
 public class GetMovesController implements ActionListener {
 	JTextField moves;
-	JPanel panel;
+	KabaSuji view;
 	int numMoves;
 	
 	/**
@@ -29,9 +30,9 @@ public class GetMovesController implements ActionListener {
 	 * @param moves TextField where the amount of moves will be types in.
 	 * @param p Panel where the text field resides.
 	 */
-	public GetMovesController(JTextField moves, JPanel p) {
+	public GetMovesController(JTextField moves, KabaSuji view) {
 		this.moves = moves;
-		this.panel = p;
+		this.view = view;
 		if(!moves.getText().equals("")){
 			numMoves = Integer.parseInt(moves.getText());
 		}
@@ -45,6 +46,7 @@ public class GetMovesController implements ActionListener {
 		if(!moves.getText().equals("")){
 			 try
 			    {
+				  view.addLevelModel();
 			      //Try to convert the string in the text in an int
 			      numMoves = Integer.parseInt(moves.getText());
 			      // print out the value after the conversion
@@ -55,17 +57,21 @@ public class GetMovesController implements ActionListener {
 			      System.out.println("NumberFormatException: " + nfe.getMessage());
 			    }
 			 
-			if(panel instanceof LevelBuilderPuzzlePanel){
-					((LevelBuilderPuzzlePanel) panel).addEntity(numMoves);	
+			if(view instanceof LevelBuilderPuzzlePanel){
+					((LevelBuilderPuzzlePanel) view).addEntity(numMoves);	
+					((LevelBuilderPuzzlePanel) view).setNumMoves(numMoves);	
 			}
-			else if (panel instanceof EditPuzzleLevelPanel){
-				((EditPuzzleLevelPanel) panel).addEntity(numMoves);
+			else if (view instanceof EditPuzzleLevelPanel){
+				((EditPuzzleLevelPanel) view).addEntity(numMoves);
+				((LevelBuilderPuzzlePanel) view).setNumMoves(numMoves);	
 			}
-			else if(panel instanceof LevelBuilderReleasePanel){
-				((LevelBuilderReleasePanel) panel).addEntity(numMoves);
+			else if(view instanceof LevelBuilderReleasePanel){
+				((LevelBuilderReleasePanel) view).addEntity(numMoves);
+				((LevelBuilderPuzzlePanel) view).setNumMoves(numMoves);	
 			}
-			else if(panel instanceof EditReleaseLevelPanel){
-				((EditReleaseLevelPanel) panel).addEntity(numMoves);
+			else if(view instanceof EditReleaseLevelPanel){
+				((EditReleaseLevelPanel) view).addEntity(numMoves);
+				((LevelBuilderPuzzlePanel) view).setNumMoves(numMoves);	
 			}
 		}
 	}
