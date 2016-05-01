@@ -30,6 +30,7 @@ import Controller.BullPenController;
 import Controller.GetBoardDimensionsController;
 import Controller.GetTimeController;
 import Controller.HflipController;
+import Controller.HintController;
 import Controller.ReturnToBuilderMenuController;
 import Controller.RotateController;
 import Controller.SaveController;
@@ -239,6 +240,8 @@ public class EditLightningLevelPanel extends KabaSuji {
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
+		hint.addActionListener(new HintController(this));
+
 		getTimer = new GetTimeController(time_text, this);
 		this.setTime.addActionListener(getTimer);
 	}

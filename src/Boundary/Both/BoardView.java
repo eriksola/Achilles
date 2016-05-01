@@ -84,7 +84,7 @@ public class BoardView extends JPanel {
 					g.setColor(Color.BLACK);
 				}
 				if(brd.getTiles()[i][j].isHint()){
-					g.setColor(Color.green);
+					g.setColor(Color.GREEN);
 					g.fillRect(j*10, i*10, 10, 10);
 					g.setColor(Color.BLACK);
 				}

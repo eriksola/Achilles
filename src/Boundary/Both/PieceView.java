@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -17,7 +18,7 @@ import Game.Piece;
  * @author bwolfson
  *
  */
-public class PieceView {
+public class PieceView{
 
 	JLabel label; /** the label representing the Piece. **/
 	Piece p; /** the Piece entity itself. **/

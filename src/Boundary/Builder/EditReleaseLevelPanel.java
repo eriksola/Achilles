@@ -30,6 +30,7 @@ import Controller.BullPenController;
 import Controller.GetBoardDimensionsController;
 import Controller.GetMovesController;
 import Controller.HflipController;
+import Controller.HintController;
 import Controller.ReturnToBuilderMenuController;
 import Controller.RotateController;
 import Controller.SaveController;
@@ -236,6 +237,8 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
+		hint.addActionListener(new HintController(this));
+
 		
 		}
 	
