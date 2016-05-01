@@ -10,12 +10,22 @@ import javax.swing.JTextField;
 import Boundary.Builder.EditLightningLevelPanel;
 import Boundary.Builder.LevelBuilderLightningPanel;
 
+/**
+ * Controller to get the time that is set in the level builder for a lightning level.
+ * @author Sola
+ *
+ */
 public class GetTimeController implements ActionListener {
 
 	JTextField time;
 	JPanel panel;
 	int timeSet;
 	
+	/**
+	 * Creates a GetTimeController.
+	 * @param t JTextField where time is entered.
+	 * @param p JPanel where that holds the text field.
+	 */
 	public GetTimeController(JTextField t, JPanel p){
 		this.time = t;
 		this.panel = p;
@@ -23,6 +33,9 @@ public class GetTimeController implements ActionListener {
 	}
 	
 	@Override
+	/**
+	 * Invoked when the set time button is pressed.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		this.timeSet = Integer.parseInt(time.getText());
 		
@@ -40,7 +53,6 @@ public class GetTimeController implements ActionListener {
 	 * Getter to return the time set by a user for a lightning level
 	 * @return time as an int
 	 */
-	
 	public boolean hasTime(){
 		return this.timeSet > 0;
 	}

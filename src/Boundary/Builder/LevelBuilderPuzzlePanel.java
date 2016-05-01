@@ -42,11 +42,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
-
+/**
+ * Panel for a Puzzle level type to be built in the <b> LevelBuilder. </b>
+ * @author Achilles
+ *
+ */
 public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
 	ArrayList<Object> entities;
-	GetMovesController getMoves;
+	GetMovesController movesController;
 	
 	BullPen bp;
 	Board board;
@@ -241,11 +245,11 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 		
 
-		this.getMoves = new GetMovesController(txtMoves, this);
+		this.movesController = new GetMovesController(txtMoves, this);
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
 		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
 		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
-		btnEnterMoves.addActionListener(getMoves);
+		btnEnterMoves.addActionListener(movesController);
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
@@ -254,6 +258,10 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		this.save.addActionListener(new SaveController(entities, 1));
 	}
 	
+	/**
+	 * Adds any entity that may need to be serialized as well.
+	 * @param addition Object to be serialized.
+	 */
 	public void addEntity(Object addition){
 		entities.add(addition);			
 	}

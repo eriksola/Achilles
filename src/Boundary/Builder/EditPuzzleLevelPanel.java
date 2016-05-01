@@ -44,7 +44,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.awt.event.InputMethodEvent;
 
-
+/**
+ * Panel to hold any edits in a puzzle level in the <b> LevelBuilder. </b>
+ * @author Achilles
+ *
+ */
 public class EditPuzzleLevelPanel extends KabaSuji {
 	
 	ArrayList<Object> entities;
@@ -251,6 +255,10 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		entities.add(gmController.getMoves());
 	}
 	
+	/**
+	 * Adds any entity that may need to be serialized as well.
+	 * @param addition Object to be serialized.
+	 */
 	public void addEntity(Object addition){
 		entities.add(addition);			
 	}

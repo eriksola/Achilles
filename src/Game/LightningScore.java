@@ -1,23 +1,36 @@
 package Game;
 
+/**
+ * A LightningScore will have the logic for how to win a lightning level type in the <b> Kabasuji</b> game.
+ * @author Aguila
+ *
+ */
 public class LightningScore implements IScore{
 	int totalTiles;
 	int totalMarked;
 	
+	/**
+	 * Creates a LightningScore.
+	 * @param total The total number of pieces that are not used yet.
+	 */
 	public LightningScore(int total){
 		this.totalTiles = total;
 		this.totalMarked = 0;
 	}
 	
+	/**
+	 * Checks to see if a player has won a lightning level.
+	 * A player has won when if at least one star is earned, otherwise they lose.
+	 */
 	public boolean hasWon(){
-		
-		//if at least one star is earned the game is won
 		if (scoreToStars() > 0) return true;
-		
-		//otherwise the game is incomplete/lost
 		else return false;
 	}
-	//converts the score into the number of stars
+	
+	/**
+	 * Will convert the score into the number of stars earned for a level.
+	 * @return The number of stars that the score corresponds to.
+	 */
 	public int scoreToStars(){
 		int tilesLeft = totalTiles - totalMarked;
 		
@@ -31,6 +44,10 @@ public class LightningScore implements IScore{
 		else return 0;
 	}
 	
+	/**
+	 * Updates the score of a lightning level.
+	 * @param lightLvl LevelModel that describes the current level.
+	 */
 	public void updateScore(LevelModel lightLvl){
 		
 		int countMarked = 0;

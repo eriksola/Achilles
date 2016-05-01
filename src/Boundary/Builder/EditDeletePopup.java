@@ -12,6 +12,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
+/**
+ * Pop up menu that allows a user to either edit or delete a level.
+ * @author Sola
+ *
+ */
 public class EditDeletePopup extends JPopupMenu {
 	
     JMenuItem edit;
@@ -22,6 +27,14 @@ public class EditDeletePopup extends JPopupMenu {
     LevelBuilderBuiltLevelPanel currentPanel;
     Deserialization de;
 	
+    /**
+     * Constructor.
+     * @param filepath Filepath for the level.
+     * @param p Panel where the you will be able to right click.
+     * @param levelNum The level number that is going to be edited.
+     * @param level The level type.
+     * @param d The Deserialization object that holds serialized objects.
+     */
     public EditDeletePopup(String filepath, LevelBuilderBuiltLevelPanel p, int levelNum, int level, Deserialization d){
     	
     	this.path = filepath;

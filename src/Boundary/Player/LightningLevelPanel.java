@@ -11,9 +11,12 @@ import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSujiPlayer;
 import Controller.BoardController;
 import Controller.BullPenController;
+import Controller.HflipController;
 import Controller.PlayPuzzletoPuzzleRulesController;
 import Controller.ReturnToDefMenuController;
+import Controller.RotateController;
 import Controller.TimerController;
+import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
 import Game.LightningLevelModel;
@@ -31,12 +34,19 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
+import javax.swing.border.BevelBorder;
 
+/**
+ * JPanel to hold a lightning level in the <b> Kabasuji </b> game.
+ * @author Achilles
+ *
+ */
 public class LightningLevelPanel extends KabaSujiPlayer{
 
 
 	KabasujiFrame mainFrame;
-	LightningLevelModel levelModel;
+	LightningLevelModel currentModel;
+	LightningLevelModel initialModel;
 	Board board;
 	BullPen bp;
 	int time;
@@ -52,10 +62,12 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	 * Create the panel.
 	 */
 	public LightningLevelPanel(KabasujiFrame f, LightningLevelModel m) {
+		setBackground(new Color(173, 216, 230));
 		
 		
 		this.mainFrame = f;
-		this.levelModel = m;
+		this.currentModel = m;
+		this.initialModel = new LightningLevelModel(m);
 		this.board = m.getBoard();
 		this.bp = m.getBullPen();
 		this.time = m.getTime();
@@ -68,15 +80,17 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		
 		scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, bp, this);
+		bullPenView.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		scrollPane.setViewportView(bullPenView);
 		
 		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
+		boardView.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JButton button = new JButton("Horizontal");
+		JButton horBtn = new JButton("Horizontal");
 		
-		JButton button_1 = new JButton("Vertical");
+		JButton vertBtn = new JButton("Vertical");
 		
-		JButton button_2 = new JButton("90");
+		JButton rotateBtn = new JButton("90");
 		
 		JButton button_3 = new JButton("Back");
 				
@@ -93,6 +107,12 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		textArea.setEditable(false);
 		this.timerView = textArea;
 		
+		/** Starview for score */
+		StarView starView = new StarView();
+		//To add a star simply call the addStars method
+		
+		starView.setBackground(new Color(173, 216, 230));
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -100,11 +120,11 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(button)
+							.addComponent(horBtn)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_1)
+							.addComponent(vertBtn)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_2))
+							.addComponent(rotateBtn))
 						.addComponent(button_3)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
@@ -123,6 +143,10 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(button_5)
 							.addGap(112))))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(272)
+					.addComponent(starView, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(293, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -140,12 +164,16 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(button_5))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(11)
+									.addComponent(starView, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
 							.addGap(16)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button)
-								.addComponent(button_1)
-								.addComponent(button_2)
+								.addComponent(horBtn)
+								.addComponent(vertBtn)
+								.addComponent(rotateBtn)
 								.addComponent(textArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 					.addGap(32))
 		);
@@ -156,10 +184,12 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		button_4.addActionListener(new PlayPuzzletoPuzzleRulesController(mainFrame));
 		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
 		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
+		horBtn.addActionListener(new HflipController(this));
+		vertBtn.addActionListener(new VflipController(this));
+		rotateBtn.addActionListener(new RotateController(this));
 
 		//start timer
-		TimerController timerController = new TimerController(mainFrame, this.timerView, this.time);
-		new Timer(1000, timerController).start();
+		TimerController timerController = new TimerController(mainFrame, this, this.timerView, this.time);
 	}
 
 	public JScrollPane getScrollPane() {
@@ -169,10 +199,13 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	public BoardView getBoardView(){
 		return this.boardView;
 	}
+	
+	public LightningLevelModel getInitial(){
+		return this.initialModel;
+	}
 
 	@Override
 	public void updateScore() {
-		score.updateScore(levelModel);
+		score.updateScore(currentModel);
 	}
-
 }

@@ -4,6 +4,12 @@ import java.io.Serializable;
 
 import Game.Coordinate;
 
+/**
+ * 
+ * Represents a playable Piece within the <b> Kabasuji</b> game.
+ * @author Achilles
+ *
+ */
 public class Piece implements Serializable{
 
 	private Coordinate[] coords = new Coordinate[6];
@@ -17,17 +23,12 @@ public class Piece implements Serializable{
 		this.bpIndex = bp;
 	}	
 	
-	
-	/**
-	 * getter for coordinates
-	 * @return coords the Coordinates of this Piece
-	 */
 	public Coordinate[] getCoordinates(){
 		return this.coords;
 	}
 	
 	/**
-	 * rotate the selected piece ninety degrees counterclockwise
+	 * Rotates the selected piece ninety degrees counterclockwise.
 	 */
 	public void rotateLeft(){
 		for(Coordinate c: coords){
@@ -39,7 +40,7 @@ public class Piece implements Serializable{
 	}
 
 	/**
-	 * rotate the selected piece ninety degrees clockwise
+	 * Rotates the selected piece ninety degrees clockwise.
 	 */
 	public void rotateRight(){
 		for(Coordinate c: coords){
@@ -51,7 +52,7 @@ public class Piece implements Serializable{
 	}
 	
 	/**
-	 * flip the selected piece over it's x-axis
+	 * Flips the selected piece over it's x-axis.
 	 */
 	public void verticalFlip(){
 		for(Coordinate c: coords){
@@ -61,7 +62,7 @@ public class Piece implements Serializable{
 	}
 
 	/**
-	 * flip the selected piece over it's y-axis
+	 * Flips the selected piece over it's y-axis.
 	 */
 	public void horizontalFlip(){
 		for(Coordinate c: coords){
@@ -69,7 +70,8 @@ public class Piece implements Serializable{
 			c.x = (-1) * oldX;
 		}
 	}
-
+	
+	@Override
 	public String toString () {
 		String s = "";
 		for (Coordinate c : coords) {

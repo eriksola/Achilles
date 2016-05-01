@@ -13,11 +13,22 @@ import Boundary.Builder.LevelBuilderLightningPanel;
 import Boundary.Builder.LevelBuilderPuzzlePanel;
 import Boundary.Builder.LevelBuilderReleasePanel;
 
+/**
+ * 
+ * Controller to get the amount of moves for a puzzle or release level.
+ * @author Sola
+ *
+ */
 public class GetMovesController implements ActionListener {
 	JTextField moves;
 	JPanel panel;
 	int numMoves;
 	
+	/**
+	 * Creates a GetMovesController.
+	 * @param moves TextField where the amount of moves will be types in.
+	 * @param p Panel where the text field resides.
+	 */
 	public GetMovesController(JTextField moves, JPanel p) {
 		this.moves = moves;
 		this.panel = p;
@@ -26,6 +37,9 @@ public class GetMovesController implements ActionListener {
 		}
 	}
 
+	/**
+	 * Invoked when the Enter Moves button is pressed.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		//Check if we have anything in the text field
 		if(!moves.getText().equals("")){
@@ -34,7 +48,7 @@ public class GetMovesController implements ActionListener {
 			      //Try to convert the string in the text in an int
 			      numMoves = Integer.parseInt(moves.getText());
 			      // print out the value after the conversion
-			      System.out.println("int numMoves = " + numMoves);
+			      System.out.println("numMoves = " + numMoves);
 			    }
 			    catch (NumberFormatException nfe)
 			    {

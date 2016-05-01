@@ -21,6 +21,12 @@ import Game.BullPen;
 import Game.Piece;
 import Game.Stock;
 
+/**
+ * 
+ * SaveController is used in the LevelBuilder in order to serialize created levels into the corresponding directories where built leveles reside.
+ * @author Sola
+ *
+ */
 public class SaveController implements ActionListener {
 	
 	ArrayList<Object> entities;
@@ -29,15 +35,19 @@ public class SaveController implements ActionListener {
 	/**
 	 * Constructor will take every entity that is needed in order to build a level.
 	 * LevelTypes:
-	 * 1 = Puzzle
-	 * 2 = Lightning
-	 * 3 = Release
+	 * <ul> <li> Puzzle = 1 </li> <li> Lightning = 2 </li> <li> Release = 3</li>
+	 * @param ent List of objects to be serialized.
+	 * @param levelType The leveltype of the level being built.
 	 */
 	public SaveController(ArrayList<Object> ent, int levelType){
 		this.entities = ent;
 		this.levelType = levelType;
 	}
 	
+	/**
+	 * Get the input, name of the file, from the builder.
+	 * @return Name of the level being built.
+	 */
 	public String getInput(){
 		String levelName = null;
 		boolean validName = false;
@@ -53,6 +63,13 @@ public class SaveController implements ActionListener {
 		}
 		return levelName;
 	}
+	
+	/**
+	 * If the level name requested is already created this will be invoked.
+	 * This will get the name of a level that is not the same as any levels in the directory.
+	 * @param pastName The previous name of a level that will be overwritten.
+	 * @return The name of the new level.
+	 */
 	public String overWriteLevel(String pastName){
 		String levelName = null;
 		boolean validName = false;
