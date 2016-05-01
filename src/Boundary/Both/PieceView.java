@@ -99,5 +99,9 @@ public class PieceView {
 	public void setP(Piece p) {
 		this.p = p;
 	}
+	
+	public void makeHintPiece(){
+		return this.p.makeHintPiece();
+	}
 
 }

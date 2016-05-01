@@ -103,4 +103,8 @@ public class Board implements Serializable{
 		this.height = tiles.length;
 		this.width = tiles[0].length;
 	}
+
+	public void registerHintPiece(Piece p) {
+		//know this piece is currently on the board, just need to get to the tiles beneath it
+	}
 }
