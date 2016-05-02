@@ -27,7 +27,7 @@ public class LevelModel {
 	}
 	
 	/**
-	 * Creates a LevelModel given a LevelModel.
+	 * Creates a LevelModel copy of a given LevelModel.
 	 * @param lm LevelModel given.
 	 */
 	public LevelModel(LevelModel lm){
@@ -51,5 +51,13 @@ public class LevelModel {
 	
 	public IScore getScore(){
 		return this.score;
+	}
+	
+	/**
+	 * if the player earns a better score, save it as the new top score
+	 * @param currentScore the new top score
+	 */
+	public void setScore(IScore currentScore) {
+		this.score = currentScore;
 	}
 }

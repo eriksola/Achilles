@@ -32,7 +32,7 @@ public class BoardView extends JPanel {
 	JLabel label; /** the label representing the Board. **/
 	KabaSuji view; /** the top-level boundary object. **/
 	BullPenView bpv; /** the BullPenView **/
-	Tile selectedTile;
+	Tile selectedTile; /** the tile on the board which was most recently click on**/
 	
 	/**
 	 * Constructor for the BoardView.
@@ -110,6 +110,10 @@ public class BoardView extends JPanel {
 		}
 		
 		this.brd.setTiles(brdTiles);
+	}
+	
+	public BullPenView getBullPenView(){
+		return this.bpv;
 	}
 	
 	public void setBullPenView(BullPenView bpv){
