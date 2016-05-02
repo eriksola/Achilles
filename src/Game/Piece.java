@@ -88,4 +88,5 @@ public class Piece implements Serializable{
 	public void setAnchorOnBoard(Coordinate c){
 		this.anchorOnBoard = c;
 	}
+
 }

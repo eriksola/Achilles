@@ -50,12 +50,11 @@ public class PieceController extends java.awt.event.MouseAdapter{
 			
 			PuzzleLevelPanel puzzlePanel = (PuzzleLevelPanel) view;
 			BoardView boardView = puzzlePanel.getBoardView();
-			HashMap<Tile,PieceView> piecesOnBoard = puzzlePanel.getBoardView().getBoard().getPieces();
+			HashMap<Tile,Piece> piecesOnBoard = puzzlePanel.getBoardView().getBoard().getPieces();
 			
 			//if there is a selected piece from the board, unselect that piece and redraw the board
 			if (piecesOnBoard.containsValue(view.getSelectedPiece())){
-				PieceView boardPieceView = piecesOnBoard.get(boardView.getSelectedTile());
-				Piece boardPiece = boardPieceView.getP();
+				Piece boardPiece = piecesOnBoard.get(boardView.getSelectedTile());
 				Coordinate pieceAnchor = boardPiece.getAnchorOnBoard();
 				int col = pieceAnchor.x;
 				int row = pieceAnchor.y;

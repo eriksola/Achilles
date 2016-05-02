@@ -95,10 +95,15 @@ public class ReleaseLevelPanel extends KabaSujiPlayer{
 		JButton button_4 = new JButton("Help");
 				
 		JButton button_5 = new JButton("Reset");
+
+		/** Starview for score */
+		StarView stars = new StarView();
+		//To add a star simply call the addStars method
+	
+		stars.setBackground(new Color(173, 216, 230));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 761, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
@@ -112,7 +117,7 @@ public class ReleaseLevelPanel extends KabaSujiPlayer{
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -125,10 +130,13 @@ public class ReleaseLevelPanel extends KabaSujiPlayer{
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(button_5)
 							.addGap(112))))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(272)
+					.addComponent(stars, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(293, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 448, Short.MAX_VALUE)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(button_3)
@@ -136,19 +144,24 @@ public class ReleaseLevelPanel extends KabaSujiPlayer{
 							.addContainerGap()
 							.addComponent(label))
 						.addComponent(button_4))
-					.addGap(21)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_5))
+							.addGap(21)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(button_5))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+									.addGap(16)
+									.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(button)
+										.addComponent(button_1)
+										.addComponent(button_2)))))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
-							.addGap(16)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button)
-								.addComponent(button_1)
-								.addComponent(button_2))))
+							.addGap(32)
+							.addComponent(stars, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
 					.addGap(32))
 		);
 		panel.setLayout(gl_panel);

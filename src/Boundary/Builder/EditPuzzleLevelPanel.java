@@ -29,6 +29,7 @@ import Controller.BullPenController;
 import Controller.GetMovesController;
 import Controller.GetBoardDimensionsController;
 import Controller.HflipController;
+import Controller.HintController;
 import Controller.RotateController;
 import Controller.SaveController;
 import Controller.VflipController;
@@ -245,6 +246,8 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
+		addhint.addActionListener(new HintController(this));
+
 		
 	}
 	

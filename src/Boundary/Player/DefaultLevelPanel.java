@@ -19,6 +19,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import Boundary.Both.Deserialization;
 import Controller.DefLevelMenuToLightningLevelController;
 import Controller.DefLevelMenuToPuzzleLevelController;
+import Controller.DefLevelMenuToReleaseLevelController;
 import Controller.ReturnToPlayerMenuController;
 import Controller.TimerController;
 import Game.Board;

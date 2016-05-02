@@ -28,6 +28,7 @@ import Controller.GetMovesController;
 import Controller.GetTimeController;
 import Controller.GetBoardDimensionsController;
 import Controller.HflipController;
+import Controller.HintController;
 import Controller.RotateController;
 import Controller.SaveController;
 import Controller.VflipController;
@@ -252,6 +253,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
+		addhint.addActionListener(new HintController(this));
 		this.getTimer = new GetTimeController(time_text, this);
 		this.btnTime.addActionListener(getTimer);
 		

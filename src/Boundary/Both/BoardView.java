@@ -74,13 +74,18 @@ public class BoardView extends JPanel {
 				
 				if(brd.getTiles()[i][j].isOccupied()){
 					g.setColor(Color.RED);
-					g.fillRect(j*10 + 1, i*10 + 1, 8, 8);
+					g.fillRect(j*10, i*10, 10, 10);
 					g.setColor(Color.BLACK);
 				}
 				
 				if(brd.getTiles()[i][j].isSelected()){
 					g.setColor(Color.YELLOW);
-					g.fillRect(j*10 + 1, i*10 + 1, 8, 8);
+					g.fillRect(j*10, i*10, 10, 10);
+					g.setColor(Color.BLACK);
+				}
+				if(brd.getTiles()[i][j].isHint()){
+					g.setColor(Color.GREEN);
+					g.fillRect(j*10, i*10, 10, 10);
 					g.setColor(Color.BLACK);
 				}
 				g.drawRect(j*10, i*10, 10, 10);

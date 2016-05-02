@@ -12,6 +12,7 @@ public class Tile implements Serializable{
 	
 	boolean isOccupied;
 	boolean isSelected;
+	boolean isHint;
 	int row;
 	int column;
 	
@@ -23,6 +24,7 @@ public class Tile implements Serializable{
 	public Tile(int r, int c){
 		this.isOccupied = false;
 		this.isSelected = false;
+		this.isHint = false;
 		this.row = r;
 		this.column = c;
 	}
@@ -58,5 +60,12 @@ public class Tile implements Serializable{
 	public void setSelected(boolean bool){
 		this.isSelected = bool;
 	}
+	
+	public boolean isHint(){
+		return this.isHint;
+	}
+	
+	public void setHint(boolean bool){
+		this.isHint = bool;
+	}
 }
-//>>>>>>> refs/remotes/origin/master

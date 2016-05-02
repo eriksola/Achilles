@@ -9,6 +9,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
+import Boundary.Builder.*;
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
@@ -45,6 +46,12 @@ public class BoardController extends java.awt.event.MouseAdapter{
 	public void mouseClicked(MouseEvent me){
 		
 		Point p = me.getPoint();
+		boolean isBuilder = (view instanceof LevelBuilderPuzzlePanel) ||
+				(view instanceof LevelBuilderLightningPanel) ||
+				(view instanceof LevelBuilderReleasePanel) ||
+				(view instanceof EditPuzzleLevelPanel) ||
+				(view instanceof EditLightningLevelPanel) ||
+				(view instanceof EditReleaseLevelPanel);
 		
 		//if there is a selected piece
 		if (view.getSelectedPiece() != null){
@@ -71,10 +78,11 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			PieceView pv = view.getSelectedPiece();
 			Board brd = bv.getBoard();
 			
+
 			//check if this is a puzzle level
-			if(view instanceof PuzzleLevelPanel){
+			if(view instanceof PuzzleLevelPanel || isBuilder){
 				
-				HashMap<Tile,PieceView> piecesOnBoard = bv.getBoard().getPieces();
+				HashMap<Tile,Piece> piecesOnBoard = bv.getBoard().getPieces();
 				
 				//check if the piece is coming from the board
 				if (piecesOnBoard.containsValue(view.getSelectedPiece())){
@@ -82,7 +90,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 					//get info for removing piece from board -
 					//location of the anchor point of the piece
 					Tile c = bv.getSelectedTile();
-					Piece piece = piecesOnBoard.get(c).getP();
+					Piece piece = piecesOnBoard.get(c);
 					Coordinate pieceAnchor = piece.getAnchorOnBoard();
 					int oldCol = pieceAnchor.getX();
 					int oldRow = pieceAnchor.getY();
@@ -139,11 +147,13 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			return;
 		}
 		
+
 		// if there is no selected piece and this is a puzzle level
-		else if (view instanceof PuzzleLevelPanel){
-			
-			//pieces can be removed from the board
-			HashMap<Tile, PieceView> piecesOnBoard = bv.getBoard().getPieces();
+		else if (view instanceof PuzzleLevelPanel || isBuilder){
+
+			//pieces can be removed from the board while no piece is selected
+			HashMap<Tile, Piece> piecesOnBoard = bv.getBoard().getPieces();
+
 			int row = -1;
 			int col = -1;
 			
@@ -166,7 +176,8 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			bv.setSelectedTile(t);
 			System.out.println(piecesOnBoard.get(t));
 			if (piecesOnBoard.containsKey(t)){
-				PieceView pv = piecesOnBoard.get(t);
+				Piece piece = piecesOnBoard.get(t);
+				PieceView pv = new PieceView(piece, this.view);
 				view.setSelected(pv);
 				Coordinate c = pv.getP().getAnchorOnBoard();
 				col = c.x;

@@ -79,6 +79,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 	 * Create the panel.
 	 */
 	public PuzzleLevelPanel(KabasujiFrame f, PuzzleLevelModel m) {
+		setBackground(new Color(173, 216, 230));
 		
 		
 		this.mainFrame = f;
@@ -126,6 +127,11 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		this.movesView = textArea;
 		
 		this.starView = new StarView();
+		
+		/** Starview for score */
+		StarView stars = new StarView();
+		//To add a star simply call the addStars
+		stars.setBackground(new Color(173, 216, 230));
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -182,7 +188,9 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(button_5))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+								.addComponent(stars, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
 							.addGap(16)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(horBtn)

@@ -64,6 +64,7 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	 * Create the panel.
 	 */
 	public LightningLevelPanel(KabasujiFrame f, LightningLevelModel m) {
+		setBackground(new Color(173, 216, 230));
 		
 		
 		this.mainFrame = f;
@@ -167,7 +168,11 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(button_5))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(11)
+									.addComponent(starView, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
 							.addGap(16)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(horBtn)
@@ -222,8 +227,9 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 			mainFrame.endLevel(initialModel, score);
 		}
 	}
-	
+
 	public LightningLevelModel getCurrent(){
 		return this.currentModel;
 	}
+
 }
