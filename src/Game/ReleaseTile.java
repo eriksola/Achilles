@@ -8,5 +8,8 @@ public class ReleaseTile extends Tile{
 		super(row, column);
 		this.colNum = cn;
 	}
-
+	
+	public ColorNumber getColNum(){
+		return this.colNum;
+	}
 }

@@ -24,6 +24,7 @@ import Boundary.Both.KabaSuji;
 import Boundary.Both.StockView;
 import Controller.BoardController;
 import Controller.BullPenController;
+import Controller.DeleteTileController;
 import Controller.GetMovesController;
 import Controller.GetBoardDimensionsController;
 import Controller.HflipController;
@@ -239,6 +240,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		//activate controllers
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
+		delete.addActionListener(new DeleteTileController(this));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
 	
 		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
