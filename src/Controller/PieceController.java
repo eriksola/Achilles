@@ -45,6 +45,7 @@ public class PieceController extends java.awt.event.MouseAdapter{
 		if (view.getSelectedPiece() == pv){
 			view.removeSelected();
 		}
+		
 		//if this is the puzzle player, the selected piece may be from the board
 		else if (view instanceof PuzzleLevelPanel){
 			
@@ -64,6 +65,7 @@ public class PieceController extends java.awt.event.MouseAdapter{
 			}
 			view.setSelected(pv);
 		}
+		
 		//otherwise make that piece the selected piece
 		else {
 		view.setSelected(pv);
