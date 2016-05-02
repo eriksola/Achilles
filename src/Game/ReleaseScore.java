@@ -1,5 +1,7 @@
 package Game;
 
+import Boundary.Player.KabasujiFrame;
+
 /**
  * A ReleaseScore will have the logic for how to win a release level type in the <b> Kabasuji</b> game.
  * @author Aguila

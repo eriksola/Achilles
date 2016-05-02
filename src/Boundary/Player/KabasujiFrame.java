@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Game.BullPen;
+import Game.IScore;
+import Game.LevelModel;
+import Game.PuzzleLevelModel;
+import Game.PuzzleScore;
 import Game.Stock;
 
 import javax.swing.GroupLayout;
@@ -31,16 +35,6 @@ public class KabasujiFrame extends JFrame {
 	int builtLightning = 0;
 	int builtRelease = 0;
 	boolean builtLevels = false;
-	
-	/**
-	 * Constructs a KabasujiFrame.
-	 * @param s Stock of pieces for the game.
-	 */
-	public KabasujiFrame(Stock s){
-		this.stock = s;
-		initialize();
-		builtLevels = hasBuiltLevels();
-	}
 
 	public int getBuiltPuzzles() {
 		return this.builtPuzzles;
@@ -58,7 +52,7 @@ public class KabasujiFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	KabasujiFrame() {
+	public KabasujiFrame() {
 		setBackground(new Color(173, 216, 230));
 		setForeground(new Color(173, 216, 230));
 		setTitle("Kabasuji");
@@ -82,12 +76,14 @@ public class KabasujiFrame extends JFrame {
 		mainMenu.setBackground(new Color(173, 216, 230));
 		mainMenu.setVisible(true);
 		getContentPane().add(mainMenu);
+		
+		builtLevels = hasBuiltLevels();
 	}
 	
 	/**
 	 * Initialize the game with the main menu panel.
 	 */
-	void initialize(){
+	public void initialize(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -115,5 +111,17 @@ public class KabasujiFrame extends JFrame {
 		this.builtRelease = new File("./src/BuiltLevels/ReleaseLevels").list().length;
 		boolean hasBuiltLvl = builtPuzzles > 0 || builtLightning > 0 || builtRelease > 0;
 		return hasBuiltLvl;
+	}
+
+	public void endLevel(LevelModel initialModel, IScore score) {
+		
+		getContentPane().removeAll();
+		getContentPane().invalidate();
+		
+		LevelEndPanel levelEnd = new LevelEndPanel(this, initialModel, score);
+		getContentPane().add(levelEnd, BorderLayout.CENTER);
+		getContentPane().revalidate();
+		
+		
 	}
 }

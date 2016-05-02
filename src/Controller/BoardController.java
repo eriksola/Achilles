@@ -117,8 +117,6 @@ public class BoardController extends java.awt.event.MouseAdapter{
 						bv.draw();
 					}
 				}
-				//draw in case of edge cases (always keep bullpenview up to date)
-				bv.draw();
 			}
 			
 			//otherwise the piece must be from the bullpen
@@ -149,11 +147,13 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			return;
 		}
 		
-		//if this is a puzzle level
+
+		// if there is no selected piece and this is a puzzle level
 		else if (view instanceof PuzzleLevelPanel || isBuilder){
-			
+
 			//pieces can be removed from the board while no piece is selected
 			HashMap<Tile, Piece> piecesOnBoard = bv.getBoard().getPieces();
+
 			int row = -1;
 			int col = -1;
 			
@@ -171,7 +171,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				}
 			}
 			
-			//select the piece on the board
+			//select the piece on the board at that row and column
 			Tile t = bv.getBoard().getTiles()[row][col];
 			bv.setSelectedTile(t);
 			System.out.println(piecesOnBoard.get(t));
