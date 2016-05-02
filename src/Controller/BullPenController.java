@@ -41,7 +41,7 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 	 * When a piece is clicked select it.
 	 */
 	public void mouseClicked(MouseEvent me){
-		System.out.println("mouse clicked from bullpen");
+		System.out.println("mouse clicked to bullpen");
 		
 		//if there is a selected Piece
 		if(view.getSelectedPiece() != null){

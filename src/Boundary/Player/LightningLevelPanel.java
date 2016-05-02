@@ -205,6 +205,10 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		return this.boardView;
 	}
 	
+	public BullPenView getBullPenView(){
+		return this.bullPenView;
+	}
+	
 	public LightningLevelModel getInitial(){
 		return this.initialModel;
 	}

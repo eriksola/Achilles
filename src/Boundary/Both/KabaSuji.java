@@ -23,6 +23,8 @@ public abstract class KabaSuji extends JPanel {
 	
 	public abstract JScrollPane getScrollPane();
 	public abstract BoardView getBoardView();
+	public abstract BullPenView getBullPenView();
+	
 	/**
 	 * set a selected PieceView.
 	 * @param pv the PieceView to select

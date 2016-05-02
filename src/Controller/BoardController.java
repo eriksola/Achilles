@@ -87,7 +87,6 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				HashMap<Tile,Piece> piecesOnBoard = bv.getBoard().getPieces();
 				
 				//check if the piece is coming from the board
-				System.out.println("Piece coming from board? " + piecesOnBoard.containsValue(view.getSelectedPiece()));
 				if (piecesOnBoard.containsValue(view.getSelectedPiece().getP())){
 					
 					//get info for removing piece from board -
