@@ -28,9 +28,10 @@ public abstract class KabaSuji extends JPanel {
 	 * @param pv the PieceView to select
 	 */
 	public void setSelected(PieceView pv){
+		
 		if (pv != null){
 			if(selectedPiece == pv){
-				selectedPiece.drawUnselected();
+				removeSelected();
 			}
 			if(selectedPiece != null){
 				selectedPiece.drawUnselected();

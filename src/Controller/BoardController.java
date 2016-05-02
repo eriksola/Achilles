@@ -46,6 +46,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 	public void mouseClicked(MouseEvent me){
 		
 		Point p = me.getPoint();
+		
 		boolean isBuilder = (view instanceof LevelBuilderPuzzlePanel) ||
 				(view instanceof LevelBuilderLightningPanel) ||
 				(view instanceof LevelBuilderReleasePanel) ||
@@ -55,7 +56,8 @@ public class BoardController extends java.awt.event.MouseAdapter{
 		
 		//if there is a selected piece
 		if (view.getSelectedPiece() != null){
-			System.out.println("Mouse clicked from board");
+			
+			System.out.println("Mouse clicked to board");
 			System.out.println(p.x);
 			System.out.println(p.y);
 			int row = -1;
@@ -85,12 +87,13 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				HashMap<Tile,Piece> piecesOnBoard = bv.getBoard().getPieces();
 				
 				//check if the piece is coming from the board
-				if (piecesOnBoard.containsValue(view.getSelectedPiece())){
+				System.out.println("Piece coming from board? " + piecesOnBoard.containsValue(view.getSelectedPiece()));
+				if (piecesOnBoard.containsValue(view.getSelectedPiece().getP())){
 					
 					//get info for removing piece from board -
 					//location of the anchor point of the piece
-					Tile c = bv.getSelectedTile();
-					Piece piece = piecesOnBoard.get(c);
+					Tile oldLocation = bv.getSelectedTile();
+					Piece piece = piecesOnBoard.get(oldLocation);
 					Coordinate pieceAnchor = piece.getAnchorOnBoard();
 					int oldCol = pieceAnchor.getX();
 					int oldRow = pieceAnchor.getY();
@@ -150,10 +153,10 @@ public class BoardController extends java.awt.event.MouseAdapter{
 
 		// if there is no selected piece and this is a puzzle level
 		else if (view instanceof PuzzleLevelPanel || isBuilder){
-
+		
+			System.out.println("Mouse clicked from board");
 			//pieces can be removed from the board while no piece is selected
 			HashMap<Tile, Piece> piecesOnBoard = bv.getBoard().getPieces();
-
 			int row = -1;
 			int col = -1;
 			
@@ -174,7 +177,6 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			//select the piece on the board at that row and column
 			Tile t = bv.getBoard().getTiles()[row][col];
 			bv.setSelectedTile(t);
-			System.out.println(piecesOnBoard.get(t));
 			if (piecesOnBoard.containsKey(t)){
 				Piece piece = piecesOnBoard.get(t);
 				PieceView pv = new PieceView(piece, this.view);
