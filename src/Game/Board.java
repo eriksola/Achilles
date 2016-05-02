@@ -188,6 +188,7 @@ public class Board implements Serializable{
 	}
 
 	public void registerHintPiece(Piece p) {
+		
 		//get the piece from the board and set it's underlying tiles as hint tiles
 		Coordinate anchor = p.getAnchorOnBoard();
 		for (int i = 0; i < p.getCoordinates().length; i++) {

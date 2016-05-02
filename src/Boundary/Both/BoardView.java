@@ -58,6 +58,7 @@ public class BoardView extends JPanel {
 	 * draws the current state of the Board, occupied Tiles yellow, unoccupied white.
 	 */
 	public void draw(){
+	
 		int brdHeight = brd.getTiles().length*10;
 		int brdWidth = brd.getTiles()[0].length*10;
 		int brdRows = brd.getTiles().length;

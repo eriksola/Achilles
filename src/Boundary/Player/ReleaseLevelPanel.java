@@ -177,6 +177,11 @@ public class ReleaseLevelPanel extends KabaSujiPlayer{
 	public BoardView getBoardView(){
 		return this.boardView;
 	}
+	
+	public BullPenView getBullPenView(){
+		return this.bullPenView;
+	}
+	
 	@Override
 	public void updateScore() {
 	
