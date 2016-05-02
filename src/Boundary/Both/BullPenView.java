@@ -34,18 +34,21 @@ import javax.swing.JScrollPane;
  */
 public class BullPenView extends JPanel {
 	
-	JFrame frame;
-	BullPen bp;
-	KabaSuji view;
-	ArrayList<PieceView> pieceViews;
-	JLabel label;
+	JFrame frame; //the frame of the player/builder app
+	BullPen bp; //the bullPen entity
+	KabaSuji view; //the screen which holds the BullPenView
+	ArrayList<PieceView> pieceViews; //the array of PieceViews contained in the bullPen
+	JLabel label; //holds the imageIcons which make up pieceViews
 
 	/**
-	 * Constructor for bullpenview.
+	 * Constructor for bullPenView
+	 * @param f frame of app
+	 * @param p bullpen entity
+	 * @param view panel within frame
 	 */
-	public BullPenView(JFrame f, BullPen p, KabaSuji view) {
+	public BullPenView(JFrame f, BullPen bp, KabaSuji view) {
 		this.frame = f;
-		this.bp = p;
+		this.bp = bp;
 		this.view = view;
 		this.pieceViews = new ArrayList<PieceView>();
 		draw();
@@ -74,7 +77,10 @@ public class BullPenView extends JPanel {
 		repaint();
 		return this;
 	}
-	
+	/** 
+	 * Removes the pieceView from the bullPenView
+	 * @param pv the pieceView to be removed
+	 */
 	public void remove(PieceView pv){
 		for (int i = 0; i < pieceViews.size(); i++) {
 			if(pieceViews.get(i) == pv){
@@ -90,7 +96,10 @@ public class BullPenView extends JPanel {
 			}
 		}
 	}
-	
+	/**
+	 * Adds the pieceView to the bullPenView
+	 * @param pv the pieceView to be added
+	 */
 	public void addView(PieceView pv){
 		this.pieceViews.add(pv);
 		add(pv.getLabel());
@@ -105,7 +114,7 @@ public class BullPenView extends JPanel {
 	}
 
 	/**
-	 * Add a PieceView to the BullPenView.
+	 * Add a PieceView to the BullPenView (AND THE PIECE TO THE BULLPEN)
 	 * @param pv PieceView to be added.
 	 */
 	public void addPiece(PieceView pv) {

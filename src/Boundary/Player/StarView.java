@@ -80,4 +80,8 @@ public class StarView extends JPanel {
 		}
 		
 	}
+	
+	public int getStars(){
+		return currentStars;
+	}
 }

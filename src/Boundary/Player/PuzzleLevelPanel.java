@@ -2,6 +2,7 @@ package Boundary.Player;
 
 import javax.swing.JPanel;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.border.EmptyBorder;
@@ -22,6 +23,7 @@ import Controller.BoardController;
 import Controller.BullPenController;
 import Controller.DefLevelMenuToPuzzleLevelController;
 import Controller.HflipController;
+import Controller.LevelPlayerController;
 import Controller.PlayPuzzletoPuzzleRulesController;
 import Controller.ReturnToDefMenuController;
 import Controller.RotateController;
@@ -29,6 +31,7 @@ import Controller.TimerController;
 import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
+import Game.IScore;
 import Game.LevelModel;
 import Game.LightningLevelModel;
 import Game.LightningScore;
@@ -45,6 +48,7 @@ import Boundary.Both.PieceView;
 
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
@@ -57,7 +61,8 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 
 
 	KabasujiFrame mainFrame;
-	PuzzleLevelModel levelModel;
+	PuzzleLevelModel initialModel;
+	PuzzleLevelModel currentModel;
 	Board board;
 	BullPen bp;
 	int numMoves;
@@ -65,6 +70,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 	
 	BoardView boardView;
 	BullPenView bullPenView;
+	StarView starView;
 	JScrollPane scrollPane;
 	JTextArea movesView;
 
@@ -76,11 +82,13 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		
 		
 		this.mainFrame = f;
-		this.levelModel = m;
-		this.board = m.getBoard();
-		this.bp = m.getBullPen();
-		this.numMoves = m.getMovesAllowed();
-		this.score = (PuzzleScore) m.getScore();
+		this.initialModel = new PuzzleLevelModel(m);
+		this.currentModel = m;
+		this.board = currentModel.getBoard();
+		this.bp = currentModel.getBullPen();
+		this.numMoves = currentModel.getMovesAllowed();
+		currentModel.setScore(new PuzzleScore(numMoves));
+		this.score = (PuzzleScore) currentModel.getScore();
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,6 +103,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
 		boardView.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
+		
 		JButton horBtn = new JButton("Horizontal");
 		
 		JButton vertBtn = new JButton("Vertical");
@@ -103,10 +112,10 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		
 		JButton button_3 = new JButton("Back");
 				
-		JLabel label = new JLabel("Level");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setForeground(Color.BLACK);
-		label.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
+		JLabel lblPuzzle = new JLabel("Puzzle");
+		lblPuzzle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPuzzle.setForeground(Color.BLACK);
+		lblPuzzle.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
 		
 		JButton button_4 = new JButton("Help");
 				
@@ -115,6 +124,8 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		JTextArea textArea = new JTextArea("Moves Left: " + Integer.toString(numMoves));
 		textArea.setEditable(false);
 		this.movesView = textArea;
+		
+		this.starView = new StarView();
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -132,33 +143,39 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(label)
-									.addGap(298)
-									.addComponent(button_4)))
-							.addContainerGap())
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(60)
-							.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(starView, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(textArea, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+							.addGap(135)
 							.addComponent(button_5)
-							.addGap(112))))
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(90)
+									.addComponent(lblPuzzle)
+									.addPreferredGap(ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
+									.addComponent(button_4)))
+							.addGap(38))))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(button_3)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(label))
-						.addComponent(button_4))
-					.addGap(21)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblPuzzle)
+							.addComponent(button_4)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(starView, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
@@ -179,6 +196,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		//activate controllers
 		button_3.addActionListener(new ReturnToDefMenuController(mainFrame));
 		button_4.addActionListener(new PlayPuzzletoPuzzleRulesController(mainFrame));
+		button_5.addActionListener(new LevelPlayerController(mainFrame, initialModel));
 		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
 		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
 		horBtn.addActionListener(new HflipController(this));
@@ -197,13 +215,32 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 
 	@Override
 	public void updateScore() {
-		score.updateScore(levelModel);
+		score.updateScore(currentModel);
+		
+		//update the star view
+		if (score.scoreToStars() > starView.getStars()){
+			starView.addStar();
+		}
+		
+		if (score.scoreToStars() < starView.getStars()){
+			starView.removeStar();
+		}
+		
+		//if the maximum score has been earned, end the level
+		if (score.scoreToStars() == 3){
+			mainFrame.endLevel(initialModel, score);
+		}
 	}
 	
 	//called by BoardController when successfully using addPiece()
 	public void useMove(){
 		//decrement the number of moves left and change to a string
 		String strMoves = Integer.toString(--numMoves);
+		
+		//if there are no moves left, end the game
+		if (numMoves <= 0){
+			mainFrame.endLevel(initialModel, score);
+		}
 		//update the boundary view of moves left
 		this.movesView.setText("Moves Left: " + strMoves);
 	}

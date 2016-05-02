@@ -1,6 +1,7 @@
 package Controller;
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,8 +14,10 @@ import javax.swing.Timer;
 
 import Boundary.Both.KabaSuji;
 import Boundary.Player.KabasujiFrame;
+import Boundary.Player.LevelEndPanel;
 import Boundary.Player.LightningLevelPanel;
-import Boundary.Player.TimeUpScreen;
+import Boundary.Player.TimesUpPanel;
+import Game.IScore;
 
 /**
  * 
@@ -24,11 +27,11 @@ import Boundary.Player.TimeUpScreen;
  */
 public class TimerController implements ActionListener{
 	
-	KabasujiFrame frame;
-	LightningLevelPanel view; /** the top level boundary object **/
+	KabasujiFrame frame; /** the frame for the entire app **/
+	LightningLevelPanel view; /** the top level boundary panel **/
 	JTextArea timerView; /** the swing element displaying the time left **/
-	int timeLeft; /** time left on the timer CURRENTLY **/
-	Timer t;
+	int timeLeft; /** time left on the timer  **/
+	Timer t; /** The swing entity which triggers the controller **/
 	
 	/**
 	 * Creates a timer controller that will set a countdown time for a lightning level.
@@ -46,7 +49,7 @@ public class TimerController implements ActionListener{
 		//set the swing element to display the time given
 		timerView.invalidate();
 		String stringTime = Integer.toString(timeLeft);
-		timerView.setText(stringTime);
+		timerView.setText("Time Left: " + stringTime);
 		timerView.revalidate();
 		
 		t = new Timer(1000, this);
@@ -64,6 +67,7 @@ public class TimerController implements ActionListener{
 		
 		//if there is time left, update the timer view
 		if (timeLeft >= 0){
+			
 			timerView.invalidate();
 			
 			//if less than 20 seconds left, change color of numbers to red
@@ -71,19 +75,23 @@ public class TimerController implements ActionListener{
 		
 			//update timeLeft and print to JTextArea
 			String stringTimeLeft = Integer.toString(timeLeft);
-			timerView.setText(stringTimeLeft);
+			timerView.setText("Time Left: " + stringTimeLeft);
 		
 			timerView.revalidate();
 		}
-		//if there is no time left, open a new window and stop play
+		
+		//if there is no time left, stop play and switch to the "Times Up" screen
 		else {
+			
 			t.stop();
-			TimeUpScreen timeUp = new TimeUpScreen(frame, view.getInitial());
-			timeUp.addWindowListener(new WindowAdapter() {
-				public void windowClosing(WindowEvent e) {
-					frame.dispose();
-				}      
-			});
+			IScore currentScore = view.getCurrent().getScore();
+			LevelEndPanel levelEnd = new LevelEndPanel(frame, view.getInitial(), currentScore);
+			
+			frame.getContentPane().removeAll();
+			frame.getContentPane().invalidate();
+			
+			frame.getContentPane().add(levelEnd, BorderLayout.CENTER);
+			frame.getContentPane().revalidate();
 		}
 	}
 }

@@ -83,7 +83,7 @@ public class Board implements Serializable{
 			newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
 		}
 		
-		//if true then mark the tiles with those coordinates as unoccupied
+		//if true then mark the tiles with those coordinates as unoccupied and unselected
 		//first mark the tile that was clicked on
 		//then mark the other tiles based on the coordinates of the Pieces squares
 		//and remove the tile from the HashMap 
@@ -108,20 +108,20 @@ public class Board implements Serializable{
 	 */
 	public boolean selectPiece(int row, int column, PieceView pv){
 		
-		Coordinate[] newUnoccCoords = new Coordinate[6];
+		Coordinate[] newSelectCoords = new Coordinate[6];
 		
 		//get coordinates of the piece on the board
 		for (int i = 0; i < 6; i++){
 			Coordinate c = pv.getP().getCoordinates()[i];
-			newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
+			newSelectCoords[i] = new Coordinate(column+c.x, row-c.y);
 		}
 		
 		//if true then mark those tiles as selected 
 		//first mark the tile that was clicked on
 		//then mark the other tiles based on the coordinates of the Pieces squares
 		for(int i = 0; i < 6; i++){
-			int newX = newUnoccCoords[i].x;
-			int newY = newUnoccCoords[i].y;
+			int newX = newSelectCoords[i].x;
+			int newY = newSelectCoords[i].y;
 			Tile t = this.tiles[newY][newX];
 			t.setSelected(true);
 		}
@@ -132,20 +132,20 @@ public class Board implements Serializable{
 
 	public boolean deselectPiece(int row, int column, PieceView pv){
 		
-		Coordinate[] newUnoccCoords = new Coordinate[6];
+		Coordinate[] newUnselCoords = new Coordinate[6];
 		
 		//get coordinates of the piece on the board
 		for (int i = 0; i < 6; i++){
 			Coordinate c = pv.getP().getCoordinates()[i];
-			newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
+			newUnselCoords[i] = new Coordinate(column+c.x, row-c.y);
 		}
 		
-		//if true then mark those tiles as selected 
+		//if true then mark those tiles as unselected 
 		//first mark the tile that was clicked on
 		//then mark the other tiles based on the coordinates of the Pieces squares
 		for(int i = 0; i < 6; i++){
-			int newX = newUnoccCoords[i].x;
-			int newY = newUnoccCoords[i].y;
+			int newX = newUnselCoords[i].x;
+			int newY = newUnselCoords[i].y;
 			Tile t = this.tiles[newY][newX];
 			t.setSelected(false);
 		}

@@ -150,6 +150,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		
 		JButton timerBtn = new JButton("Set Time");
 		btnTime = timerBtn;
+		timerBtn.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
