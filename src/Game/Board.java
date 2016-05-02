@@ -14,6 +14,7 @@ public class Board implements Serializable{
 	
 	Tile[][] tiles;
 	HashMap<Tile,Piece> pieces;
+	Tile selectedPieceAnchor; /** the anchor of the selected piece on the board **/
 	int width;
 	int height;
 		
@@ -26,6 +27,7 @@ public class Board implements Serializable{
 		this.height = t.length;
 		this.width = t[0].length;
 		this.pieces = new HashMap<Tile,Piece>();
+		this.selectedPieceAnchor = null;
 	}
 	
 	/**
@@ -117,8 +119,13 @@ public class Board implements Serializable{
 		}
 		
 		//if true then mark those tiles as selected 
-		//first mark the tile that was clicked on
+		//first mark the tile that was clicked on (and set as anchor)
 		//then mark the other tiles based on the coordinates of the Pieces squares
+		
+		int anchorX = newSelectCoords[0].x;
+		int anchorY = newSelectCoords[0].y;
+		setSelectedPieceAnchor(this.tiles[anchorY][anchorX]);
+		
 		for(int i = 0; i < 6; i++){
 			int newX = newSelectCoords[i].x;
 			int newY = newSelectCoords[i].y;
@@ -143,6 +150,9 @@ public class Board implements Serializable{
 		//if true then mark those tiles as unselected 
 		//first mark the tile that was clicked on
 		//then mark the other tiles based on the coordinates of the Pieces squares
+		
+		deselectPieceAnchor();
+		
 		for(int i = 0; i < 6; i++){
 			int newX = newUnselCoords[i].x;
 			int newY = newUnselCoords[i].y;
@@ -166,6 +176,10 @@ public class Board implements Serializable{
 
 			return false;
 		}
+		
+		//if this tile is null, invalid move
+		if (this.tiles[row][col] == null) { return false;}
+		
 		//if the tile is occupied, invalid move
 		if (this.tiles[row][col].isOccupied()){ return false;}
 
@@ -181,11 +195,30 @@ public class Board implements Serializable{
 		return this.pieces;
 	}
 	
+	public Tile getSelectedPieceAnchor(){
+		return this.selectedPieceAnchor;
+	}
+	
 	public void setTiles(Tile[][] tiles){
 		this.tiles = tiles;
 		this.height = tiles.length;
 		this.width = tiles[0].length;
 	}
+	
+	/**
+	 * Sets the anchor of the selected piece (IF ITS ON THE BOARD)
+	 * @param t
+	 */
+	public void setSelectedPieceAnchor(Tile t){
+		this.selectedPieceAnchor = t;
+	}
+	
+	/**
+	 * Deselects the anchor of the selected piece
+	 */
+	public void deselectPieceAnchor(){
+		this.selectedPieceAnchor = null;
+	}	
 
 	public void registerHintPiece(Piece p) {
 		
@@ -196,6 +229,8 @@ public class Board implements Serializable{
 			int colOffset = p.getCoordinates()[i].x;
 			Tile t = this.tiles[anchor.y - rowOffset][anchor.x + colOffset];
 			t.setHint(true);
+			t.setOccupied(false);
+			t.setSelected(false);
 		}
 	}
 }

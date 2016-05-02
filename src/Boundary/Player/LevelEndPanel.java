@@ -41,6 +41,7 @@ public class LevelEndPanel extends JPanel {
 		//if the new score is better, set is as the new top score
 		if (currentStars > initStars){
 			initialModel.setScore(currentScore);
+			
 		}
 		
 		setBackground(new Color(173, 216, 230));

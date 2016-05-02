@@ -53,7 +53,7 @@ public class PieceController extends java.awt.event.MouseAdapter{
 			BoardView boardView = puzzlePanel.getBoardView();
 			HashMap<Tile,Piece> piecesOnBoard = puzzlePanel.getBoardView().getBoard().getPieces();
 			
-			//if there is a selected piece from the board, unselect that piece and redraw the board
+			//if there is a selected piece/tile from the board, unselect that piece/tile and redraw the board
 			if (piecesOnBoard.containsValue(view.getSelectedPiece())){
 				Piece boardPiece = piecesOnBoard.get(boardView.getSelectedTile());
 				Coordinate pieceAnchor = boardPiece.getAnchorOnBoard();
@@ -61,14 +61,15 @@ public class PieceController extends java.awt.event.MouseAdapter{
 				int row = pieceAnchor.y;
 				Board board = boardView.getBoard();
 				board.deselectPiece(row, col, view.getSelectedPiece());
-				boardView.draw();
 			}
 			view.setSelected(pv);
+			boardView.deselectTile();
 		}
 		
 		//otherwise make that piece the selected piece
 		else {
 		view.setSelected(pv);
+		view.getBoardView().deselectTile();
 		}
 
 	}

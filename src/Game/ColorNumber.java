@@ -19,5 +19,12 @@ public class ColorNumber {
 		this.ryg = col;
 		this.number = num;
 	}
-
+	
+	public int getColor(){
+		return this.ryg;
+	}
+	
+	public int getNum(){
+		return this.number;
+	}
 }

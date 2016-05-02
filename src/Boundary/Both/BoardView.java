@@ -32,7 +32,7 @@ public class BoardView extends JPanel {
 	JLabel label; /** the label representing the Board. **/
 	KabaSuji view; /** the top-level boundary object. **/
 	BullPenView bpv; /** the BullPenView **/
-	Tile selectedTile; /** the tile on the board which was most recently click on**/
+	Tile selectedTile; /** the tile on the board which was most recently selected**/
 	
 	/**
 	 * Constructor for the BoardView.
@@ -59,44 +59,44 @@ public class BoardView extends JPanel {
 	 */
 	public void draw(){
 	
-		int brdHeight = brd.getTiles().length*10;
-		int brdWidth = brd.getTiles()[0].length*10;
+		int brdHeight = brd.getTiles().length*20;
+		int brdWidth = brd.getTiles()[0].length*20;
 		int brdRows = brd.getTiles().length;
 		int brdCols = brd.getTiles()[0].length;
 		BufferedImage img = new BufferedImage(brdWidth + 5, brdHeight + 5, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = (Graphics2D)img.getGraphics();
-		g.setColor(Color.WHITE);
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, brdWidth + 5, brdHeight + 5);
 		g.setColor(Color.BLACK);
 		for(int i = 0; i < brdRows; i++){
 			for(int j = 0; j < brdCols; j++){
-
-				g.drawRect(j*10, i*10, 10, 10);
 				
 				if(brd.getTiles()[i][j] != null){
-					g.setColor(Color.LIGHT_GRAY);
-					g.fillRect(j*10, i*10, 10, 10);
+					
+					g.drawRect(j*20, i*20, 20, 20);
+					g.setColor(Color.WHITE);
+					g.fillRect(j*20, i*20, 20, 20);
 					g.setColor(Color.BLACK);
-				}
+					
+					if(brd.getTiles()[i][j].isHint()){
+						g.setColor(Color.GREEN);
+						g.fillRect(j*20, i*20, 20, 20);
+						g.setColor(Color.BLACK);
+					}
+					
+					if(brd.getTiles()[i][j].isOccupied()){
+						g.setColor(Color.RED);
+						g.fillRect(j*20, i*20, 20, 20);
+						g.setColor(Color.BLACK);
+					}
 				
-				if(brd.getTiles()[i][j].isOccupied()){
-					g.setColor(Color.RED);
-					g.fillRect(j*10, i*10, 10, 10);
-					g.setColor(Color.BLACK);
+					if(brd.getTiles()[i][j].isSelected()){
+						g.setColor(Color.YELLOW);
+						g.fillRect(j*20, i*20, 20, 20);
+						g.setColor(Color.BLACK);
+					}
+					g.drawRect(j*20, i*20, 20, 20);
 				}
-				
-				if(brd.getTiles()[i][j].isSelected()){
-					g.setColor(Color.YELLOW);
-					g.fillRect(j*10, i*10, 10, 10);
-					g.setColor(Color.BLACK);
-				}
-				
-				if(brd.getTiles()[i][j].isHint()){
-					g.setColor(Color.GREEN);
-					g.fillRect(j*10, i*10, 10, 10);
-					g.setColor(Color.BLACK);
-				}
-				g.drawRect(j*10, i*10, 10, 10);
 			}
 		}
 		ImageIcon img1 = new ImageIcon(img);
@@ -137,6 +137,23 @@ public class BoardView extends JPanel {
 	}
 	
 	public void setSelectedTile(Tile t){
+		//if there is a selected tile, unselect it
+		if (this.selectedTile != null){
+			this.selectedTile.setSelected(false);
+		}
+		//set the new tile as selected
 		this.selectedTile = t;
+		t.setSelected(true);
+		draw();
+	}
+	
+	public void deselectTile(){
+		//if there is a selectedTile, unselect it
+		if (this.selectedTile != null){
+			this.selectedTile.setSelected(false);
+		}
+		//remove the selected Tile
+		this.selectedTile = null;
+		draw();
 	}
 }

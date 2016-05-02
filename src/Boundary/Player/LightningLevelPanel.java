@@ -44,7 +44,6 @@ import javax.swing.border.BevelBorder;
  */
 public class LightningLevelPanel extends KabaSujiPlayer{
 
-
 	KabasujiFrame mainFrame;
 	LightningLevelModel currentModel;
 	LightningLevelModel initialModel;

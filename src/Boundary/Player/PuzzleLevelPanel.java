@@ -59,7 +59,6 @@ import javax.swing.border.BevelBorder;
  */
 public class PuzzleLevelPanel extends KabaSujiPlayer {
 
-
 	KabasujiFrame mainFrame;
 	PuzzleLevelModel initialModel;
 	PuzzleLevelModel currentModel;
@@ -79,8 +78,6 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 	 * Create the panel.
 	 */
 	public PuzzleLevelPanel(KabasujiFrame f, PuzzleLevelModel m) {
-		setBackground(new Color(173, 216, 230));
-		
 		
 		this.mainFrame = f;
 		this.initialModel = new PuzzleLevelModel(m);
@@ -91,6 +88,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		currentModel.setScore(new PuzzleScore(numMoves));
 		this.score = (PuzzleScore) currentModel.getScore();
 		
+		setBackground(new Color(173, 216, 230));
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBackground(new Color(173, 216, 230));
