@@ -12,6 +12,8 @@ import Game.Board;
 import Game.BullPen;
 import Game.Coordinate;
 import Game.Piece;
+import Game.PuzzleScore;
+import Game.ReleaseScore;
 import Game.Stock;
 import Game.Tile;
 import junit.framework.TestCase;
@@ -82,6 +84,10 @@ public class TestEntities extends TestCase {
 		assertTrue(board.selectPiece(1, 1, pv));
 	}
 	
+	public void testDeselectPiece(){
+		assertTrue(board.deselectPiece(1, 1, pv));
+	}
+	
 	//////////////////////////////Piece Tests////////////////////////////////
 	
 	public void testRotation(){
@@ -139,4 +145,43 @@ public class TestEntities extends TestCase {
 
 	}
 	
+	///////////////////////////PuzzleScore Tests///////////////////////////////
+	
+	public void testScoreToStarsPuzzle(){
+		PuzzleScore s1 = new PuzzleScore(8);
+		assertTrue(s1.scoreToStars() == 0);
+		
+		PuzzleScore s2 = new PuzzleScore(0);
+		assertTrue(s2.scoreToStars() == 3);
+	}
+	
+	public void testHasWon(){
+		PuzzleScore s3 = new PuzzleScore(0);
+		assertTrue(s3.hasWon());
+		
+		PuzzleScore s4 = new PuzzleScore(6);
+		assertFalse(s4.hasWon());
+	}
+	
+///////////////////////////ReleaseScore Tests///////////////////////////////
+	
+	public void testAllNum(){
+		ReleaseScore s5 = new ReleaseScore();
+		boolean[] nums = new boolean[6];
+		for (int i = 0; i < 6; i++){
+			nums[i] = false;
+		}
+		
+		assertTrue(s5.allNum(nums) == false);
+	}
+	
+	public void testScoreToStarsRelease(){
+		ReleaseScore s6 = new ReleaseScore();
+		assertTrue(s6.scoreToStars() == 0);
+	}
+
+	public void testHasWonRelease(){
+		ReleaseScore s7 = new ReleaseScore();
+		assertFalse(s7.hasWon());
+	}
 }
