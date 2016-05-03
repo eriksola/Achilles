@@ -60,9 +60,9 @@ public class PieceController extends java.awt.event.MouseAdapter{
 				int row = pieceAnchor.y;
 				Board board = boardView.getBoard();
 				board.deselectPiece(row, col, view.getSelectedPiece());
+				boardView.draw();
 			}
 			view.setSelected(pv);
-			boardView.deselectTile();
 		}
 		
 		//otherwise make that piece the selected piece

@@ -26,8 +26,8 @@ public class Tile implements Serializable{
 		this.isOccupied = false;
 		this.isSelected = false;
 		this.isHint = false;
-		this.row = r;
 		this.column = c;
+		this.row = r;
 	}
 	
 	public Tile(int row, int col, boolean isHint, boolean isOccupied, boolean isSelected){

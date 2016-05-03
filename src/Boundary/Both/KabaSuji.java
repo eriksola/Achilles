@@ -7,6 +7,7 @@ import javax.swing.JScrollPane;
 import Game.BullPen;
 import Game.LevelModel;
 
+
 /**
  * Top-level boundary object for both the builder and player.
  * @author bwolfson
@@ -16,19 +17,14 @@ import Game.LevelModel;
 public abstract class KabaSuji extends JPanel {
 	
 	protected PieceView selectedPiece; /** the one selected piece. **/
-	
-	
+
 	/**
 	 * start with no PieceView selected.
 	 */
-
+	
 	public abstract JScrollPane getScrollPane();
 	public abstract BoardView getBoardView();
 	public abstract BullPenView getBullPenView();
-	public abstract void addLevelModel();
-	public abstract LevelModel getLastLevelModel();
-	public abstract void addModelForRedo();
-	public abstract LevelModel getLastRedoModel();
 	
 	/**
 	 * set a selected PieceView.
@@ -62,4 +58,6 @@ public abstract class KabaSuji extends JPanel {
 	public PieceView getSelectedPiece(){
 		return this.selectedPiece;
 	}
+	
+
 }

@@ -231,6 +231,7 @@ public class Board implements Serializable{
 			t.setHint(true);
 			t.setOccupied(false);
 			t.setSelected(false);
+			pieces.remove(t);
 		}
 	}
 

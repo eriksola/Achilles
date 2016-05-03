@@ -34,7 +34,11 @@ public class KabasujiFrame extends JFrame {
 	int builtPuzzles = 0;
 	int builtLightning = 0;
 	int builtRelease = 0;
+	int defaultPuzzles = 0;
+	int defaultLightning = 0;
+	int defaultRelease = 0;
 	boolean builtLevels = false;
+	boolean defaultLevels = false;
 
 	public int getBuiltPuzzles() {
 		return this.builtPuzzles;
@@ -78,6 +82,7 @@ public class KabasujiFrame extends JFrame {
 		getContentPane().add(mainMenu);
 		
 		builtLevels = hasBuiltLevels();
+		defaultLevels = hasDefaultLevels();
 	}
 	
 	/**
@@ -111,6 +116,15 @@ public class KabasujiFrame extends JFrame {
 		this.builtRelease = new File("./src/BuiltLevels/ReleaseLevels").list().length;
 		boolean hasBuiltLvl = builtPuzzles > 0 || builtLightning > 0 || builtRelease > 0;
 		return hasBuiltLvl;
+	}
+	
+	public boolean hasDefaultLevels() {
+		
+		this.defaultPuzzles = new File("./src/DefaultLevels/PuzzleLevels").list().length;
+		this.defaultLightning = new File("./src/DefaultLevels/LightningLevels").list().length;
+		this.defaultRelease = new File("./src/DefaultLevels/ReleaseLevels").list().length;
+		boolean hasDefaultLvl = defaultPuzzles > 0 || defaultLightning > 0 || defaultRelease > 0;
+		return hasDefaultLvl;
 	}
 
 	public void endLevel(LevelModel initialModel, IScore score) {

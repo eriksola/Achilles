@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
-import Boundary.Both.KabaSujiPlayer;
+import Boundary.Both.StockView;
 import Controller.BoardController;
 import Controller.BullPenController;
 import Controller.HflipController;
@@ -20,9 +20,12 @@ import Controller.TimerController;
 import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
+import Game.LightningBoard;
 import Game.LevelModel;
 import Game.LightningLevelModel;
 import Game.LightningScore;
+import Game.Stock;
+import Game.Tile;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -49,8 +52,9 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	KabasujiFrame mainFrame;
 	LightningLevelModel currentModel;
 	LightningLevelModel initialModel;
-	Board board;
+	LightningBoard board;
 	BullPen bp;
+	Stock stock;
 	int time;
 	LightningScore score;
 	
@@ -65,17 +69,25 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	 * Create the panel.
 	 */
 	public LightningLevelPanel(KabasujiFrame f, LightningLevelModel m) {
-		setBackground(new Color(173, 216, 230));
 		
+		setBackground(new Color(173, 216, 230));
 		
 		this.mainFrame = f;
 		this.initialModel = new LightningLevelModel(m);
 		this.currentModel = m;
-		this.board = currentModel.getBoard();
+		this.board = (LightningBoard) currentModel.getBoard();
 		this.bp = currentModel.getBullPen();
 		this.time = currentModel.getTime();
-		currentModel.setScore(new LightningScore(time));
+		Tile[][] tiles = m.getBoard().getTiles();
+		int totalTiles = 0;
+		for (int a = 0; a < tiles.length; a++){
+			for (int b = 0; b < tiles[0].length; b++){
+				if (tiles[a][b] != null) {totalTiles++;}
+			}
+		}
+		currentModel.setScore(new LightningScore(totalTiles));
 		this.score = (LightningScore) currentModel.getScore();
+		this.stock = new Stock();
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -236,28 +248,9 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	public LightningLevelModel getCurrent(){
 		return this.currentModel;
 	}
-
-	@Override
-	public void addLevelModel() {
-		// TODO Auto-generated method stub
-		
+	
+	public Stock getStock(){
+		return this.stock;
 	}
 
-	@Override
-	public LevelModel getLastLevelModel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void addModelForRedo() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public LevelModel getLastRedoModel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

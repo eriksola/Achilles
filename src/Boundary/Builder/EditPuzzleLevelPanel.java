@@ -27,6 +27,7 @@ import Boundary.Both.PieceView;
 import Boundary.Both.StockView;
 import Controller.BoardController;
 import Controller.BullPenController;
+import Controller.DeleteTileController;
 import Controller.GetMovesController;
 import Controller.GetBoardDimensionsController;
 import Controller.HflipController;
@@ -40,6 +41,7 @@ import Game.Board;
 import Game.BullPen;
 import Game.LevelModel;
 import Game.Piece;
+import Game.PuzzleScore;
 import Game.Stock;
 import Game.Tile;
 import Game.PuzzleLevelModel;
@@ -56,7 +58,7 @@ import java.awt.event.InputMethodEvent;
  * @author Achilles
  *
  */
-public class EditPuzzleLevelPanel extends KabaSuji {
+public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 	
 	ArrayList<Object> entities;
 	Stack<PuzzleLevelModel> levelModels;
@@ -65,7 +67,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	BullPen bp;
 	Board board;
 	Stock stock;
-	int levelNum;
+	String name;
 	int numMoves;
 	
 	JTextField x;
@@ -109,7 +111,6 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
-		this.levelNum = levelNumber;
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -257,6 +258,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
 		addhint.addActionListener(new HintController(this));
+		delete.addActionListener(new DeleteTileController(this));
 		undo.addActionListener(new UndoController(mainFrame, this));
 		redo.addActionListener(new RedoController(mainFrame, this));
 	
@@ -267,6 +269,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		this.bp = model.getBullPen();
 		this.stock = new Stock();
 		this.board = model.getBoard();
+		this.name = model.getName();
 		this.numMoves = model.getMovesAllowed();
 		this.levelModels = levelModels;
 		this.redoModels = redoModels;
@@ -284,9 +287,9 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		//bullPenView was previously null, set it to actual view
 		this.boardView.setBullPenView(bullPenView);
 		
-		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
-		this.levelNum = model.getLevelNum();
+		
+		setBackground(new Color(173, 216, 230));
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -442,7 +445,6 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		entities.add(gmController.getMoves());
 	}
 	
 	/**
@@ -465,6 +467,12 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		return this.scrollPane;
 	}
 
+
+	@Override
+	public StockView getStockView() {
+		return this.stockView;
+	}
+	
 	public Stack<PuzzleLevelModel> getLevelModels(){
 		return this.levelModels;
 	}
@@ -475,7 +483,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, 0, null, this.numMoves);
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.numMoves);
 		this.levelModels.push(changedLevel);
 	}
 	
@@ -485,7 +493,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
-		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, 0, null, this.numMoves);
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.numMoves);
 		this.redoModels.push(changedLevel);
 	}
 

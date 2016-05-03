@@ -3,7 +3,7 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Boundary.Both.KabaSuji;
+import Boundary.Builder.KabaSujiBuilder;
 import Boundary.Builder.EditLightningLevelPanel;
 import Boundary.Builder.EditPuzzleLevelPanel;
 import Boundary.Builder.EditReleaseLevelPanel;
@@ -43,7 +43,7 @@ public class RedoController implements ActionListener{
 	 * Invoked when the button is pressed to redo a move
 	 */
 	public void actionPerformed(ActionEvent e) {		
-		KabaSuji view = (KabaSuji)panel;
+		KabaSujiBuilder view = (KabaSujiBuilder) panel;
 		LevelModel model = view.getLastRedoModel(); //the previous state to be loaded
 		frame.getContentPane().removeAll();
 		frame.getContentPane().invalidate();

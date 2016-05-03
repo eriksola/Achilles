@@ -30,6 +30,7 @@ import Game.LightningScore;
 import Game.PuzzleLevelModel;
 import Game.PuzzleScore;
 import Game.ReleaseScore;
+import Game.Tile;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -271,7 +272,7 @@ public class DefaultLevelPanel extends JPanel {
 		for(int i = 0; i < puzzleFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(puzzleFiles.get(i).getPath(), 1)){
-				puzzleLevels[i] = new PuzzleLevelModel(d.getBoard(), d.getBullPen(), i + 1, new PuzzleScore(d.getNumMoves()), d.getNumMoves());
+				puzzleLevels[i] = new PuzzleLevelModel(d.getBoard(), d.getBullPen(), puzzleFiles.get(i).getName(), d.getScore(), d.getNumMoves());
 				puzzleBtns[i].addActionListener(new DefLevelMenuToPuzzleLevelController( (KabasujiFrame) mainframe, puzzleLevels[i]));
 			}
 			else{
@@ -281,7 +282,7 @@ public class DefaultLevelPanel extends JPanel {
 		for(int i = 0; i < lightningFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(lightningFiles.get(i).getPath(), 2)){
-				lightLevels[i] = new LightningLevelModel(d.getBoard(), d.getBullPen(), i + 1, new LightningScore(d.getTime()), d.getTime());
+				lightLevels[i] = new LightningLevelModel(d.getBoard(), d.getBullPen(), lightningFiles.get(i).getName(), d.getScore(), d.getTime());
 				lightBtns[i].addActionListener(new DefLevelMenuToLightningLevelController( (KabasujiFrame) mainframe, lightLevels[i]));
 			}
 			else{
@@ -291,8 +292,8 @@ public class DefaultLevelPanel extends JPanel {
 		for(int i = 0; i < releaseFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(releaseFiles.get(i).getPath(), 3)){
-				releaseLevels[i] = new LevelModel(d.getBoard(), d.getBullPen(), i + 1, new ReleaseScore());
-				//releaseBtns[i].addActionListener(new DefLevelMenuToReleaseLevelController( (KabasujiFrame) mainframe, releaseLevels[i]));
+				releaseLevels[i] = new LevelModel(d.getBoard(), d.getBullPen(), releaseFiles.get(i).getName(), d.getScore());
+				releaseBtns[i].addActionListener(new DefLevelMenuToReleaseLevelController( (KabasujiFrame) mainframe, releaseLevels[i]));
 			}
 			else{
 				System.err.println("Error in serialization importing process!");

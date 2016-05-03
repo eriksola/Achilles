@@ -28,6 +28,7 @@ import Boundary.Both.PieceView;
 import Boundary.Both.StockView;
 import Controller.BoardController;
 import Controller.BullPenController;
+import Controller.DeleteTileController;
 import Controller.GetBoardDimensionsController;
 import Controller.GetTimeController;
 import Controller.HflipController;
@@ -40,7 +41,11 @@ import Controller.UndoController;
 import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
+
+import Game.LightningBoard;
+import Game.LightningScore;
 import Game.LevelModel;
+
 import Game.Stock;
 import Game.Tile;
 import Game.LightningLevelModel;
@@ -50,7 +55,7 @@ import Game.LightningLevelModel;
  * @author Achilles
  *
  */
-public class EditLightningLevelPanel extends KabaSuji {
+public class EditLightningLevelPanel extends KabaSujiBuilder{
 	
 	GetTimeController getTimer;
 	ArrayList<Object> entities;
@@ -66,10 +71,11 @@ public class EditLightningLevelPanel extends KabaSuji {
 	JButton btnEnter;
 	JButton setTime;
 	JFrame mainFrame;
-	int levelNum;
+	
 	BullPen bp;
 	Stock stock;
-	Board board;
+	LightningBoard board;
+	String name;
 	BullPenView bullPenView;
 	StockView stockView;
 	BoardView boardView;
@@ -86,7 +92,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 	public EditLightningLevelPanel(JFrame f, Deserialization d, int levelNumber) {
 		Tile[][] brdTiles = d.getBoard().getTiles();
 	
-		this.board = d.getBoard();
+		this.board = (LightningBoard) d.getBoard();
 		this.stock = new Stock();
 		this.bp = d.getBullPen();
 		this.time = d.getTime();
@@ -253,6 +259,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
 		hint.addActionListener(new HintController(this));
+		delete.addActionListener(new DeleteTileController(this));
 		undo.addActionListener(new UndoController(mainFrame, this));
 		redo.addActionListener(new RedoController(mainFrame, this));
 
@@ -263,13 +270,13 @@ public class EditLightningLevelPanel extends KabaSuji {
 	
 	public EditLightningLevelPanel(JFrame f, LightningLevelModel model, Stack<LightningLevelModel> levelModels, Stack<LightningLevelModel> redoModels) {
 		
-		this.board = model.getBoard();
+		this.board = (LightningBoard) model.getBoard();
 		this.stock = new Stock();
 		this.bp = model.getBullPen();
 		this.time = model.getTime();
+		this.name = model.getName();
 		this.levelModels = levelModels;
 		this.redoModels = redoModels;
-		this.levelNum = model.getLevelNum();
 		
 		this.stockView = new StockView(mainFrame, stock, this);
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -442,7 +449,14 @@ public class EditLightningLevelPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		
+		Tile[][] tiles = board.getTiles();
+		int totalTiles = 0;
+		for (int a = 0; a < tiles.length; a++){
+			for (int b = 0; b < tiles[0].length; b++){
+				if (tiles[a][b] != null) {totalTiles++;}
+			}
+		}
+		entities.add(new LightningScore(totalTiles));
 	}
 	
 	/**
@@ -465,6 +479,10 @@ public class EditLightningLevelPanel extends KabaSuji {
 		return this.scrollPane;
 	}
 
+	public StockView getStockView() {
+		return this.stockView;
+	}
+	
 	public void setTime(int time){
 		this.time = time;
 	}
@@ -479,7 +497,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 	
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, 0, null, this.time);
+		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.time);
 		this.levelModels.push(changedLevel);
 	}
 	
@@ -489,7 +507,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
-		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, 0, null, this.time);
+		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.time);
 		this.redoModels.push(changedLevel);
 	}
 

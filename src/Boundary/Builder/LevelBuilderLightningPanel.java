@@ -24,6 +24,7 @@ import Boundary.Both.KabaSuji;
 import Boundary.Both.StockView;
 import Controller.BoardController;
 import Controller.BullPenController;
+import Controller.DeleteTileController;
 import Controller.GetMovesController;
 import Controller.GetTimeController;
 import Controller.GetBoardDimensionsController;
@@ -36,6 +37,8 @@ import Controller.UndoController;
 import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
+import Game.LightningBoard;
+import Game.LightningScore;
 import Game.LevelModel;
 import Game.LightningLevelModel;
 import Game.Piece;
@@ -55,15 +58,16 @@ import java.awt.event.InputMethodEvent;
  * @author Achilles
  *
  */
-public class LevelBuilderLightningPanel extends KabaSuji {
+public class LevelBuilderLightningPanel extends KabaSujiBuilder{
 	
 	ArrayList<Object> entities;
 	
 	GetTimeController getTimer;
 	
 	BullPen bp;
-	Stock stock = new Stock();
-	Board board;
+	Stock stock;
+	LightningBoard board;
+	String name;
 	int timeSet;
 	
 	JTextField x;
@@ -85,6 +89,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 	
 	JScrollPane scrollPane;
 	private JTextField time_text;
+
 	/**
 	 * Create the panel.
 	 */
@@ -97,8 +102,10 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 				brdTiles[i][j] = new Tile(i, j);
 			}
 		}
+		
 		this.bp = new BullPen();
-		this.board = new Board(brdTiles);
+		this.board = new LightningBoard(brdTiles);
+		this.stock = new Stock();
 		this.levelModels = new Stack<LightningLevelModel>();
 		this.redoModels = new Stack<LightningLevelModel>();
 		
@@ -252,6 +259,7 @@ public class LevelBuilderLightningPanel extends KabaSuji {
 		//activate controllers
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		int levelCount = ((LevelBuilderFrame) mainFrame).getLightningLevelCount();
+		delete.addActionListener(new DeleteTileController(this));
 		
 		levelCount = new File("./src/BuiltLevels/LightningLevels").list().length;
 		
@@ -284,7 +292,8 @@ public LevelBuilderLightningPanel(JFrame f, LightningLevelModel model, Stack<Lig
 			}
 		}
 		this.bp = model.getBullPen();
-		this.board = model.getBoard();
+		this.board = (LightningBoard) model.getBoard();
+		this.name = model.getName();
 		this.levelModels = levelModels;
 		this.redoModels = redoModels;
 		this.timeSet = model.getTime();
@@ -464,6 +473,14 @@ public LevelBuilderLightningPanel(JFrame f, LightningLevelModel model, Stack<Lig
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
+		Tile[][] tiles = board.getTiles();
+		int totalTiles = 0;
+		for (int a = 0; a < tiles.length; a++){
+			for (int b = 0; b < tiles[0].length; b++){
+				if (tiles[a][b] != null) {totalTiles++;}
+			}
+		}
+		entities.add(new LightningScore(totalTiles));
 	}
 	
 	/**
@@ -500,7 +517,7 @@ public LevelBuilderLightningPanel(JFrame f, LightningLevelModel model, Stack<Lig
 
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, 0, null, this.timeSet);
+		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.timeSet);
 		this.levelModels.push(changedLevel);
 	}
 	
@@ -510,12 +527,17 @@ public LevelBuilderLightningPanel(JFrame f, LightningLevelModel model, Stack<Lig
 
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
-		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, 0, null, this.timeSet);
+		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.timeSet);
 		this.redoModels.push(changedLevel);
 	}
 
 	public LevelModel getLastRedoModel() {
 		return this.redoModels.pop();
+	}
+
+	@Override
+	public StockView getStockView() {
+		return this.stockView;
 	}
 
 }

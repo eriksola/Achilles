@@ -28,6 +28,7 @@ import Boundary.Both.PieceView;
 import Boundary.Both.StockView;
 import Controller.BoardController;
 import Controller.BullPenController;
+import Controller.DeleteTileController;
 import Controller.GetBoardDimensionsController;
 import Controller.GetMovesController;
 import Controller.HflipController;
@@ -40,6 +41,7 @@ import Controller.UndoController;
 import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
+import Game.ReleaseScore;
 import Game.LevelModel;
 import Game.PuzzleLevelModel;
 import Game.Stock;
@@ -50,7 +52,7 @@ import Game.Tile;
  * @author Achilles
  *
  */
-public class EditReleaseLevelPanel extends KabaSuji {
+public class EditReleaseLevelPanel extends KabaSujiBuilder {
 	
 	ArrayList<Object> entities;
 	Stack<LevelModel> levelModels;
@@ -63,11 +65,11 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	JButton exit;
 	JButton btnEnter;
 	JButton save;
-	int levelNum;
 	
 	BullPen bp;
 	Stock stock;
 	Board board;
+	String name;
 	
 	BullPenView bullPenView;
 	StockView stockView;
@@ -82,7 +84,6 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 		this.levelModels = new Stack<LevelModel>();
 		this.redoModels = new Stack<LevelModel>();
-		this.levelNum = levelNumber;
 		this.board = d.getBoard();
 		this.stock = new Stock();
 		this.bp = d.getBullPen();
@@ -233,7 +234,8 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 
 		panel.setLayout(gl_panel);
-
+		
+		//activate controllers
 		getEntities();
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		this.save.addActionListener(new SaveController(entities, 3));
@@ -245,6 +247,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
 		hint.addActionListener(new HintController(this));
+		delete.addActionListener(new DeleteTileController(this));
 		undo.addActionListener(new UndoController(mainFrame, this));
 		redo.addActionListener(new RedoController(mainFrame, this));
 	}
@@ -253,7 +256,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 		this.levelModels = levelModels;
 		this.redoModels = redoModels;
-		this.levelNum = model.getLevelNum();
+		this.name = model.getName();
 		this.board = model.getBoard();
 		this.stock = new Stock();
 		this.bp = model.getBullPen();
@@ -425,6 +428,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
+		entities.add(new ReleaseScore());
 	}
 	
 	/**
@@ -457,7 +461,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		LevelModel changedLevel = new LevelModel(this.board, this.bp, 0, null);
+		LevelModel changedLevel = new LevelModel(this.board, this.bp, this.name, null);
 		this.levelModels.push(changedLevel);
 	}
 	
@@ -467,12 +471,17 @@ public class EditReleaseLevelPanel extends KabaSuji {
 
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
-		LevelModel changedLevel = new LevelModel(this.board, this.bp, 0, null);
+		LevelModel changedLevel = new LevelModel(this.board, this.bp, this.name, null);
 		this.redoModels.push(changedLevel);
 	}
 
 	public LevelModel getLastRedoModel() {
 		return this.redoModels.pop();
+	}
+
+	@Override
+	public StockView getStockView() {
+		return this.stockView;
 	}
 
 }

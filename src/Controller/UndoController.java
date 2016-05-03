@@ -7,6 +7,7 @@ import Boundary.Both.KabaSuji;
 import Boundary.Builder.EditLightningLevelPanel;
 import Boundary.Builder.EditPuzzleLevelPanel;
 import Boundary.Builder.EditReleaseLevelPanel;
+import Boundary.Builder.KabaSujiBuilder;
 import Boundary.Builder.LevelBuilderLightningPanel;
 import Boundary.Builder.LevelBuilderPuzzlePanel;
 import Boundary.Builder.LevelBuilderReleasePanel;
@@ -45,7 +46,7 @@ public class UndoController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//add current state to levelModels saved for redo
 		
-		KabaSuji view = (KabaSuji)panel;
+		KabaSujiBuilder view = (KabaSujiBuilder)panel;
 		LevelModel model = view.getLastLevelModel(); //the previous state to be loaded
 		frame.getContentPane().removeAll();
 		frame.getContentPane().invalidate();

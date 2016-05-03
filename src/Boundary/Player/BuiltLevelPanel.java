@@ -156,6 +156,7 @@ public class BuiltLevelPanel extends JPanel {
 		//activate controllers for buttons
 		menuBtn.addActionListener(new ReturnToPlayerMenuController(mainframe));
 		if(mainframe.hasBuiltLevels()){			
+			
 			int puzzleLevels = mainframe.getBuiltPuzzles();
 			File puzzlePath = new File("./src/BuiltLevels/PuzzleLevels");
 			ArrayList<File> puzzleFiles = new ArrayList<File>(Arrays.asList(puzzlePath.listFiles()));

@@ -35,7 +35,6 @@ public class LightningScore implements IScore{
 	 */
 	public int scoreToStars(){
 		int tilesLeft = totalTiles - totalMarked;
-		
 		//if all tiles are marked, 3 stars have been earned
 		if (tilesLeft == 0) return 3;
 		//if all but 6 tiles are marked, 2 stars have been earned
@@ -53,11 +52,13 @@ public class LightningScore implements IScore{
 	public void updateScore(LevelModel lightLvl){
 			
 		int countMarked = 0;
-		Tile[][] tile = lightLvl.getBoard().getTiles();
+		Tile[][] tiles = lightLvl.getBoard().getTiles();
 		
-		for (int i = 0; i < tile.length; i++){
-			for (int j = 0; j < tile[0].length; j++){
-				if (tile[i][j].isOccupied){ countMarked++; }
+		for (int i = 0; i < tiles.length; i++){
+			for (int j = 0; j < tiles[0].length; j++){
+				if (tiles[i][j] != null){
+					if (tiles[i][j].isOccupied){ countMarked++; }
+				}
 			}
 		}
 		totalMarked = countMarked;
