@@ -169,6 +169,10 @@ public class Stock implements Serializable{
 		setOfPieces.add(p35);		
 	}
 	
+	public Stock(ArrayList<Piece> stockPieces){
+		this.setOfPieces = stockPieces;
+	}
+	
 
 	public List<Piece> getPieces(){
 		return this.setOfPieces;

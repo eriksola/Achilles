@@ -246,10 +246,6 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			//if theres a piece at that tile, select that piece
 			if (piecesOnBoard.containsKey(t)){
 				
-				if (view instanceof KabaSujiBuilder){
-					((KabaSujiBuilder) view).addLevelModel();
-				}
-				
 				Piece piece = piecesOnBoard.get(t);
 				PieceView pv1 = new PieceView(piece, this.view);
 				view.setSelected(pv1);

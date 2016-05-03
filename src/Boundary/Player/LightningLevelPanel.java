@@ -73,12 +73,11 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		setBackground(new Color(173, 216, 230));
 		
 		this.mainFrame = f;
-		this.initialModel = new LightningLevelModel(m);
 		this.currentModel = m;
-		this.board = (LightningBoard) currentModel.getBoard();
+		this.board = currentModel.getLightningBoard();	
 		this.bp = currentModel.getBullPen();
 		this.time = currentModel.getTime();
-		Tile[][] tiles = m.getBoard().getTiles();
+		Tile[][] tiles = m.getLightningBoard().getTiles();
 		int totalTiles = 0;
 		for (int a = 0; a < tiles.length; a++){
 			for (int b = 0; b < tiles[0].length; b++){
@@ -88,6 +87,7 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		currentModel.setScore(new LightningScore(totalTiles));
 		this.score = (LightningScore) currentModel.getScore();
 		this.stock = new Stock();
+		this.initialModel = new LightningLevelModel(this.board, this.bp, m.getName(), m.getScore(), this.stock, this.time);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));

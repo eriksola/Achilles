@@ -47,7 +47,10 @@ public class LevelEndPanel extends JPanel{
 		int currentStars = currentScore.scoreToStars();
 		
 		//if the new score is better, set it as the new top score
+		System.out.println("Current stars: " + currentStars);
+		System.out.println("Initial stars: " + initStars);
 		if (currentStars > initStars){
+			System.out.println("new highscore!");
 			initialModel.setScore(currentScore);
 			
 			ArrayList<Object> entities = new ArrayList<Object>();

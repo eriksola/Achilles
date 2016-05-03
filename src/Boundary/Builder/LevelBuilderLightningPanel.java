@@ -282,7 +282,7 @@ public class LevelBuilderLightningPanel extends KabaSujiBuilder{
 		
 	}
 	
-public LevelBuilderLightningPanel(JFrame f, LightningLevelModel model, Stack<LightningLevelModel> levelModels, Stack<LightningLevelModel> redoModels) {
+	public LevelBuilderLightningPanel(JFrame f, LightningLevelModel model, Stack<LightningLevelModel> levelModels, Stack<LightningLevelModel> redoModels) {
 		
 		Tile[][] brdTiles = new Tile[10][10];
 		//start board empty
@@ -292,8 +292,9 @@ public LevelBuilderLightningPanel(JFrame f, LightningLevelModel model, Stack<Lig
 			}
 		}
 		this.bp = model.getBullPen();
-		this.board = (LightningBoard) model.getBoard();
+		this.board = model.getLightningBoard();
 		this.name = model.getName();
+		this.stock = model.getStock();
 		this.levelModels = levelModels;
 		this.redoModels = redoModels;
 		this.timeSet = model.getTime();
@@ -521,24 +522,29 @@ public LevelBuilderLightningPanel(JFrame f, LightningLevelModel model, Stack<Lig
 
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.timeSet);
+		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.stock, this.timeSet);
 		this.levelModels.push(changedLevel);
 	}
 	
-	public LevelModel getLastLevelModel(){
-		return this.levelModels.pop();
-	}
-
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
-		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.timeSet);
+		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.stock, this.timeSet);
 		this.redoModels.push(changedLevel);
 	}
-
-	public LevelModel getLastRedoModel() {
-		return this.redoModels.pop();
+	
+	public LevelModel getLastLevelModel(){
+		if (!this.levelModels.isEmpty()){
+			return this.levelModels.pop();
+		}
+		else return null;
 	}
-
+	
+	public LevelModel getLastRedoModel(){
+		if (!this.redoModels.isEmpty()){
+			return this.redoModels.pop();
+		}
+		else return null;
+	}
 	@Override
 	public StockView getStockView() {
 		return this.stockView;

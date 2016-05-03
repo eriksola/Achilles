@@ -258,7 +258,7 @@ public class EditReleaseLevelPanel extends KabaSujiBuilder {
 		this.redoModels = redoModels;
 		this.name = model.getName();
 		this.board = model.getBoard();
-		this.stock = new Stock();
+		this.stock = model.getStock();
 		this.bp = model.getBullPen();
 		
 		this.stockView = new StockView(mainFrame, stock, this);
@@ -465,24 +465,29 @@ public class EditReleaseLevelPanel extends KabaSujiBuilder {
 
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		LevelModel changedLevel = new LevelModel(this.board, this.bp, this.name, null);
+		LevelModel changedLevel = new LevelModel(this.board, this.bp, this.name, null, this.stock);
 		this.levelModels.push(changedLevel);
-	}
-	
-	public LevelModel getLastLevelModel(){
-		return this.levelModels.pop();
 	}
 
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
-		LevelModel changedLevel = new LevelModel(this.board, this.bp, this.name, null);
+		LevelModel changedLevel = new LevelModel(this.board, this.bp, this.name, null, this.stock);
 		this.redoModels.push(changedLevel);
 	}
-
-	public LevelModel getLastRedoModel() {
-		return this.redoModels.pop();
+	
+	public LevelModel getLastLevelModel(){
+		if (!this.levelModels.isEmpty()){
+			return this.levelModels.pop();
+		}
+		else return null;
 	}
-
+	
+	public LevelModel getLastRedoModel(){
+		if (!this.redoModels.isEmpty()){
+			return this.redoModels.pop();
+		}
+		else return null;
+	}
 	@Override
 	public StockView getStockView() {
 		return this.stockView;

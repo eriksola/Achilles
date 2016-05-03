@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Game.Board;
 import Game.BullPen;
 import Game.IScore;
+import Game.LightningBoard;
 import Game.Piece;
 import Game.Stock;
 
@@ -33,7 +34,6 @@ public class Deserialization {
 			bullPen = (BullPen) in.readObject();
 			board = (Board) in.readObject();
 			score = (IScore) in.readObject();
-			
 			switch(levelType){
 			
 			//Puzzle level
