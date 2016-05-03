@@ -196,7 +196,7 @@ public class LevelBuilderReleasePanel extends KabaSujiBuilder {
 					.addGap(12)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)	
 								.addComponent(undo)
 								.addComponent(x, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -458,6 +458,7 @@ public class LevelBuilderReleasePanel extends KabaSujiBuilder {
 		addhint.addActionListener(new HintController(this));
 		undo.addActionListener(new UndoController(mainFrame, this));
 		redo.addActionListener(new RedoController(mainFrame, this));
+		delete.addActionListener(new DeleteTileController(this));
 		
 	}
 	

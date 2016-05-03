@@ -468,7 +468,7 @@ public class LevelBuilderLightningPanel extends KabaSujiBuilder{
 		this.btnTime.addActionListener(getTimer);
 		undo.addActionListener(new UndoController(mainFrame, this));
 		redo.addActionListener(new RedoController(mainFrame, this));
-		
+		delete.addActionListener(new DeleteTileController(this));
 		getEntities();
 		this.save.addActionListener(new SaveController(entities, 2));
 		
