@@ -19,6 +19,10 @@ public class PuzzleScore implements IScore{
 		this.piecesUsed = 0;
 	}
 	
+	public PuzzleScore(int total, int used){
+		this.totalPieces = total;
+		this.piecesUsed = used;
+	}
 	/**
 	 * Checks to see if a player has won a puzzle level.
 	 * A player has won when if at least one star is earned, otherwise they lose.

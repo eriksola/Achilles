@@ -20,6 +20,11 @@ public class LightningScore implements IScore{
 		this.totalMarked = 0;
 	}
 	
+	public LightningScore(int total, int totalMarked){
+		this.totalTiles = total;
+		this.totalMarked = totalMarked;
+	}
+	
 	/**
 	 * Checks to see if a player has won a lightning level.
 	 * A player has won when if at least one star is earned, otherwise they lose.

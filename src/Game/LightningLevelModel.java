@@ -41,12 +41,14 @@ public class LightningLevelModel extends LevelModel{
 			this.bullpen = new BullPen(pieces);
 			this.name = name;
 			int totalTiles = 0;
+			int totalMarked = 0;
 			for (int i = 0; i < tiles.length; i++){
 				for (int j = 0; j < tiles[0].length; j++){
 					if (tiles[i][j] != null) {totalTiles++;}
+					if (tiles[i][j].isOccupied()) {totalMarked++;}
 				}
 			}
-			this.score = new LightningScore(totalTiles);
+			this.score = new LightningScore(totalTiles,totalMarked);
 			ArrayList<Piece> stockPieces = new ArrayList<Piece>();
 			for (int i = 0; i < stock.getPieces().size(); i++){
 				stockPieces.add(stock.getPiece(i));
@@ -73,4 +75,16 @@ public class LightningLevelModel extends LevelModel{
 		return this.lightBoard;
 	}
 	
+	public void setScore(LightningScore currentScore) {
+		Tile[][] tiles = lightBoard.getTiles();
+		int totalTiles = 0;
+		int totalMarked = 0;
+		for (int i = 0; i < tiles.length; i++){
+			for (int j = 0; j < tiles[0].length; j++){
+				if (tiles[i][j] != null) {totalTiles++;}
+				if (tiles[i][j].isOccupied()) {totalMarked++;}
+			}
+		}
+		this.score = new LightningScore(totalTiles,totalMarked);
+	}
 }
