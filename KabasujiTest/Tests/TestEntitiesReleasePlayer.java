@@ -68,7 +68,7 @@ public class TestEntitiesReleasePlayer extends TestCase {
 		bp = new BullPen();
 		
 		rScore  = new ReleaseScore();
-		rLevelModel  = new LevelModel(board, bp, "release", rScore);
+		rLevelModel  = new LevelModel(board, bp, "release", (ReleaseScore) rScore, new Stock());
 		view = new ReleaseLevelPanel(frame, rLevelModel);
 		pv = new PieceView(p1, view);
 		

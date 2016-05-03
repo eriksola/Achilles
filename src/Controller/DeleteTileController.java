@@ -20,10 +20,10 @@ public class DeleteTileController implements ActionListener{
 		
 		Tile selectedTile = view.getBoardView().getSelectedTile();
 		Tile[][] tiles = view.getBoardView().getBoard().getTiles();
-		int col = selectedTile.getCol();
-		int row = selectedTile.getRow();
 		
 		if (selectedTile != null){
+			int col = selectedTile.getCol();
+			int row = selectedTile.getRow();
 			view.getBoardView().deselectTile();
 			tiles[col][row] = null;
 		} 

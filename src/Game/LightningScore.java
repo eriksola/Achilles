@@ -50,9 +50,10 @@ public class LightningScore implements IScore{
 	 * @param lightLvl LevelModel that describes the current level.
 	 */
 	public void updateScore(LevelModel lightLvl){
-			
+		
+		
 		int countMarked = 0;
-		Tile[][] tiles = lightLvl.getBoard().getTiles();
+		Tile[][] tiles = ((LightningLevelModel) lightLvl).getLightningBoard().getTiles();
 		
 		for (int i = 0; i < tiles.length; i++){
 			for (int j = 0; j < tiles[0].length; j++){

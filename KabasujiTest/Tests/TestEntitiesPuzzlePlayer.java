@@ -67,7 +67,7 @@ public class TestEntitiesPuzzlePlayer extends TestCase {
 		
 		bp = new BullPen();
 		pScore = new PuzzleScore(7);
-		pLevelModel = new PuzzleLevelModel(board, bp, "1.txt", pScore, 7);
+		pLevelModel = new PuzzleLevelModel(board, bp, "1.txt",(PuzzleScore) pScore, new Stock(), 7);
 		view = new PuzzleLevelPanel(frame, pLevelModel);
 		pv = new PieceView(p1, view);
 	}

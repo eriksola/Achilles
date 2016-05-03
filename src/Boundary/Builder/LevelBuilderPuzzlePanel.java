@@ -277,17 +277,17 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 	
 	public LevelBuilderPuzzlePanel(JFrame frame, PuzzleLevelModel model, Stack<PuzzleLevelModel> prevMoves, Stack<PuzzleLevelModel>	redoMoves){
 		
-		this.mainFrame = frame;
-		this.stock = new Stock();
+		this.mainFrame = frame;	
 		this.name = model.getName();
 		this.board = model.getBoard();
 		this.bp = model.getBullPen();
+		this.stock = model.getStock();
 		this.numMoves = model.getMovesAllowed();
 		this.levelModels = prevMoves;
 		this.redoModels = redoMoves;
 		
 		//generate the StockView (with scroll panel)
-		this.stockView = new StockView(mainFrame, stock, this);
+		this.stockView = new StockView(mainFrame, this.stock, this);
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
 		
@@ -508,21 +508,27 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 	
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.numMoves);
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.stock, this.numMoves);
 		this.levelModels.push(changedLevel);
 	}
 	
 	public void addModelForRedo(){
 		System.out.println("level model pushed for redo purpose.");
-		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.numMoves);
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.stock, this.numMoves);
 		this.redoModels.push(changedLevel);
 	}
 	
 	public LevelModel getLastLevelModel(){
-		return this.levelModels.pop();
+		if (!this.levelModels.isEmpty()){
+			return this.levelModels.pop();
+		}
+		else return null;
 	}
 	
 	public LevelModel getLastRedoModel(){
-		return this.redoModels.pop();
+		if (!this.redoModels.isEmpty()){
+			return this.redoModels.pop();
+		}
+		else return null;
 	}
 }

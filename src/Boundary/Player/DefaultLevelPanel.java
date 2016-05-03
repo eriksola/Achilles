@@ -25,11 +25,13 @@ import Controller.TimerController;
 import Game.Board;
 import Game.BullPen;
 import Game.LevelModel;
+import Game.LightningBoard;
 import Game.LightningLevelModel;
 import Game.LightningScore;
 import Game.PuzzleLevelModel;
 import Game.PuzzleScore;
 import Game.ReleaseScore;
+import Game.Stock;
 import Game.Tile;
 
 import java.awt.event.ActionListener;
@@ -47,7 +49,7 @@ import javax.swing.JTextArea;
  *
  */
 public class DefaultLevelPanel extends JPanel {
-
+		
 		KabasujiFrame mainframe;
 		PuzzleLevelModel[] puzzleLevels;
 		LightningLevelModel[] lightLevels;
@@ -55,7 +57,7 @@ public class DefaultLevelPanel extends JPanel {
 		
 		JButton menuBtn;
 		JButton[] puzzleBtns = new JButton[5];
-		JButton[] lightBtns = new JButton[5];
+		JButton[] lightBtns = new JButton[5];	
 		JButton[] releaseBtns = new JButton[5];
 		
 		JTextArea timerView;
@@ -272,8 +274,11 @@ public class DefaultLevelPanel extends JPanel {
 		for(int i = 0; i < puzzleFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(puzzleFiles.get(i).getPath(), 1)){
-				puzzleLevels[i] = new PuzzleLevelModel(d.getBoard(), d.getBullPen(), puzzleFiles.get(i).getName(), d.getScore(), d.getNumMoves());
+				puzzleLevels[i] = new PuzzleLevelModel(d.getBoard(), d.getBullPen(), puzzleFiles.get(i).getName(),(PuzzleScore) d.getScore(), new Stock(), d.getNumMoves());
 				puzzleBtns[i].addActionListener(new DefLevelMenuToPuzzleLevelController( (KabasujiFrame) mainframe, puzzleLevels[i]));
+				if (d.getScore().scoreToStars() <= 0){
+					puzzleBtns[i].setEnabled(false);
+				}
 			}
 			else{
 				System.err.println("Error in serialization importing process!");
@@ -282,8 +287,11 @@ public class DefaultLevelPanel extends JPanel {
 		for(int i = 0; i < lightningFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(lightningFiles.get(i).getPath(), 2)){
-				lightLevels[i] = new LightningLevelModel(d.getBoard(), d.getBullPen(), lightningFiles.get(i).getName(), d.getScore(), d.getTime());
+				lightLevels[i] = new LightningLevelModel((LightningBoard) d.getBoard(), d.getBullPen(), lightningFiles.get(i).getName(), (LightningScore) d.getScore(), new Stock(), d.getTime());
 				lightBtns[i].addActionListener(new DefLevelMenuToLightningLevelController( (KabasujiFrame) mainframe, lightLevels[i]));
+				if (d.getScore().scoreToStars() <= 0){
+					lightBtns[i].setEnabled(false);
+				}
 			}
 			else{
 				System.err.println("Error in serialization importing process!");
@@ -292,13 +300,20 @@ public class DefaultLevelPanel extends JPanel {
 		for(int i = 0; i < releaseFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(releaseFiles.get(i).getPath(), 3)){
-				releaseLevels[i] = new LevelModel(d.getBoard(), d.getBullPen(), releaseFiles.get(i).getName(), d.getScore());
+				releaseLevels[i] = new LevelModel(d.getBoard(), d.getBullPen(), releaseFiles.get(i).getName(), (ReleaseScore) d.getScore(), new Stock());
 				releaseBtns[i].addActionListener(new DefLevelMenuToReleaseLevelController( (KabasujiFrame) mainframe, releaseLevels[i]));
+				if (d.getScore().scoreToStars() <= 0){
+					releaseBtns[i].setEnabled(false);
+				}
 			}
 			else{
 				System.err.println("Error in serialization importing process!");
 			}
 		}
+		puzzleBtns[0].setEnabled(true);
+		lightBtns[0].setEnabled(true);
+		releaseBtns[0].setEnabled(true);
+		
 		System.out.println("Default Levels Loaded!");
 		
 		

@@ -1,5 +1,7 @@
 package Game;
 
+import java.util.ArrayList;
+
 /**
  * LightningLevelModel holds all the logic for a LightningLevel type in the <b> Kabasuji </b> game.
  * @author Aguila
@@ -7,6 +9,7 @@ package Game;
  */
 public class LightningLevelModel extends LevelModel{
 	
+	LightningBoard lightBoard;
 	int timeGiven;
 	int timeUsed;
 	
@@ -18,8 +21,37 @@ public class LightningLevelModel extends LevelModel{
 	 * @param s Encapsulates the type of score associated with this level.
 	 * @param tg Time given to complete this LightningLevel Level.
 	 */
-	public LightningLevelModel(Board b, BullPen bp, String name, IScore s, int tg){
-			super(b, bp, name, s);
+	public LightningLevelModel(LightningBoard lightningBoard, BullPen bp, String name, IScore s, Stock stock, int tg){
+			super();
+			
+			Tile[][] tiles = new Tile[lightningBoard.height][lightningBoard.width];
+			for (int i = 0; i < tiles.length; i++) {
+				for (int j = 0; j < tiles[0].length; j++) {
+					Tile t = lightningBoard.tiles[i][j];
+					tiles[i][j] = new Tile(t.row, t.column, t.isHint, t.isOccupied, t.isSelected);
+				}
+			}
+			this.lightBoard = new LightningBoard(tiles);
+			
+			//construct bullpen with current state of bullpen
+			ArrayList<Piece> pieces = new ArrayList<Piece>();
+			for (int i = 0; i < bp.pieces.size(); i++) {
+				pieces.add(bp.pieces.get(i));
+			}
+			this.bullpen = new BullPen(pieces);
+			this.name = name;
+			int totalTiles = 0;
+			for (int i = 0; i < tiles.length; i++){
+				for (int j = 0; j < tiles[0].length; j++){
+					if (tiles[i][j] != null) {totalTiles++;}
+				}
+			}
+			this.score = new LightningScore(totalTiles);
+			ArrayList<Piece> stockPieces = new ArrayList<Piece>();
+			for (int i = 0; i < stock.getPieces().size(); i++){
+				stockPieces.add(stock.getPiece(i));
+			}
+			this.stock = new Stock(stockPieces);
 			this.timeGiven = tg;
 			this.timeUsed = 0;
 	}
@@ -37,5 +69,8 @@ public class LightningLevelModel extends LevelModel{
 		return this.timeGiven;
 	}
 	
-
+	public LightningBoard getLightningBoard(){
+		return this.lightBoard;
+	}
+	
 }

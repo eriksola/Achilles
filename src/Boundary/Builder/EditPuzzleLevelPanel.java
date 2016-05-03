@@ -267,9 +267,9 @@ public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 	public EditPuzzleLevelPanel(JFrame f, PuzzleLevelModel model, Stack<PuzzleLevelModel> levelModels, Stack<PuzzleLevelModel> redoModels) {
 
 		this.bp = model.getBullPen();
-		this.stock = new Stock();
+		this.stock = model.getStock();
 		this.board = model.getBoard();
-		this.name = model.getName();
+		this.name = model.getName();	
 		this.numMoves = model.getMovesAllowed();
 		this.levelModels = levelModels;
 		this.redoModels = redoModels;
@@ -486,23 +486,27 @@ public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 	
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.numMoves);
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.stock, this.numMoves);
 		this.levelModels.push(changedLevel);
-	}
-	
-	public LevelModel getLastLevelModel(){
-		return this.levelModels.pop();
 	}
 
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
-		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.numMoves);
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.stock, this.numMoves);
 		this.redoModels.push(changedLevel);
 	}
-
-	public LevelModel getLastRedoModel() {
-		return this.redoModels.pop();
+	public LevelModel getLastLevelModel(){
+		if (!this.levelModels.isEmpty()){
+			return this.levelModels.pop();
+		}
+		else return null;
 	}
 	
+	public LevelModel getLastRedoModel(){
+		if (!this.redoModels.isEmpty()){
+			return this.redoModels.pop();
+		}
+		else return null;
+	}
 }
 

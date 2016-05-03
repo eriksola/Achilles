@@ -66,7 +66,7 @@ public class TestEntitiesLightningPlayer extends TestCase {
 		
 		bp = new BullPen();
 		lScore = new LightningScore(7);
-		lLevelModel = new LightningLevelModel(board, bp, "lightning", lScore, 100);
+		lLevelModel = new LightningLevelModel(board, bp, "lightning", (LightningScore) lScore, new Stock(), 100);
 		view = new LightningLevelPanel(frame, lLevelModel);
 		pv = new PieceView(p1, view);
 	}

@@ -51,53 +51,52 @@ public class UndoController implements ActionListener{
 		frame.getContentPane().removeAll();
 		frame.getContentPane().invalidate();
 		
-		//check if being called from puzzle, lightning, or release builder
-		if(view instanceof LevelBuilderPuzzlePanel){
-			((LevelBuilderPuzzlePanel)view).addModelForRedo();
-			LevelBuilderPuzzlePanel puzzleLevelView = new LevelBuilderPuzzlePanel(frame, (PuzzleLevelModel)model, 
-					((LevelBuilderPuzzlePanel)view).getLevelModels(),((LevelBuilderPuzzlePanel)view).getRedoModels());
-			frame.getContentPane().add(puzzleLevelView, BorderLayout.CENTER);
-			frame.getContentPane().revalidate();
-		}
-		else if(view instanceof LevelBuilderLightningPanel){
-			((LevelBuilderLightningPanel)view).addModelForRedo();
-			LevelBuilderLightningPanel lightningLevelView = new LevelBuilderLightningPanel(frame, (LightningLevelModel)model, 
-				((LevelBuilderLightningPanel)view).getLevelModels(), ((LevelBuilderLightningPanel)view).getRedoModels());
-			frame.getContentPane().add(lightningLevelView, BorderLayout.CENTER);
-			frame.getContentPane().revalidate();
-		}
-		else if(view instanceof LevelBuilderReleasePanel){
-			((LevelBuilderReleasePanel)view).addModelForRedo();
-			LevelBuilderReleasePanel puzzleLevelView = new LevelBuilderReleasePanel(frame, (LevelModel)model, 
-				((LevelBuilderReleasePanel)view).getLevelModels(), ((LevelBuilderReleasePanel)view).getRedoModels());
-			frame.getContentPane().add(puzzleLevelView, BorderLayout.CENTER);
-			frame.getContentPane().revalidate();
-		}
-		else if(view instanceof EditPuzzleLevelPanel){
-			((EditPuzzleLevelPanel)view).addModelForRedo();
-			EditPuzzleLevelPanel puzzleLevelView = new EditPuzzleLevelPanel(frame, (PuzzleLevelModel)model, 
-					((EditPuzzleLevelPanel)view).getLevelModels(), ((EditPuzzleLevelPanel)view).getRedoModels());
-			frame.getContentPane().add(puzzleLevelView, BorderLayout.CENTER);
-			frame.getContentPane().revalidate();
-		}
-		else if(view instanceof EditLightningLevelPanel){
-			((EditLightningLevelPanel)view).addModelForRedo();
-			EditLightningLevelPanel lightningLevelView = new EditLightningLevelPanel(frame, (LightningLevelModel)model,
-					((EditLightningLevelPanel)view).getLevelModels(), ((EditLightningLevelPanel)view).getRedoModels());
-			frame.getContentPane().add(lightningLevelView, BorderLayout.CENTER);
-			frame.getContentPane().revalidate();
+		if (model != null){
+			//check if being called from puzzle, lightning, or release builder
+			if(view instanceof LevelBuilderPuzzlePanel){
+				((LevelBuilderPuzzlePanel)view).addModelForRedo();
+				LevelBuilderPuzzlePanel puzzleLevelView = new LevelBuilderPuzzlePanel(frame, (PuzzleLevelModel)model, 
+						((LevelBuilderPuzzlePanel)view).getLevelModels(),((LevelBuilderPuzzlePanel)view).getRedoModels());
+				frame.getContentPane().add(puzzleLevelView, BorderLayout.CENTER);
+				frame.getContentPane().revalidate();
+			}
+			else if(view instanceof LevelBuilderLightningPanel){
+				((LevelBuilderLightningPanel)view).addModelForRedo();
+				LevelBuilderLightningPanel lightningLevelView = new LevelBuilderLightningPanel(frame, (LightningLevelModel)model, 
+						((LevelBuilderLightningPanel)view).getLevelModels(), ((LevelBuilderLightningPanel)view).getRedoModels());
+				frame.getContentPane().add(lightningLevelView, BorderLayout.CENTER);
+				frame.getContentPane().revalidate();
+			}
+			else if(view instanceof LevelBuilderReleasePanel){
+				((LevelBuilderReleasePanel)view).addModelForRedo();
+				LevelBuilderReleasePanel puzzleLevelView = new LevelBuilderReleasePanel(frame, (LevelModel)model, 
+						((LevelBuilderReleasePanel)view).getLevelModels(), ((LevelBuilderReleasePanel)view).getRedoModels());
+				frame.getContentPane().add(puzzleLevelView, BorderLayout.CENTER);
+				frame.getContentPane().revalidate();
+			}	
+			else if(view instanceof EditPuzzleLevelPanel){
+				((EditPuzzleLevelPanel)view).addModelForRedo();
+				EditPuzzleLevelPanel puzzleLevelView = new EditPuzzleLevelPanel(frame, (PuzzleLevelModel)model, 
+						((EditPuzzleLevelPanel)view).getLevelModels(), ((EditPuzzleLevelPanel)view).getRedoModels());
+				frame.getContentPane().add(puzzleLevelView, BorderLayout.CENTER);
+				frame.getContentPane().revalidate();
+			}
+			else if(view instanceof EditLightningLevelPanel){
+				((EditLightningLevelPanel)view).addModelForRedo();
+				EditLightningLevelPanel lightningLevelView = new EditLightningLevelPanel(frame, (LightningLevelModel)model,
+						((EditLightningLevelPanel)view).getLevelModels(), ((EditLightningLevelPanel)view).getRedoModels());
+				frame.getContentPane().add(lightningLevelView, BorderLayout.CENTER);
+				frame.getContentPane().revalidate();
 			
+			}
+			else if(view instanceof EditReleaseLevelPanel){
+				((EditReleaseLevelPanel)view).addModelForRedo();
+				EditReleaseLevelPanel releaseLevelView = new EditReleaseLevelPanel(frame, (LevelModel)model,
+						((EditReleaseLevelPanel)view).getLevelModels(), ((EditReleaseLevelPanel)view).getRedoModels());
+				frame.getContentPane().add(releaseLevelView, BorderLayout.CENTER);
+				frame.getContentPane().revalidate();
+				
+			}
 		}
-		else if(view instanceof EditReleaseLevelPanel){
-			((EditReleaseLevelPanel)view).addModelForRedo();
-			EditReleaseLevelPanel releaseLevelView = new EditReleaseLevelPanel(frame, (LevelModel)model,
-					((EditReleaseLevelPanel)view).getLevelModels(), ((EditReleaseLevelPanel)view).getRedoModels());
-			frame.getContentPane().add(releaseLevelView, BorderLayout.CENTER);
-			frame.getContentPane().revalidate();
-			
-		}
-		
-		
 	}
-
 }

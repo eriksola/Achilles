@@ -1,6 +1,7 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * LevelModel is the superclass for any type of level in the <b> Kabasuji </b> game.
@@ -12,15 +13,16 @@ public class LevelModel {
 	BullPen bullpen;
 	String name;	
 	IScore score;
+	Stock stock;
 	
 	/**
 	 * Creates a LevelModel with all of the entities needed for a level.
 	 * @param b Board for a level.
-	 * @param bp Bullpen for a level.
+	 * @param bp Bullpen for a level.		
 	 * @param ln Level number for a level
 	 * @param s Encapsulates the score associated with a LevelModel.
 	 */
-	public LevelModel(Board b, BullPen bp, String name, IScore s){
+	public LevelModel(Board b, BullPen bp, String name, ReleaseScore s, Stock stock){
 		//construct board with current state of Board
 		Tile[][] tiles = new Tile[b.height][b.width];
 		for (int i = 0; i < tiles.length; i++) {
@@ -30,6 +32,7 @@ public class LevelModel {
 			}
 		}
 		this.board = new Board(tiles);
+		
 		//construct bullpen with current state of bullpen
 		ArrayList<Piece> pieces = new ArrayList<Piece>();
 		for (int i = 0; i < bp.pieces.size(); i++) {
@@ -37,7 +40,12 @@ public class LevelModel {
 		}
 		this.bullpen = new BullPen(pieces);
 		this.name = name;
-		this.score = s;
+		this.score = new ReleaseScore();
+		ArrayList<Piece> stockPieces = new ArrayList<Piece>();
+		for (int i = 0; i < stock.getPieces().size(); i++){
+			stockPieces.add(stock.getPiece(i));
+		}
+		this.stock = new Stock(stockPieces);
 	}
 	
 	/**
@@ -51,6 +59,9 @@ public class LevelModel {
 		this.score = lm.score;
 	}
 	
+	public LevelModel() {
+	}
+
 	public Board getBoard(){
 		return this.board;
 	}
@@ -65,6 +76,10 @@ public class LevelModel {
 	
 	public IScore getScore(){
 		return this.score;
+	}
+	
+	public Stock getStock(){
+		return this.stock;
 	}
 	
 	/**
