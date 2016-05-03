@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 
 import Boundary.Both.KabaSuji;
 import Boundary.Builder.EditLightningLevelPanel;
+import Boundary.Builder.KabaSujiBuilder;
 import Boundary.Builder.LevelBuilderLightningPanel;
 
 /**
@@ -21,14 +22,14 @@ public class GetTimeController implements ActionListener {
 	JTextField time;
 	JPanel panel;
 	int timeSet;
-	KabaSuji view;
+	KabaSujiBuilder view;
 	
 	/**
 	 * Creates a GetTimeController.
 	 * @param t JTextField where time is entered.
 	 * @param p JPanel where that holds the text field.
 	 */
-	public GetTimeController(JTextField t, JPanel p, KabaSuji view){
+	public GetTimeController(JTextField t, JPanel p, KabaSujiBuilder view){
 		this.time = t;
 		this.panel = p;
 		this.view = view;

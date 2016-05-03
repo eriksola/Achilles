@@ -184,8 +184,10 @@ public class Stock implements Serializable{
 	 */
 	public Piece getRandomPiece(){
 		Random rand = new Random();
-		int  randomIndex = rand.nextInt(35);
-		return setOfPieces.get(randomIndex); 
+		int  randomIndex = rand.nextInt(setOfPieces.size());
+		Piece piece = setOfPieces.get(randomIndex);
+		setOfPieces.remove(randomIndex);
+		return piece;
 	}
 	
 	/**
@@ -200,6 +202,7 @@ public class Stock implements Serializable{
 			int  randomIndex = rand.nextInt(35);
 			pieces.add(setOfPieces.get(randomIndex));
 		}
+		
 		return pieces;
 	}
 	

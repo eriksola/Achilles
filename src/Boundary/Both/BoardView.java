@@ -18,6 +18,7 @@ import Game.Board;
 import Game.BullPen;
 import Game.Coordinate;
 import Game.Piece;
+import Game.ReleaseTile;
 import Game.Tile;
 
 /**
@@ -84,17 +85,43 @@ public class BoardView extends JPanel {
 						g.setColor(Color.BLACK);
 					}
 					
+					if (brd.getTiles()[i][j] instanceof ReleaseTile){
+						
+						ReleaseTile relTile = (ReleaseTile) brd.getTiles()[i][j];
+						int col = relTile.getColNum().getColor();
+						int num = relTile.getColNum().getNum();
+						
+						//get the appropriate color for the int representation of the color
+						if (col == 1){
+							g.setColor(Color.RED);
+						}
+						
+						if (col == 2){
+							g.setColor(Color.YELLOW);
+						}
+						
+						if (col == 3){
+							g.setColor(Color.GREEN);
+						}
+						g.fillRect(j*20, i*20, 20, 20);
+						g.setColor(Color.BLACK);
+						
+						//add the number to the tile
+						g.drawString(Integer.toString(num), j*20 + 7, i*20 + 15);
+					}
+					
 					if(brd.getTiles()[i][j].isOccupied()){
-						g.setColor(Color.RED);
+						g.setColor(Color.CYAN);
 						g.fillRect(j*20, i*20, 20, 20);
 						g.setColor(Color.BLACK);
 					}
 				
 					if(brd.getTiles()[i][j].isSelected()){
-						g.setColor(Color.YELLOW);
+						g.setColor(Color.MAGENTA);
 						g.fillRect(j*20, i*20, 20, 20);
 						g.setColor(Color.BLACK);
 					}
+					
 					g.drawRect(j*20, i*20, 20, 20);
 				}
 			}

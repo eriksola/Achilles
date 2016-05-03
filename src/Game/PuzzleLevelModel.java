@@ -18,8 +18,8 @@ public class PuzzleLevelModel extends LevelModel{
 	 * @param s Encapsulates the type of score associated with this level.
 	 * @param mg Number of moves given for this Puzzle Level.
 	 */
-	public PuzzleLevelModel(Board b, BullPen bp, int ln, IScore s, int mg){
-		super(b, bp, ln, s);
+	public PuzzleLevelModel(Board b, BullPen bp, String name, IScore s, int mg){
+		super(b, bp, name, s);
 		this.movesGiven = mg;
 		this.movesUsed = 0;
 	}

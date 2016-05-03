@@ -39,6 +39,7 @@ import Game.Board;
 import Game.BullPen;
 import Game.LevelModel;
 import Game.Piece;
+import Game.PuzzleScore;
 import Game.PuzzleLevelModel;
 import Game.Stock;
 import Game.Tile;
@@ -55,7 +56,7 @@ import java.awt.event.InputMethodEvent;
  * @author Achilles
  *
  */
-public class LevelBuilderPuzzlePanel extends KabaSuji {
+public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 	
 	ArrayList<Object> entities;
 	GetMovesController movesController;
@@ -63,6 +64,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	BullPen bp;
 	Board board;
 	Stock stock;
+	String name;
 	int numMoves;
 	
 	JTextField x;
@@ -277,7 +279,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		
 		this.mainFrame = frame;
 		this.stock = new Stock();
-
+		this.name = model.getName();
 		this.board = model.getBoard();
 		this.bp = model.getBullPen();
 		this.numMoves = model.getMovesAllowed();
@@ -493,6 +495,12 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
 	}
+
+	@Override
+	public StockView getStockView() {
+		return this.stockView;
+	}
+
 	
 	public void setNumMoves(int numMoves){
 		this.numMoves = numMoves;
@@ -500,13 +508,13 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, 0, null, this.numMoves);
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.numMoves);
 		this.levelModels.push(changedLevel);
 	}
 	
 	public void addModelForRedo(){
 		System.out.println("level model pushed for redo purpose.");
-		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, 0, null, this.numMoves);
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.numMoves);
 		this.redoModels.push(changedLevel);
 	}
 	
@@ -517,6 +525,4 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	public LevelModel getLastRedoModel(){
 		return this.redoModels.pop();
 	}
-	
-	
 }

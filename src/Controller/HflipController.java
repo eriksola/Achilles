@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import Boundary.Both.KabaSuji;
 import Boundary.Both.PieceView;
+import Boundary.Builder.KabaSujiBuilder;
 import Game.Piece;
 
 /**
@@ -32,7 +33,9 @@ public class HflipController implements ActionListener{
 		//check if selected piece is in bullpen (otherwise moves not allowed)
 		PieceView selected = view.getSelectedPiece();
 		if(selected != null){
-			view.addLevelModel();
+			if (view instanceof KabaSujiBuilder){
+				((KabaSujiBuilder) view).addLevelModel();
+			}
 			Piece p = selected.getP();
 			p.horizontalFlip();
 			selected.drawSelected();

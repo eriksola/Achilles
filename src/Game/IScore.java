@@ -1,5 +1,7 @@
 package Game;
 
+import java.io.Serializable;
+
 import Boundary.Player.KabasujiFrame;
 
 /**
@@ -7,7 +9,7 @@ import Boundary.Player.KabasujiFrame;
  * @author Aguila
  *
  */
-public interface IScore {
+public interface IScore extends Serializable{
 	/** Method contracts for any score type. */
 	public boolean hasWon();
 	public int scoreToStars();

@@ -1,11 +1,15 @@
 package Game;
-
+import java.io.Serializable;
 /**
  * ColorNumber used in order to represent the color and number of a Release level type in the <b> Kabasuji </b> game.
  * @author Achilles
  *
  */
-public class ColorNumber {
+public class ColorNumber implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int ryg;
 	int number;
 	
@@ -15,7 +19,7 @@ public class ColorNumber {
 	 * @param col The color, either 1, 2, or 3.
 	 * @param num The number associated with that color.
 	 */
-	ColorNumber(int col, int num){
+	public ColorNumber(int col, int num){
 		this.ryg = col;
 		this.number = num;
 	}

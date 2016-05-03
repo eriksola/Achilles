@@ -88,8 +88,8 @@ public class BullPenView extends JPanel {
 				JLabel c = pieceViews.get(i).getLabel();
 				System.out.println(c);
 				bp.getPieces().remove(i);
-				pieceViews.remove(i);
 				remove(c);
+				draw();
 				revalidate();
 				repaint();
 				break;
