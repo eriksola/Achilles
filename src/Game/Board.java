@@ -249,4 +249,12 @@ public class Board implements Serializable{
 		}
 		return true;
 	}
+	
+	public int getHeight(){
+		return this.height;
+	}
+	
+	public int getWidth(){
+		return this.width;
+	}
 }
