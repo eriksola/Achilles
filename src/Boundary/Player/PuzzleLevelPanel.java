@@ -231,4 +231,16 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void addModelForRedo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public LevelModel getLastRedoModel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

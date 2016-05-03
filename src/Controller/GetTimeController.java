@@ -43,10 +43,13 @@ public class GetTimeController implements ActionListener {
 		view.addLevelModel();
 		this.timeSet = Integer.parseInt(time.getText());
 		
+		
 		if(panel instanceof LevelBuilderLightningPanel){
+			((LevelBuilderLightningPanel)panel).setTime(timeSet);
 			((LevelBuilderLightningPanel) panel).addEntity(timeSet);	
 		}
 		else{
+			((EditLightningLevelPanel)panel).setTime(timeSet);
 			((EditLightningLevelPanel) panel).addEntity(timeSet);
 		}
 

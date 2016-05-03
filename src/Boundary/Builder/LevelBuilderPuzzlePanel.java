@@ -29,6 +29,7 @@ import Controller.GetMovesController;
 import Controller.GetBoardDimensionsController;
 import Controller.HflipController;
 import Controller.HintController;
+import Controller.RedoController;
 import Controller.RotateController;
 import Controller.SaveController;
 import Controller.UndoController;
@@ -79,6 +80,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	JScrollPane scrollPane;
 	
 	Stack<PuzzleLevelModel> levelModels;
+	Stack<PuzzleLevelModel>	redoModels;
 	/**
 	 * Create the panel.
 	 */
@@ -98,6 +100,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		this.board = new Board(brdTiles);
 		this.bp = new BullPen();
 		this.levelModels = new Stack<PuzzleLevelModel>();
+		this.redoModels = new Stack<PuzzleLevelModel>();
 		
 		//generate the StockView (with scroll panel)
 		this.stockView = new StockView(mainFrame, stock, this);
@@ -105,7 +108,6 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		scrollPane_1.setViewportView(stockView);
 		
 
-		
 		//generate the BullPenView (with scroll panel)
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, this.bp, this);
@@ -263,13 +265,14 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
 		addhint.addActionListener(new HintController(this));
-		undo.addActionListener(new UndoController(this, mainFrame));
+		undo.addActionListener(new UndoController(mainFrame, this));
+		redo.addActionListener(new RedoController(mainFrame, this));
 		
 		getEntities();
 		this.save.addActionListener(new SaveController(entities, 1));
 	}
 	
-	public LevelBuilderPuzzlePanel(JFrame frame, PuzzleLevelModel model, Stack<PuzzleLevelModel> prevMoves, PieceView selected){
+	public LevelBuilderPuzzlePanel(JFrame frame, PuzzleLevelModel model, Stack<PuzzleLevelModel> prevMoves, Stack<PuzzleLevelModel>	redoMoves){
 		
 		this.mainFrame = frame;
 		this.stock = new Stock();
@@ -277,6 +280,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		this.board = model.getBoard();
 		this.bp = model.getBullPen();
 		this.levelModels = prevMoves;
+		this.redoModels = redoMoves;
 		
 		//generate the StockView (with scroll panel)
 		this.stockView = new StockView(mainFrame, stock, this);
@@ -442,7 +446,9 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
 		addhint.addActionListener(new HintController(this));
-		undo.addActionListener(new UndoController(this, mainFrame));
+		undo.addActionListener(new UndoController(mainFrame, this));
+		redo.addActionListener(new RedoController(mainFrame, this));
+		
 		
 		getEntities();
 		this.save.addActionListener(new SaveController(entities, 1));
@@ -450,6 +456,10 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	
 	public Stack<PuzzleLevelModel> getLevelModels(){
 		return this.levelModels;
+	}
+	
+	public Stack<PuzzleLevelModel> getRedoModels(){
+		return this.redoModels;
 	}
 	
 	/**
@@ -483,12 +493,24 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	}
 	
 	public void addLevelModel(){
+		System.out.println("level model pushed.");
 		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, 0, null, this.numMoves);
 		this.levelModels.push(changedLevel);
+	}
+	
+	public void addModelForRedo(){
+		System.out.println("level model pushed for redo purpose.");
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, 0, null, this.numMoves);
+		this.redoModels.push(changedLevel);
 	}
 	
 	public LevelModel getLastLevelModel(){
 		return this.levelModels.pop();
 	}
+	
+	public LevelModel getLastRedoModel(){
+		return this.redoModels.pop();
+	}
+	
 	
 }

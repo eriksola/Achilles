@@ -25,6 +25,8 @@ public abstract class KabaSuji extends JPanel {
 	public abstract BoardView getBoardView();
 	public abstract void addLevelModel();
 	public abstract LevelModel getLastLevelModel();
+	public abstract void addModelForRedo();
+	public abstract LevelModel getLastRedoModel();
 	
 	/**
 	 * set a selected PieceView.

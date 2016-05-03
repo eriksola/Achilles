@@ -29,6 +29,14 @@ public class Tile implements Serializable{
 		this.column = c;
 	}
 	
+	public Tile(int row, int col, boolean isHint, boolean isOccupied, boolean isSelected){
+		this.row = row;
+		this.column = col;
+		this.isHint = isHint;
+		this.isOccupied = isOccupied;
+		this.isSelected = isSelected;
+	}
+	
 	/**
 	 * Will check if a Tile is currently occupied.
 	 * @return True if the Tile is currently occupied by a piece.

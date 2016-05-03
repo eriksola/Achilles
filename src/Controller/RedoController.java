@@ -20,67 +20,66 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- * Controller to undo the last move performed in the builder
+ * Controller to redo the last move performed in the builder
  * @author bwolfson
  *
  */
-public class UndoController implements ActionListener{
+public class RedoController implements ActionListener{
 
 	JFrame frame; /** the main frame of the application. **/
 	JPanel panel; /** the panel containing previous state to be loaded back up. **/
 	
 	/**
-	 * Constructs an UndoController from a main frame and target panel.
+	 * Constructs a RedoController from a main frame and target panel.
 	 * @param frame the main frame.
 	 * @param panel the panel to be loaded.
 	 */
-	public UndoController(JFrame frame, JPanel panel) {
+	public RedoController(JFrame frame, JPanel panel) {
 		this.frame = frame;
 		this.panel = panel;
 	}
 	
 	/**
-	 * Invoked when the button is pressed to undo a move
+	 * Invoked when the button is pressed to redo a move
 	 */
-	public void actionPerformed(ActionEvent e) {
-		//add current state to levelModels saved for redo
-		
+	public void actionPerformed(ActionEvent e) {		
 		KabaSuji view = (KabaSuji)panel;
-		LevelModel model = view.getLastLevelModel(); //the previous state to be loaded
+		LevelModel model = view.getLastRedoModel(); //the previous state to be loaded
 		frame.getContentPane().removeAll();
 		frame.getContentPane().invalidate();
 		
 		//check if being called from puzzle, lightning, or release builder
 		if(view instanceof LevelBuilderPuzzlePanel){
-			((LevelBuilderPuzzlePanel)view).addModelForRedo();
+			((LevelBuilderPuzzlePanel)view).addLevelModel();
 			LevelBuilderPuzzlePanel puzzleLevelView = new LevelBuilderPuzzlePanel(frame, (PuzzleLevelModel)model, 
-					((LevelBuilderPuzzlePanel)view).getLevelModels(),((LevelBuilderPuzzlePanel)view).getRedoModels());
+								((LevelBuilderPuzzlePanel)view).getLevelModels(),((LevelBuilderPuzzlePanel)view).getRedoModels());
 			frame.getContentPane().add(puzzleLevelView, BorderLayout.CENTER);
 			frame.getContentPane().revalidate();
 		}
+		
 		else if(view instanceof LevelBuilderLightningPanel){
-			((LevelBuilderLightningPanel)view).addModelForRedo();
+			((LevelBuilderLightningPanel)view).addLevelModel();
 			LevelBuilderLightningPanel lightningLevelView = new LevelBuilderLightningPanel(frame, (LightningLevelModel)model, 
-				((LevelBuilderLightningPanel)view).getLevelModels(), ((LevelBuilderLightningPanel)view).getRedoModels());
+								((LevelBuilderLightningPanel)view).getLevelModels(),((LevelBuilderLightningPanel)view).getRedoModels());
 			frame.getContentPane().add(lightningLevelView, BorderLayout.CENTER);
 			frame.getContentPane().revalidate();
 		}
 		else if(view instanceof LevelBuilderReleasePanel){
-			((LevelBuilderReleasePanel)view).addModelForRedo();
+			((LevelBuilderReleasePanel)view).addLevelModel();
 			LevelBuilderReleasePanel puzzleLevelView = new LevelBuilderReleasePanel(frame, (LevelModel)model, 
-				((LevelBuilderReleasePanel)view).getLevelModels(), ((LevelBuilderReleasePanel)view).getRedoModels());
+								((LevelBuilderReleasePanel)view).getLevelModels(),((LevelBuilderReleasePanel)view).getRedoModels());
 			frame.getContentPane().add(puzzleLevelView, BorderLayout.CENTER);
 			frame.getContentPane().revalidate();
 		}
 		else if(view instanceof EditPuzzleLevelPanel){
-			((EditPuzzleLevelPanel)view).addModelForRedo();
+			((EditPuzzleLevelPanel)view).addLevelModel();
 			EditPuzzleLevelPanel puzzleLevelView = new EditPuzzleLevelPanel(frame, (PuzzleLevelModel)model, 
 					((EditPuzzleLevelPanel)view).getLevelModels(), ((EditPuzzleLevelPanel)view).getRedoModels());
 			frame.getContentPane().add(puzzleLevelView, BorderLayout.CENTER);
 			frame.getContentPane().revalidate();
 		}
 		else if(view instanceof EditLightningLevelPanel){
-			((EditLightningLevelPanel)view).addModelForRedo();
+			((EditLightningLevelPanel)view).addLevelModel();
 			EditLightningLevelPanel lightningLevelView = new EditLightningLevelPanel(frame, (LightningLevelModel)model,
 					((EditLightningLevelPanel)view).getLevelModels(), ((EditLightningLevelPanel)view).getRedoModels());
 			frame.getContentPane().add(lightningLevelView, BorderLayout.CENTER);
@@ -88,9 +87,9 @@ public class UndoController implements ActionListener{
 			
 		}
 		else if(view instanceof EditReleaseLevelPanel){
-			((EditReleaseLevelPanel)view).addModelForRedo();
+			((EditReleaseLevelPanel)view).addLevelModel();
 			EditReleaseLevelPanel releaseLevelView = new EditReleaseLevelPanel(frame, (LevelModel)model,
-					((EditReleaseLevelPanel)view).getLevelModels(), ((EditReleaseLevelPanel)view).getRedoModels());
+					((EditReleaseLevelPanel)view).getLevelModels(),((EditReleaseLevelPanel)view).getRedoModels());
 			frame.getContentPane().add(releaseLevelView, BorderLayout.CENTER);
 			frame.getContentPane().revalidate();
 			
