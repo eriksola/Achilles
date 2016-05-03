@@ -309,12 +309,16 @@ public class EditLightningLevelPanel extends KabaSuji {
 		
 		x_text = new JTextField();
 		x_text.setColumns(10);
+		x_text.setText(((Integer)this.board.getTiles()[0].length).toString());
+
 				
 		JLabel label_1 = new JLabel("x");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		y_text = new JTextField();
 		y_text.setColumns(10);
+		y_text.setText(((Integer)this.board.getTiles().length).toString());
+
 		
 		JButton redo = new JButton("Redo");
 		
@@ -329,6 +333,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		timeTextField = new JTextField();
 		timeTextField.setColumns(10);
 		time_text = timeTextField;
+		time_text.setText(((Integer)time).toString());
 		
 		JButton timebtn = new JButton("Set Time");
 		setTime = timebtn;

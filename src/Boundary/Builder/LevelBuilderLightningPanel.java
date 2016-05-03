@@ -325,14 +325,17 @@ public LevelBuilderLightningPanel(JFrame f, LightningLevelModel model, Stack<Lig
 		JButton undo = new JButton("Undo");
 		
 		x = new JTextField();
-		
 		x.setColumns(10);
+		x.setText(((Integer)this.board.getTiles()[0].length).toString());
+
 		
 		JLabel label_1 = new JLabel("x");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		y = new JTextField();
 		y.setColumns(10);
+		y.setText(((Integer)this.board.getTiles().length).toString());
+
 		
 		JButton redo = new JButton("Redo");
 		
@@ -344,6 +347,7 @@ public LevelBuilderLightningPanel(JFrame f, LightningLevelModel model, Stack<Lig
 		
 		time_text = new JTextField();
 		time_text.setColumns(10);
+		time_text.setText(((Integer)timeSet).toString());
 		time = time_text;
 		
 		JButton timerBtn = new JButton("Set Time");
