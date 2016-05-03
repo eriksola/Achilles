@@ -30,7 +30,7 @@ public class TestEditReleaseUndo extends TestCase {
 	Board board;
 	Stock s = new Stock();
 	BullPen bp = new BullPen();
-	IScore score = new ReleaseScore();
+	ReleaseScore score = new ReleaseScore();
 	LevelBuilderFrame frame = new LevelBuilderFrame(s);
 	LevelModel model;
 	Stack<LevelModel> levelModels;
@@ -68,7 +68,7 @@ public class TestEditReleaseUndo extends TestCase {
 		}
 		board = new Board(t);
 
-		model = new LevelModel(board, bp, "test", score);
+		model = new LevelModel(board, bp, "test", score, s);
 		levelModels = new Stack<LevelModel>();
 		redoModels = new Stack<LevelModel>();
 		view = new EditReleaseLevelPanel(frame, model, levelModels, redoModels);

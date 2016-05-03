@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class LightningLevelModel extends LevelModel{
 	
-	LightningBoard lightBoard;
+	//LightningBoard lightBoard;
 	int timeGiven;
 	int timeUsed;
 	
@@ -23,7 +23,7 @@ public class LightningLevelModel extends LevelModel{
 	 */
 	public LightningLevelModel(LightningBoard lightningBoard, BullPen bp, String name, IScore s, Stock stock, int tg){
 			super();
-			
+
 			Tile[][] tiles = new Tile[lightningBoard.height][lightningBoard.width];
 			for (int i = 0; i < tiles.length; i++) {
 				for (int j = 0; j < tiles[0].length; j++) {
@@ -31,7 +31,8 @@ public class LightningLevelModel extends LevelModel{
 					tiles[i][j] = new Tile(t.row, t.column, t.isHint, t.isOccupied, t.isSelected);
 				}
 			}
-			this.lightBoard = new LightningBoard(tiles);
+			//this.lightningBoard = new LightningBoard(tiles);
+			this.board = new LightningBoard(tiles);
 			
 			//construct bullpen with current state of bullpen
 			ArrayList<Piece> pieces = new ArrayList<Piece>();
@@ -70,7 +71,7 @@ public class LightningLevelModel extends LevelModel{
 	}
 	
 	public LightningBoard getLightningBoard(){
-		return this.lightBoard;
+		return (LightningBoard) this.board;
 	}
 	
 }

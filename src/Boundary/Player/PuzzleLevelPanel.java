@@ -80,7 +80,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 	public PuzzleLevelPanel(KabasujiFrame f, PuzzleLevelModel m) {
 		
 		this.mainFrame = f;
-		System.out.println("High Score: " + initialModel.getScore().scoreToStars() + " Stars");
+		//System.out.println("High Score: " + initialModel.getScore().scoreToStars() + " Stars");
 		this.currentModel = m;
 		this.board = currentModel.getBoard();
 		this.bp = currentModel.getBullPen();

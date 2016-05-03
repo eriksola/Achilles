@@ -29,7 +29,7 @@ public class TestEditPuzzleUndo extends TestCase {
 	Board board;
 	Stock s = new Stock();
 	BullPen bp = new BullPen();
-	IScore score = new PuzzleScore(1);
+	PuzzleScore score = new PuzzleScore(1);
 	LevelBuilderFrame frame = new LevelBuilderFrame(s);
 	PuzzleLevelModel model;
 	Stack<PuzzleLevelModel> levelModels;
@@ -67,7 +67,7 @@ public class TestEditPuzzleUndo extends TestCase {
 		}
 		board = new Board(t);
 
-		model = new PuzzleLevelModel(board, bp, "test", score, 10);
+		model = new PuzzleLevelModel(board, bp, "test", score, s, 10);
 		levelModels = new Stack<PuzzleLevelModel>();
 		redoModels = new Stack<PuzzleLevelModel>();
 		view = new EditPuzzleLevelPanel(frame, model, levelModels, redoModels);

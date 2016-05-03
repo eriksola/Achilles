@@ -14,6 +14,7 @@ import Game.Board;
 import Game.BullPen;
 import Game.Coordinate;
 import Game.IScore;
+import Game.LightningBoard;
 import Game.LightningLevelModel;
 import Game.LightningScore;
 import Game.Piece;
@@ -26,7 +27,7 @@ import junit.framework.TestCase;
 public class TestLightningBuilderUndo extends TestCase {
 	
 	Tile[][] t = new Tile[6][6];
-	Board board;
+	LightningBoard board;
 	Stock s = new Stock();
 	BullPen bp = new BullPen();
 	IScore score = new LightningScore(1);
@@ -65,9 +66,9 @@ public class TestLightningBuilderUndo extends TestCase {
 				t[i][y] = new Tile(i, y, false,false,false);
 			}
 		}
-		board = new Board(t);
+		board = new LightningBoard(t);
 
-		model = new LightningLevelModel(board, bp, "test", score, 10);
+		model = new LightningLevelModel(board, bp, "test", score, s, 10);
 		levelModels = new Stack<LightningLevelModel>();
 		redoModels = new Stack<LightningLevelModel>();
 		view = new LevelBuilderLightningPanel(frame, model, levelModels, redoModels);

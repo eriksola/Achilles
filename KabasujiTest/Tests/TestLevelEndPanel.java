@@ -32,8 +32,8 @@ public class TestLevelEndPanel extends TestCase {
 	Stock s = new Stock();
 	BullPen bp = new BullPen();
 	BullPen bp2 = new BullPen();
-	IScore score1 = new PuzzleScore(10);
-	IScore score2 = new PuzzleScore(2);
+	PuzzleScore score1 = new PuzzleScore(10);
+	PuzzleScore score2 = new PuzzleScore(2);
 	KabasujiFrame frame = new KabasujiFrame();
 	PuzzleLevelModel model;
 	PuzzleLevelModel model2;
@@ -74,8 +74,8 @@ public class TestLevelEndPanel extends TestCase {
 		board = new Board(t);
 		bp2.addPiece(p1);
 		bp2.addPiece(p2);
-		model = new PuzzleLevelModel(board, bp, "test", score1, 10);
-		model2 = new PuzzleLevelModel(board, bp2, "test2", score2, 10);
+		model = new PuzzleLevelModel(board, bp, "test", score1, s, 10);
+		model2 = new PuzzleLevelModel(board, bp2, "test2", score2, s, 10);
 		//remove pieces then update score
 		bp2.removePiece(p1);
 		bp2.removePiece(p2);
