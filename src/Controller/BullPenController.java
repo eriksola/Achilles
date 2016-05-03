@@ -24,9 +24,9 @@ import Game.Tile;
  */
 public class BullPenController extends java.awt.event.MouseAdapter{
 	
-	KabaSuji view;
-	BullPenView bpv;
-	BoardView bv;
+	KabaSuji view; /** the panel being displayed by the app **/
+	BullPenView bpv; /** The bull pen boundary object **/
+	BoardView bv; /** the board boundary object **/
 	
 	/**
 	 * Constructor.
@@ -41,7 +41,7 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 	 * When a piece is clicked select it.
 	 */
 	public void mouseClicked(MouseEvent me){
-		System.out.println("mouse clicked from bullpen");
+		System.out.println("mouse clicked to bullpen");
 		
 		//if there is a selected Piece
 		if(view.getSelectedPiece() != null){
@@ -57,7 +57,6 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 				
 				//get info for removing piece from board -
 				//location of the anchor point of the piece
-				
 				Tile c = bv.getSelectedTile();
 				Piece piece = piecesOnBoard.get(c);
 				Coordinate pieceAnchor = piece.getAnchorOnBoard();

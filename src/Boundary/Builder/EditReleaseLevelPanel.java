@@ -439,6 +439,10 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		return this.boardView;
 	}
 	
+	public BullPenView getBullPenView(){
+		return this.bullPenView;
+	}
+	
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
 	}

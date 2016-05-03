@@ -4,6 +4,7 @@ package Boundary.Both;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import Game.BullPen;
 import Game.LevelModel;
 
 /**
@@ -23,6 +24,7 @@ public abstract class KabaSuji extends JPanel {
 
 	public abstract JScrollPane getScrollPane();
 	public abstract BoardView getBoardView();
+	public abstract BullPenView getBullPenView();
 	public abstract void addLevelModel();
 	public abstract LevelModel getLastLevelModel();
 	public abstract void addModelForRedo();
@@ -35,7 +37,7 @@ public abstract class KabaSuji extends JPanel {
 	public void setSelected(PieceView pv){
 		if (pv != null){
 			if(selectedPiece == pv){
-				selectedPiece.drawUnselected();
+				removeSelected();
 			}
 			if(selectedPiece != null){
 				selectedPiece.drawUnselected();

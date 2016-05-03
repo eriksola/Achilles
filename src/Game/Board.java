@@ -14,6 +14,7 @@ public class Board implements Serializable{
 	
 	Tile[][] tiles;
 	HashMap<Tile,Piece> pieces;
+	Tile selectedPieceAnchor; /** the anchor of the selected piece on the board **/
 	int width;
 	int height;
 		
@@ -26,6 +27,7 @@ public class Board implements Serializable{
 		this.height = t.length;
 		this.width = t[0].length;
 		this.pieces = new HashMap<Tile,Piece>();
+		this.selectedPieceAnchor = null;
 	}
 	
 	/**
@@ -83,7 +85,7 @@ public class Board implements Serializable{
 			newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
 		}
 		
-		//if true then mark the tiles with those coordinates as unoccupied
+		//if true then mark the tiles with those coordinates as unoccupied and unselected
 		//first mark the tile that was clicked on
 		//then mark the other tiles based on the coordinates of the Pieces squares
 		//and remove the tile from the HashMap 
@@ -108,20 +110,25 @@ public class Board implements Serializable{
 	 */
 	public boolean selectPiece(int row, int column, PieceView pv){
 		
-		Coordinate[] newUnoccCoords = new Coordinate[6];
+		Coordinate[] newSelectCoords = new Coordinate[6];
 		
 		//get coordinates of the piece on the board
 		for (int i = 0; i < 6; i++){
 			Coordinate c = pv.getP().getCoordinates()[i];
-			newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
+			newSelectCoords[i] = new Coordinate(column+c.x, row-c.y);
 		}
 		
 		//if true then mark those tiles as selected 
-		//first mark the tile that was clicked on
+		//first mark the tile that was clicked on (and set as anchor)
 		//then mark the other tiles based on the coordinates of the Pieces squares
+		
+		int anchorX = newSelectCoords[0].x;
+		int anchorY = newSelectCoords[0].y;
+		setSelectedPieceAnchor(this.tiles[anchorY][anchorX]);
+		
 		for(int i = 0; i < 6; i++){
-			int newX = newUnoccCoords[i].x;
-			int newY = newUnoccCoords[i].y;
+			int newX = newSelectCoords[i].x;
+			int newY = newSelectCoords[i].y;
 			Tile t = this.tiles[newY][newX];
 			t.setSelected(true);
 		}
@@ -132,20 +139,23 @@ public class Board implements Serializable{
 
 	public boolean deselectPiece(int row, int column, PieceView pv){
 		
-		Coordinate[] newUnoccCoords = new Coordinate[6];
+		Coordinate[] newUnselCoords = new Coordinate[6];
 		
 		//get coordinates of the piece on the board
 		for (int i = 0; i < 6; i++){
 			Coordinate c = pv.getP().getCoordinates()[i];
-			newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
+			newUnselCoords[i] = new Coordinate(column+c.x, row-c.y);
 		}
 		
-		//if true then mark those tiles as selected 
+		//if true then mark those tiles as unselected 
 		//first mark the tile that was clicked on
 		//then mark the other tiles based on the coordinates of the Pieces squares
+		
+		deselectPieceAnchor();
+		
 		for(int i = 0; i < 6; i++){
-			int newX = newUnoccCoords[i].x;
-			int newY = newUnoccCoords[i].y;
+			int newX = newUnselCoords[i].x;
+			int newY = newUnselCoords[i].y;
 			Tile t = this.tiles[newY][newX];
 			t.setSelected(false);
 		}
@@ -166,6 +176,10 @@ public class Board implements Serializable{
 
 			return false;
 		}
+		
+		//if this tile is null, invalid move
+		if (this.tiles[row][col] == null) { return false;}
+		
 		//if the tile is occupied, invalid move
 		if (this.tiles[row][col].isOccupied()){ return false;}
 
@@ -181,13 +195,33 @@ public class Board implements Serializable{
 		return this.pieces;
 	}
 	
+	public Tile getSelectedPieceAnchor(){
+		return this.selectedPieceAnchor;
+	}
+	
 	public void setTiles(Tile[][] tiles){
 		this.tiles = tiles;
 		this.height = tiles.length;
 		this.width = tiles[0].length;
 	}
+	
+	/**
+	 * Sets the anchor of the selected piece (IF ITS ON THE BOARD)
+	 * @param t
+	 */
+	public void setSelectedPieceAnchor(Tile t){
+		this.selectedPieceAnchor = t;
+	}
+	
+	/**
+	 * Deselects the anchor of the selected piece
+	 */
+	public void deselectPieceAnchor(){
+		this.selectedPieceAnchor = null;
+	}	
 
 	public void registerHintPiece(Piece p) {
+		
 		//get the piece from the board and set it's underlying tiles as hint tiles
 		Coordinate anchor = p.getAnchorOnBoard();
 		for (int i = 0; i < p.getCoordinates().length; i++) {
@@ -195,6 +229,8 @@ public class Board implements Serializable{
 			int colOffset = p.getCoordinates()[i].x;
 			Tile t = this.tiles[anchor.y - rowOffset][anchor.x + colOffset];
 			t.setHint(true);
+			t.setOccupied(false);
+			t.setSelected(false);
 		}
 	}
 

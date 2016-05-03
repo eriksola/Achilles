@@ -13,15 +13,16 @@ public class Tile implements Serializable{
 	boolean isOccupied;
 	boolean isSelected;
 	boolean isHint;
-	int row;
 	int column;
+	int row;
+
 	
 	/**
 	 * Constructor for a Tile class. Creates a Tile where pieces will reside.
 	 * @param r The specified row for a tile.
 	 * @param c The specified column for a tile.
 	 */
-	public Tile(int r, int c){
+	public Tile(int c, int r){
 		this.isOccupied = false;
 		this.isSelected = false;
 		this.isHint = false;
@@ -75,5 +76,13 @@ public class Tile implements Serializable{
 	
 	public void setHint(boolean bool){
 		this.isHint = bool;
+	}
+	
+	public int getRow(){
+		return this.row;
+	}
+	
+	public int getCol(){
+		return this.column;
 	}
 }

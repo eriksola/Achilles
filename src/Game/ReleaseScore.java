@@ -1,5 +1,7 @@
 package Game;
 
+import Boundary.Player.KabasujiFrame;
+
 /**
  * A ReleaseScore will have the logic for how to win a release level type in the <b> Kabasuji</b> game.
  * @author Aguila
@@ -77,6 +79,31 @@ public class ReleaseScore implements IScore{
 	 * @param releaseLvl LevelModel that describes the current level 
 	 */
 	public void updateScore(LevelModel releaseLvl){
-		//TO-DO
+		Tile[][] tiles = releaseLvl.getBoard().getTiles();
+		int height = tiles.length;
+		int width = tiles[0].length;
+		
+		for (int i = 0; i < height; i++){
+			for (int j = 0; j < width; j++){
+				//if the tile is a release tile and is occupied
+				if (tiles[i][j] instanceof ReleaseTile){
+					if (tiles[i][j].isOccupied()){
+						ReleaseTile relTile = (ReleaseTile) tiles[i][j];
+						int color = relTile.getColNum().getColor();
+						int num = relTile.getColNum().getNum();
+							//add to score
+							if (color == 1){
+								this.red[num - 1] = true;
+							}
+							if (color == 2){
+								this.yellow[num - 1] = true;
+							}
+							if (color == 3){
+								this.green[num - 1] = true;
+							}
+					}
+				}
+			}
+		}
 	}
 }

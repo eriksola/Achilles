@@ -51,7 +51,6 @@ public class PuzzleScore implements IScore{
 		int piecesInBullPen = puzzleLvl.getBullPen().getPieces().size();
 		//difference between pieces left and total pieces is the amount used
 		piecesUsed = totalPieces - piecesInBullPen;
-		
 	}
 	
 }

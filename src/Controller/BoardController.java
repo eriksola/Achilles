@@ -56,7 +56,8 @@ public class BoardController extends java.awt.event.MouseAdapter{
 		//if there is a selected piece
 		if (view.getSelectedPiece() != null){
 
-			System.out.println("Mouse clicked from board");
+			
+			System.out.println("Mouse clicked to board");
 			System.out.println(p.x);
 			System.out.println(p.y);
 			int row = -1;
@@ -65,10 +66,10 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			//get the row and column of the tile that was clicked on
 			for(int i = 0; i < bv.getBoard().getTiles().length; i++){
 				for(int j = 0; j < bv.getBoard().getTiles()[0].length; j++){
-					int leftX = j * 10;
-					int rightX = j * 10 + 10;
-					int topY = i * 10;
-					int botY = i * 10 + 10;
+					int leftX = j * 20;
+					int rightX = j * 20 + 20;
+					int topY = i * 20;
+					int botY = i * 20 + 20;
 					if(p.x >= leftX && p.x <= rightX && p.y >= topY && p.y <= botY){
 						row = i;
 						col = j;
@@ -84,16 +85,27 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			if(view instanceof PuzzleLevelPanel || isBuilder){
 				
 				HashMap<Tile,Piece> piecesOnBoard = bv.getBoard().getPieces();
-				
+				Piece selectedPiece = view.getSelectedPiece().getP();
 				//check if the piece is coming from the board
 				if (piecesOnBoard.containsValue(view.getSelectedPiece().getP())){
+				if (piecesOnBoard.containsValue(selectedPiece)){
+					
 					//get info for removing piece from board -
 					//location of the anchor point of the piece
-					Tile c = bv.getSelectedTile();
-					Piece piece = piecesOnBoard.get(c);
+					Tile oldLocation = bv.getBoard().getSelectedPieceAnchor();
+					Piece piece = piecesOnBoard.get(oldLocation);
 					Coordinate pieceAnchor = piece.getAnchorOnBoard();
 					int oldCol = pieceAnchor.getX();
 					int oldRow = pieceAnchor.getY();
+					
+					//if the piece isn't going to move, deselect it
+					if (oldRow == row && oldCol == col){
+						System.out.println("Same spot");
+						view.removeSelected();
+						bv.getBoard().deselectPiece(row, col, pv);
+						bv.draw();
+						return;
+					}
 					
 					//add the piece to the board in the new location
 					if(brd.isValidToAdd(row,col,pv)){
@@ -118,8 +130,6 @@ public class BoardController extends java.awt.event.MouseAdapter{
 						bv.draw();
 					}
 				}
-				//draw in case of edge cases (always keep bullpenview up to date)
-				bv.draw();
 			}
 			
 			//otherwise the piece must be from the bullpen
@@ -152,21 +162,23 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			return;
 		}
 		
-		//if this is a puzzle level
+
+		// if there is no selected piece and this is a puzzle level
 		else if (view instanceof PuzzleLevelPanel || isBuilder){
-			
+		
+			System.out.println("Mouse clicked from board");
 			//pieces can be removed from the board while no piece is selected
 			HashMap<Tile, Piece> piecesOnBoard = bv.getBoard().getPieces();
-			int row = -1;
-			int col = -1;
+			row = -1;
+			col = -1;
 			
 			//get the row and column of the tile that was clicked on
 			for(int i = 0; i < bv.getBoard().getTiles().length; i++){
 				for(int j = 0; j < bv.getBoard().getTiles()[0].length; j++){
-					int leftX = j * 10;
-					int rightX = j * 10 + 10;
-					int topY = i * 10;
-					int botY = i * 10 + 10;
+					int leftX = j * 20;
+					int rightX = j * 20 + 20;
+					int topY = i * 20;
+					int botY = i * 20 + 20;
 					if(p.x >= leftX && p.x <= rightX && p.y >= topY && p.y <= botY){
 						row = i;
 						col = j;
@@ -174,21 +186,33 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				}
 			}
 			
-			//select the piece on the board
 			Tile t = bv.getBoard().getTiles()[row][col];
-			bv.setSelectedTile(t);
-			System.out.println(piecesOnBoard.get(t));
+			
+			//if that tile is the selected tile, unselect it 
+			if (t == bv.getSelectedTile()){
+				bv.deselectTile();
+			}
+			
+			//otherwise make that tile the selected tile
+			else {
+				bv.setSelectedTile(t);
+			}
+			
+			//if theres a piece at that tile, select that piece
 			if (piecesOnBoard.containsKey(t)){
 				view.addLevelModel();
 				Piece piece = piecesOnBoard.get(t);
-				PieceView pv = new PieceView(piece, this.view);
-				view.setSelected(pv);
-				Coordinate c = pv.getP().getAnchorOnBoard();
+				PieceView pv1 = new PieceView(piece, this.view);
+				view.setSelected(pv1);
+				Coordinate c = pv1.getP().getAnchorOnBoard();
 				col = c.x;
 				row = c.y;
-				bv.getBoard().selectPiece(row, col, pv);
-				bv.draw();
+				bv.getBoard().selectPiece(row, col, pv1);
 			}
+			
+			//redraw board to display selected piece/tile
+			bv.draw();		
 		}
 	}
+}
 }

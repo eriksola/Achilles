@@ -1,5 +1,7 @@
 package Game;
 
+import Boundary.Player.KabasujiFrame;
+
 /**
  * A LightningScore will have the logic for how to win a lightning level type in the <b> Kabasuji</b> game.
  * @author Aguila
@@ -49,7 +51,7 @@ public class LightningScore implements IScore{
 	 * @param lightLvl LevelModel that describes the current level.
 	 */
 	public void updateScore(LevelModel lightLvl){
-		
+			
 		int countMarked = 0;
 		Tile[][] tile = lightLvl.getBoard().getTiles();
 		

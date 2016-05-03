@@ -83,66 +83,77 @@ public class DefaultLevelPanel extends JPanel {
 		label.setForeground(new Color(0, 0, 0));
 		label.setFont(new Font("Comic Sans MS", Font.BOLD, 28));
 		
-		JButton button_1 = new JButton("1");
-		this.puzzleBtns[0] = button_1;
+		JButton puzzle1 = new JButton("1");
+		puzzle1.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.puzzleBtns[0] = puzzle1;
 		
-		button_1.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton puzzle2 = new JButton("2");
+		puzzle2.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.puzzleBtns[1] = puzzle2;
 		
-		JButton button_2 = new JButton("2");
-		button_2.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton puzzle3 = new JButton("3");
+		puzzle3.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.puzzleBtns[2] = puzzle3;
 		
-		JButton button_3 = new JButton("3");
-		button_3.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton puzzle4 = new JButton("4");
+		puzzle4.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.puzzleBtns[3] = puzzle4;
 		
-		JButton button_4 = new JButton("4");
-		button_4.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton puzzle5 = new JButton("5");
+		puzzle5.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.puzzleBtns[4] = puzzle5;
 		
-		JButton button_5 = new JButton("5");
-		button_5.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton lightning1 = new JButton("1");
+		lightning1.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.lightBtns[0] = lightning1;
 		
-		JButton button_6 = new JButton("1");
-		this.lightBtns[0] = button_6;
+		JButton lightning2 = new JButton("2");
+		lightning2.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.lightBtns[1] = lightning2;
 		
-		button_6.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton lightning3 = new JButton("3");
+		lightning3.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.lightBtns[2] = lightning3;
 		
-		JButton button_7 = new JButton("2");
-		button_7.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton lightning4 = new JButton("4");
+		lightning4.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.lightBtns[3] = lightning4;
 		
-		JButton button_8 = new JButton("3");
-		button_8.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton lightning5 = new JButton("5");
+		lightning5.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.lightBtns[4] = lightning5;
 		
-		JButton button_9 = new JButton("4");
-		button_9.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JLabel lightningLbl = new JLabel("Lightning:");
+		lightningLbl.setForeground(new Color(0, 0, 0));
+		lightningLbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
-		JButton button_10 = new JButton("5");
-		button_10.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JLabel puzzleLbl = new JLabel("Puzzle:");
+		puzzleLbl.setForeground(new Color(0, 0, 0));
+		puzzleLbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
-		JLabel label_1 = new JLabel("Lightning:");
-		label_1.setForeground(new Color(0, 0, 0));
-		label_1.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		JButton release1 = new JButton("1");
+		release1.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.releaseBtns[0] = release1;
 		
-		JLabel label_2 = new JLabel("Puzzle:");
-		label_2.setForeground(new Color(0, 0, 0));
-		label_2.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		JButton release2 = new JButton("2");
+		release2.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.releaseBtns[1] = release2;
 		
-		JButton button_11 = new JButton("1");
-		button_11.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton release3 = new JButton("3");
+		release3.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.releaseBtns[2] = release3;
 		
-		JButton button_12 = new JButton("2");
-		button_12.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton release4 = new JButton("4");
+		release4.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.releaseBtns[3] = release4;
 		
-		JButton button_13 = new JButton("3");
-		button_13.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		JButton release5 = new JButton("5");
+		release5.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		this.releaseBtns[4] = release5;
 		
-		JButton button_14 = new JButton("4");
-		button_14.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-		
-		JButton button_15 = new JButton("5");
-		button_15.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-		
-		JLabel label_3 = new JLabel("Release:");
-		label_3.setForeground(new Color(0, 0, 0));
-		label_3.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		JLabel releaseLbl = new JLabel("Release:");
+		releaseLbl.setForeground(new Color(0, 0, 0));
+		releaseLbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		
@@ -158,40 +169,40 @@ public class DefaultLevelPanel extends JPanel {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(puzzle1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(puzzle2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(puzzle3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(puzzle4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+									.addComponent(puzzle5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lightning1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_7, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lightning2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_8, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lightning3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lightning4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-								.addComponent(label_2)
+									.addComponent(lightning5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+								.addComponent(puzzleLbl)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(release1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_12, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(release2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_13, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(release3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_14, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(release4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(button_15, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-								.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+									.addComponent(release5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+								.addComponent(releaseLbl, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
 							.addContainerGap(422, Short.MAX_VALUE))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lightningLbl, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap(648, Short.MAX_VALUE))))
 		);
 		gl_panel.setVerticalGroup(
@@ -204,34 +215,34 @@ public class DefaultLevelPanel extends JPanel {
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(button)
 									.addGap(40)
-									.addComponent(label_2)
+									.addComponent(puzzleLbl)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button_4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-										.addComponent(button_3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(puzzle1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+										.addComponent(puzzle2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+										.addComponent(puzzle4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+										.addComponent(puzzle5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+										.addComponent(puzzle3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
 								.addComponent(label))
 							.addGap(18)
-							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lightningLbl, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button_7, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button_8, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button_9, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button_10, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lightning1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lightning2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lightning3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lightning4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lightning5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
 							.addGap(47)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button_11, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button_12, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button_13, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button_14, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(button_15, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(release1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(release2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(release3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(release4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(release5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(258)
-							.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(releaseLbl, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(26, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
@@ -290,11 +301,7 @@ public class DefaultLevelPanel extends JPanel {
 		System.out.println("Default Levels Loaded!");
 		
 		
-		
 		this.menuBtn.addActionListener(new ReturnToPlayerMenuController(mainframe));
 	}
 	
-	public JButton getMenuButton(){
-		return menuBtn;
-	}
 }

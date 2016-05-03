@@ -155,6 +155,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		JButton timebtn = new JButton("Set Time");
 		setTime = timebtn;
 		timebtn.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -454,6 +455,10 @@ public class EditLightningLevelPanel extends KabaSuji {
 	
 	public BoardView getBoardView(){
 		return this.boardView;
+	}
+	
+	public BullPenView getBullPenView(){
+		return this.bullPenView;
 	}
 	
 	public JScrollPane getScrollPane(){
