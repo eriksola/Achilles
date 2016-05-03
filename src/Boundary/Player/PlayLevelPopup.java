@@ -21,6 +21,8 @@ import Game.LevelModel;
 import Game.LightningBoard;
 import Game.LightningLevelModel;
 import Game.PuzzleLevelModel;
+import Game.PuzzleScore;
+import Game.ReleaseScore;
 import Game.Stock;
 
 public class PlayLevelPopup extends JPopupMenu{
@@ -52,7 +54,7 @@ public class PlayLevelPopup extends JPopupMenu{
         		
         		switch(levelType){	
         			case 1:
-        				PuzzleLevelModel puzzleLevel = new PuzzleLevelModel(de.getBoard(), de.getBullPen(), name , de.getScore(), new Stock(), de.getNumMoves());
+        				PuzzleLevelModel puzzleLevel = new PuzzleLevelModel(de.getBoard(), de.getBullPen(), name , (PuzzleScore) de.getScore(), new Stock(), de.getNumMoves());
         				playableLevel = new PuzzleLevelPanel(currentPanel.getMainFrame(), puzzleLevel);
         				break;
         			case 2:
@@ -60,7 +62,7 @@ public class PlayLevelPopup extends JPopupMenu{
         				playableLevel = new LightningLevelPanel(currentPanel.getMainFrame(), lightningLevel);
         				break;
         			case 3:
-        				LevelModel releaseLevel = new LevelModel(de.getBoard(), de.getBullPen(), name, de.getScore(), new Stock());
+        				LevelModel releaseLevel = new LevelModel(de.getBoard(), de.getBullPen(), name, (ReleaseScore) de.getScore(), new Stock());
         				playableLevel = new ReleaseLevelPanel(currentPanel.getMainFrame(), releaseLevel);
         				break;
         			default:

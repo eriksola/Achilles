@@ -88,7 +88,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		currentModel.setScore(new PuzzleScore(numMoves));
 		this.score = (PuzzleScore) currentModel.getScore();
 		this.stock = new Stock();
-		this.initialModel = new PuzzleLevelModel(this.board, this.bp, m.getName(), m.getScore(), this.stock, this.numMoves);
+		this.initialModel = new PuzzleLevelModel(this.board, this.bp, m.getName(),(PuzzleScore) m.getScore(), this.stock, this.numMoves);
 		
 		setBackground(new Color(173, 216, 230));
 		JPanel panel = new JPanel();

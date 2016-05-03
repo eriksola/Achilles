@@ -40,7 +40,13 @@ public class LightningLevelModel extends LevelModel{
 			}
 			this.bullpen = new BullPen(pieces);
 			this.name = name;
-			this.score = s;
+			int totalTiles = 0;
+			for (int i = 0; i < tiles.length; i++){
+				for (int j = 0; j < tiles[0].length; j++){
+					if (tiles[i][j] != null) {totalTiles++;}
+				}
+			}
+			this.score = new LightningScore(totalTiles);
 			ArrayList<Piece> stockPieces = new ArrayList<Piece>();
 			for (int i = 0; i < stock.getPieces().size(); i++){
 				stockPieces.add(stock.getPiece(i));

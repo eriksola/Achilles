@@ -277,11 +277,12 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 	
 	public LevelBuilderPuzzlePanel(JFrame frame, PuzzleLevelModel model, Stack<PuzzleLevelModel> prevMoves, Stack<PuzzleLevelModel>	redoMoves){
 		
-		this.mainFrame = frame;
+		this.mainFrame = frame;	
 		this.name = model.getName();
 		this.board = model.getBoard();
 		this.bp = model.getBullPen();
 		this.stock = model.getStock();
+		this.numMoves = model.getMovesAllowed();
 		this.levelModels = prevMoves;
 		this.redoModels = redoMoves;
 		
@@ -323,14 +324,16 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 		JButton undo = new JButton("Undo");
 		
 		x = new JTextField();
-		
 		x.setColumns(10);
+		x.setText(((Integer)this.board.getTiles()[0].length).toString());
 		
 		JLabel label_1 = new JLabel("x");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		y = new JTextField();
 		y.setColumns(10);
+		y.setText(((Integer)this.board.getTiles().length).toString());
+
 		
 		JButton redo = new JButton("Redo");
 		
@@ -342,6 +345,7 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 				
 		txtMoves = new JTextField();
 		txtMoves.setColumns(10);
+		txtMoves.setText(((Integer)numMoves).toString());
 		
 		JButton btnEnterMoves = new JButton("enter moves");
 		

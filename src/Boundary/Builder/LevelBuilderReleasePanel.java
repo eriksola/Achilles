@@ -137,12 +137,14 @@ public class LevelBuilderReleasePanel extends KabaSujiBuilder {
 		
 		x = new JTextField();
 		x.setColumns(10);
+
 		
 		JLabel label_1 = new JLabel("x");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		y = new JTextField();
 		y.setColumns(10);
+
 		
 		JButton redo = new JButton("Redo");
 		
@@ -331,14 +333,17 @@ public class LevelBuilderReleasePanel extends KabaSujiBuilder {
 		JButton undo = new JButton("Undo");
 		
 		x = new JTextField();
-		
 		x.setColumns(10);
+		x.setText(((Integer)this.board.getTiles()[0].length).toString());
+
 		
 		JLabel label_1 = new JLabel("x");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		y = new JTextField();
 		y.setColumns(10);
+		y.setText(((Integer)this.board.getTiles().length).toString());
+
 		
 		JButton redo = new JButton("Redo");
 		

@@ -80,13 +80,13 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 	public ReleaseLevelPanel(KabasujiFrame f, LevelModel m) {
 		
 		this.mainFrame = f;
-		this.currentModel = m;
+		this.currentModel = m;	
 		this.board = currentModel.getBoard();
 		this.bp = currentModel.getBullPen();
 		currentModel.setScore(new ReleaseScore());
 		this.score = (ReleaseScore) currentModel.getScore();
 		this.stock = new Stock();
-		this.initialModel = new LevelModel(this.board, this.bp, m.getName(), m.getScore(), this.stock);
+		this.initialModel = new LevelModel(this.board, this.bp, m.getName(),(ReleaseScore) m.getScore(), this.stock);
 		setBackground(new Color(173, 216, 230));
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));

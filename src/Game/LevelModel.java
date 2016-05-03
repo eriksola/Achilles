@@ -18,11 +18,11 @@ public class LevelModel {
 	/**
 	 * Creates a LevelModel with all of the entities needed for a level.
 	 * @param b Board for a level.
-	 * @param bp Bullpen for a level.	
+	 * @param bp Bullpen for a level.		
 	 * @param ln Level number for a level
 	 * @param s Encapsulates the score associated with a LevelModel.
 	 */
-	public LevelModel(Board b, BullPen bp, String name, IScore s, Stock stock){
+	public LevelModel(Board b, BullPen bp, String name, ReleaseScore s, Stock stock){
 		//construct board with current state of Board
 		Tile[][] tiles = new Tile[b.height][b.width];
 		for (int i = 0; i < tiles.length; i++) {
@@ -40,7 +40,7 @@ public class LevelModel {
 		}
 		this.bullpen = new BullPen(pieces);
 		this.name = name;
-		this.score = s;
+		this.score = new ReleaseScore();
 		ArrayList<Piece> stockPieces = new ArrayList<Piece>();
 		for (int i = 0; i < stock.getPieces().size(); i++){
 			stockPieces.add(stock.getPiece(i));
