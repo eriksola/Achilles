@@ -95,5 +95,4 @@ public class RedoController implements ActionListener{
 			}
 		}
 	}
-
 }

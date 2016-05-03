@@ -286,7 +286,7 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 		this.redoModels = redoMoves;
 		
 		//generate the StockView (with scroll panel)
-		this.stockView = new StockView(mainFrame, stock, this);
+		this.stockView = new StockView(mainFrame, this.stock, this);
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
 		

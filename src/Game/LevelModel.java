@@ -1,6 +1,7 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * LevelModel is the superclass for any type of level in the <b> Kabasuji </b> game.
@@ -40,7 +41,11 @@ public class LevelModel {
 		this.bullpen = new BullPen(pieces);
 		this.name = name;
 		this.score = s;
-		this.stock = stock;
+		ArrayList<Piece> stockPieces = new ArrayList<Piece>();
+		for (int i = 0; i < stock.getPieces().size(); i++){
+			stockPieces.add(stock.getPiece(i));
+		}
+		this.stock = new Stock(stockPieces);
 	}
 	
 	/**
