@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Boundary.Both.KabaSuji;
 import Boundary.Builder.EditLightningLevelPanel;
 import Boundary.Builder.EditPuzzleLevelPanel;
 import Boundary.Builder.EditReleaseLevelPanel;
+import Boundary.Builder.KabaSujiBuilder;
 import Boundary.Builder.LevelBuilderLightningPanel;
 import Boundary.Builder.LevelBuilderPuzzlePanel;
 import Boundary.Builder.LevelBuilderReleasePanel;
@@ -22,7 +24,7 @@ import Game.PuzzleScore;
  */
 public class GetMovesController implements ActionListener {
 	JTextField moves;
-	JPanel panel;
+	KabaSujiBuilder view;
 	int numMoves;
 	
 	/**
@@ -30,9 +32,9 @@ public class GetMovesController implements ActionListener {
 	 * @param moves TextField where the amount of moves will be types in.
 	 * @param p Panel where the text field resides.
 	 */
-	public GetMovesController(JTextField moves, JPanel p) {
+	public GetMovesController(JTextField moves, KabaSujiBuilder view) {
 		this.moves = moves;
-		this.panel = p;
+		this.view = view;
 		if(!moves.getText().equals("")){
 			numMoves = Integer.parseInt(moves.getText());
 		}
@@ -46,6 +48,7 @@ public class GetMovesController implements ActionListener {
 		if(!moves.getText().equals("")){
 			 try
 			    {
+				  view.addLevelModel();
 			      //Try to convert the string in the text in an int
 			      numMoves = Integer.parseInt(moves.getText());
 			      // print out the value after the conversion
@@ -56,14 +59,16 @@ public class GetMovesController implements ActionListener {
 			      System.out.println("NumberFormatException: " + nfe.getMessage());
 			    }
 			 
-			if(panel instanceof LevelBuilderPuzzlePanel){
-				((LevelBuilderPuzzlePanel) panel).addEntity(new PuzzleScore(numMoves));
-				((LevelBuilderPuzzlePanel) panel).addEntity(numMoves);
 
+			if(view instanceof LevelBuilderPuzzlePanel){
+				((LevelBuilderPuzzlePanel) view).addEntity(new PuzzleScore(numMoves));
+				((LevelBuilderPuzzlePanel) view).addEntity(numMoves);
 			}
-			else if (panel instanceof EditPuzzleLevelPanel){
-				((EditPuzzleLevelPanel) panel).addEntity(new PuzzleScore(numMoves));
-				((EditPuzzleLevelPanel) panel).addEntity(numMoves);
+
+
+			else if (view instanceof EditPuzzleLevelPanel){
+				((EditPuzzleLevelPanel) view).addEntity(new PuzzleScore(numMoves));
+				((EditPuzzleLevelPanel) view).addEntity(numMoves);
 			}
 		}
 	}

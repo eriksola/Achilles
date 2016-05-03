@@ -40,7 +40,6 @@ public class PieceController extends java.awt.event.MouseAdapter{
 	 */
 	public void mouseClicked(MouseEvent me){
 		System.out.println("mouse clicked on piece");
-		
 		//if you click on a piece thats already selected, make it unselected
 		if (view.getSelectedPiece() == pv){
 			view.removeSelected();
@@ -68,9 +67,9 @@ public class PieceController extends java.awt.event.MouseAdapter{
 		
 		//otherwise make that piece the selected piece
 		else {
-		view.setSelected(pv);
+			view.setSelected(pv);
 		view.getBoardView().deselectTile();
 		}
-
+		
 	}
 }

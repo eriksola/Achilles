@@ -1,4 +1,4 @@
-package test;
+package Tests;
 
 import java.util.ArrayList;
 
@@ -122,6 +122,21 @@ public class TestEntities extends TestCase {
 		b1.setSelectedPiece(p2);
 		assertTrue(b1.selectedPiece == p2);
 		assertEquals(b1.getSelectedPiece(),p2);
+	}
+	
+	public void testRemove(){
+		ArrayList<Piece> a = new ArrayList<Piece>();
+		a.add(p1);
+		a.add(p2);
+		
+		BullPen b1 = new BullPen(a);
+		b1.addPiece(p3);
+		
+		assertTrue(b1.getPieces().size() == 3);
+		
+		b1.removePiece(p1);
+		assertFalse(b1.getPieces().size() == 3);
+
 	}
 	
 }

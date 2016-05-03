@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import Boundary.Both.BoardView;
 import Boundary.Both.KabaSuji;
+import Boundary.Builder.KabaSujiBuilder;
 import Boundary.Builder.LevelBuilderPuzzlePanel;
 
 /**
@@ -20,7 +21,7 @@ public class GetBoardDimensionsController implements ActionListener {
 	JTextField y;
 	int xNum;
 	int yNum;
-	KabaSuji view;
+	KabaSujiBuilder view;
 	
 	/**
 	 * Creates a GetBoardDimensionsController.
@@ -28,7 +29,7 @@ public class GetBoardDimensionsController implements ActionListener {
 	 * @param y TextField where y coordinate can be entered.
 	 * @param view Panel where the controller resides.
 	 */
-	public GetBoardDimensionsController(JTextField x, JTextField y, KabaSuji view) {
+	public GetBoardDimensionsController(JTextField x, JTextField y, KabaSujiBuilder view) {
 		this.x = x;
 		this.y = y;
 		this.view = view;
@@ -42,7 +43,8 @@ public class GetBoardDimensionsController implements ActionListener {
 		if(!x.getText().equals("") && !y.getText().equals("")){
 			 try
 			    {
-				 
+			      view.addLevelModel();
+
 				  BoardView bv = view.getBoardView();
 			      //Try to convert the string in the text in an int
 			      xNum = Integer.parseInt(x.getText());
@@ -59,6 +61,7 @@ public class GetBoardDimensionsController implements ActionListener {
 			    {
 			      System.out.println("NumberFormatException: " + nfe.getMessage());
 			    }
+			 
 		}
 	}
 	

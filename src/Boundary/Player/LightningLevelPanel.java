@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
+import Boundary.Both.StockView;
 import Controller.BoardController;
 import Controller.BullPenController;
 import Controller.HflipController;
@@ -20,6 +21,7 @@ import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
 import Game.LightningBoard;
+import Game.LevelModel;
 import Game.LightningLevelModel;
 import Game.LightningScore;
 import Game.Stock;
@@ -45,6 +47,7 @@ import javax.swing.border.BevelBorder;
  *
  */
 public class LightningLevelPanel extends KabaSujiPlayer{
+
 
 	KabasujiFrame mainFrame;
 	LightningLevelModel currentModel;
@@ -249,4 +252,5 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	public Stock getStock(){
 		return this.stock;
 	}
+
 }

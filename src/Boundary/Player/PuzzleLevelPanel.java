@@ -248,4 +248,5 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		//update the boundary view of moves left
 		this.movesView.setText("Moves Left: " + strMoves);
 	}
+
 }
