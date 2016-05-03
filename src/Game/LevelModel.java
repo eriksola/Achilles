@@ -11,7 +11,7 @@ import java.util.List;
 public class LevelModel {
 	Board board;
 	BullPen bullpen;
-	String name;	
+	String name;
 	IScore score;
 	Stock stock;
 	
@@ -86,7 +86,7 @@ public class LevelModel {
 	 * if the player earns a better score, save it as the new top score
 	 * @param currentScore the new top score
 	 */
-	public void setScore(IScore currentScore) {
-		this.score = currentScore;
+	public void setScore(ReleaseScore currentScore) {
+		this.score = new ReleaseScore(currentScore.getRed(), currentScore.getYellow(), currentScore.getGreen());
 	}
 }

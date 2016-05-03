@@ -12,6 +12,7 @@ public class LightningLevelModel extends LevelModel{
 	//LightningBoard lightBoard;
 	int timeGiven;
 	int timeUsed;
+	LightningBoard lightBoard;
 	
 	/**
 	 * Creates a LightningLevelModel with all the entity objects needed to complete a LightningLevel.
@@ -32,7 +33,7 @@ public class LightningLevelModel extends LevelModel{
 				}
 			}
 			//this.lightningBoard = new LightningBoard(tiles);
-			this.board = new LightningBoard(tiles);
+			this.lightBoard = new LightningBoard(tiles);
 			
 			//construct bullpen with current state of bullpen
 			ArrayList<Piece> pieces = new ArrayList<Piece>();
@@ -42,12 +43,14 @@ public class LightningLevelModel extends LevelModel{
 			this.bullpen = new BullPen(pieces);
 			this.name = name;
 			int totalTiles = 0;
+			int totalMarked = 0;
 			for (int i = 0; i < tiles.length; i++){
 				for (int j = 0; j < tiles[0].length; j++){
 					if (tiles[i][j] != null) {totalTiles++;}
+					if (tiles[i][j].isOccupied()) {totalMarked++;}
 				}
 			}
-			this.score = new LightningScore(totalTiles);
+			this.score = new LightningScore(totalTiles,totalMarked);
 			ArrayList<Piece> stockPieces = new ArrayList<Piece>();
 			for (int i = 0; i < stock.getPieces().size(); i++){
 				stockPieces.add(stock.getPiece(i));
@@ -71,7 +74,19 @@ public class LightningLevelModel extends LevelModel{
 	}
 	
 	public LightningBoard getLightningBoard(){
-		return (LightningBoard) this.board;
+		return lightBoard;
 	}
 	
+	public void setScore(LightningScore currentScore) {
+		Tile[][] tiles = lightBoard.getTiles();
+		int totalTiles = 0;
+		int totalMarked = 0;
+		for (int i = 0; i < tiles.length; i++){
+			for (int j = 0; j < tiles[0].length; j++){
+				if (tiles[i][j] != null) {totalTiles++;}
+				if (tiles[i][j].isOccupied()) {totalMarked++;}
+			}
+		}
+		this.score = new LightningScore(totalTiles,totalMarked);
+	}
 }

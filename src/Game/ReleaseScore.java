@@ -22,6 +22,23 @@ public class ReleaseScore implements IScore{
 		this.green = new boolean[6];
 	}
 	
+	public ReleaseScore(boolean red, boolean yellow, boolean green){
+		if (red) { 
+			for (int i = 0; i < 6; i++){
+				this.red[i] = true;
+			}
+		}
+		if (yellow) { 
+			for (int i = 0; i < 6; i++){
+				this.yellow[i] = true;
+			}
+		}
+		if (green) { 
+			for (int i = 0; i < 6; i++){
+				this.green[i] = true;
+			}
+		}
+	}
 	/**
 	 * Checks to see if a player has won a release level.
 	 * A player has won when if at least one star is earned, otherwise they lose.
@@ -105,5 +122,17 @@ public class ReleaseScore implements IScore{
 				}
 			}
 		}
+	}	
+	public boolean getRed(){
+		return allNum(this.red);
 	}
+	
+	public boolean getYellow(){
+		return allNum(this.yellow);
+	}
+	
+	public boolean getGreen(){
+		return allNum(this.green);
+	}
+
 }

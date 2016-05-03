@@ -284,11 +284,13 @@ public class DefaultLevelPanel extends JPanel {
 				System.err.println("Error in serialization importing process!");
 			}
 		}
+		
 		for(int i = 0; i < lightningFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(lightningFiles.get(i).getPath(), 2)){
 				lightLevels[i] = new LightningLevelModel((LightningBoard)d.getBoard(), d.getBullPen(), lightningFiles.get(i).getName(), (LightningScore) d.getScore(), new Stock(), d.getTime());
 				lightBtns[i].addActionListener(new DefLevelMenuToLightningLevelController( (KabasujiFrame) mainframe, lightLevels[i]));
+				System.out.println("Stars earned: " + d.getScore().scoreToStars());
 				if (d.getScore().scoreToStars() <= 0){
 					lightBtns[i].setEnabled(false);
 				}
@@ -302,6 +304,7 @@ public class DefaultLevelPanel extends JPanel {
 			if(d.Deserialize(releaseFiles.get(i).getPath(), 3)){
 				releaseLevels[i] = new LevelModel(d.getBoard(), d.getBullPen(), releaseFiles.get(i).getName(), (ReleaseScore) d.getScore(), new Stock());
 				releaseBtns[i].addActionListener(new DefLevelMenuToReleaseLevelController( (KabasujiFrame) mainframe, releaseLevels[i]));
+				System.out.println("Stars earned: " + d.getScore().scoreToStars());
 				if (d.getScore().scoreToStars() <= 0){
 					releaseBtns[i].setEnabled(false);
 				}

@@ -79,11 +79,11 @@ public class TestLevelEndPanel extends TestCase {
 		//remove pieces then update score
 		bp2.removePiece(p1);
 		bp2.removePiece(p2);
-		score2.updateScore(model2);
+		score2.updateScore(model);
 		levelModels = new Stack<PuzzleLevelModel>();
 		redoModels = new Stack<PuzzleLevelModel>();
-		view = new PuzzleLevelPanel(frame, model);
-		endPanel = new LevelEndPanel(frame, model, score2);
+		view = new PuzzleLevelPanel(frame, model2);
+		endPanel = new LevelEndPanel(frame, model2, score2);
 		view.setSelected(pv);
 		view.removeSelected();
 	}

@@ -60,4 +60,10 @@ public class PuzzleLevelModel extends LevelModel{
 	public int getMovesAllowed(){
 		return this.movesGiven;
 	}
+	
+	public void setScore(PuzzleScore score){
+		int used = board.getPieces().size();
+		int total = bullpen.getPieces().size() + used;
+		this.score = new PuzzleScore(total, used);
+	}
 }
