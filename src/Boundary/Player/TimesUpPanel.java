@@ -14,10 +14,17 @@ import Controller.DefLevelMenuToLightningLevelController;
 import Controller.ReturnToPlayerMenuController;
 import Game.IScore;
 import Game.LightningLevelModel;
+import Game.LightningScore;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.SwingConstants;
 
@@ -41,7 +48,45 @@ public class TimesUpPanel extends JPanel {
 		
 		//if the new score is better, set is as the new top score
 		if (currentStars > initStars){
-			initialModel.setScore(currentScore);
+			initialModel.setScore((LightningScore) currentScore);
+			
+			ArrayList<Object> entities = new ArrayList<Object>();
+			entities.add(initialModel.getBullPen());
+			entities.add(initialModel.getBoard());
+			entities.add(initialModel.getScore());
+			entities.add(initialModel.getTime());
+			
+			ArrayList<File> files = new ArrayList<File>();
+			
+			File builtLightningPath = new File("./src/BuiltLevels/LightningLevels");
+			ArrayList<File> builtLightning = new ArrayList<File>(Arrays.asList(builtLightningPath.listFiles()));
+			files.addAll(builtLightning);
+			
+			File defaultLightningPath = new File("./src/DefaultLevels/PuzzleLevels");
+			ArrayList<File> defaultLightning = new ArrayList<File>(Arrays.asList(defaultLightningPath.listFiles()));
+			files.addAll(defaultLightning);
+			
+			for(int i = 0; i < files.size(); i++){
+				if (files.get(i).getName().equals(initialModel.getName())){
+					try{
+						String filepath = files.get(i).getAbsolutePath();
+						File levelFile = new File(filepath);
+						FileOutputStream fileOut = new FileOutputStream(filepath);
+						ObjectOutputStream out = new ObjectOutputStream(fileOut);
+						
+						System.out.println("Serialized data is saved in " + filepath + " file");
+						for(Object j: entities){
+							out.writeObject(j);
+						}
+						
+						out.close();
+						fileOut.close();
+						break;
+					}catch (IOException ioe) {
+						ioe.printStackTrace();
+					}
+				}
+			}
 		}
 		
 		

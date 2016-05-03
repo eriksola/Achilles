@@ -24,7 +24,10 @@ import Controller.ReturnToPlayerMenuController;
 import Game.IScore;
 import Game.LevelModel;
 import Game.LightningLevelModel;
+import Game.LightningScore;
 import Game.PuzzleLevelModel;
+import Game.PuzzleScore;
+import Game.ReleaseScore;
 
 public class LevelEndPanel extends JPanel{
 
@@ -51,7 +54,18 @@ public class LevelEndPanel extends JPanel{
 		System.out.println("Initial stars: " + initStars);
 		if (currentStars > initStars){
 			System.out.println("new highscore!");
-			initialModel.setScore(currentScore);
+			
+			if (currentScore instanceof LightningScore){
+				((LightningLevelModel) initialModel).setScore((LightningScore) currentScore);
+			}
+			
+			if (currentScore instanceof PuzzleScore){
+				((PuzzleLevelModel) initialModel).setScore((PuzzleScore) currentScore);
+			}
+			
+			if (currentScore instanceof ReleaseScore){
+				initialModel.setScore((ReleaseScore) currentScore);
+			}
 			
 			ArrayList<Object> entities = new ArrayList<Object>();
 			entities.add(initialModel.getBullPen());
@@ -99,7 +113,6 @@ public class LevelEndPanel extends JPanel{
 				if (files.get(i).getName().equals(initialModel.getName())){
 					try{
 						String filepath = files.get(i).getAbsolutePath();
-						File levelFile = new File(filepath);
 						FileOutputStream fileOut = new FileOutputStream(filepath);
 						ObjectOutputStream out = new ObjectOutputStream(fileOut);
 						
