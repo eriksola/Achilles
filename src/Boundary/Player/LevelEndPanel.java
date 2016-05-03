@@ -49,39 +49,33 @@ public class LevelEndPanel extends JPanel{
 		int initStars = initialModel.getScore().scoreToStars();
 		int currentStars = currentScore.scoreToStars();
 		
-		//if the new score is better, set it as the new top score
-		System.out.println("Current stars: " + currentStars);
-		System.out.println("Initial stars: " + initStars);
 		if (currentStars > initStars){
 			System.out.println("new highscore!");
 			
+			ArrayList<Object> entities = new ArrayList<Object>();
+			entities.add(initialModel.getBullPen());
+			
 			if (currentScore instanceof LightningScore){
-				((LightningLevelModel) initialModel).setScore((LightningScore) currentScore);
+				LightningLevelModel lightModel = (LightningLevelModel) initialModel;
+				lightModel.setScore((LightningScore) currentScore);
+				entities.add(lightModel.getLightningBoard());
+				entities.add(lightModel.getScore());
+				entities.add(lightModel.getTime());
 			}
 			
 			if (currentScore instanceof PuzzleScore){
-				((PuzzleLevelModel) initialModel).setScore((PuzzleScore) currentScore);
+				PuzzleLevelModel puzzleModel = (PuzzleLevelModel) initialModel;
+				puzzleModel.setScore((PuzzleScore) currentScore);
+				entities.add(puzzleModel.getBoard());
+				entities.add(puzzleModel.getScore());
+				entities.add(puzzleModel.getMovesAllowed());
 			}
 			
 			if (currentScore instanceof ReleaseScore){
 				initialModel.setScore((ReleaseScore) currentScore);
+				entities.add(initialModel.getBoard());
+				entities.add(initialModel.getScore());
 			}
-			
-			ArrayList<Object> entities = new ArrayList<Object>();
-			entities.add(initialModel.getBullPen());
-			entities.add(initialModel.getBoard());
-			entities.add(initialModel.getScore());
-			
-			if (initialModel instanceof PuzzleLevelModel){
-				entities.add(((PuzzleLevelModel)initialModel).getMovesAllowed());
-			}
-			
-			if (initialModel instanceof LightningLevelModel){
-				entities.add(((LightningLevelModel)initialModel).getTime());
-			}
-			
-			//TEST
-			System.out.println("Level name: " + level.getName());
 			
 			ArrayList<File> files = new ArrayList<File>();
 			
@@ -101,11 +95,11 @@ public class LevelEndPanel extends JPanel{
 			ArrayList<File> defaultPuzzles = new ArrayList<File>(Arrays.asList(defaultPuzzlePath.listFiles()));
 			files.addAll(defaultPuzzles);
 			
-			File defaultLightningPath = new File("./src/DefaultLevels/PuzzleLevels");
+			File defaultLightningPath = new File("./src/DefaultLevels/LightningLevels");
 			ArrayList<File> defaultLightning = new ArrayList<File>(Arrays.asList(defaultLightningPath.listFiles()));
 			files.addAll(defaultLightning);
 			
-			File defaultReleasePath = new File("./src/DefaultLevels/PuzzleLevels");
+			File defaultReleasePath = new File("./src/DefaultLevels/ReleaseLevels");
 			ArrayList<File> defaultRelease = new ArrayList<File>(Arrays.asList(defaultReleasePath.listFiles()));
 			files.addAll(defaultRelease);
 			
@@ -117,6 +111,7 @@ public class LevelEndPanel extends JPanel{
 						ObjectOutputStream out = new ObjectOutputStream(fileOut);
 						
 						for(Object j: entities){
+							System.out.println("Writing to file: " + j);
 							out.writeObject(j);
 						}
 						

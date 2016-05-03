@@ -40,7 +40,7 @@ public class LevelModel {
 		}
 		this.bullpen = new BullPen(pieces);
 		this.name = name;
-		setScore((ReleaseScore) s);
+		this.score = new ReleaseScore();
 		ArrayList<Piece> stockPieces = new ArrayList<Piece>();
 		for (int i = 0; i < stock.getPieces().size(); i++){
 			stockPieces.add(stock.getPiece(i));
@@ -87,7 +87,6 @@ public class LevelModel {
 	 * @param currentScore the new top score
 	 */
 	public void setScore(ReleaseScore currentScore) {
-		/**check if any colors were completed and pass the score along **/
-		this.score = new ReleaseScore(currentScore.getRed(), currentScore.getYellow(), currentScore.getGreen());
+		this.score = score;
 	}
 }

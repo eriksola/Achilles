@@ -20,6 +20,7 @@ import Boundary.Both.Deserialization;
 import Controller.DefLevelMenuToLightningLevelController;
 import Controller.DefLevelMenuToPuzzleLevelController;
 import Controller.DefLevelMenuToReleaseLevelController;
+import Controller.LevelPlayerController;
 import Controller.ReturnToPlayerMenuController;
 import Controller.TimerController;
 import Game.Board;
@@ -251,7 +252,6 @@ public class DefaultLevelPanel extends JPanel {
 		panel.setLayout(gl_panel);
 
 		//activate controllers for buttons
-		
 		File puzzlePath = new File("./src/DefaultLevels/PuzzleLevels");
 		ArrayList<File> puzzleFiles = new ArrayList<File>(Arrays.asList(puzzlePath.listFiles()));
 		
@@ -271,13 +271,17 @@ public class DefaultLevelPanel extends JPanel {
 			this.releaseLevels = new LevelModel[releaseFiles.size()];
 		}
 		
+		//load puzzle levels (and check if next level is unlocked)
 		for(int i = 0; i < puzzleFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(puzzleFiles.get(i).getPath(), 1)){
 				puzzleLevels[i] = new PuzzleLevelModel(d.getBoard(), d.getBullPen(), puzzleFiles.get(i).getName(),(PuzzleScore) d.getScore(), new Stock(), d.getNumMoves());
-				puzzleBtns[i].addActionListener(new DefLevelMenuToPuzzleLevelController( (KabasujiFrame) mainframe, puzzleLevels[i]));
-				if (d.getScore().scoreToStars() <= 0){
-					puzzleBtns[i].setEnabled(false);
+				puzzleBtns[i].addActionListener(new LevelPlayerController( (KabasujiFrame) mainframe, puzzleLevels[i]));
+				//if this isnt the last level, check if it unlocks the next level
+				if (i < puzzleFiles.size() - 1){
+					if (d.getScore().scoreToStars() <= 0){
+						puzzleBtns[i + 1].setEnabled(false);
+					}
 				}
 			}
 			else{
@@ -285,34 +289,44 @@ public class DefaultLevelPanel extends JPanel {
 			}
 		}
 		
+		//load lightning levels (and check if next level is unlocked)
 		for(int i = 0; i < lightningFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(lightningFiles.get(i).getPath(), 2)){
-				lightLevels[i] = new LightningLevelModel((LightningBoard)d.getBoard(), d.getBullPen(), lightningFiles.get(i).getName(), (LightningScore) d.getScore(), new Stock(), d.getTime());
-				lightBtns[i].addActionListener(new DefLevelMenuToLightningLevelController( (KabasujiFrame) mainframe, lightLevels[i]));
+				lightLevels[i] = new LightningLevelModel(d.getBoard(), d.getBullPen(), lightningFiles.get(i).getName(), (LightningScore) d.getScore(), new Stock(), d.getTime());
+				lightBtns[i].addActionListener(new LevelPlayerController( (KabasujiFrame) mainframe, lightLevels[i]));
 				System.out.println("Stars earned: " + d.getScore().scoreToStars());
-				if (d.getScore().scoreToStars() <= 0){
-					lightBtns[i].setEnabled(false);
+				//if this isnt the last level, check if it unlocks the next level
+				if (i < lightningFiles.size() - 1){
+					if (((LightningScore) d.getScore()).scoreToStars() <= 0){
+						lightBtns[i + 1].setEnabled(false);
+					}
 				}
 			}
 			else{
 				System.err.println("Error in serialization importing process!");
 			}
 		}
-		for(int i = 0; i < releaseFiles.size(); i++){
+		
+		//load release levels (and check if next level is unlocked)
+		for(int i = 0; i < releaseFiles.size() - 1; i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(releaseFiles.get(i).getPath(), 3)){
 				releaseLevels[i] = new LevelModel(d.getBoard(), d.getBullPen(), releaseFiles.get(i).getName(), (ReleaseScore) d.getScore(), new Stock());
-				releaseBtns[i].addActionListener(new DefLevelMenuToReleaseLevelController( (KabasujiFrame) mainframe, releaseLevels[i]));
-				System.out.println("Stars earned: " + d.getScore().scoreToStars());
-				if (d.getScore().scoreToStars() <= 0){
-					releaseBtns[i].setEnabled(false);
+				releaseBtns[i].addActionListener(new LevelPlayerController( (KabasujiFrame) mainframe, releaseLevels[i]));
+				//if this isnt the last level, check if it unlocks the next level
+				if (i < releaseFiles.size() - 1){
+					if (d.getScore().scoreToStars() <= 0){
+						releaseBtns[i + 1].setEnabled(false);
+					}
 				}
 			}
 			else{
 				System.err.println("Error in serialization importing process!");
 			}
 		}
+		
+		//first level always unlocked
 		puzzleBtns[0].setEnabled(true);
 		lightBtns[0].setEnabled(true);
 		releaseBtns[0].setEnabled(true);

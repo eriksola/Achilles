@@ -37,7 +37,7 @@ public class PuzzleLevelModel extends LevelModel{
 				pieces.add(bp.pieces.get(i));
 		}
 		this.bullpen = new BullPen(pieces);
-		setScore((PuzzleScore) s);
+		this.score = new PuzzleScore(mg);
 		ArrayList<Piece> stockPieces = new ArrayList<Piece>();
 		for (int i = 0; i < stock.getPieces().size(); i++){
 			stockPieces.add(stock.getPiece(i));
@@ -62,10 +62,6 @@ public class PuzzleLevelModel extends LevelModel{
 	}
 	
 	public void setScore(PuzzleScore score){
-		/**Get the number of pieces on the board (because the HashMap is Tile,Piece there will be 6 copies of a piece, one for each tile) **/
-		int used = board.getPieces().size()/6; 
-		/**Get the number of pieces in the bullpen and add to pieces on the board to get the total **/
-		int total = bullpen.getPieces().size() + used;
-		this.score = new PuzzleScore(total, used);
+		this.score = score;
 	}
 }

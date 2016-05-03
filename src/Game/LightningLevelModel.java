@@ -22,10 +22,10 @@ public class LightningLevelModel extends LevelModel{
 	 * @param s Encapsulates the type of score associated with this level.
 	 * @param tg Time given to complete this LightningLevel Level.
 	 */
-	public LightningLevelModel(LightningBoard lightningBoard, BullPen bp, String name, IScore s, Stock stock, int tg){
+	public LightningLevelModel(Board lightningBoard, BullPen bp, String name, IScore s, Stock stock, int tg){
 			super();
 
-			Tile[][] tiles = new Tile[lightningBoard.height][lightningBoard.width];
+			Tile[][] tiles = new Tile[lightningBoard.getHeight()][lightningBoard.getWidth()];
 			for (int i = 0; i < tiles.length; i++) {
 				for (int j = 0; j < tiles[0].length; j++) {
 					Tile t = lightningBoard.tiles[i][j];
@@ -43,14 +43,12 @@ public class LightningLevelModel extends LevelModel{
 			this.bullpen = new BullPen(pieces);
 			this.name = name;
 			int totalTiles = 0;
-			int totalMarked = 0;
 			for (int i = 0; i < tiles.length; i++){
 				for (int j = 0; j < tiles[0].length; j++){
 					if (tiles[i][j] != null) {totalTiles++;}
-					if (tiles[i][j].isOccupied()) {totalMarked++;}
 				}
 			}
-			setScore((LightningScore) s);
+			this.score = new LightningScore(totalTiles);
 			ArrayList<Piece> stockPieces = new ArrayList<Piece>();
 			for (int i = 0; i < stock.getPieces().size(); i++){
 				stockPieces.add(stock.getPiece(i));
@@ -78,16 +76,6 @@ public class LightningLevelModel extends LevelModel{
 	}
 	
 	public void setScore(LightningScore currentScore) {
-		/**Count the total tiles and the number of tiles that are occupied **/
-		Tile[][] tiles = lightBoard.getTiles();
-		int totalTiles = 0;
-		int totalMarked = 0;
-		for (int i = 0; i < tiles.length; i++){
-			for (int j = 0; j < tiles[0].length; j++){
-				if (tiles[i][j] != null) {totalTiles++;}
-				if (tiles[i][j].isOccupied()) {totalMarked++;}
-			}
-		}
-		this.score = new LightningScore(totalTiles,totalMarked);
+		this.score = currentScore;
 	}
 }
