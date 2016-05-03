@@ -27,6 +27,7 @@ import Boundary.Both.PieceView;
 import Boundary.Both.StockView;
 import Controller.BoardController;
 import Controller.BullPenController;
+import Controller.DeleteTileController;
 import Controller.GetBoardDimensionsController;
 import Controller.GetTimeController;
 import Controller.HflipController;
@@ -37,6 +38,8 @@ import Controller.SaveController;
 import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
+import Game.LightningBoard;
+import Game.LightningScore;
 import Game.Stock;
 import Game.Tile;
 
@@ -45,7 +48,7 @@ import Game.Tile;
  * @author Achilles
  *
  */
-public class EditLightningLevelPanel extends KabaSuji {
+public class EditLightningLevelPanel extends KabaSujiBuilder{
 	
 	GetTimeController getTimer;
 	ArrayList<Object> entities;
@@ -62,7 +65,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 	int levelNum;
 	BullPen bp;
 	Stock stock;
-	Board board;
+	LightningBoard board;
 	BullPenView bullPenView;
 	StockView stockView;
 	BoardView boardView;
@@ -77,7 +80,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 	public EditLightningLevelPanel(JFrame f, Deserialization d, int levelNumber) {
 		Tile[][] brdTiles = d.getBoard().getTiles();
 	
-		this.board = d.getBoard();
+		this.board = (LightningBoard) d.getBoard();
 		this.stock = new Stock();
 		this.bp = d.getBullPen();
 		this.time = d.getTime();
@@ -242,6 +245,7 @@ public class EditLightningLevelPanel extends KabaSuji {
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
 		hint.addActionListener(new HintController(this));
+		delete.addActionListener(new DeleteTileController(this));
 
 		getTimer = new GetTimeController(time_text, this);
 		this.setTime.addActionListener(getTimer);
@@ -251,7 +255,14 @@ public class EditLightningLevelPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		
+		Tile[][] tiles = board.getTiles();
+		int totalTiles = 0;
+		for (int a = 0; a < tiles.length; a++){
+			for (int b = 0; b < tiles[0].length; b++){
+				if (tiles[a][b] != null) {totalTiles++;}
+			}
+		}
+		entities.add(new LightningScore(totalTiles));
 	}
 	
 	/**
@@ -272,6 +283,11 @@ public class EditLightningLevelPanel extends KabaSuji {
 	
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
+	}
+
+	@Override
+	public StockView getStockView() {
+		return this.stockView;
 	}
 }
 

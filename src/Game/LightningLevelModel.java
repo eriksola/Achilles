@@ -18,8 +18,8 @@ public class LightningLevelModel extends LevelModel{
 	 * @param s Encapsulates the type of score associated with this level.
 	 * @param tg Time given to complete this LightningLevel Level.
 	 */
-	public LightningLevelModel(Board b, BullPen bp, int ln, IScore s, int tg){
-			super(b, bp, ln, s);
+	public LightningLevelModel(Board b, BullPen bp, String name, IScore s, int tg){
+			super(b, bp, name, s);
 			this.timeGiven = tg;
 			this.timeUsed = 0;
 	}

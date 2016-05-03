@@ -4,6 +4,8 @@ package Boundary.Both;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import Game.Stock;
+
 /**
  * Top-level boundary object for both the builder and player.
  * @author bwolfson
@@ -13,6 +15,7 @@ import javax.swing.JScrollPane;
 public abstract class KabaSuji extends JPanel {
 	
 	PieceView selectedPiece; /** the one selected piece. **/
+	Stock stock;
 	
 	/**
 	 * start with no PieceView selected.
@@ -58,4 +61,6 @@ public abstract class KabaSuji extends JPanel {
 	public PieceView getSelectedPiece(){
 		return this.selectedPiece;
 	}
+	
+
 }

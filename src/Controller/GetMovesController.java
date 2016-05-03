@@ -12,6 +12,7 @@ import Boundary.Builder.EditReleaseLevelPanel;
 import Boundary.Builder.LevelBuilderLightningPanel;
 import Boundary.Builder.LevelBuilderPuzzlePanel;
 import Boundary.Builder.LevelBuilderReleasePanel;
+import Game.PuzzleScore;
 
 /**
  * 
@@ -56,16 +57,13 @@ public class GetMovesController implements ActionListener {
 			    }
 			 
 			if(panel instanceof LevelBuilderPuzzlePanel){
-					((LevelBuilderPuzzlePanel) panel).addEntity(numMoves);	
+				((LevelBuilderPuzzlePanel) panel).addEntity(new PuzzleScore(numMoves));
+				((LevelBuilderPuzzlePanel) panel).addEntity(numMoves);
+
 			}
 			else if (panel instanceof EditPuzzleLevelPanel){
+				((EditPuzzleLevelPanel) panel).addEntity(new PuzzleScore(numMoves));
 				((EditPuzzleLevelPanel) panel).addEntity(numMoves);
-			}
-			else if(panel instanceof LevelBuilderReleasePanel){
-				((LevelBuilderReleasePanel) panel).addEntity(numMoves);
-			}
-			else if(panel instanceof EditReleaseLevelPanel){
-				((EditReleaseLevelPanel) panel).addEntity(numMoves);
 			}
 		}
 	}

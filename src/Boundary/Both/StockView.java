@@ -29,19 +29,21 @@ public class StockView extends JPanel {
 		this.frame = f;
 		this.s = s;
 		this.view = view;
-	
-		setBackground(Color.WHITE);
-		setPieceViews(new PieceView[s.getPieces().size()]);
+		draw();
 		
+
+	}
+	
+	public void draw(){
+		removeAll();
+		setPieceViews(new PieceView[s.getPieces().size()]);
 		for(int i = 0; i < getPieceViews().length; i++){
 			getPieceViews()[i] = new PieceView(s.getPieces().get(i),view);
 			add(getPieceViews()[i].getLabel());
 			repaint();
 		}
-		
-
+		revalidate();
 	}
-	
 	public PieceView[] getPieceViews() {
 		return pieceViews;
 	}
@@ -50,7 +52,9 @@ public class StockView extends JPanel {
 		this.pieceViews = pieceViews;
 	}
 
-	
+	public Stock getStock(){
+		return this.s;
+	}
 
 }
 

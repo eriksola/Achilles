@@ -26,6 +26,7 @@ import Boundary.Both.PieceView;
 import Boundary.Both.StockView;
 import Controller.BoardController;
 import Controller.BullPenController;
+import Controller.DeleteTileController;
 import Controller.GetMovesController;
 import Controller.GetBoardDimensionsController;
 import Controller.HflipController;
@@ -36,6 +37,7 @@ import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
 import Game.Piece;
+import Game.PuzzleScore;
 import Game.Stock;
 import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
@@ -50,7 +52,7 @@ import java.awt.event.InputMethodEvent;
  * @author Achilles
  *
  */
-public class EditPuzzleLevelPanel extends KabaSuji {
+public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 	
 	ArrayList<Object> entities;
 	
@@ -247,6 +249,7 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
 		addhint.addActionListener(new HintController(this));
+		delete.addActionListener(new DeleteTileController(this));
 
 		
 	}
@@ -255,7 +258,6 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
-		entities.add(gmController.getMoves());
 	}
 	
 	/**
@@ -276,6 +278,11 @@ public class EditPuzzleLevelPanel extends KabaSuji {
 	
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
+	}
+
+	@Override
+	public StockView getStockView() {
+		return this.stockView;
 	}
 	
 }

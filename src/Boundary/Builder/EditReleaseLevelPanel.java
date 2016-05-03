@@ -27,6 +27,7 @@ import Boundary.Both.PieceView;
 import Boundary.Both.StockView;
 import Controller.BoardController;
 import Controller.BullPenController;
+import Controller.DeleteTileController;
 import Controller.GetBoardDimensionsController;
 import Controller.GetMovesController;
 import Controller.HflipController;
@@ -37,6 +38,7 @@ import Controller.SaveController;
 import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
+import Game.ReleaseScore;
 import Game.Stock;
 import Game.Tile;
 
@@ -45,7 +47,7 @@ import Game.Tile;
  * @author Achilles
  *
  */
-public class EditReleaseLevelPanel extends KabaSuji {
+public class EditReleaseLevelPanel extends KabaSujiBuilder {
 	
 	ArrayList<Object> entities;
 	
@@ -226,7 +228,8 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		
 
 		panel.setLayout(gl_panel);
-
+		
+		//activate controllers
 		getEntities();
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		this.save.addActionListener(new SaveController(entities, 3));
@@ -238,6 +241,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		vertical.addActionListener(new VflipController(this));
 		rightrotate.addActionListener(new RotateController(this));
 		hint.addActionListener(new HintController(this));
+		delete.addActionListener(new DeleteTileController(this));
 
 		
 		}
@@ -246,6 +250,7 @@ public class EditReleaseLevelPanel extends KabaSuji {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
+		entities.add(new ReleaseScore());
 	}
 	
 	/**
@@ -266,6 +271,11 @@ public class EditReleaseLevelPanel extends KabaSuji {
 	
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
+	}
+
+	@Override
+	public StockView getStockView() {
+		return this.stockView;
 	}
 
 }

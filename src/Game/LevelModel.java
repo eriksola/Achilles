@@ -8,7 +8,7 @@ package Game;
 public class LevelModel {
 	Board board;
 	BullPen bullpen;
-	int levelNum;
+	String name;	
 	IScore score;
 	
 	/**
@@ -18,11 +18,11 @@ public class LevelModel {
 	 * @param ln Level number for a level
 	 * @param s Encapsulates the score associated with a LevelModel.
 	 */
-	public LevelModel(Board b, BullPen bp, int ln, IScore s){
-		
+	public LevelModel(Board b, BullPen bp, String name, IScore s){
+			
 		this.board = b;
 		this.bullpen = bp;
-		this.levelNum = ln;
+		this.name = name;
 		this.score = s;
 	}
 	
@@ -33,7 +33,7 @@ public class LevelModel {
 	public LevelModel(LevelModel lm){
 		this.board = lm.board;
 		this.bullpen = lm.bullpen;
-		this.levelNum = lm.levelNum;
+		this.name = lm.name;
 		this.score = lm.score;
 	}
 	
@@ -45,8 +45,8 @@ public class LevelModel {
 		return this.bullpen;
 	}
 	
-	public int getLevelNum(){
-		return this.levelNum;
+	public String getName(){
+		return this.name;
 	}
 	
 	public IScore getScore(){

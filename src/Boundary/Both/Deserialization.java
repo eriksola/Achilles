@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import Game.Board;
 import Game.BullPen;
+import Game.IScore;
 import Game.Piece;
 import Game.Stock;
 
@@ -16,6 +17,7 @@ public class Deserialization {
 	Board board;
 	int timer = 0;
 	int numMoves = 0;
+	IScore score;
 	
 	/**
 	 * Deserializes a previously serialized level.
@@ -30,6 +32,7 @@ public class Deserialization {
 			//TODO add more entities as needed
 			bullPen = (BullPen) in.readObject();
 			board = (Board) in.readObject();
+			score = (IScore) in.readObject();
 			
 			switch(levelType){
 			
@@ -75,6 +78,9 @@ public class Deserialization {
 		return this.board;
 	}
 	
+	public IScore getScore() {
+		return this.score;
+	}
 
 	public int getTime(){
 		return this.timer;

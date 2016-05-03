@@ -25,7 +25,7 @@ public class HintController implements ActionListener{
 			view.getBoardView().draw();
 			//and add the piece to the bullpen
 			BullPenView bpView = view.getBullPenView();
-			bpView.addView(new PieceView(selected.getP(), view));
+			bpView.addPiece(new PieceView(selected.getP(), view));
 			view.getScrollPane().setViewportView(bpView);
 		}
 	}

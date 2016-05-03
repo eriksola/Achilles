@@ -3,18 +3,22 @@ package Controller;
 import Game.Board;
 import Game.Coordinate;
 import Game.Piece;
+import Game.Stock;
 import Game.Tile;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
+import java.util.List;
 
 import Boundary.Builder.*;
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
-import Boundary.Both.KabaSujiPlayer;
 import Boundary.Both.PieceView;
+import Boundary.Both.StockView;
+import Boundary.Player.KabaSujiPlayer;
+import Boundary.Player.LightningLevelPanel;
 import Boundary.Player.PuzzleLevelPanel;
 
 /**
@@ -86,6 +90,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				
 				HashMap<Tile,Piece> piecesOnBoard = bv.getBoard().getPieces();
 				Piece selectedPiece = view.getSelectedPiece().getP();
+				
 				//check if the piece is coming from the board
 				if (piecesOnBoard.containsValue(selectedPiece)){
 					
@@ -98,10 +103,16 @@ public class BoardController extends java.awt.event.MouseAdapter{
 					int oldRow = pieceAnchor.getY();
 					
 					//if the piece isn't going to move, deselect it
-					if (oldRow == row && oldCol == col){
-						System.out.println("Same spot");
+					boolean notMove = false;
+					for (int i = 0; i < 6; i++){
+						Coordinate c = piece.getCoordinates()[i];
+						if ((oldRow - c.y == row) && (oldCol + c.x == col)){
+							notMove = true;
+						}
+					}
+					if (notMove){
 						view.removeSelected();
-						bv.getBoard().deselectPiece(row, col, pv);
+						bv.getBoard().deselectPiece(oldRow, oldCol, pv);
 						bv.draw();
 						return;
 					}
@@ -111,7 +122,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 						
 						//remove the piece from the old location
 						brd.removePiece(oldRow, oldCol, pv);
-
+					
 						//if this is the player, update the score of the level
 						if (view instanceof KabaSujiPlayer){
 							KabaSujiPlayer player = (KabaSujiPlayer) view;
@@ -126,36 +137,62 @@ public class BoardController extends java.awt.event.MouseAdapter{
 						//unselect the piece and draw
 						view.removeSelected();
 						bv.draw();
+						return;
 					}
 				}
 			}
 			
-			//otherwise the piece must be from the bullpen
-			if(brd.addPiece(row,col,pv)){
+			//check if the piece is coming from the bullpen
+			if (bpv.getPieceViews().contains(pv)){
+				if(brd.addPiece(row,col,pv)){
+					//redraw the board
+					bv.draw();
+				
+					//remove the piece from the bullpen
+					bpv.remove(pv);
+				
+					//if this is a lightning level
+					if (view instanceof LightningLevelPanel){
+						LightningLevelPanel lightningPanel = (LightningLevelPanel) view;
+						Stock stock = lightningPanel.getStock();
+						PieceView pieceView = new PieceView(stock.getRandomPiece(), this.view);
+						bpv.addPiece(pieceView);
+						bpv.draw();
+						//replace the piece with a random one from the stock
+					}
+					view.getScrollPane().setViewportView(bpv);
+					view.removeSelected();
+				
+					//if this is the player, update the score of the level
+					if (view instanceof KabaSujiPlayer){
+						KabaSujiPlayer player = (KabaSujiPlayer) view;
+						player.updateScore();
 					
-				//redraw the board
-				bv.draw();
-				
-				//remove the piece from the bullpen
-				bpv.remove(pv);
-				
-				view.getScrollPane().setViewportView(bpv);
-				view.removeSelected();
-				
-				//if this is the player, update the score of the level
-				if (view instanceof KabaSujiPlayer){
-					KabaSujiPlayer player = (KabaSujiPlayer) view;
-					player.updateScore();
-					
-					//if this is a puzzle level, decrement the moves left
-					if (player instanceof PuzzleLevelPanel){
+						//if this is a puzzle level, decrement the moves left
+						if (player instanceof PuzzleLevelPanel){
 						PuzzleLevelPanel puzzlePlayer = (PuzzleLevelPanel) player;
 						puzzlePlayer.useMove();
-					}
-				}	
+						}
+					}	
+				}
+				//if there was a selected piece end the function here
+				return;
 			}
-			//if there was a selected piece end the function here
-			return;
+			//otherwise the piece must be coming from the stock
+			else if (view instanceof KabaSujiBuilder){
+				if(brd.addPiece(row,col,pv)){
+					bv.draw();
+					KabaSujiBuilder buildView = (KabaSujiBuilder) view;
+					StockView stockView = buildView.getStockView();
+					Piece selectedPiece = view.getSelectedPiece().getP();
+					List<Piece> stockPieces = stockView.getStock().getPieces();
+					if (stockPieces.remove(selectedPiece)){
+						System.out.println("piece removed from stock");
+					}
+					stockView.draw();
+					view.removeSelected();
+				}
+			}
 		}
 		
 

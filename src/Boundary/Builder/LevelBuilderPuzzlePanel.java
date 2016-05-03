@@ -35,6 +35,7 @@ import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
 import Game.Piece;
+import Game.PuzzleScore;
 import Game.Stock;
 import Game.Tile;
 import Controller.ReturnToBuilderMenuController;
@@ -49,7 +50,7 @@ import java.awt.event.InputMethodEvent;
  * @author Achilles
  *
  */
-public class LevelBuilderPuzzlePanel extends KabaSuji {
+public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 	
 	ArrayList<Object> entities;
 	GetMovesController movesController;
@@ -57,6 +58,7 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	BullPen bp;
 	Board board;
 	Stock stock;
+	int numMoves;
 	
 	JTextField x;
 	JTextField y;
@@ -287,5 +289,10 @@ public class LevelBuilderPuzzlePanel extends KabaSuji {
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
 	}
-	
+
+	@Override
+	public StockView getStockView() {
+		return this.stockView;
+	}
+
 }
