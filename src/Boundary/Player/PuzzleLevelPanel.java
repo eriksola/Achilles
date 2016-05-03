@@ -65,6 +65,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 	BullPen bp;
 	int numMoves;
 	PuzzleScore score;
+	Stock stock;
 	
 	BoardView boardView;
 	BullPenView bullPenView;
@@ -79,14 +80,15 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 	public PuzzleLevelPanel(KabasujiFrame f, PuzzleLevelModel m) {
 		
 		this.mainFrame = f;
-		this.initialModel = new PuzzleLevelModel(m);
 		System.out.println("High Score: " + initialModel.getScore().scoreToStars() + " Stars");
 		this.currentModel = m;
 		this.board = currentModel.getBoard();
 		this.bp = currentModel.getBullPen();
-		this.numMoves = currentModel.getMovesAllowed();
+		this.numMoves = currentModel.getMovesAllowed();	
 		currentModel.setScore(new PuzzleScore(numMoves));
 		this.score = (PuzzleScore) currentModel.getScore();
+		this.stock = new Stock();
+		this.initialModel = new PuzzleLevelModel(this.board, this.bp, m.getName(), m.getScore(), this.stock, this.numMoves);
 		
 		setBackground(new Color(173, 216, 230));
 		JPanel panel = new JPanel();

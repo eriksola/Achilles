@@ -26,10 +26,14 @@ public class Board implements Serializable{
 		this.tiles = t;
 		this.height = t.length;
 		this.width = t[0].length;
-		this.pieces = new HashMap<Tile,Piece>();
+		this.pieces = new HashMap<Tile,Piece>();	
 		this.selectedPieceAnchor = null;
 	}
 	
+	public Board() {
+		
+	}
+
 	/**
 	 * Add a piece to the board if it is valid.
 	 * @param row <i> x </i> coordinate for the Piece.

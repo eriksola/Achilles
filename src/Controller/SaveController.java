@@ -18,6 +18,7 @@ import Boundary.Builder.LevelBuilderFrame;
 import Boundary.Builder.LevelBuilderMainMenuPanel;
 import Game.Board;
 import Game.BullPen;
+import Game.LightningBoard;
 import Game.LightningScore;
 import Game.Piece;
 import Game.PuzzleScore;
@@ -47,7 +48,7 @@ public class SaveController implements ActionListener {
 		this.levelType = levelType;
 	}
 	
-	/**
+	/**	
 	 * Get the input, name of the file, from the builder.
 	 * @return Name of the level being built.
 	 */

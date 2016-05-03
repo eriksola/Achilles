@@ -1,20 +1,13 @@
 package Game;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class LightningBoard extends Board{
-	
-	HashMap<Tile,Piece> pieces;
-	Tile selectedPieceAnchor; /** the anchor of the selected piece on the board **/
-	int width;
-	int height;
+public class LightningBoard extends Board implements Serializable{
+
 	
 	public LightningBoard(Tile[][] t){
 		super(t);
-		this.height = t.length;
-		this.width = t[0].length;
-		this.pieces = new HashMap<Tile,Piece>();
-		this.selectedPieceAnchor = null;
 	}
 	
 	/**

@@ -31,7 +31,7 @@ public class DefLevelMenuToLightningLevelController implements ActionListener {
 		this.lightLevel = llm;
 	}
 	
-	/**
+	/**	
 	 * Invoked when the button is pressed to go to a level.
 	 */
 	public void actionPerformed(ActionEvent e) {

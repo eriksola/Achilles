@@ -278,10 +278,10 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 	public LevelBuilderPuzzlePanel(JFrame frame, PuzzleLevelModel model, Stack<PuzzleLevelModel> prevMoves, Stack<PuzzleLevelModel>	redoMoves){
 		
 		this.mainFrame = frame;
-		this.stock = new Stock();
 		this.name = model.getName();
 		this.board = model.getBoard();
 		this.bp = model.getBullPen();
+		this.stock = model.getStock();
 		this.levelModels = prevMoves;
 		this.redoModels = redoMoves;
 		
@@ -504,13 +504,13 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 	
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.numMoves);
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.stock, this.numMoves);
 		this.levelModels.push(changedLevel);
 	}
 	
 	public void addModelForRedo(){
 		System.out.println("level model pushed for redo purpose.");
-		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.numMoves);
+		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.stock, this.numMoves);
 		this.redoModels.push(changedLevel);
 	}
 	

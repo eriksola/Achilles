@@ -258,7 +258,7 @@ public class EditReleaseLevelPanel extends KabaSujiBuilder {
 		this.redoModels = redoModels;
 		this.name = model.getName();
 		this.board = model.getBoard();
-		this.stock = new Stock();
+		this.stock = model.getStock();
 		this.bp = model.getBullPen();
 		
 		this.stockView = new StockView(mainFrame, stock, this);
@@ -461,7 +461,7 @@ public class EditReleaseLevelPanel extends KabaSujiBuilder {
 
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
-		LevelModel changedLevel = new LevelModel(this.board, this.bp, this.name, null);
+		LevelModel changedLevel = new LevelModel(this.board, this.bp, this.name, null, this.stock);
 		this.levelModels.push(changedLevel);
 	}
 	
@@ -471,7 +471,7 @@ public class EditReleaseLevelPanel extends KabaSujiBuilder {
 
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
-		LevelModel changedLevel = new LevelModel(this.board, this.bp, this.name, null);
+		LevelModel changedLevel = new LevelModel(this.board, this.bp, this.name, null, this.stock);
 		this.redoModels.push(changedLevel);
 	}
 
