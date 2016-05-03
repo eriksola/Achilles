@@ -16,14 +16,15 @@ import Game.Stock;
 import Game.Tile;
 import junit.framework.TestCase;
 
-public class TestEntities extends TestCase {
+public class TestEntitiesBuilder extends TestCase {
 	
 	Tile[][] t = new Tile[6][6];
 	Board board = new Board(t);
 	Stock s = new Stock();
 	LevelBuilderFrame frame = new LevelBuilderFrame(s);
 	LevelBuilderPuzzlePanel view = new LevelBuilderPuzzlePanel(frame);
-
+	
+	
 	Coordinate c1 = new Coordinate(0,0);
 	Coordinate c2 = new Coordinate(1,0);
 	Coordinate c3 = new Coordinate(0,1);
@@ -47,14 +48,18 @@ public class TestEntities extends TestCase {
 	PieceView pv = new PieceView(p1, view);
 	
 	public void setUp(){
+		
 		for (int i =0; i < 6; i++){
 			for (int y = 0; y < 6; y++){
 				t[i][y] = new Tile(i, y);
 			}
 		}
+		view.setSelected(pv);
+		view.removeSelected();
 	}
 	
 	/////////////////////////////Board Tests////////////////////////////////
+
 
 	public void testIsValid(){
 		assertFalse(board.isValid(7, 6));
