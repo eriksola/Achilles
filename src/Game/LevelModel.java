@@ -17,7 +17,7 @@ public class LevelModel {
 	/**
 	 * Creates a LevelModel with all of the entities needed for a level.
 	 * @param b Board for a level.
-	 * @param bp Bullpen for a level.
+	 * @param bp Bullpen for a level.	
 	 * @param ln Level number for a level
 	 * @param s Encapsulates the score associated with a LevelModel.
 	 */

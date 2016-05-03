@@ -4,22 +4,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import Boundary.Builder.EditDeletePopup;
+import Boundary.Player.PlayLevelPopup;
 
-/**
- * Listener to show a right click on a level so a builder can then edit or delete it.
- * @author Sola
- *
- */
-public class EditDeletePopupListener extends MouseAdapter {
-
-	EditDeletePopup e;
+public class PlayLevelPopupListener extends MouseAdapter{
 	
-	/**
-	 * Constructor.
-	 * @param editOrDelete EditDeletePopup class that holds logic for actions.
-	 */
-	public EditDeletePopupListener(EditDeletePopup editOrDelete){
-		this.e = editOrDelete;
+	PlayLevelPopup play;
+	
+	public PlayLevelPopupListener(PlayLevelPopup playLevel){
+		this.play = playLevel;
 	}
 	
 	/**
@@ -29,7 +21,7 @@ public class EditDeletePopupListener extends MouseAdapter {
         if (event.isPopupTrigger())
             doPop(event);
     }
-	
+
 	/**	
 	 * When the mouse is released.
 	 */
@@ -43,7 +35,6 @@ public class EditDeletePopupListener extends MouseAdapter {
      * @param event
      */
     public void doPop(MouseEvent event){
-        e.show(event.getComponent(), event.getX(), event.getY());
+        play.show(event.getComponent(), event.getX(), event.getY());
     }
-        
 }

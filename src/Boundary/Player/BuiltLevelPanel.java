@@ -21,7 +21,10 @@ import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Boundary.Both.Deserialization;
+import Boundary.Builder.EditDeletePopup;
+import Boundary.Builder.LevelBuilderFrame;
 import Controller.EditDeletePopupListener;
+import Controller.PlayLevelPopupListener;
 import Controller.ReturnToPlayerMenuController;
 
 import javax.swing.JScrollPane;
@@ -71,11 +74,6 @@ public class BuiltLevelPanel extends JPanel {
 		JLabel label_3 = new JLabel("Release:");
 		label_3.setForeground(new Color(0, 0, 0));
 		label_3.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
-		
-		
-		JButton puzzleLevelsButtons[] = new JButton[5];	
-		JButton lightningLevelsButtons[] = new JButton[5];
-		JButton releaseLevelsButtons[] = new JButton[5];
 		
 		JScrollPane puzzleScroll = new JScrollPane();
 		
@@ -181,6 +179,7 @@ public class BuiltLevelPanel extends JPanel {
 					puzzleLevelsLabels.put(levelName, new JLabel(levelName));
 					puzzleLevelsLabels.get(levelName).setVisible(true);	
 					puzzlePanel.add(puzzleLevelsLabels.get(levelName));
+					puzzleLevelsLabels.get(levelName).addMouseListener(new PlayLevelPopupListener(new PlayLevelPopup(levelName, this, 1, d)));
 					puzzlePanel.revalidate();
 				}
 				else{
@@ -199,6 +198,7 @@ public class BuiltLevelPanel extends JPanel {
 					lightningLevelsLabels.put(levelName, new JLabel(levelName));
 					lightningLevelsLabels.get(levelName).setVisible(true);	
 					lightningPanel.add(lightningLevelsLabels.get(levelName));
+					lightningLevelsLabels.get(levelName).addMouseListener(new PlayLevelPopupListener(new PlayLevelPopup(levelName, this, 2, d)));
 					lightningPanel.revalidate();
 				}
 				else{
@@ -217,6 +217,7 @@ public class BuiltLevelPanel extends JPanel {
 					releaseLevelsLabels.put(levelName, new JLabel(levelName));
 					releaseLevelsLabels.get(levelName).setVisible(true);	
 					releasePanel.add(releaseLevelsLabels.get(levelName));
+					releaseLevelsLabels.get(levelName).addMouseListener(new PlayLevelPopupListener(new PlayLevelPopup(levelName, this, 3, d)));
 					releasePanel.revalidate();
 				}
 				else{
@@ -229,5 +230,9 @@ public class BuiltLevelPanel extends JPanel {
 	
 	public JButton getMenuButton(){
 		return this.menuBtn;
+	}
+	
+	public KabasujiFrame getMainFrame(){
+		return this.mainframe;
 	}
 }

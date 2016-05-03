@@ -515,10 +515,16 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 	}
 	
 	public LevelModel getLastLevelModel(){
-		return this.levelModels.pop();
+		if (!this.levelModels.isEmpty()){
+			return this.levelModels.pop();
+		}
+		else return null;
 	}
 	
 	public LevelModel getLastRedoModel(){
-		return this.redoModels.pop();
+		if (!this.redoModels.isEmpty()){
+			return this.redoModels.pop();
+		}
+		else return null;
 	}
 }

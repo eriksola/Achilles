@@ -500,10 +500,6 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.stock, this.time);
 		this.levelModels.push(changedLevel);
 	}
-	
-	public LevelModel getLastLevelModel(){
-		return this.levelModels.pop();
-	}
 
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
@@ -511,8 +507,18 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		this.redoModels.push(changedLevel);
 	}
 
-	public LevelModel getLastRedoModel() {
-		return this.redoModels.pop();
+	public LevelModel getLastLevelModel(){
+		if (!this.levelModels.isEmpty()){
+			return this.levelModels.pop();
+		}
+		else return null;
+	}
+	
+	public LevelModel getLastRedoModel(){
+		if (!this.redoModels.isEmpty()){
+			return this.redoModels.pop();
+		}
+		else return null;
 	}
 }
 

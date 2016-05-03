@@ -21,25 +21,7 @@ public class PuzzleLevelModel extends LevelModel{
 	 * @param mg Number of moves given for this Puzzle Level.
 	 */
 	public PuzzleLevelModel(Board b, BullPen bp, String name, IScore s, Stock stock, int mg){
-		super();
-		Tile[][] tiles = new Tile[board.height][board.width];
-		for (int i = 0; i < tiles.length; i++) {
-			for (int j = 0; j < tiles[0].length; j++) {
-				Tile t = board.tiles[i][j];
-				tiles[i][j] = new Tile(t.row, t.column, t.isHint, t.isOccupied, t.isSelected);
-			}
-		}
-		this.board = new Board(tiles);
-		
-		//construct bullpen with current state of bullpen
-		ArrayList<Piece> pieces = new ArrayList<Piece>();
-		for (int i = 0; i < bp.pieces.size(); i++) {
-			pieces.add(bp.pieces.get(i));
-		}
-		this.bullpen = new BullPen(pieces);
-		this.name = name;
-		this.score = s;
-		this.stock = stock;
+		super(b, bp, name, s, stock);
 		this.movesGiven = mg;
 		this.movesUsed = 0;
 	}

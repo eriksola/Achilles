@@ -21,13 +21,13 @@ public class LightningLevelModel extends LevelModel{
 	 * @param s Encapsulates the type of score associated with this level.
 	 * @param tg Time given to complete this LightningLevel Level.
 	 */
-	public LightningLevelModel(LightningBoard board, BullPen bp, String name, IScore s, Stock stock, int tg){
+	public LightningLevelModel(LightningBoard lightningBoard, BullPen bp, String name, IScore s, Stock stock, int tg){
 			super();
 			
-			Tile[][] tiles = new Tile[board.height][board.width];
+			Tile[][] tiles = new Tile[lightningBoard.height][lightningBoard.width];
 			for (int i = 0; i < tiles.length; i++) {
 				for (int j = 0; j < tiles[0].length; j++) {
-					Tile t = board.tiles[i][j];
+					Tile t = lightningBoard.tiles[i][j];
 					tiles[i][j] = new Tile(t.row, t.column, t.isHint, t.isOccupied, t.isSelected);
 				}
 			}
