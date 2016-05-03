@@ -43,7 +43,6 @@ import Game.Tile;
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
-import Boundary.Both.KabaSujiPlayer;
 import Boundary.Both.PieceView;
 
 import java.awt.FlowLayout;
@@ -81,6 +80,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		
 		this.mainFrame = f;
 		this.initialModel = new PuzzleLevelModel(m);
+		System.out.println("High Score: " + initialModel.getScore().scoreToStars() + " Stars");
 		this.currentModel = m;
 		this.board = currentModel.getBoard();
 		this.bp = currentModel.getBullPen();
@@ -125,11 +125,6 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		this.movesView = textArea;
 		
 		this.starView = new StarView();
-		
-		/** Starview for score */
-		StarView stars = new StarView();
-		//To add a star simply call the addStars
-		stars.setBackground(new Color(173, 216, 230));
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -187,8 +182,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 							.addComponent(button_5))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
-								.addComponent(stars, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE))
 							.addGap(16)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(horBtn)
@@ -254,4 +248,5 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		//update the boundary view of moves left
 		this.movesView.setText("Moves Left: " + strMoves);
 	}
+
 }

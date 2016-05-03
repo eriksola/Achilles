@@ -18,7 +18,10 @@ import Boundary.Builder.LevelBuilderFrame;
 import Boundary.Builder.LevelBuilderMainMenuPanel;
 import Game.Board;
 import Game.BullPen;
+import Game.LightningScore;
 import Game.Piece;
+import Game.PuzzleScore;
+import Game.ReleaseScore;
 import Game.Stock;
 
 /**
@@ -153,13 +156,10 @@ public class SaveController implements ActionListener {
 	            		boolean hasBoard = false;
 	            		boolean hasPen = false;
 	            		boolean hasNumMoves = false;
+	            		boolean hasScore = false;
 	            		//A puzzle level will have three objects, board, bullpen, and number of moves
-	            		//PRINT FOR TESTING
-	            		for (int i = 0; i < entities.size(); i++){
-	            			System.out.println(entities.get(i));
-	            			
-	            		}
-	            		if(entities.size() != 3){//Make two for right now
+	            		
+	            		if(entities.size() != 4){
 	            			canWriteFile = false;
 	            			System.err.println("This level does not have everything it needs to be playable!");
 	            			System.err.println("Remember, for a puzzle level you need, board, bullpen, and number of moves.");
@@ -175,10 +175,13 @@ public class SaveController implements ActionListener {
 		            			else if( j instanceof Integer){
 		            				hasNumMoves = true;
 		            			}
+		            			else if (j instanceof PuzzleScore){
+		            				hasScore = true;
+		            			}
 		            		}
 	            		}
 	            		
-	            		if(!hasBoard || !hasPen || !hasNumMoves){
+	            		if(!hasBoard || !hasPen || !hasNumMoves || !hasScore){
 	            			canWriteFile = false;
 	            		}
 	                    break;
@@ -186,13 +189,14 @@ public class SaveController implements ActionListener {
 	            	boolean hasboard = false;
             		boolean haspen = false;
             		boolean hasTimer = false;
+            		boolean hasscore = false;
             		//A lightning level will have three objects: board, bullpen, and a time
             		//PRINT FOR TESTING
             		for (int i = 0; i < entities.size(); i++){
             			System.out.println(entities.get(i));
             			
             		}
-            		if(entities.size() != 3){
+            		if(entities.size() != 4){
             			canWriteFile = false;
             			System.err.println("This level does not have everything it needs to be playable!");
             			System.err.println("Remember for a lightning level you need board, bullpen, and a time that is not 0.");
@@ -208,22 +212,25 @@ public class SaveController implements ActionListener {
 	            			else if(j instanceof Integer){
 	            				hasTimer = true;
 	            			}
+	            			else if(j instanceof LightningScore){
+	            				hasscore = true;
+	            			}
 	            		}
             		}
             		
-            		if(!hasboard || !haspen || !hasTimer){
+            		if(!hasboard || !haspen || !hasTimer || !hasscore){
             			canWriteFile = false;
             		}
 	                     break;
 	            case 3:  
 	            	boolean board = false;
             		boolean pen = false;
-            		boolean numMoves = false;
+            		boolean score = false;
             		//A release level will have three objects, board, bullpen, number of moves, colornumber class.....add more
             		if(entities.size() != 3){//Make three for right now
             			canWriteFile = false;
             			System.err.println("This level does not have everything it needs to be playable!");
-            			System.err.println("Remember, for a release level you need, board, bullpen, number of moves, color numbers...");
+            			System.err.println("Remember, for a release level you need, board, bullpen, color numbers...");
             		}
             		else{
 	            		for(Object j: entities){
@@ -233,13 +240,13 @@ public class SaveController implements ActionListener {
 	            			else if(j instanceof BullPen){
 	            				pen = true;
 	            			}
-	            			else if( j instanceof Integer){
-	            				numMoves = true;
+	            			else if(j instanceof ReleaseScore){
+	            				score = true;
 	            			}
 	            		}
             		}
             		
-            		if(!board || !pen || !numMoves){
+            		if(!board || !pen || !score){
             			canWriteFile = false;
             		}
 	                     break;

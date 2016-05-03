@@ -9,6 +9,7 @@ import Game.Board;
 import Game.BullPen;
 import Game.Coordinate;
 import Game.IScore;
+import Game.LightningBoard;
 import Game.LightningLevelModel;
 import Game.LightningScore;
 import Game.Piece;
@@ -17,8 +18,8 @@ import Game.Tile;
 import junit.framework.TestCase;
 
 public class TestEntitiesLightningPlayer extends TestCase {
-	Tile[][] t = new Tile[6][6];
-	Board board = new Board(t);
+	Tile[][] tiles;
+	LightningBoard board;
 	Stock s = new Stock();
 	KabasujiFrame frame = new KabasujiFrame();
 
@@ -36,11 +37,11 @@ public class TestEntitiesLightningPlayer extends TestCase {
 	Piece p3 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c8},0);
 	Piece p4 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c6},0);
 	
-	BullPen bp = new BullPen();
-	IScore lScore = new LightningScore(7);
+	BullPen bp;
+	IScore lScore;
 	
-	LightningLevelModel lLevelModel = new LightningLevelModel(board, bp, 2, lScore, 100);
-	LightningLevelPanel view = new LightningLevelPanel(frame, lLevelModel);
+	LightningLevelModel lLevelModel;
+	LightningLevelPanel view;
 	
 	
 	
@@ -50,14 +51,24 @@ public class TestEntitiesLightningPlayer extends TestCase {
 	 *    # 
 	 *    #
 	 */
-	PieceView pv = new PieceView(p1, view);
+	PieceView pv;
 	
+	@Override
 	public void setUp(){
-		for (int i =0; i < 6; i++){
-			for (int y = 0; y < 6; y++){
-				t[i][y] = new Tile(i, y);
+		tiles = new Tile[6][6];
+		for (int i = 0; i < tiles.length; i++) {
+			for (int j = 0; j < tiles[0].length; j++) {
+				Tile t = tiles[i][j];
+				tiles[i][j] = new Tile(i, j, false, false, false);
 			}
 		}
+		this.board = new LightningBoard(tiles);
+		
+		bp = new BullPen();
+		lScore = new LightningScore(7);
+		lLevelModel = new LightningLevelModel(board, bp, "lightning", lScore, 100);
+		view = new LightningLevelPanel(frame, lLevelModel);
+		pv = new PieceView(p1, view);
 	}
 	
 	/////////////////////////////Board Tests////////////////////////////////
@@ -67,9 +78,9 @@ public class TestEntitiesLightningPlayer extends TestCase {
 		assertTrue(board.isValid(5, 5));
 		assertFalse(board.isValid(-1, 1));
 
-		t[5][5].setOccupied(true);
+		tiles[5][5].setOccupied(true);
 		assertFalse(board.isValid(5, 5));
-		t[5][5].setOccupied(false);
+		tiles[5][5].setOccupied(false);
 
 	}
 
@@ -101,19 +112,6 @@ public class TestEntitiesLightningPlayer extends TestCase {
 		
 	}
 	
-	public void testFlips(){
-		String pString = p1.toString();
-		Coordinate[] originals = p1.getCoordinates();
-		p1.verticalFlip();
-		p1.verticalFlip();
-		p1.horizontalFlip();
-		p1.horizontalFlip();
-		for (int i = 0; i < originals.length; i++) {
-			assertEquals(originals[i].x, p1.getCoordinates()[i].x);
-			assertEquals(originals[i].y, p1.getCoordinates()[i].y);
-		}
-		
-	}
 	
 	///////////////////////////BullPen Tests///////////////////////////////
 

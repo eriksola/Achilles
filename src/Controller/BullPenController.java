@@ -3,17 +3,22 @@ package Controller;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import Boundary.Both.BoardView;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
 import Boundary.Both.PieceView;
+import Boundary.Both.StockView;
+import Boundary.Builder.KabaSujiBuilder;
 import Boundary.Builder.LevelBuilderPuzzlePanel;
 import Game.Board;
 import Game.BullPen;
 import Game.Coordinate;
 import Game.Piece;
+import Game.Stock;
 import Game.Tile;
 
 /**
@@ -46,6 +51,9 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 		//if there is a selected Piece
 		if(view.getSelectedPiece() != null){
 			
+			if (view instanceof KabaSujiBuilder){
+				((KabaSujiBuilder) view).addLevelModel();
+			}
 			//add the piece to the bullpen
 			bpv.addPiece(new PieceView(view.getSelectedPiece().getP(), view));
 			view.getScrollPane().setViewportView(bpv);
@@ -64,6 +72,19 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 				Board board = bv.getBoard();
 				board.removePiece(row, col, view.getSelectedPiece());
 				bv.draw();
+			}
+			
+			//if this is the builder the piece is from the stock
+			else if (view instanceof KabaSujiBuilder){
+				
+				KabaSujiBuilder buildView = (KabaSujiBuilder) view;
+				StockView stockView = buildView.getStockView();
+				Piece selectedPiece = view.getSelectedPiece().getP();
+				List<Piece> stockPieces = stockView.getStock().getPieces();
+				if (stockPieces.remove(selectedPiece)){
+					System.out.println("piece removed from stock");
+				}
+				stockView.draw();
 			}
 			//make the piece unselected
 			view.removeSelected();

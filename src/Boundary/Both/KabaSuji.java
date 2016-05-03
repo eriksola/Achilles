@@ -4,6 +4,10 @@ package Boundary.Both;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import Game.BullPen;
+import Game.LevelModel;
+
+
 /**
  * Top-level boundary object for both the builder and player.
  * @author bwolfson
@@ -12,14 +16,11 @@ import javax.swing.JScrollPane;
 
 public abstract class KabaSuji extends JPanel {
 	
-	PieceView selectedPiece; /** the one selected piece. **/
-	
+	protected PieceView selectedPiece; /** the one selected piece. **/
+
 	/**
 	 * start with no PieceView selected.
 	 */
-	public KabaSuji(){
-		selectedPiece = null;
-	}
 	
 	public abstract JScrollPane getScrollPane();
 	public abstract BoardView getBoardView();
@@ -30,7 +31,6 @@ public abstract class KabaSuji extends JPanel {
 	 * @param pv the PieceView to select
 	 */
 	public void setSelected(PieceView pv){
-		
 		if (pv != null){
 			if(selectedPiece == pv){
 				removeSelected();
@@ -58,4 +58,6 @@ public abstract class KabaSuji extends JPanel {
 	public PieceView getSelectedPiece(){
 		return this.selectedPiece;
 	}
+	
+
 }

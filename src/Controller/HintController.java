@@ -6,18 +6,20 @@ import java.awt.event.ActionListener;
 import Boundary.Both.BullPenView;
 import Boundary.Both.KabaSuji;
 import Boundary.Both.PieceView;
+import Boundary.Builder.KabaSujiBuilder;
 import Game.Piece;
 
 public class HintController implements ActionListener{
 
-	KabaSuji view;
+	KabaSujiBuilder view;
 	
-	public HintController(KabaSuji view){
+	public HintController(KabaSujiBuilder view){
 		this.view = view;
 	}
 	
 	public void actionPerformed(ActionEvent e){
 		//check if selected piece is in bullpen (otherwise moves not allowed)
+		view.addLevelModel();
 		PieceView selected = view.getSelectedPiece();
 		if (selected != null){
 			//set as a hint on the board
@@ -25,7 +27,7 @@ public class HintController implements ActionListener{
 			view.getBoardView().draw();
 			//and add the piece to the bullpen
 			BullPenView bpView = view.getBullPenView();
-			bpView.addView(new PieceView(selected.getP(), view));
+			bpView.addPiece(new PieceView(selected.getP(), view));
 			view.getScrollPane().setViewportView(bpView);
 		}
 	}

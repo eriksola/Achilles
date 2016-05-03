@@ -1,6 +1,8 @@
-package Boundary.Both;
+package Boundary.Player;
 
 import javax.swing.JScrollPane;
+
+import Boundary.Both.KabaSuji;
 
 /**
  * Necessary abstract class for playing levels

@@ -34,7 +34,8 @@ public class TestTimerController extends TestCase {
 		ta = new JTextArea();
 		bp = new BullPen();
 		lScore = new LightningScore(7);
-		model  = new LightningLevelModel(board, bp, 2, lScore, 100);
+		String name = "lightning";
+		model  = new LightningLevelModel(board, bp, name, lScore, 100);
 		lp = new LightningLevelPanel(frame, model);
 		timeController = new TimerController(frame, lp, ta, 100);
 	}

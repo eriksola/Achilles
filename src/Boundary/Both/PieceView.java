@@ -78,7 +78,7 @@ public class PieceView{
 		for(Coordinate c: getP().getCoordinates()){
 			int newX = 20 + (10 * c.x);
 			int newY = 20 - (10 * c.y);
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.MAGENTA);
 			g.fillRect(newX, newY, 10, 10);
 			g.setColor(Color.BLACK);
 			g.drawRect(newX, newY, 10, 10);

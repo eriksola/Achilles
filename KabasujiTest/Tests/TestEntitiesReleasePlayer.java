@@ -19,8 +19,8 @@ import junit.framework.TestCase;
 
 public class TestEntitiesReleasePlayer extends TestCase {
 
-	Tile[][] t = new Tile[6][6];
-	Board board = new Board(t);
+	Tile[][] tiles;
+	Board board;
 	Stock s = new Stock();
 	KabasujiFrame frame = new KabasujiFrame();
 
@@ -38,11 +38,11 @@ public class TestEntitiesReleasePlayer extends TestCase {
 	Piece p3 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c8},0);
 	Piece p4 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c6},0);
 	
-	BullPen bp = new BullPen();
-	IScore rScore = new ReleaseScore();
+	BullPen bp;
+	IScore rScore;
 	
-	LevelModel rLevelModel = new LevelModel(board, bp, 3, rScore);
-	ReleaseLevelPanel view = new ReleaseLevelPanel(frame, rLevelModel);
+	LevelModel rLevelModel;
+	ReleaseLevelPanel view;
 	
 	
 	
@@ -52,14 +52,26 @@ public class TestEntitiesReleasePlayer extends TestCase {
 	 *    # 
 	 *    #
 	 */
-	PieceView pv = new PieceView(p1, view);
+	PieceView pv;
 	
 	public void setUp(){
-		for (int i =0; i < 6; i++){
-			for (int y = 0; y < 6; y++){
-				t[i][y] = new Tile(i, y);
+		
+		tiles = new Tile[6][6];
+		for (int i = 0; i < tiles.length; i++) {
+			for (int j = 0; j < tiles[0].length; j++) {
+				Tile t = tiles[i][j];
+				tiles[i][j] = new Tile(i, j, false, false, false);
 			}
 		}
+		this.board = new Board(tiles);
+		
+		bp = new BullPen();
+		
+		rScore  = new ReleaseScore();
+		rLevelModel  = new LevelModel(board, bp, "release", rScore);
+		view = new ReleaseLevelPanel(frame, rLevelModel);
+		pv = new PieceView(p1, view);
+		
 	}
 	
 	/////////////////////////////Board Tests////////////////////////////////
@@ -69,9 +81,9 @@ public class TestEntitiesReleasePlayer extends TestCase {
 		assertTrue(board.isValid(5, 5));
 		assertFalse(board.isValid(-1, 1));
 
-		t[5][5].setOccupied(true);
+		tiles[5][5].setOccupied(true);
 		assertFalse(board.isValid(5, 5));
-		t[5][5].setOccupied(false);
+		tiles[5][5].setOccupied(false);
 
 	}
 
@@ -103,19 +115,6 @@ public class TestEntitiesReleasePlayer extends TestCase {
 		
 	}
 	
-	public void testFlips(){
-		String pString = p1.toString();
-		Coordinate[] originals = p1.getCoordinates();
-		p1.verticalFlip();
-		p1.verticalFlip();
-		p1.horizontalFlip();
-		p1.horizontalFlip();
-		for (int i = 0; i < originals.length; i++) {
-			assertEquals(originals[i].x, p1.getCoordinates()[i].x);
-			assertEquals(originals[i].y, p1.getCoordinates()[i].y);
-		}
-		
-	}
 	
 	///////////////////////////BullPen Tests///////////////////////////////
 

@@ -231,6 +231,18 @@ public class Board implements Serializable{
 			t.setHint(true);
 			t.setOccupied(false);
 			t.setSelected(false);
+			pieces.remove(t);
 		}
+	}
+
+	public boolean isValidToAdd(int row, int col, PieceView pv) {
+		//makes sure every square in the Piece has a valid Tile
+		for (int i = 0; i < 6; i++){
+			Coordinate c = pv.getP().getCoordinates()[i];
+			if (!isValid(row - c.y, col + c.x)){
+				return false;
+			}
+		}
+		return true;
 	}
 }

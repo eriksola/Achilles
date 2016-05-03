@@ -4,9 +4,12 @@ public class ReleaseTile extends Tile{
 	
 	ColorNumber colNum;
 	
-	ReleaseTile(boolean isOccupied, int row, int column, ColorNumber cn){
-		super(row, column);
+	public ReleaseTile(int c, int r, ColorNumber cn){
+		super(c, r);
 		this.colNum = cn;
+		this.isOccupied = false;
+		this.isSelected = false;
+		this.isHint = false;
 	}
 	
 	public ColorNumber getColNum(){

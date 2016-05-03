@@ -28,7 +28,7 @@ public class TestGetTimeController extends TestCase {
 		t = new JTextField();
 		t.setText("100");
 		lightningPanel = new LevelBuilderLightningPanel(lf);
-		time = new GetTimeController(t, lightningPanel);
+		time = new GetTimeController(t, lightningPanel, lightningPanel);
 		
 	}
 	

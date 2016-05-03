@@ -19,9 +19,8 @@ import Game.Tile;
 import junit.framework.TestCase;
 
 public class TestEntitiesPuzzlePlayer extends TestCase {
-
-	Tile[][] t = new Tile[6][6];
-	Board board = new Board(t);
+	Tile tiles[][];
+	Board board;
 	Stock s = new Stock();
 	KabasujiFrame frame = new KabasujiFrame();
 
@@ -39,11 +38,11 @@ public class TestEntitiesPuzzlePlayer extends TestCase {
 	Piece p3 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c8},0);
 	Piece p4 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c6},0);
 	
-	BullPen bp = new BullPen();
-	IScore pScore = new PuzzleScore(7);
+	BullPen bp;
+	IScore pScore;
 	
-	PuzzleLevelModel pLevelModel = new PuzzleLevelModel(board, bp, 1, pScore, 8);
-	PuzzleLevelPanel view = new PuzzleLevelPanel(frame, pLevelModel);
+	PuzzleLevelModel pLevelModel;
+	PuzzleLevelPanel view;
 	
 	
 	
@@ -53,14 +52,24 @@ public class TestEntitiesPuzzlePlayer extends TestCase {
 	 *    # 
 	 *    #
 	 */
-	PieceView pv = new PieceView(p1, view);
+	PieceView pv;
 	
+	@Override
 	public void setUp(){
-		for (int i =0; i < 6; i++){
-			for (int y = 0; y < 6; y++){
-				t[i][y] = new Tile(i, y);
+		tiles = new Tile[6][6];
+		for (int i = 0; i < tiles.length; i++) {
+			for (int j = 0; j < tiles[0].length; j++) {
+				Tile t = tiles[i][j];
+				tiles[i][j] = new Tile(i, j, false, false, false);
 			}
 		}
+		this.board = new Board(tiles);
+		
+		bp = new BullPen();
+		pScore = new PuzzleScore(7);
+		pLevelModel = new PuzzleLevelModel(board, bp, "1.txt", pScore, 7);
+		view = new PuzzleLevelPanel(frame, pLevelModel);
+		pv = new PieceView(p1, view);
 	}
 	
 	/////////////////////////////Board Tests////////////////////////////////
@@ -70,9 +79,9 @@ public class TestEntitiesPuzzlePlayer extends TestCase {
 		assertTrue(board.isValid(5, 5));
 		assertFalse(board.isValid(-1, 1));
 
-		t[5][5].setOccupied(true);
+		tiles[5][5].setOccupied(true);
 		assertFalse(board.isValid(5, 5));
-		t[5][5].setOccupied(false);
+		tiles[5][5].setOccupied(false);
 
 	}
 
@@ -91,7 +100,7 @@ public class TestEntitiesPuzzlePlayer extends TestCase {
 		assertTrue(board.selectPiece(1, 1, pv));
 	}
 	
-	//////////////////////////////Piece Tests////////////////////////////////
+//	//////////////////////////////Piece Tests////////////////////////////////
 	
 	public void testRotation(){
 		Coordinate[] originals = p1.getCoordinates();
@@ -132,6 +141,6 @@ public class TestEntitiesPuzzlePlayer extends TestCase {
 		assertTrue(b1.selectedPiece == p2);
 		assertEquals(b1.getSelectedPiece(),p2);
 	}
-	
+
 }
 
