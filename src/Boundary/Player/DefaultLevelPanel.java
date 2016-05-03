@@ -288,7 +288,7 @@ public class DefaultLevelPanel extends JPanel {
 		for(int i = 0; i < lightningFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(lightningFiles.get(i).getPath(), 2)){
-				lightLevels[i] = new LightningLevelModel((LightningBoard) d.getBoard(), d.getBullPen(), lightningFiles.get(i).getName(), (LightningScore) d.getScore(), new Stock(), d.getTime());
+				lightLevels[i] = new LightningLevelModel((LightningBoard)d.getBoard(), d.getBullPen(), lightningFiles.get(i).getName(), (LightningScore) d.getScore(), new Stock(), d.getTime());
 				lightBtns[i].addActionListener(new DefLevelMenuToLightningLevelController( (KabasujiFrame) mainframe, lightLevels[i]));
 				System.out.println("Stars earned: " + d.getScore().scoreToStars());
 				if (d.getScore().scoreToStars() <= 0){

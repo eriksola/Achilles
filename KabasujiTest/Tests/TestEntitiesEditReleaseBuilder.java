@@ -47,7 +47,7 @@ public class TestEntitiesEditReleaseBuilder extends TestCase {
 	PieceView pv = new PieceView(p1, view);
 	
 	public void setUp(){
-		if(d.Deserialize("./src/DefaultLevels/LightningLevels/1.txt", 1)){
+		if(d.Deserialize("./src/DefaultLevels/ReleaseLevels/1.txt", 1)){
 			System.out.println("Level deserialized.");
 		}
 		else{

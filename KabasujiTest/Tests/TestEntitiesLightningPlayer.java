@@ -79,7 +79,8 @@ public class TestEntitiesLightningPlayer extends TestCase {
 		assertFalse(board.isValid(-1, 1));
 
 		tiles[5][5].setOccupied(true);
-		assertFalse(board.isValid(5, 5));
+		//this is true for a lightning level (overlaps allowed)
+		assertTrue(board.isValid(5, 5));
 		tiles[5][5].setOccupied(false);
 
 	}
