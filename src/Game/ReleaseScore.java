@@ -9,17 +9,15 @@ import Boundary.Player.KabasujiFrame;
  */
 public class ReleaseScore implements IScore{
 	/** Arrays of booleans for colors for a Release Level */
-	boolean[] red;
-	boolean[] yellow;
-	boolean[] green;
+	boolean[] red = new boolean[6];
+	boolean[] yellow = new boolean[6];
+	boolean[] green = new boolean[6];
 	
 	/**
 	 * Constructs a release score with the Color on the tiles are all initialized to false.
 	 */
 	public ReleaseScore(){
-		this.red = new boolean[6];
-		this.yellow = new boolean[6];
-		this.green = new boolean[6];
+		
 	}
 	
 	public ReleaseScore(boolean red, boolean yellow, boolean green){

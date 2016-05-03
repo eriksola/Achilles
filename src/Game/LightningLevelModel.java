@@ -48,7 +48,7 @@ public class LightningLevelModel extends LevelModel{
 					if (tiles[i][j].isOccupied()) {totalMarked++;}
 				}
 			}
-			this.score = new LightningScore(totalTiles,totalMarked);
+			setScore((LightningScore) s);
 			ArrayList<Piece> stockPieces = new ArrayList<Piece>();
 			for (int i = 0; i < stock.getPieces().size(); i++){
 				stockPieces.add(stock.getPiece(i));
@@ -76,6 +76,7 @@ public class LightningLevelModel extends LevelModel{
 	}
 	
 	public void setScore(LightningScore currentScore) {
+		/**Count the total tiles and the number of tiles that are occupied **/
 		Tile[][] tiles = lightBoard.getTiles();
 		int totalTiles = 0;
 		int totalMarked = 0;

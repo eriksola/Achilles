@@ -425,6 +425,7 @@ public class EditReleaseLevelPanel extends KabaSujiBuilder {
 		hint.addActionListener(new HintController(this));
 		undo.addActionListener(new UndoController(mainFrame, this));
 		redo.addActionListener(new RedoController(mainFrame, this));
+		delete.addActionListener(new DeleteTileController(this));
 		}
 	
 	

@@ -444,6 +444,7 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		hint.addActionListener(new HintController(this));
 		undo.addActionListener(new UndoController(mainFrame, this));
 		redo.addActionListener(new RedoController(mainFrame, this));
+		delete.addActionListener(new DeleteTileController(this));
 
 
 		getTimer = new GetTimeController(time_text, this, this);

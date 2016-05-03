@@ -11,8 +11,10 @@ import Controller.TimerController;
 import Game.Board;
 import Game.BullPen;
 import Game.IScore;
+import Game.LightningBoard;
 import Game.LightningLevelModel;
 import Game.LightningScore;
+import Game.Stock;
 import Game.Tile;
 import junit.framework.TestCase;
 
@@ -35,7 +37,7 @@ public class TestTimerController extends TestCase {
 		bp = new BullPen();
 		lScore = new LightningScore(7);
 		String name = "lightning";
-		model  = new LightningLevelModel(board, bp, name, lScore, 100);
+		model  = new LightningLevelModel((LightningBoard) board, bp, name, lScore, new Stock(), 100);
 		lp = new LightningLevelPanel(frame, model);
 		timeController = new TimerController(frame, lp, ta, 100);
 	}

@@ -10,6 +10,7 @@ import Boundary.Player.KabasujiFrame;
  *
  */
 public interface IScore extends Serializable{
+	
 	/** Method contracts for any score type. */
 	public boolean hasWon();
 	public int scoreToStars();

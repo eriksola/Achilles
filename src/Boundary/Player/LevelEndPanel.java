@@ -116,13 +116,13 @@ public class LevelEndPanel extends JPanel{
 						FileOutputStream fileOut = new FileOutputStream(filepath);
 						ObjectOutputStream out = new ObjectOutputStream(fileOut);
 						
-						System.out.println("Serialized data is saved in " + filepath + " file");
 						for(Object j: entities){
 							out.writeObject(j);
 						}
 						
 						out.close();
 						fileOut.close();
+						System.out.println("Serialized data is saved in " + filepath + " file");
 						break;
 					}catch (IOException ioe) {
 						ioe.printStackTrace();

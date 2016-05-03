@@ -273,6 +273,7 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 		
 		getEntities();
 		this.save.addActionListener(new SaveController(entities, 1));
+		delete.addActionListener(new DeleteTileController(this));
 	}
 	
 	public LevelBuilderPuzzlePanel(JFrame frame, PuzzleLevelModel model, Stack<PuzzleLevelModel> prevMoves, Stack<PuzzleLevelModel>	redoMoves){
@@ -456,7 +457,6 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 		addhint.addActionListener(new HintController(this));
 		undo.addActionListener(new UndoController(mainFrame, this));
 		redo.addActionListener(new RedoController(mainFrame, this));
-		
 		
 		getEntities();
 		this.save.addActionListener(new SaveController(entities, 1));
