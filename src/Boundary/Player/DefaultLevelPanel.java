@@ -165,7 +165,6 @@ public class DefaultLevelPanel extends JPanel {
 		releaseLbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
-		
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
@@ -176,82 +175,75 @@ public class DefaultLevelPanel extends JPanel {
 							.addGap(115)
 							.addComponent(label))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(puzzle1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(puzzle2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(puzzle3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(puzzle4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(puzzle5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(lightning1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(lightning2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(lightning3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(lightning4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(lightning5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-								.addComponent(puzzleLbl)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(release1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(release2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(release3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(release4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(release5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-								.addComponent(releaseLbl, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
-							.addContainerGap(422, Short.MAX_VALUE))
+							.addComponent(puzzle1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(puzzle2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(puzzle3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(puzzle4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(puzzle5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lightningLbl, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(648, Short.MAX_VALUE))))
+							.addComponent(lightning1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(lightning2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(lightning3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(lightning4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(lightning5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+						.addComponent(puzzleLbl)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(release1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(release2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(release3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(release4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(release5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lightningLbl, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+						.addComponent(releaseLbl, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(221, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(button)
-									.addGap(40)
-									.addComponent(puzzleLbl)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-										.addComponent(puzzle1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-										.addComponent(puzzle2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-										.addComponent(puzzle4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-										.addComponent(puzzle5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-										.addComponent(puzzle3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
-								.addComponent(label))
-							.addGap(18)
-							.addComponent(lightningLbl, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+							.addComponent(button)
+							.addGap(40)
+							.addComponent(puzzleLbl)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lightning1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lightning2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lightning3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lightning4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lightning5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-							.addGap(47)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(release1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(release2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(release3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(release4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(release5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(258)
-							.addComponent(releaseLbl, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(puzzle1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(puzzle2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(puzzle4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(puzzle5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(puzzle3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(label))
+					.addGap(18)
+					.addComponent(lightningLbl, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lightning1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lightning2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lightning3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lightning4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lightning5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+					.addGap(21)
+					.addComponent(releaseLbl, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(release1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(release2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(release3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(release4, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addComponent(release5, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(26, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
@@ -286,7 +278,7 @@ public class DefaultLevelPanel extends JPanel {
 				//if this isnt the last level, check if it unlocks the next level
 				if (i < puzzleFiles.size() - 1){
 					//if at least one star has been earned, next level unlocked
-					if (d.getScore().scoreToStars() > 0){
+					if (((PuzzleScore) d.getScore()).scoreToStars() > 0){
 						puzzleBtns[i + 1].setEnabled(true);
 					}
 				}
@@ -303,7 +295,6 @@ public class DefaultLevelPanel extends JPanel {
 				//deserialize lightning level and activate controller for playing it
 				lightLevels[i] = new LightningLevelModel(d.getBoard(), d.getBullPen(), lightningFiles.get(i).getName(), (LightningScore) d.getScore(), new Stock(), d.getTime());
 				lightBtns[i].addActionListener(new LevelPlayerController( (KabasujiFrame) mainframe, lightLevels[i]));
-				System.out.println("Stars earned: " + d.getScore().scoreToStars());
 				//if this isnt the last level, check if it unlocks the next level
 				if (i < lightningFiles.size() - 1){
 					//if at least one star has been earned, next level unlocked
@@ -324,7 +315,6 @@ public class DefaultLevelPanel extends JPanel {
 				//deserialize release level and activate controller for playing it
 				releaseLevels[i] = new LevelModel(d.getBoard(), d.getBullPen(), releaseFiles.get(i).getName(), (ReleaseScore) d.getScore(), new Stock());
 				releaseBtns[i].addActionListener(new LevelPlayerController( (KabasujiFrame) mainframe, releaseLevels[i]));
-				
 				//if this isnt the last level, check if it unlocks the next level
 				if (i < releaseFiles.size() - 1){
 					//if one star has been earned, the next level is unlocked
