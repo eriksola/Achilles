@@ -37,6 +37,7 @@ public class PuzzleLevelModel extends LevelModel{
 		}
 		this.bullpen = new BullPen(pieces);
 		this.score = new PuzzleScore(mg);
+		this.name = name;
 		ArrayList<Piece> stockPieces = new ArrayList<Piece>();
 		for (int i = 0; i < stock.getPieces().size(); i++){
 			stockPieces.add(stock.getPiece(i));

@@ -83,6 +83,7 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		
 		this.mainFrame = f;
 		this.currentModel = m;
+		System.out.println(m.getName());
 		this.board = currentModel.getBoard();
 		this.bp = currentModel.getBullPen();
 		this.numMoves = currentModel.getMovesAllowed();	
@@ -150,10 +151,12 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 							.addComponent(vertBtn)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(rotateBtn))
-						.addComponent(button_3)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(button_3)))
 					.addGap(60)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
@@ -162,10 +165,10 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 									.addComponent(btnEndLevel, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
 									.addGap(48)
 									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(30)
+								.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+									.addGap(20)
 									.addComponent(lblPuzzle)
-									.addPreferredGap(ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
 									.addComponent(button_4)))
 							.addGap(38))
 						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
@@ -181,14 +184,13 @@ public class PuzzleLevelPanel extends KabaSujiPlayer {
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(button_3)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblPuzzle)
-							.addComponent(button_4)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(starView, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(starView, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						.addComponent(button_3)
+						.addComponent(button_4))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
