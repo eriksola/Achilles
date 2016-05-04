@@ -134,6 +134,11 @@ public class BoardView extends JPanel {
 		return this.brd;
 	}
 	
+	/**
+	 * sets the Board to a Tile[][] of size row x col.
+	 * @param row
+	 * @param col
+	 */
 	public void setBoard(int row, int col){
 		Tile[][] brdTiles = new Tile[row][col];
 		
@@ -163,6 +168,10 @@ public class BoardView extends JPanel {
 		return this.selectedTile;
 	}
 	
+	/**
+	 * sets the target Tile selected.
+	 * @param t the target Tile.
+	 */
 	public void setSelectedTile(Tile t){
 		//if there is a selected tile, unselect it
 		if (this.selectedTile != null){
@@ -174,6 +183,9 @@ public class BoardView extends JPanel {
 		draw();
 	}
 	
+	/**
+	 * unselects the selected Tile if there is one.
+	 */
 	public void deselectTile(){
 		//if there is a selectedTile, unselect it
 		if (this.selectedTile != null){

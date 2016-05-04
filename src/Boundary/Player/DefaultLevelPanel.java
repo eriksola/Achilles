@@ -51,20 +51,20 @@ import javax.swing.JTextArea;
  */
 public class DefaultLevelPanel extends JPanel {
 		
-		KabasujiFrame mainframe;
-		PuzzleLevelModel[] puzzleLevels;
-		LightningLevelModel[] lightLevels;
-		LevelModel[] releaseLevels;
+		KabasujiFrame mainframe; /** main frame **/
+		PuzzleLevelModel[] puzzleLevels; /** puzzle levels available **/
+		LightningLevelModel[] lightLevels; /** lightning levels available **/
+		LevelModel[] releaseLevels; /** release levels available **/
 		
-		JButton menuBtn;
-		JButton[] puzzleBtns = new JButton[5];
-		JButton[] lightBtns = new JButton[5];	
-		JButton[] releaseBtns = new JButton[5];
+		JButton menuBtn; /** main menu button **/
+		JButton[] puzzleBtns = new JButton[5]; /** five buttons for Puzzle levels **/
+		JButton[] lightBtns = new JButton[5];	/** five buttons for Lightning levels **/
+		JButton[] releaseBtns = new JButton[5]; /** five buttons for Release Levels **/
 		
-		JTextArea timerView;
-		HashMap<String, JLabel> puzzleLevelsLabels = new HashMap<String, JLabel>();
-		HashMap<String, JLabel> lightningLevelsLabels = new HashMap<String, JLabel>();
-		HashMap<String, JLabel> releaseLevelsLabels = new HashMap<String, JLabel>();
+		JTextArea timerView; /** view of the timer **/
+		HashMap<String, JLabel> puzzleLevelsLabels = new HashMap<String, JLabel>(); /** labels for puzzle levels **/
+		HashMap<String, JLabel> lightningLevelsLabels = new HashMap<String, JLabel>(); /** labels for lightning levels **/
+		HashMap<String, JLabel> releaseLevelsLabels = new HashMap<String, JLabel>(); /** labels for release levels **/
 		
 	/**
 	 * Create the panel.
