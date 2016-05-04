@@ -31,12 +31,14 @@ public class StockView extends JPanel {
 		this.s = s;
 		this.view = view;
 		draw();
-		
-
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * draws the StockView with the given entities
+=======
+	 * draw the StockView to the JPanel and display.
+>>>>>>> refs/remotes/origin/master
 	 */
 	public void draw(){
 		removeAll();
@@ -53,6 +55,7 @@ public class StockView extends JPanel {
 	 * getter function for the pieceViews
 	 * @return array of pieceViews
 	 */
+
 	public PieceView[] getPieceViews() {
 		return pieceViews;
 	}

@@ -36,11 +36,11 @@ import javax.swing.JScrollPane;
  */
 public class BuiltLevelPanel extends JPanel {
 
-	KabasujiFrame mainframe;
-	JButton menuBtn;
-	HashMap<String, JLabel> puzzleLevelsLabels = new HashMap<String, JLabel>();
-	HashMap<String, JLabel> lightningLevelsLabels = new HashMap<String, JLabel>();
-	HashMap<String, JLabel> releaseLevelsLabels = new HashMap<String, JLabel>();
+	KabasujiFrame mainframe; /** main frame **/
+	JButton menuBtn; /** main menu button **/
+	HashMap<String, JLabel> puzzleLevelsLabels = new HashMap<String, JLabel>(); /** labels for the puzzle levels **/
+	HashMap<String, JLabel> lightningLevelsLabels = new HashMap<String, JLabel>(); /** labels for the lightning levels **/
+	HashMap<String, JLabel> releaseLevelsLabels = new HashMap<String, JLabel>(); /** labels for the release levels **/
 
 	/**
 	 * Create the panel.

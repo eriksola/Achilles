@@ -12,6 +12,12 @@ import Game.LightningBoard;
 import Game.Piece;
 import Game.Stock;
 
+
+/**
+ * Deserializes a serialized level from it's file location.
+ * @author Erik Sola
+ *
+ */
 public class Deserialization {
 
 	BullPen bullPen; /** bullpen for the level **/

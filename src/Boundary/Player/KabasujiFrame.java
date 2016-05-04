@@ -29,8 +29,8 @@ import java.awt.Color;
  */
 public class KabasujiFrame extends JFrame {
 	
-	JPanel contentPane;
-	Stock stock;
+	JPanel contentPane; /** this frames content pane **/
+	Stock stock; /** the stock of Pieces **/
 	int builtPuzzles = 0;
 	int builtLightning = 0;
 	int builtRelease = 0;

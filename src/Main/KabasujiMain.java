@@ -9,7 +9,11 @@ import Game.Stock;
 import java.awt.*;
 import java.awt.event.*;
 
-
+/**
+ * run the player.
+ * @author Achilles
+ *
+ */
 public class KabasujiMain {
 	public static void main(String[] args){
 		Stock s = new Stock();

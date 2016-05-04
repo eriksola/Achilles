@@ -137,10 +137,11 @@ public class BoardView extends JPanel {
 	public Board getBoard(){
 		return this.brd;
 	}
+	
 	/**
-	 * Set the board as a new board with a tile double array with the given parameters
-	 * @param row y-param for the tile double array
-	 * @param col x-param for the tile double array
+	 * sets the Board to a Tile[][] of size row x col.
+	 * @param row
+	 * @param col
 	 */
 	public void setBoard(int row, int col){
 		Tile[][] brdTiles = new Tile[row][col];
@@ -180,8 +181,13 @@ public class BoardView extends JPanel {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Sets the selected tile on the boardview
 	 * @param t the new selected tile
+=======
+	 * sets the target Tile selected.
+	 * @param t the target Tile.
+>>>>>>> refs/remotes/origin/master
 	 */
 	public void setSelectedTile(Tile t){
 		//if there is a selected tile, unselect it
@@ -193,6 +199,7 @@ public class BoardView extends JPanel {
 		this.selectedTile.setSelected(true);
 		draw();
 	}
+
 	/**
 	 * Deselects the selected tile on the boardview
 	 */

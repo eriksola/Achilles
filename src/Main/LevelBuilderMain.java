@@ -10,7 +10,11 @@ import Game.Stock;
 import java.awt.*;
 import java.awt.event.*;
 
-
+/**
+ * Run the builder.
+ * @author Achilles
+ *
+ */
 public class LevelBuilderMain {
 	public static void main(String[] args){
 		Stock s = new Stock();

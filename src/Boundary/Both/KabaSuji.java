@@ -13,18 +13,29 @@ import Game.LevelModel;
  * @author bwolfson
  *
  */
-
 public abstract class KabaSuji extends JPanel {
 	
 	protected PieceView selectedPiece; /** the one selected piece. **/
 
-	/**
-	 * start with no PieceView selected.
-	 */
 	
-	public abstract BoardView getBoardView(); /** the BoardView for the builder/player **/
-	public abstract BullPenView getBullPenView(); /** the BullPenView for the builder/player **/
-	public abstract JScrollPane getScrollPane(); /** the scrollpane for the BullPenView **/
+
+	/**
+	 * get the scroll pane for the BullPen.
+	 * @return scroll pane for BullPen.
+	 */
+	public abstract JScrollPane getScrollPane();
+	
+	/**
+	 * get the BoardView.
+	 * @return the BoardView.
+	 */
+	public abstract BoardView getBoardView();
+	
+	/**
+	 * get the BullPenView.
+	 * @return the BullPenView.
+	 */
+	public abstract BullPenView getBullPenView();
 	
 	/**
 	 * set a selected PieceView.
@@ -51,12 +62,13 @@ public abstract class KabaSuji extends JPanel {
 	}
 	
 	/**
-	 * removes the selected PieceView
+	 * remove the currently selected piece.
 	 */
 	public void removeSelected(){
 		selectedPiece.drawUnselected();
 		selectedPiece = null;
 	}
+	
 	/**
 	 * get the selected PieceView
 	 * @return the pieceview
