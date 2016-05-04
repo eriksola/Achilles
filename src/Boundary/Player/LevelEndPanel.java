@@ -103,6 +103,7 @@ public class LevelEndPanel extends JPanel{
 			ArrayList<File> defaultRelease = new ArrayList<File>(Arrays.asList(defaultReleasePath.listFiles()));
 			files.addAll(defaultRelease);
 			
+			System.out.println(initialModel.getName());
 			for(int i = 0; i < files.size(); i++){
 				if (files.get(i).getName().equals(initialModel.getName())){
 					try{

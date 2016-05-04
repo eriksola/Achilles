@@ -24,9 +24,9 @@ import Controller.BullPenController;
 import Controller.DefLevelMenuToPuzzleLevelController;
 import Controller.HflipController;
 import Controller.LevelPlayerController;
-import Controller.PlayPuzzletoPuzzleRulesController;
 import Controller.ReturnToDefMenuController;
 import Controller.RotateController;
+import Controller.RulesController;
 import Controller.TimerController;
 import Controller.VflipController;
 import Game.Board;
@@ -66,6 +66,7 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 	BullPen bp;
 	ReleaseScore score;
 	Stock stock;
+	String name;
 	
 	BoardView boardView;
 	BullPenView bullPenView;
@@ -86,6 +87,7 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 		currentModel.setScore(new ReleaseScore());
 		this.score = (ReleaseScore) currentModel.getScore();
 		this.stock = new Stock();
+		this.name = m.getName();
 		this.initialModel = new LevelModel(this.board, this.bp, m.getName(),(ReleaseScore) m.getScore(), this.stock);
 		setBackground(new Color(173, 216, 230));
 		JPanel panel = new JPanel();
@@ -188,7 +190,7 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 		
 		//activate controllers
 		button_3.addActionListener(new ReturnToDefMenuController(mainFrame));
-		button_4.addActionListener(new PlayPuzzletoPuzzleRulesController(mainFrame));
+		button_4.addActionListener(new RulesController(mainFrame, this, initialModel, 3));
 		button_5.addActionListener(new LevelPlayerController(mainFrame, initialModel));
 		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
 		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));

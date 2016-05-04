@@ -1,14 +1,21 @@
 package Boundary.Player;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+
 import java.awt.Font;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import Controller.LevelPlayerController;
+import Game.LevelModel;
 
 /**
  * Rules for the lightning level.
@@ -17,17 +24,24 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  */
 public class RulesLightning extends JPanel {
 
+	KabasujiFrame mainframe;
+	LevelModel levelModel;
+	
 	/**
 	 * Create the panel.
 	 */
-	public RulesLightning() {
+	public RulesLightning(KabasujiFrame mainframe, LevelModel initModel) {
+		this.mainframe = mainframe;
+		this.levelModel = initModel;
 		
 		JPanel panel = new JPanel();
+		panel.setBounds(100, 100, 769, 485);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBackground(new Color(173, 216, 230));
 		add(panel);
 		
 		JButton button = new JButton("Back to Game");
+		button.addActionListener(new LevelPlayerController(mainframe, initModel));
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setText("LIGHTNING RULES");

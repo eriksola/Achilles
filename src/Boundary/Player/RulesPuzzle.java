@@ -14,6 +14,9 @@ import java.awt.Font;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import Controller.LevelPlayerController;
+import Game.LevelModel;
+
 /**
  * 
  * Rules for the Puzzle Level.
@@ -23,21 +26,23 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class RulesPuzzle extends JPanel {
 
 	KabasujiFrame mainframe;
+	LevelModel levelModel;
 	JButton gameBtn;
 	/**
 	 * Create the panel.
 	 */
-	public RulesPuzzle(KabasujiFrame f) {
-		
+	public RulesPuzzle(KabasujiFrame f, LevelModel initModel) {
 		this.mainframe = f;
+		this.levelModel = initModel;
 		
 		JPanel panel = new JPanel();
+		panel.setBounds(100, 100, 769, 485);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panel.setBackground(new Color(173, 216, 230));
 		add(panel);
 		
 		JButton button = new JButton("Back to Game");
-		this.gameBtn = button;
+		button.addActionListener(new LevelPlayerController(mainframe, initModel));
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setText("Pieces can be placed\nCan be rotated or flipped\nArrangement of 6n squares\nPieces can be placed anywhere within the bounds of the board\nLimited amount of moves\nPieces cannot overlap");

@@ -13,9 +13,9 @@ import Controller.BoardController;
 import Controller.BullPenController;
 import Controller.HflipController;
 import Controller.LevelPlayerController;
-import Controller.PlayPuzzletoPuzzleRulesController;
 import Controller.ReturnToDefMenuController;
 import Controller.RotateController;
+import Controller.RulesController;
 import Controller.TimerController;
 import Controller.VflipController;
 import Game.Board;
@@ -198,7 +198,7 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		
 		//activate controllers
 		button_3.addActionListener(new ReturnToDefMenuController(mainFrame));
-		button_4.addActionListener(new PlayPuzzletoPuzzleRulesController(mainFrame));
+		button_4.addActionListener(new RulesController(mainFrame, this, initialModel, 2));
 		button_5.addActionListener(new LevelPlayerController(mainFrame, initialModel));
 		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
 		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
