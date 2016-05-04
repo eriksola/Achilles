@@ -7,8 +7,8 @@ package Game;
  */
 public class PuzzleScore implements IScore{
 	
-	int totalPieces;
-	int piecesUsed;
+	int totalPieces; /** the total number of pieces in the puzzle level **/
+	int piecesUsed; /** the number of pieces played on the board **/
 	
 	/**
 	 * Creates a PuzzleScore.
@@ -19,10 +19,16 @@ public class PuzzleScore implements IScore{
 		this.piecesUsed = 0;
 	}
 	
+	/**
+	 * Creates a PuzzleScore with the params given
+	 * @param total The total number of pieces
+	 * @param used The number of pieces played
+	 */
 	public PuzzleScore(int total, int used){
 		this.totalPieces = total;
 		this.piecesUsed = used;
 	}
+	
 	/**
 	 * Checks to see if a player has won a puzzle level.
 	 * A player has won when if at least one star is earned, otherwise they lose.

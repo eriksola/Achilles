@@ -8,18 +8,24 @@ import Boundary.Player.KabasujiFrame;
  *
  */
 public class LightningScore implements IScore{
-	int totalTiles;
-	int totalMarked;
+	
+	int totalTiles; /** the total tiles on the board **/
+	int totalMarked; /** the total occupied tiles on the board **/
 	
 	/**
-	 * Creates a LightningScore.
-	 * @param total The total number of pieces that are not used yet.
+	 * Creates a new LightningScore.
+	 * @param total The total number of tiles (that are not used yet)
 	 */
 	public LightningScore(int total){
 		this.totalTiles = total;
 		this.totalMarked = 0;
 	}
 	
+	/**
+	 * Creates a LightningScore with the params given
+	 * @param total The total number of tiles
+	 * @param totalMarked The total number of occupied tiles
+	 */
 	public LightningScore(int total, int totalMarked){
 		this.totalTiles = total;
 		this.totalMarked = totalMarked;

@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import Boundary.Both.BoardView;
 import Boundary.Both.KabaSuji;
 import Boundary.Both.PieceView;
+import Boundary.Builder.KabaSujiBuilder;
 import Boundary.Builder.LevelBuilderPuzzlePanel;
 import Boundary.Player.PuzzleLevelPanel;
 import Game.Board;
@@ -67,7 +68,11 @@ public class PieceController extends java.awt.event.MouseAdapter{
 		
 		//otherwise make that piece the selected piece
 		else {
+			if (view instanceof KabaSujiBuilder){
+				((KabaSujiBuilder) view).addLevelModel();
+			}
 			view.setSelected(pv);
+			
 		view.getBoardView().deselectTile();
 		}
 		

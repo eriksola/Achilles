@@ -12,8 +12,8 @@ import Boundary.Player.KabasujiFrame;
 public interface IScore extends Serializable{
 	
 	/** Method contracts for any score type. */
-	public boolean hasWon();
-	public int scoreToStars();
-	public void updateScore(LevelModel level);
+	public boolean hasWon(); /** checks if the level has been won **/
+	public int scoreToStars(); /** converts the score into the number of stars earned **/
+	public void updateScore(LevelModel level); /** updates the score of the given level **/
 
 }

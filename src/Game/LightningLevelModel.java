@@ -9,10 +9,8 @@ import java.util.ArrayList;
  */
 public class LightningLevelModel extends LevelModel{
 	
-	//LightningBoard lightBoard;
-	int timeGiven;
-	int timeUsed;
-	LightningBoard lightBoard;
+	int timeGiven; /** time given for the lightning level **/
+	LightningBoard lightBoard; /** board for lightning level (which allows for overlapping pieces)
 	
 	/**
 	 * Creates a LightningLevelModel with all the entity objects needed to complete a LightningLevel.
@@ -55,7 +53,6 @@ public class LightningLevelModel extends LevelModel{
 			}
 			this.stock = new Stock(stockPieces);
 			this.timeGiven = tg;
-			this.timeUsed = 0;
 	}
 
 	/**
@@ -66,16 +63,21 @@ public class LightningLevelModel extends LevelModel{
 		super(m);
 		this.timeGiven = m.timeGiven;
 	}
-
+	
+	/**
+	 * getter function for the time allowed
+	 * @return the time
+	 */
 	public int getTime(){
 		return this.timeGiven;
 	}
 	
+	/**
+	 * getter function for the lightning level board
+	 * @return the board
+	 */
 	public LightningBoard getLightningBoard(){
 		return lightBoard;
 	}
 	
-	public void setScore(LightningScore currentScore) {
-		this.score = currentScore;
-	}
 }

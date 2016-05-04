@@ -14,11 +14,11 @@ import Game.Stock;
 
 public class Deserialization {
 
-	BullPen bullPen;
-	Board board;
-	int timer = 0;
-	int numMoves = 0;
-	IScore score;
+	BullPen bullPen; /** bullpen for the level **/
+	Board board; /** board for the level **/
+	int timer = 0; /** timer for a lightning level **/
+	int numMoves = 0; /** number of moves for a puzzle level **/
+	IScore score; /** score for the level **/
 	
 	/**
 	 * Deserializes a previously serialized level.
@@ -70,22 +70,42 @@ public class Deserialization {
 		}
 	}
 	
+	/**
+	 * getter function for the bullpen
+	 * @return the bullpen
+	 */
 	public BullPen getBullPen(){
 		return this.bullPen;
 	}
-
+	
+	/**
+	 * getter function for the board
+	 * @return the board
+	 */
 	public Board getBoard() {
 		return this.board;
 	}
 	
+	/**
+	 * getter function for the score
+	 * @return the score
+	 */
 	public IScore getScore() {
 		return this.score;
 	}
 
+	/**
+	 * getter function for the time 
+	 * @return the time
+	 */
 	public int getTime(){
 		return this.timer;
 	}
-
+	
+	/**
+	 * getter function for the number of moves
+	 * @return the number of moves
+	 */
 	public int getNumMoves(){
 		return this.numMoves;
 	}

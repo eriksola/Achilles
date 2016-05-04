@@ -12,10 +12,8 @@ import Boundary.Both.PieceView;
  */
 public class BullPen implements Serializable{
 	
-	/** Set of all pieces in a Bullpen */
-	ArrayList<Piece> pieces;
-	
-	public Piece selectedPiece;
+	ArrayList<Piece> pieces; /** Set of all pieces in a Bullpen **/
+	public Piece selectedPiece; /** the piece in the bullpen that is selected (if there is one)**/
 
 	/**
 	 * Creates a Bullpen with an array of Pieces.
@@ -23,6 +21,7 @@ public class BullPen implements Serializable{
 	 */
 	public BullPen(ArrayList<Piece> p){
 		this.pieces = p;
+		selectedPiece = null;
 	}
 	
 	/**
@@ -31,11 +30,18 @@ public class BullPen implements Serializable{
 	public BullPen(){
 		this.pieces = new ArrayList<Piece>();
 	}
-
+	
+	/**
+	 * getter function for the selected piece
+	 * @return returns the piece in the bullpen thats selected
+	 */
 	public Piece getSelectedPiece() {
 		return this.selectedPiece;
 	}
-
+	/**
+	 * getter function for the pieces
+	 * @return returns the pieces in the bullpen
+	 */
 	public ArrayList<Piece> getPieces(){
 		return this.pieces;
 	}
@@ -56,7 +62,11 @@ public class BullPen implements Serializable{
 	public boolean removePiece(Piece p){
 		return this.pieces.remove(p);
 	}
-
+	
+	/**
+	 * sets the selected piece
+	 * @param selectedPiece the piece in the bullpen that selected
+	 */
 	public void setSelectedPiece(Piece selectedPiece) {
 		this.selectedPiece = selectedPiece;
 	}

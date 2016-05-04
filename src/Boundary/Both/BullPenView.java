@@ -77,6 +77,7 @@ public class BullPenView extends JPanel {
 		repaint();
 		return this;
 	}
+	
 	/** 
 	 * Removes the pieceView from the bullPenView
 	 * @param pv the pieceView to be removed
@@ -96,6 +97,7 @@ public class BullPenView extends JPanel {
 			}
 		}
 	}
+	
 	/**
 	 * Adds the pieceView to the bullPenView
 	 * @param pv the pieceView to be added
@@ -104,11 +106,19 @@ public class BullPenView extends JPanel {
 		this.pieceViews.add(pv);
 		add(pv.getLabel());
 	}
-
+	
+	/**
+	 * getter function for the pieceViews on the BullPenView
+	 * @return the pieceViews
+	 */
 	public ArrayList<PieceView> getPieceViews() {
 		return pieceViews;
 	}
-
+	
+	/**
+	 * getter function for the bullPen entity
+	 * @return the bullpen
+	 */
 	public BullPen getBullPen(){
 		return this.bp;
 	}

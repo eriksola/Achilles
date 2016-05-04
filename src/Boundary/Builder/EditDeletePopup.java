@@ -19,13 +19,13 @@ import java.io.File;
  */
 public class EditDeletePopup extends JPopupMenu {
 	
-    JMenuItem edit;
-    JMenuItem delete;
-    String path;
-    int levelNumber;
-    int levelType;
-    LevelBuilderBuiltLevelPanel currentPanel;
-    Deserialization de;
+    JMenuItem edit; /** item for editing a level **/
+    JMenuItem delete; /** item for deleting a level **/
+    String path; /** filepath for selected level **/
+    int levelNumber; /** level number **/
+    int levelType; /** leveltype: Puzzle - 1, Lightning - 2, Release - 3 **/
+    LevelBuilderBuiltLevelPanel currentPanel; /**the current panel being displayed **/
+    Deserialization de; /** the deserialization of the level at the given filepath **/
 	
     /**
      * Constructor.

@@ -38,6 +38,7 @@ import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
 import Game.LevelModel;
+import Game.LightningLevelModel;
 import Game.Piece;
 import Game.PuzzleScore;
 import Game.PuzzleLevelModel;
@@ -58,32 +59,31 @@ import java.awt.event.InputMethodEvent;
  */
 public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 	
-	ArrayList<Object> entities;
-	GetMovesController movesController;
+	ArrayList<Object> entities; /** array of objects for serializing the level **/
+	Stack<PuzzleLevelModel> levelModels; /** stack of level models for undoing any actions **/
+	Stack<PuzzleLevelModel> redoModels; /** stack of level models for redoing any undo **/
 	
-	BullPen bp;
-	Board board;
-	Stock stock;
-	String name;
-	int numMoves;
+	JFrame mainFrame; /** frame of the application **/
+	JTextField x; /** x parameter for the board setter **/
+	JTextField y; /** y parameter for the board setter **/
+	JButton exit; /** button for exiting the lightning builder **/
+	JButton btnEnter; /** button for setting the board **/
+	JButton save; /** button for saving the lightning level **/
+	BullPenView bullPenView; /** boundary for the bullpen **/
+	BoardView boardView; /** boundary for the board **/
+	StockView stockView; /** boundary for the stock **/
+	JScrollPane scrollPane; /** scrollpane of the bullpen **/
+	JTextField txtMoves; /** parameter for the move setter **/
+	JButton btnMoves; /** button for setting the number of moves **/
 	
-	JTextField x;
-	JTextField y;
-	JButton exit;
-	JButton btnEnter;
-	JButton save;
+	GetMovesController movesController; /** controller for the move setter **/
 	
-	BullPenView bullPenView;
-	BoardView boardView;
-	StockView stockView;
-
-	JFrame mainFrame;
-	private JTextField txtMoves;
+	BullPen bp; /** the bullpen entity **/
+	Board board; /**the board entity **/
+	Stock stock; /**the stock entity **/
+	String name; /** the name of the level **/
+	int numMoves; /** the number of moves allowed **/
 	
-	JScrollPane scrollPane;
-	
-	Stack<PuzzleLevelModel> levelModels;
-	Stack<PuzzleLevelModel>	redoModels;
 	/**
 	 * Create the panel.
 	 */
@@ -91,27 +91,23 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 		
 		this.mainFrame = f;
 		this.stock = new Stock();
-		
-		//start with a 10 by 10 board
+		//start with empty 10x10 board
 		Tile[][] brdTiles = new Tile[10][10];
 		for (int i = 0; i < brdTiles.length; i++) {
 			for (int j = 0; j < brdTiles[0].length; j++) {
 				brdTiles[i][j] = new Tile(i, j);
 			}
 		}
-		
 		this.board = new Board(brdTiles);
 		this.bp = new BullPen();
 		this.levelModels = new Stack<PuzzleLevelModel>();
 		this.redoModels = new Stack<PuzzleLevelModel>();
 		
-		//generate the StockView (with scroll panel)
+		//WINDOW BUILDER
 		this.stockView = new StockView(mainFrame, stock, this);
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
 		
-
-		//generate the BullPenView (with scroll panel)
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, this.bp, this);
 		scrollPane.setViewportView(bullPenView);
@@ -162,7 +158,7 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 		txtMoves = new JTextField();
 		txtMoves.setColumns(10);
 		
-		JButton btnEnterMoves = new JButton("enter moves");
+		this.btnMoves = new JButton("enter moves");
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -209,7 +205,7 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(txtMoves, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnEnterMoves)))
+									.addComponent(btnMoves)))
 							.addPreferredGap(ComponentPlacement.RELATED))
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
 					.addContainerGap())
@@ -227,7 +223,7 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 							.addComponent(y, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnEnter)
 							.addComponent(txtMoves, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnEnterMoves)))
+							.addComponent(btnMoves)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(horizontal)
@@ -252,28 +248,24 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 		
 		//activate controllers
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
-		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
-	
-		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
-		
-		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
-		
-
 		this.movesController = new GetMovesController(txtMoves, this);
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
 		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
 		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
-		btnEnterMoves.addActionListener(movesController);
+		btnMoves.addActionListener(movesController);
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
 		addhint.addActionListener(new HintController(this));
 		undo.addActionListener(new UndoController(mainFrame, this));
 		redo.addActionListener(new RedoController(mainFrame, this));
-		
 		getEntities();
 		this.save.addActionListener(new SaveController(entities, 1));
 		delete.addActionListener(new DeleteTileController(this));
+		
+		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
+		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
+		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 	}
 	
 	public LevelBuilderPuzzlePanel(JFrame frame, PuzzleLevelModel model, Stack<PuzzleLevelModel> prevMoves, Stack<PuzzleLevelModel>	redoMoves){
@@ -287,14 +279,11 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 		this.levelModels = prevMoves;
 		this.redoModels = redoMoves;
 		
-		//generate the StockView (with scroll panel)
+		//WINDOW BUILDER
 		this.stockView = new StockView(mainFrame, this.stock, this);
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
-		
-
-		
-		//generate the BullPenView (with scroll panel)
+	
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, this.bp, this);
 		scrollPane.setViewportView(bullPenView);
@@ -342,13 +331,13 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 		
 		JButton delete = new JButton("Delete Square");
 		
-		btnEnter = new JButton("Enter n x m ");
+		this.btnEnter = new JButton("Enter n x m ");
 				
-		txtMoves = new JTextField();
+		this.txtMoves = new JTextField();
 		txtMoves.setColumns(10);
 		txtMoves.setText(((Integer)numMoves).toString());
 		
-		JButton btnEnterMoves = new JButton("enter moves");
+		this.btnMoves = new JButton("enter moves");
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -395,7 +384,7 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(txtMoves, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnEnterMoves)))
+									.addComponent(btnMoves)))
 							.addPreferredGap(ComponentPlacement.RELATED))
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
 					.addContainerGap())
@@ -413,7 +402,7 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 							.addComponent(y, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnEnter)
 							.addComponent(txtMoves, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnEnterMoves)))
+							.addComponent(btnMoves)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(horizontal)
@@ -433,41 +422,28 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 							.addGap(0, 10, Short.MAX_VALUE))
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
 		);
-		
 		panel.setLayout(gl_panel);
 		
 		//activate controllers
 		this.exit.addActionListener(new ReturnToBuilderMenuController((LevelBuilderFrame) mainFrame));
 		delete.addActionListener(new DeleteTileController(this));
-		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
-	
-		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
-		
-		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
-		
-
 		this.movesController = new GetMovesController(txtMoves, this);
 		this.btnEnter.addActionListener(new GetBoardDimensionsController(x, y, this));
 		this.bullPenView.addMouseListener(new BullPenController(this, bullPenView, boardView));
 		this.boardView.getLabel().addMouseListener(new BoardController(this, boardView, bullPenView));
-		btnEnterMoves.addActionListener(movesController);
+		this.btnMoves.addActionListener(movesController);
 		horizontal.addActionListener(new HflipController(this));
 		vertical.addActionListener(new VflipController(this));
 		right.addActionListener(new RotateController(this));
 		addhint.addActionListener(new HintController(this));
 		undo.addActionListener(new UndoController(mainFrame, this));
 		redo.addActionListener(new RedoController(mainFrame, this));
-		
 		getEntities();
 		this.save.addActionListener(new SaveController(entities, 1));
-	}
-	
-	public Stack<PuzzleLevelModel> getLevelModels(){
-		return this.levelModels;
-	}
-	
-	public Stack<PuzzleLevelModel> getRedoModels(){
-		return this.redoModels;
+		
+		int levelCount = ((LevelBuilderFrame) mainFrame).getPuzzleLevelCount();
+		levelCount = new File("./src/BuiltLevels/PuzzleLevels").list().length;
+		((LevelBuilderFrame) mainFrame).setPuzzleLevelCount(levelCount);
 	}
 	
 	/**
@@ -478,53 +454,98 @@ public class LevelBuilderPuzzlePanel extends KabaSujiBuilder {
 		entities.add(addition);			
 	}
 	
+	/**
+	 * gets the entities for the save controller
+	 */
 	public void getEntities() {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
 		entities.add(board);
 	}
 	
+	/**
+	 * getter function for the bullpenview
+	 */
 	public BullPenView getBullPenView(){
 		return this.bullPenView;
 	}
-	
+
+	/**
+	 * getter function for the boardview
+	 */
 	public BoardView getBoardView(){
 		return this.boardView;
 	}
-	
+
+	/**
+	 * getter function for the scrollpane of the bullpenview
+	 */
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
 	}
-
-	@Override
+	
+	/**
+	 * getter function for the stockview
+	 */
 	public StockView getStockView() {
 		return this.stockView;
 	}
 
-	
+	/**
+	 * setter function for the number of moves
+	 * @param time new number of moves allowed
+	 */
 	public void setNumMoves(int numMoves){
 		this.numMoves = numMoves;
 	}
 	
+	/**
+	 * getter function for the undo models
+	 * @return undo models
+	 */
+	public Stack<PuzzleLevelModel> getLevelModels(){
+		return this.levelModels;
+	}
+
+	/**
+	 * getter function for the redo models
+	 * @return redo models
+	 */
+	public Stack<PuzzleLevelModel> getRedoModels(){
+		return this.redoModels;
+	}
+
+	/**
+	 * adds a level model to the stack of undo models
+	 */
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
 		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.stock, this.numMoves);
 		this.levelModels.push(changedLevel);
 	}
-	
+
+	/** 
+	 * adds a level model to the stack of redo models
+	 */
 	public void addModelForRedo(){
 		System.out.println("level model pushed for redo purpose.");
 		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.stock, this.numMoves);
 		this.redoModels.push(changedLevel);
 	}
-	
+
+	/**
+	 * gets the last undo model
+	 */
 	public LevelModel getLastLevelModel(){
 		if (!this.levelModels.isEmpty()){
 			return this.levelModels.pop();
 		}
 		else return null;
 	}
-	
+
+	/**
+	 * gets the last redo model
+	 */
 	public LevelModel getLastRedoModel(){
 		if (!this.redoModels.isEmpty()){
 			return this.redoModels.pop();

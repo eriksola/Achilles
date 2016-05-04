@@ -9,8 +9,7 @@ import java.util.ArrayList;
  */
 public class PuzzleLevelModel extends LevelModel{
 	
-	int movesGiven;
-	int movesUsed;
+	int movesGiven; /** the number of moves allowed **/
 	
 	/**
 	 * Creates a PuzzleLevelModel with all the entity objects needed to complete a PuzzleLevel.
@@ -44,7 +43,6 @@ public class PuzzleLevelModel extends LevelModel{
 		}
 		this.stock = new Stock(stockPieces);
 		this.movesGiven = mg;
-		this.movesUsed = 0;
 	}
 	
 	/**
@@ -54,13 +52,20 @@ public class PuzzleLevelModel extends LevelModel{
 	public PuzzleLevelModel(PuzzleLevelModel plm){
 		super(plm);
 		this.movesGiven = plm.movesGiven;
-		this.movesUsed = 0;
 	}
 	
+	/**
+	 * getter function for the moves
+	 * @return the number of moves allowed
+	 */
 	public int getMovesAllowed(){
 		return this.movesGiven;
 	}
 	
+	/**
+	 * setter function for the score
+	 * @param score New score
+	 */
 	public void setScore(PuzzleScore score){
 		this.score = score;
 	}

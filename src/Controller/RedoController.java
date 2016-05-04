@@ -45,9 +45,12 @@ public class RedoController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {		
 		KabaSujiBuilder view = (KabaSujiBuilder) panel;
 		LevelModel model = view.getLastRedoModel(); //the previous state to be loaded
-		frame.getContentPane().removeAll();
-		frame.getContentPane().invalidate();
 		if (model != null){
+			frame.getContentPane().removeAll();
+			frame.getContentPane().invalidate();
+			
+			System.out.println("Pieces on Board: " + model.getBoard().getPieces().values().size()/6);
+			
 			//check if being called from puzzle, lightning, or release builder
 			if(view instanceof LevelBuilderPuzzlePanel){
 				((LevelBuilderPuzzlePanel)view).addLevelModel();

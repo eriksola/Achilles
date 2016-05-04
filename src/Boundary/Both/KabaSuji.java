@@ -22,9 +22,9 @@ public abstract class KabaSuji extends JPanel {
 	 * start with no PieceView selected.
 	 */
 	
-	public abstract JScrollPane getScrollPane();
-	public abstract BoardView getBoardView();
-	public abstract BullPenView getBullPenView();
+	public abstract BoardView getBoardView(); /** the BoardView for the builder/player **/
+	public abstract BullPenView getBullPenView(); /** the BullPenView for the builder/player **/
+	public abstract JScrollPane getScrollPane(); /** the scrollpane for the BullPenView **/
 	
 	/**
 	 * set a selected PieceView.
@@ -32,10 +32,13 @@ public abstract class KabaSuji extends JPanel {
 	 */
 	public void setSelected(PieceView pv){
 		if (pv != null){
+
+			System.out.println(pv.getP().getCoordinates());
+
 			if(selectedPiece == pv){
 				removeSelected();
 			}
-			if(selectedPiece != null){
+			else if(selectedPiece != null){
 				selectedPiece.drawUnselected();
 				selectedPiece = pv;
 				selectedPiece.drawSelected();
@@ -47,13 +50,16 @@ public abstract class KabaSuji extends JPanel {
 		}
 	}
 	
+	/**
+	 * removes the selected PieceView
+	 */
 	public void removeSelected(){
 		selectedPiece.drawUnselected();
 		selectedPiece = null;
 	}
 	/**
 	 * get the selected PieceView
-	 * @return
+	 * @return the pieceview
 	 */
 	public PieceView getSelectedPiece(){
 		return this.selectedPiece;

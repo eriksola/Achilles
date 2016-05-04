@@ -7,19 +7,20 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import Boundary.Both.KabaSuji;
+import Boundary.Builder.KabaSujiBuilder;
 import Game.ColorNumber;
 import Game.ReleaseTile;
 import Game.Tile;
 
 public class ReleaseTileController implements ActionListener{
 	
-	KabaSuji view;
+	KabaSujiBuilder view;
 	JComboBox colorView;
 	JTextField numView;
 	String color;
 	int num;
 	
-	public ReleaseTileController(KabaSuji v, JComboBox color, JTextField num){
+	public ReleaseTileController(KabaSujiBuilder v, JComboBox color, JTextField num){
 		this.view = v;
 		this.colorView = color;
 		this.numView = num;
@@ -38,6 +39,8 @@ public class ReleaseTileController implements ActionListener{
 		Tile selectedTile = view.getBoardView().getSelectedTile();
 		Tile[][] tiles = view.getBoardView().getBoard().getTiles();
 		if (selectedTile != null){
+			view.addLevelModel();
+			
 			int col = selectedTile.getCol();
 			int row = selectedTile.getRow();
 			
@@ -58,6 +61,7 @@ public class ReleaseTileController implements ActionListener{
 				ColorNumber colNum = new ColorNumber(ryg, num);
 				tiles[col][row] = new ReleaseTile(row, col, colNum);
 			} 
+		view.getBoardView().deselectTile();
 		view.getBoardView().draw();
 		}
 	}

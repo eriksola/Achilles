@@ -57,40 +57,37 @@ import Game.LightningLevelModel;
  */
 public class EditLightningLevelPanel extends KabaSujiBuilder{
 	
-	GetTimeController getTimer;
-	ArrayList<Object> entities;
-	Stack<LightningLevelModel> levelModels;
-	Stack<LightningLevelModel> redoModels;
+	ArrayList<Object> entities; /** array of objects for serializing the level **/
+	Stack<LightningLevelModel> levelModels; /** stack of level models for undoing any actions **/
+	Stack<LightningLevelModel> redoModels; /** stack of level models for redoing any undo **/
 	
-	JTextField x_text;
-	JTextField y_text;
-	JTextField time_text;
+	JFrame mainFrame; /** frame of the application **/
+	JTextField x_text; /** x parameter for the board setter **/
+	JTextField y_text; /** y parameter for the board setter **/
+	JTextField timeTextField; /** parameter for the time setter **/
+	JButton exit; /** button for exiting the lightning builder **/
+	JButton save; /** button for saving the lightning level **/
+	JButton btnEnter; /** button for setting the board **/
+	JButton setTime; /** button for setting the time **/
+	BullPenView bullPenView; /** the boundary for the bullpen **/
+	StockView stockView; /** the boundary for the stock **/
+	BoardView boardView; /** the boundary for the board **/
+	JScrollPane scrollPane; /** scrollpane of the bullpen **/
 	
-	JButton exit;
-	JButton save;
-	JButton btnEnter;
-	JButton setTime;
-	JFrame mainFrame;
+	GetTimeController getTimer; /** controller for the time setter **/
 	
-	BullPen bp;
-	Stock stock;
-	LightningBoard board;
-	String name;
-	BullPenView bullPenView;
-	StockView stockView;
-	BoardView boardView;
-	int time;
-	JScrollPane scrollPane;
-	private JTextField timeTextField;
+	BullPen bp; /** the bullpen entity **/
+	Stock stock; /** the stock entity **/
+	LightningBoard board; /** the board entity **/
+	int time; /**the time allowed entity **/
+	String name; /** the name of the level **/
 
 	
 	/**
 	 * Create the panel.
+	 * @wbp.parser.constructor
 	 */
-	
-	
 	public EditLightningLevelPanel(JFrame f, Deserialization d, int levelNumber) {
-		Tile[][] brdTiles = d.getBoard().getTiles();
 	
 		this.board = (LightningBoard) d.getBoard();
 		this.stock = new Stock();
@@ -156,7 +153,6 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		
 		timeTextField = new JTextField();
 		timeTextField.setColumns(10);
-		time_text = timeTextField;
 		
 		JButton timebtn = new JButton("Set Time");
 		setTime = timebtn;
@@ -264,10 +260,17 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		redo.addActionListener(new RedoController(mainFrame, this));
 
 
-		getTimer = new GetTimeController(time_text, this, this);
+		getTimer = new GetTimeController(timeTextField, this, this);
 		this.setTime.addActionListener(getTimer);
 	}
-	
+		
+	/**
+	 * constructor for undoing/redoing moves
+	 * @param f the frame of the application
+	 * @param model the level model after the undo/redo
+	 * @param levelModels stack of undo models
+	 * @param redoModels stack of redo models
+	 */
 	public EditLightningLevelPanel(JFrame f, LightningLevelModel model, Stack<LightningLevelModel> levelModels, Stack<LightningLevelModel> redoModels) {
 		
 		this.board = model.getLightningBoard();
@@ -337,10 +340,9 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		JButton enter = new JButton("Enter n x m");
 		this.btnEnter = enter;
 		
-		timeTextField = new JTextField();
+		this.timeTextField = new JTextField();
 		timeTextField.setColumns(10);
-		time_text = timeTextField;
-		time_text.setText(((Integer)time).toString());
+		timeTextField.setText(((Integer)time).toString());
 		
 		JButton timebtn = new JButton("Set Time");
 		setTime = timebtn;
@@ -447,10 +449,13 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		delete.addActionListener(new DeleteTileController(this));
 
 
-		getTimer = new GetTimeController(time_text, this, this);
+		getTimer = new GetTimeController(timeTextField, this, this);
 		this.setTime.addActionListener(getTimer);
 	}
 	
+	/**
+	 * gets the entities for the save controller
+	 */
 	public void getEntities() {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
@@ -473,46 +478,79 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		entities.add(addition);			
 	}
 	
+	/**
+	 * getter function for the boardview
+	 */
 	public BoardView getBoardView(){
 		return this.boardView;
 	}
 	
+	/**
+	 * getter function for the bullpenview
+	 */
 	public BullPenView getBullPenView(){
 		return this.bullPenView;
 	}
 	
+	/**
+	 * getter function for the scrollpane of the bullpenview
+	 */
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
 	}
-
+	
+	/**
+	 * getter function for the stockview
+	 */
 	public StockView getStockView() {
 		return this.stockView;
 	}
 	
+	/**
+	 * setter function for the time
+	 * @param time new time allowed
+	 */
 	public void setTime(int time){
 		this.time = time;
 	}
 	
+	/**
+	 * getter function for the undo models
+	 * @return undo models
+	 */
 	public Stack<LightningLevelModel> getLevelModels(){
 		return this.levelModels;
 	}
 	
+	/**
+	 * getter function for the redo models
+	 * @return redo models
+	 */
 	public Stack<LightningLevelModel> getRedoModels(){
 		return this.redoModels;
 	}
 	
+	/**
+	 * adds a level model to the stack of undo models
+	 */
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
 		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.stock, this.time);
 		this.levelModels.push(changedLevel);
 	}
-
+	
+	/** 
+	 * adds a level model to the stack of redo models
+	 */
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
 		LightningLevelModel changedLevel = new LightningLevelModel(this.board, this.bp, this.name, null, this.stock, this.time);
 		this.redoModels.push(changedLevel);
 	}
-
+	
+	/**
+	 * gets the last undo model
+	 */
 	public LevelModel getLastLevelModel(){
 		if (!this.levelModels.isEmpty()){
 			return this.levelModels.pop();
@@ -520,6 +558,9 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		else return null;
 	}
 	
+	/**
+	 * gets the last redo model
+	 */
 	public LevelModel getLastRedoModel(){
 		if (!this.redoModels.isEmpty()){
 			return this.redoModels.pop();

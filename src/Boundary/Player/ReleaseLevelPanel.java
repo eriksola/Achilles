@@ -64,7 +64,6 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 	LevelModel currentModel;
 	Board board;
 	BullPen bp;
-	int numMoves;
 	ReleaseScore score;
 	Stock stock;
 	
@@ -80,7 +79,8 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 	public ReleaseLevelPanel(KabasujiFrame f, LevelModel m) {
 		
 		this.mainFrame = f;
-		this.currentModel = m;	
+		this.currentModel = m;
+		Tile[][] tiles = currentModel.getBoard().getTiles();
 		this.board = currentModel.getBoard();
 		this.bp = currentModel.getBullPen();
 		currentModel.setScore(new ReleaseScore());

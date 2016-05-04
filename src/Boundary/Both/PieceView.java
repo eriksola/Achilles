@@ -88,15 +88,26 @@ public class PieceView{
 		label.setIcon(icon);
 	}
 	
-
+	/**
+	 * getter function for the piece entity
+	 * @return the piece entity
+	 */
 	public Piece getP() {
 		return p;
 	}
 	
+	/**
+	 * getter function for the JLabel the PieceView is on
+	 * @return JLabel containing PieceView
+	 */
 	public JLabel getLabel(){
 		return this.label;
 	}
 
+	/**
+	 * sets the piece entity for the pieceView
+	 * @param p the piece entity
+	 */
 	public void setP(Piece p) {
 		this.p = p;
 	}

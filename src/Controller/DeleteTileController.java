@@ -4,14 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Boundary.Both.KabaSuji;
+import Boundary.Builder.KabaSujiBuilder;
 import Game.Board;
 import Game.Tile;
 
 public class DeleteTileController implements ActionListener{
 	
-	KabaSuji view;
+	KabaSujiBuilder view;
 	
-	public DeleteTileController(KabaSuji v){
+	public DeleteTileController(KabaSujiBuilder v){
 		this.view = v;
 	}
 	
@@ -22,12 +23,12 @@ public class DeleteTileController implements ActionListener{
 		Tile[][] tiles = view.getBoardView().getBoard().getTiles();
 		
 		if (selectedTile != null){
+			view.addLevelModel();
 			int col = selectedTile.getCol();
 			int row = selectedTile.getRow();
 			view.getBoardView().deselectTile();
 			tiles[col][row] = null;
 		} 
-		
 		view.getBoardView().draw();
 	}
 }
