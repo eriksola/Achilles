@@ -35,6 +35,8 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -63,7 +65,7 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 	StarView starView;
 	JScrollPane scrollPane;
 	JTextArea timerView;
-
+	JButton endLvlBtn;
 	
 	/**
 	 * Create the panel.
@@ -125,43 +127,55 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		label.setForeground(Color.BLACK);
 		label.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
 		
+		JButton btnEndLevel = new JButton("END LEVEL");
+		btnEndLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.endLevel(initialModel, score);
+			}
+		});
+		btnEndLevel.setEnabled(false);
+		this.endLvlBtn = btnEndLevel;
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(horBtn)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(vertBtn)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(rotateBtn))
 						.addComponent(button_3)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)))
-					.addGap(68)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(horBtn)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(vertBtn)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(rotateBtn)))
+					.addGap(54)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
 									.addComponent(button_4))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(10)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-								.addComponent(starView, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(161)
+								.addComponent(btnEndLevel, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+									.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)))
+							.addGap(169)
 							.addComponent(button_5)
-							.addGap(112)))
+							.addGap(91)))
 					.addGap(12))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(308)
+					.addComponent(starView, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -173,26 +187,30 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 							.addComponent(button_4))
 						.addComponent(label, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(starView, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addComponent(starView, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(button_5))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(11)
-									.addComponent(starView, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
-							.addGap(16)
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+									.addGap(20))
+								.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+									.addGap(49)
+									.addComponent(starView, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnEndLevel)
+									.addGap(67)))
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(horBtn)
 								.addComponent(vertBtn)
 								.addComponent(rotateBtn)
 								.addComponent(textArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addGap(32))
+					.addGap(172))
 		);
 		panel.setLayout(gl_panel);
 		
@@ -238,7 +256,12 @@ public class LightningLevelPanel extends KabaSujiPlayer{
 		if (score.scoreToStars() < starView.getStars()){
 			starView.removeStar();
 		}
-				
+		
+		//if the player has earned at least one star, they can end the level
+		if (score.scoreToStars() >= 1){
+			endLvlBtn.setEnabled(true);
+		}
+		
 		//if the maximum score has been earned end the level
 		if (score.scoreToStars() == 3){
 			mainFrame.endLevel(initialModel, score);
