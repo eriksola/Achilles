@@ -51,6 +51,8 @@ import java.util.ArrayList;
 
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * JPanel to hold a PuzzleLevel in the <b> Kabasuji </b> game.
@@ -73,6 +75,7 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 	JScrollPane scrollPane;
 	JTextArea movesView;
 	StarView starView;
+	JButton endLvlBtn;
 	
 	/**
 	 * Create the panel.
@@ -88,6 +91,7 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 		this.score = (ReleaseScore) currentModel.getScore();
 		this.stock = new Stock();
 		this.name = m.getName();
+		System.out.println(name);
 		this.initialModel = new LevelModel(this.board, this.bp, m.getName(),(ReleaseScore) m.getScore(), this.stock);
 		setBackground(new Color(173, 216, 230));
 		JPanel panel = new JPanel();
@@ -123,6 +127,15 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 		
 		this.starView = new StarView();
 		
+		JButton btnEndLevel = new JButton("END LEVEL");
+		btnEndLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.endLevel(initialModel, score);
+			}
+		});
+		btnEndLevel.setEnabled(false);
+		this.endLvlBtn = btnEndLevel;
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -139,11 +152,13 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGap(75)
+									.addComponent(btnEndLevel)
+									.addGap(59)
 									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGap(78)
@@ -151,14 +166,13 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 									.addPreferredGap(ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
 									.addComponent(button_4)))
 							.addGap(38))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(button_5)
 							.addGap(139))))
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(316)
 					.addComponent(starView, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(339, Short.MAX_VALUE))
+					.addContainerGap(353, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -171,20 +185,26 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 						.addComponent(button_4))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(starView, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_5))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
-							.addGap(16)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(horBtn)
-								.addComponent(vertBtn)
-								.addComponent(rotateBtn))))
-					.addGap(32))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(button_5))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+									.addGap(16)
+									.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(horBtn)
+										.addComponent(vertBtn)
+										.addComponent(rotateBtn))))
+							.addGap(32))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnEndLevel)
+							.addGap(114))))
 		);
 		panel.setLayout(gl_panel);
 		
@@ -225,10 +245,14 @@ public class ReleaseLevelPanel extends KabaSujiPlayer {
 			starView.removeStar();
 		}
 		
+		//if the player has earned at least one star, they can end the level
+		if (score.scoreToStars() >= 1){
+			endLvlBtn.setEnabled(true);
+		}
+		
 		//if the maximum score has been earned, end the level
 		if (score.scoreToStars() == 3){
 			mainFrame.endLevel(initialModel, score);
 		}
 	}
-	
 }

@@ -29,6 +29,11 @@ import Game.PuzzleLevelModel;
 import Game.PuzzleScore;
 import Game.ReleaseScore;
 
+/**
+ * Panel for a level that has ended 
+ * @author gaguila
+ *
+ */
 public class LevelEndPanel extends JPanel{
 
 	KabasujiFrame playerFrame;
