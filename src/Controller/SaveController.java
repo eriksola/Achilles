@@ -94,7 +94,7 @@ public class SaveController implements ActionListener {
 	 * Action to save a file given a level type.
 	 * This will place the level in the appropriate package with the corresponding filename
 	 */
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		
 		String levelName = getInput();
 		boolean canWriteFile = false;

@@ -18,6 +18,7 @@ public abstract class KabaSuji extends JPanel {
 	protected PieceView selectedPiece; /** the one selected piece. **/
 
 	
+
 	/**
 	 * get the scroll pane for the BullPen.
 	 * @return scroll pane for BullPen.
@@ -42,10 +43,13 @@ public abstract class KabaSuji extends JPanel {
 	 */
 	public void setSelected(PieceView pv){
 		if (pv != null){
+
+			System.out.println(pv.getP().getCoordinates());
+
 			if(selectedPiece == pv){
 				removeSelected();
 			}
-			if(selectedPiece != null){
+			else if(selectedPiece != null){
 				selectedPiece.drawUnselected();
 				selectedPiece = pv;
 				selectedPiece.drawSelected();
@@ -64,9 +68,10 @@ public abstract class KabaSuji extends JPanel {
 		selectedPiece.drawUnselected();
 		selectedPiece = null;
 	}
+	
 	/**
 	 * get the selected PieceView
-	 * @return
+	 * @return the pieceview
 	 */
 	public PieceView getSelectedPiece(){
 		return this.selectedPiece;

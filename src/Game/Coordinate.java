@@ -9,6 +9,7 @@ import java.io.Serializable;
  *
  */
 public class Coordinate implements Serializable{
+	
 	public int x;
 	public int y;
 	
@@ -21,7 +22,11 @@ public class Coordinate implements Serializable{
 		this.x = x;
 		this.y = y;
 	}
-
+	
+	/**
+	 * Copies a Coordinate
+	 * @param coordinate The coordinate to be copied
+	 */
 	public Coordinate(Coordinate coordinate) {
 		this.x = coordinate.x;
 		this.y = coordinate.y;
@@ -32,10 +37,18 @@ public class Coordinate implements Serializable{
 		return "(" + x + "," + y + ")";
 	}
 	
+	/**
+	 * getter function for the x param
+	 * @return x coord
+	 */
 	public int getX(){
 		return this.x;
 	}
 	
+	/**
+	 * getter function for the y param
+	 * @return y coord
+	 */
 	public int getY(){
 		return this.y;
 	}

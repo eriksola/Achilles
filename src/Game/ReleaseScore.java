@@ -8,10 +8,10 @@ import Boundary.Player.KabasujiFrame;
  *
  */
 public class ReleaseScore implements IScore{
-	/** Arrays of booleans for colors for a Release Level */
-	boolean[] red = new boolean[6];
-	boolean[] yellow = new boolean[6];
-	boolean[] green = new boolean[6];
+	
+	boolean[] red = new boolean[6]; //Array of booleans representing covered Red tiles (idx 0 = Red 1, idx 1 = Red 2, etc...)
+	boolean[] yellow = new boolean[6]; //Array of booleans representing covered Yellow tiles
+	boolean[] green = new boolean[6]; //Array of booleans representing covered Green tiles
 	
 	/**
 	 * Constructs a release score with the Color on the tiles are all initialized to false.
@@ -20,6 +20,12 @@ public class ReleaseScore implements IScore{
 		
 	}
 	
+	/**
+	 * Constructs a release score with the given params
+	 * @param red True if all Red tiles covered
+	 * @param yellow True if all Yellow tiles covered
+	 * @param green True if all Green tiles covered
+	 */
 	public ReleaseScore(boolean red, boolean yellow, boolean green){
 		if (red) { 
 			for (int i = 0; i < 6; i++){
@@ -37,6 +43,7 @@ public class ReleaseScore implements IScore{
 			}
 		}
 	}
+	
 	/**
 	 * Checks to see if a player has won a release level.
 	 * A player has won when if at least one star is earned, otherwise they lose.
@@ -45,7 +52,6 @@ public class ReleaseScore implements IScore{
 		if (scoreToStars() > 0) return true;
 		else return false;
 	}
-	
 	
 	/**
 	 * Will convert the score into the number of stars earned for a level.
@@ -89,6 +95,7 @@ public class ReleaseScore implements IScore{
 		
 		return result;
 	}
+	
 	/**
 	 * Updates the score of a level.
 	 * @param releaseLvl LevelModel that describes the current level 
@@ -121,14 +128,27 @@ public class ReleaseScore implements IScore{
 			}
 		}
 	}	
+	  
+	/**
+	 * returns true if all the Red tiles are covered
+	 * @return earned star for red tiles
+	 */
 	public boolean getRed(){
 		return allNum(this.red);
 	}
 	
+	/**
+	 * returns true  if all Yellow tiles are covered
+	 * @return earned star for red tiles
+	 */
 	public boolean getYellow(){
 		return allNum(this.yellow);
 	}
 	
+	/**
+	 * returns true if all Green tiles are covered
+	 * @return earned star for green tiles
+	 */
 	public boolean getGreen(){
 		return allNum(this.green);
 	}

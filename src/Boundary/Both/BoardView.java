@@ -27,7 +27,7 @@ import Game.Tile;
  *
  */
 public class BoardView extends JPanel {
-
+	
 	Board brd; /** the Board entity **/
 	JFrame frame; /** the JFrame the BoardView belongs to. **/
 	JLabel label; /** the label representing the Board. **/
@@ -56,7 +56,8 @@ public class BoardView extends JPanel {
 	}
 	
 	/**
-	 * draws the current state of the Board, occupied Tiles yellow, unoccupied white.
+	 * Draws the current state of the Board, occupied tiles cyan, selected tiles/pieces magenta, unoccupied white.
+	 * For release levels it displays red, yellow, and green tiles with numbers
 	 */
 	public void draw(){
 	
@@ -129,7 +130,10 @@ public class BoardView extends JPanel {
 		ImageIcon img1 = new ImageIcon(img);
 		label.setIcon(img1);
 	}
-	
+	/**
+	 * getter function for the Board
+	 * @return the board
+	 */
 	public Board getBoard(){
 		return this.brd;
 	}
@@ -152,25 +156,38 @@ public class BoardView extends JPanel {
 		this.brd.setTiles(brdTiles);
 	}
 	
+	/**
+	 * getter function for the BullPenView
+	 * @return the bullpenview
+	 */
 	public BullPenView getBullPenView(){
 		return this.bpv;
 	}
 	
-	public void setBullPenView(BullPenView bpv){
-		this.bpv = bpv;
-	}
-	
+	/**
+	 * getter function for the label
+	 * @return the label
+	 */
 	public JLabel getLabel(){
 		return this.label;
 	}
 	
+	/**
+	 * getter function for the selected tile on the boardview
+	 * @return the selected tile
+	 */
 	public Tile getSelectedTile(){
 		return this.selectedTile;
 	}
 	
 	/**
+<<<<<<< HEAD
+	 * Sets the selected tile on the boardview
+	 * @param t the new selected tile
+=======
 	 * sets the target Tile selected.
 	 * @param t the target Tile.
+>>>>>>> refs/remotes/origin/master
 	 */
 	public void setSelectedTile(Tile t){
 		//if there is a selected tile, unselect it
@@ -179,12 +196,12 @@ public class BoardView extends JPanel {
 		}
 		//set the new tile as selected
 		this.selectedTile = t;
-		t.setSelected(true);
+		this.selectedTile.setSelected(true);
 		draw();
 	}
-	
+
 	/**
-	 * unselects the selected Tile if there is one.
+	 * Deselects the selected tile on the boardview
 	 */
 	public void deselectTile(){
 		//if there is a selectedTile, unselect it

@@ -57,41 +57,42 @@ import Game.LightningLevelModel;
  */
 public class EditLightningLevelPanel extends KabaSujiBuilder{
 	
-	GetTimeController getTimer; /** controller to get the Timer. **/
-	ArrayList<Object> entities; /** store of entities used is the edit panel. **/
-	Stack<LightningLevelModel> levelModels; /** previous level models (for undo). **/
-	Stack<LightningLevelModel> redoModels;  /** level models stored for redo. **/
-	
-	JTextField x_text; /** x dimension of the Board. **/
-	JTextField y_text; /** y dimension of the Board. **/
+
+	ArrayList<Object> entities; /** array of objects for serializing the level **/
+	Stack<LightningLevelModel> levelModels; /** stack of level models for undoing any actions **/
+	Stack<LightningLevelModel> redoModels; /** stack of level models for redoing any undo **/
+
+	JFrame mainFrame; /** frame of the application **/
+	JTextField x_text; /** x parameter for the board setter **/
+	JTextField y_text; /** y parameter for the board setter **/
+	JTextField timeTextField; /** parameter for the time setter **/
+	JButton exit; /** button for exiting the lightning builder **/
+	JButton save; /** button for saving the lightning level **/
+	JButton btnEnter; /** button for setting the board **/
+	JButton setTime; /** button for setting the time **/
+	BullPenView bullPenView; /** the boundary for the bullpen **/
+	StockView stockView; /** the boundary for the stock **/
+	BoardView boardView; /** the boundary for the board **/
+	JScrollPane scrollPane; /** scrollpane of the bullpen **/
 	JTextField time_text; /** input to the time field. **/
-	
-	JButton exit; /** exit button. **/
-	JButton save; /** save button. **/
-	JButton btnEnter; /** enter board dimensions button. **/
-	JButton setTime; /** button to set the time of the level. **/
-	JFrame mainFrame; /** main frame this JPanel exists within. **/
-	
-	BullPen bp; /** BullPen entity for the level. **/
-	Stock stock; /** Stock entity for the level. **/
-	LightningBoard board; /** Board entity for the level. **/
-	String name; /** name of the level. **/
-	BullPenView bullPenView; /** view of the BullPen. **/
-	StockView stockView; /** view of the Stock. **/
-	BoardView boardView; /** view of the Board. **/
-	int time; /** set time for the level. **/
-	JScrollPane scrollPane; /** scrollPane for the bullpen. **/
-	private JTextField timeTextField; /** field for the time. **/
+
+	GetTimeController getTimer; /** controller for the time setter **/
+
+	BullPen bp; /** the bullpen entity **/
+	Stock stock; /** the stock entity **/
+	LightningBoard board; /** the board entity **/
+	int time; /**the time allowed entity **/
+	String name; /** the name of the level **/
 
 	
 	/**
+	 * Create the panel.
 	 * create the edit lightning level panel.
 	 * @param f the frame this panel exists within.
 	 * @param d the Deserialization object to extract data from.
 	 * @param levelNumber the number of this level.
 	 */
 	public EditLightningLevelPanel(JFrame f, Deserialization d, int levelNumber) {
-		Tile[][] brdTiles = d.getBoard().getTiles();
 	
 		this.board = (LightningBoard) d.getBoard();
 		this.stock = new Stock();
@@ -157,7 +158,6 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		
 		timeTextField = new JTextField();
 		timeTextField.setColumns(10);
-		time_text = timeTextField;
 		
 		JButton timebtn = new JButton("Set Time");
 		setTime = timebtn;
@@ -265,10 +265,10 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		redo.addActionListener(new RedoController(mainFrame, this));
 
 
-		getTimer = new GetTimeController(time_text, this, this);
+		getTimer = new GetTimeController(timeTextField, this, this);
 		this.setTime.addActionListener(getTimer);
 	}
-	
+
 	/**
 	 * Constructor used for undo and redo.
 	 * @param f main frame.
@@ -345,10 +345,9 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		JButton enter = new JButton("Enter n x m");
 		this.btnEnter = enter;
 		
-		timeTextField = new JTextField();
+		this.timeTextField = new JTextField();
 		timeTextField.setColumns(10);
-		time_text = timeTextField;
-		time_text.setText(((Integer)time).toString());
+		timeTextField.setText(((Integer)time).toString());
 		
 		JButton timebtn = new JButton("Set Time");
 		setTime = timebtn;
@@ -455,12 +454,16 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		delete.addActionListener(new DeleteTileController(this));
 
 
-		getTimer = new GetTimeController(time_text, this, this);
+		getTimer = new GetTimeController(timeTextField, this, this);
 		this.setTime.addActionListener(getTimer);
 	}
 	
 	/**
+<<<<<<< HEAD
+	 * gets the entities for the save controller
+=======
 	 * collect all of the pertinent entities of this panel.
+>>>>>>> refs/remotes/origin/master
 	 */
 	public void getEntities() {
 		entities = new ArrayList<Object>();
@@ -484,36 +487,64 @@ public class EditLightningLevelPanel extends KabaSujiBuilder{
 		entities.add(addition);			
 	}
 	
+	/**
+	 * getter function for the boardview
+	 */
 	public BoardView getBoardView(){
 		return this.boardView;
 	}
 	
+	/**
+	 * getter function for the bullpenview
+	 */
 	public BullPenView getBullPenView(){
 		return this.bullPenView;
 	}
 	
+	/**
+	 * getter function for the scrollpane of the bullpenview
+	 */
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
 	}
-
+	
+	/**
+	 * getter function for the stockview
+	 */
 	public StockView getStockView() {
 		return this.stockView;
 	}
 	
+	/**
+	 * setter function for the time
+	 * @param time new time allowed
+	 */
 	public void setTime(int time){
 		this.time = time;
 	}
 	
+	/**
+	 * getter function for the undo models
+	 * @return undo models
+	 */
 	public Stack<LightningLevelModel> getLevelModels(){
 		return this.levelModels;
 	}
 	
+	/**
+	 * getter function for the redo models
+	 * @return redo models
+	 */
 	public Stack<LightningLevelModel> getRedoModels(){
 		return this.redoModels;
 	}
 	
 	/**
+<<<<<<< HEAD
+	 * adds a level model to the stack of undo models
+=======
 	 * add the current model to the stack for undo.
+>>>>>>> refs/remotes/origin/master
 	 */
 	public void addLevelModel(){
 		System.out.println("level model pushed.");

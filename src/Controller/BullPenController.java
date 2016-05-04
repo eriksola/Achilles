@@ -50,10 +50,7 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 		
 		//if there is a selected Piece
 		if(view.getSelectedPiece() != null){
-			
-			if (view instanceof KabaSujiBuilder){
-				((KabaSujiBuilder) view).addLevelModel();
-			}
+			System.out.println("Add selected piece");
 			//add the piece to the bullpen
 			bpv.addPiece(new PieceView(view.getSelectedPiece().getP(), view));
 			view.getScrollPane().setViewportView(bpv);
@@ -64,13 +61,13 @@ public class BullPenController extends java.awt.event.MouseAdapter{
 				
 				//get info for removing piece from board -
 				//location of the anchor point of the piece
-				Tile c = bv.getSelectedTile();
+				Tile c = bv.getBoard().getSelectedPieceAnchor();
 				Piece piece = piecesOnBoard.get(c);
 				Coordinate pieceAnchor = piece.getAnchorOnBoard();
-				int col = pieceAnchor.x;
-				int row = pieceAnchor.y;
+				int anchorCol = pieceAnchor.x;
+				int anchorRow = pieceAnchor.y;
 				Board board = bv.getBoard();
-				board.removePiece(row, col, view.getSelectedPiece());
+				board.removePiece(anchorRow, anchorCol, view.getSelectedPiece());
 				bv.draw();
 			}
 			

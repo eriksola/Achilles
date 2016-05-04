@@ -1,17 +1,14 @@
 package Game;
 import java.io.Serializable;
 /**
- * ColorNumber used in order to represent the color and number of a Release level type in the <b> Kabasuji </b> game.
+ * ColorNumber used in order to represent the color and number of a Release level tile in the <b> Kabasuji </b> game.
  * @author Achilles
  *
  */
 public class ColorNumber implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	int ryg;
-	int number;
+
+	int ryg; /** 1 - Red, 2 - Yellow, 3 - Green **/
+	int number; /**number on the tile **/
 	
 	/**
 	 * Creates a ColorNumber for a release level. The color associations are as follows:
@@ -24,10 +21,18 @@ public class ColorNumber implements Serializable{
 		this.number = num;
 	}
 	
+	/**
+	 * getter function for the color
+	 * @return the int representation of the color on the tile
+	 */
 	public int getColor(){
 		return this.ryg;
 	}
 	
+	/**
+	 * getter function for the num
+	 * @return the number on the tile
+	 */
 	public int getNum(){
 		return this.number;
 	}

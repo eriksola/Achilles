@@ -58,7 +58,7 @@ public class PlayLevelPopup extends JPopupMenu{
         				playableLevel = new PuzzleLevelPanel(currentPanel.getMainFrame(), puzzleLevel);
         				break;
         			case 2:
-        				LightningLevelModel lightningLevel = new LightningLevelModel( (LightningBoard) de.getBoard(), de.getBullPen(), name , de.getScore(), new Stock(), de.getTime());
+        				LightningLevelModel lightningLevel = new LightningLevelModel( (LightningBoard) de.getBoard(), de.getBullPen(), name ,de.getScore(), new Stock(), de.getTime());
         				playableLevel = new LightningLevelPanel(currentPanel.getMainFrame(), lightningLevel);
         				break;
         			case 3:

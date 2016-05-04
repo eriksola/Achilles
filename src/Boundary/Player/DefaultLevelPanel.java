@@ -155,6 +155,11 @@ public class DefaultLevelPanel extends JPanel {
 		release5.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		this.releaseBtns[4] = release5;
 		
+		for (int i = 0; i < 5 ; i++){
+			this.puzzleBtns[i].setEnabled(false);
+			this.lightBtns[i].setEnabled(false);
+			this.releaseBtns[i].setEnabled(false);
+		}
 		JLabel releaseLbl = new JLabel("Release:");
 		releaseLbl.setForeground(new Color(0, 0, 0));
 		releaseLbl.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
@@ -275,12 +280,14 @@ public class DefaultLevelPanel extends JPanel {
 		for(int i = 0; i < puzzleFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(puzzleFiles.get(i).getPath(), 1)){
+				//deserialize puzzle level and activate controller for playing it
 				puzzleLevels[i] = new PuzzleLevelModel(d.getBoard(), d.getBullPen(), puzzleFiles.get(i).getName(),(PuzzleScore) d.getScore(), new Stock(), d.getNumMoves());
 				puzzleBtns[i].addActionListener(new LevelPlayerController( (KabasujiFrame) mainframe, puzzleLevels[i]));
 				//if this isnt the last level, check if it unlocks the next level
 				if (i < puzzleFiles.size() - 1){
-					if (d.getScore().scoreToStars() <= 0){
-						puzzleBtns[i + 1].setEnabled(false);
+					//if at least one star has been earned, next level unlocked
+					if (d.getScore().scoreToStars() > 0){
+						puzzleBtns[i + 1].setEnabled(true);
 					}
 				}
 			}
@@ -293,13 +300,15 @@ public class DefaultLevelPanel extends JPanel {
 		for(int i = 0; i < lightningFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(lightningFiles.get(i).getPath(), 2)){
+				//deserialize lightning level and activate controller for playing it
 				lightLevels[i] = new LightningLevelModel(d.getBoard(), d.getBullPen(), lightningFiles.get(i).getName(), (LightningScore) d.getScore(), new Stock(), d.getTime());
 				lightBtns[i].addActionListener(new LevelPlayerController( (KabasujiFrame) mainframe, lightLevels[i]));
 				System.out.println("Stars earned: " + d.getScore().scoreToStars());
 				//if this isnt the last level, check if it unlocks the next level
 				if (i < lightningFiles.size() - 1){
-					if (((LightningScore) d.getScore()).scoreToStars() <= 0){
-						lightBtns[i + 1].setEnabled(false);
+					//if at least one star has been earned, next level unlocked
+					if (((LightningScore) d.getScore()).scoreToStars() > 0){
+						lightBtns[i + 1].setEnabled(true);
 					}
 				}
 			}
@@ -309,15 +318,18 @@ public class DefaultLevelPanel extends JPanel {
 		}
 		
 		//load release levels (and check if next level is unlocked)
-		for(int i = 0; i < releaseFiles.size() - 1; i++){
+		for(int i = 0; i < releaseFiles.size(); i++){
 			Deserialization d = new Deserialization();
 			if(d.Deserialize(releaseFiles.get(i).getPath(), 3)){
+				//deserialize release level and activate controller for playing it
 				releaseLevels[i] = new LevelModel(d.getBoard(), d.getBullPen(), releaseFiles.get(i).getName(), (ReleaseScore) d.getScore(), new Stock());
 				releaseBtns[i].addActionListener(new LevelPlayerController( (KabasujiFrame) mainframe, releaseLevels[i]));
+				
 				//if this isnt the last level, check if it unlocks the next level
 				if (i < releaseFiles.size() - 1){
-					if (d.getScore().scoreToStars() <= 0){
-						releaseBtns[i + 1].setEnabled(false);
+					//if one star has been earned, the next level is unlocked
+					if (d.getScore().scoreToStars() > 0){
+						releaseBtns[i + 1].setEnabled(true);
 					}
 				}
 			}

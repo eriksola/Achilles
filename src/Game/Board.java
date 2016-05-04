@@ -12,11 +12,11 @@ import Boundary.Both.PieceView;
  */
 public class Board implements Serializable{
 	
-	Tile[][] tiles;
-	HashMap<Tile,Piece> pieces;
+	Tile[][] tiles; /** double array of tiles which represents the board **/
+	HashMap<Tile,Piece> pieces; /** mapping of pieces on the board by the tiles they occupy **/
 	Tile selectedPieceAnchor; /** the anchor of the selected piece on the board **/
-	int width;
-	int height;
+	int width; /** width of the board **/
+	int height; /** height of the board **/
 		
 	/**
 	 * Creates a Board with a two dimensional array of Tiles.
@@ -28,10 +28,6 @@ public class Board implements Serializable{
 		this.width = t[0].length;
 		this.pieces = new HashMap<Tile,Piece>();	
 		this.selectedPieceAnchor = null;
-	}
-	
-	public Board() {
-		
 	}
 
 	/**
@@ -68,12 +64,13 @@ public class Board implements Serializable{
 			t.setOccupied(true);
 			this.pieces.put(t, pv.getP());
 		}
-		
+		System.out.println("Pieces on Board: " + this.pieces.values().size()/6);
+		System.out.println("Occupied tiles: " + this.pieces.keySet().size());
 		return true;
 	}
 	
 	/**
-	 * Remove a piece to the board if it is valid.
+	 * Remove a piece from the board if it is valid.
 	 * @param row <i> x </i> coordinate for the Piece.
 	 * @param column <i> y </i> coordinate for the Piece.
 	 * @param pv View of the Piece that is being removed. 
@@ -82,10 +79,11 @@ public class Board implements Serializable{
 	public boolean removePiece(int row, int column, PieceView pv){
 		
 		Coordinate[] newUnoccCoords = new Coordinate[6];
-		
+		boolean correctRemoval = true;
 		//get coordinates of the piece on the board
 		for (int i = 0; i < 6; i++){
 			Coordinate c = pv.getP().getCoordinates()[i];
+			if (!tiles[row-c.y][column+c.x].isOccupied()){ correctRemoval = false; }
 			newUnoccCoords[i] = new Coordinate(column+c.x, row-c.y);
 		}
 		
@@ -101,8 +99,8 @@ public class Board implements Serializable{
 			t.setSelected(false);
 			this.pieces.remove(t);
 		}
-		
-		return true;
+		System.out.println("Correct Removal? " + correctRemoval);
+		return correctRemoval;
 	}
 	
 	/**
@@ -140,7 +138,13 @@ public class Board implements Serializable{
 		return true;
 	}
 	
-
+	/**
+	 * Deselects the piece located on the tile given
+	 * @param row The row of the tile 
+	 * @param column The column of the tile
+	 * @param pv The piece to be removed
+	 * @return
+	 */
 	public boolean deselectPiece(int row, int column, PieceView pv){
 		
 		Coordinate[] newUnselCoords = new Coordinate[6];
@@ -168,7 +172,7 @@ public class Board implements Serializable{
 	}
 
 	/**
-	 * If the tile extends off the coordinates of the board, invalid move.
+	 * If the tile extends off the coordinates off the board, is null, or overlaps another piece it is an invalid move.
 	 * @param row <i> x </i> coordinate for the Piece.
 	 * @param column <i> y </i> coordinate for the Piece.
 	 * @return True if piece is valid.
@@ -191,39 +195,10 @@ public class Board implements Serializable{
 		return true;
 	}
 
-	public Tile[][] getTiles() {
-		return this.tiles;
-	}
-	
-	public HashMap<Tile, Piece> getPieces() {
-		return this.pieces;
-	}
-	
-	public Tile getSelectedPieceAnchor(){
-		return this.selectedPieceAnchor;
-	}
-	
-	public void setTiles(Tile[][] tiles){
-		this.tiles = tiles;
-		this.height = tiles.length;
-		this.width = tiles[0].length;
-	}
-	
 	/**
-	 * Sets the anchor of the selected piece (IF ITS ON THE BOARD)
-	 * @param t
+	 * sets the piece as a hint and removes it from the board
+	 * @param p The piece to be set as a hint
 	 */
-	public void setSelectedPieceAnchor(Tile t){
-		this.selectedPieceAnchor = t;
-	}
-	
-	/**
-	 * Deselects the anchor of the selected piece
-	 */
-	public void deselectPieceAnchor(){
-		this.selectedPieceAnchor = null;
-	}	
-
 	public void registerHintPiece(Piece p) {
 		
 		//get the piece from the board and set it's underlying tiles as hint tiles
@@ -238,7 +213,14 @@ public class Board implements Serializable{
 			pieces.remove(t);
 		}
 	}
-
+	
+	/**
+	 * Checks if a piece is valid (BEFORE ADDING THE PIECE TO THE BOARD)
+	 * @param row row of the tile selected
+	 * @param col column of the tile selected
+	 * @param pv pieceview of the piece to be added
+	 * @return true if a piece is valid to add to the board
+	 */
 	public boolean isValidToAdd(int row, int col, PieceView pv) {
 		//makes sure every square in the Piece has a valid Tile
 		for (int i = 0; i < 6; i++){
@@ -250,10 +232,66 @@ public class Board implements Serializable{
 		return true;
 	}
 	
+	/**
+	 * getter function for the tile array
+	 * @return array of tiles
+	 */
+	public Tile[][] getTiles() {
+		return this.tiles;
+	}
+	/**
+	 * getter function for map of pieces
+	 * @return map of pieces
+	 */
+	public HashMap<Tile, Piece> getPieces() {
+		return this.pieces;
+	}
+	
+	/**
+	 * getter function for the anchor tile of the selected piece
+	 * @return anchor tile
+	 */
+	public Tile getSelectedPieceAnchor(){
+		return this.selectedPieceAnchor;
+	}
+	
+	/**
+	 * sets the array of tiles
+	 * @param tiles new array of tiles
+	 */
+	public void setTiles(Tile[][] tiles){
+		this.tiles = tiles;
+		this.height = tiles.length;
+		this.width = tiles[0].length;
+	}
+	
+	/**
+	 * Sets the anchor of the selected piece
+	 * @param t
+	 */
+	public void setSelectedPieceAnchor(Tile t){
+		this.selectedPieceAnchor = t;
+	}
+	
+	/**
+	 * Deselects the anchor of the selected piece
+	 */
+	public void deselectPieceAnchor(){
+		this.selectedPieceAnchor = null;
+	}	
+	
+	/**
+	 * getter function for the height
+	 * @return height of the board
+	 */
 	public int getHeight(){
 		return this.height;
 	}
 	
+	/**
+	 * getter function for the width
+	 * @return width of the board
+	 */
 	public int getWidth(){
 		return this.width;
 	}

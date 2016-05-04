@@ -10,11 +10,11 @@ import java.io.Serializable;
  */
 public class Tile implements Serializable{
 	
-	boolean isOccupied;
-	boolean isSelected;
-	boolean isHint;
-	int column;
-	int row;
+	boolean isOccupied; //true if the tile is occupied by a piece
+	boolean isSelected; //true if the tile is selected by the player
+	boolean isHint; //true if the tile is part of a hint 
+	int column; //column of the tile on the board
+	int row; //row of the tile on the board
 
 	
 	/**
@@ -30,6 +30,14 @@ public class Tile implements Serializable{
 		this.row = r;
 	}
 	
+	/**
+	 * Constructor for a tile object detailing exact parameters
+	 * @param row The row of the tile on the board
+	 * @param col The column of the tile on the board
+	 * @param isHint True if the tile is part of a hint
+	 * @param isOccupied True if the tile is occupied by a piece
+	 * @param isSelected True if the tile is selected by the player
+	 */
 	public Tile(int row, int col, boolean isHint, boolean isOccupied, boolean isSelected){
 		this.row = row;
 		this.column = col;
@@ -70,18 +78,34 @@ public class Tile implements Serializable{
 		this.isSelected = bool;
 	}
 	
+	/**
+	 * getter function for isHint
+	 * @return true if the tile is part of a hint
+	 */
 	public boolean isHint(){
 		return this.isHint;
 	}
 	
+	/**
+	 * sets flag for the tile as part of a hint
+	 * @param bool True if the tile is part of a hint
+	 */
 	public void setHint(boolean bool){
 		this.isHint = bool;
 	}
 	
+	/**
+	 * Getter function for the row of the tile
+	 * @return Row of the tile on the board
+	 */
 	public int getRow(){
 		return this.row;
 	}
 	
+	/**
+	 * Getter function for the column of the tile
+	 * @return Column of the tile on the board
+	 */
 	public int getCol(){
 		return this.column;
 	}

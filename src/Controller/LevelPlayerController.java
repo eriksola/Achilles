@@ -42,7 +42,7 @@ public class LevelPlayerController implements ActionListener{
 			frame.getContentPane().revalidate();
 		}
 		
-		if (level instanceof LightningLevelModel){
+		else if (level instanceof LightningLevelModel){
 			System.out.println("Loaded a lightning level");
 			LightningLevelPanel lightningPanel = new LightningLevelPanel(frame, (LightningLevelModel) level);
 			frame.getContentPane().add(lightningPanel, BorderLayout.CENTER);

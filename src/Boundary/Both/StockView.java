@@ -18,10 +18,10 @@ import Game.Stock;
  */
 public class StockView extends JPanel {
 
-	private PieceView pieceViews[]; /** PieceViews inside the StockView **/
-	JFrame frame; /** main frame the StockView exists within. **/
-	Stock s; /** the stock entity to be visually represented by the StockView **/
-	KabaSuji view; /** the top level boundary object for the application **/
+	private PieceView pieceViews[]; /** the PieceViews of all the pieces in the StockView **/
+	JFrame frame; /** the frame of the application **/
+	Stock s; /** the stock entity containing all the piece entities **/
+	KabaSuji view; /** the view currently displayed in the application **/
 	
 	/**
 	 * Create the panel.
@@ -34,7 +34,11 @@ public class StockView extends JPanel {
 	}
 	
 	/**
+<<<<<<< HEAD
+	 * draws the StockView with the given entities
+=======
 	 * draw the StockView to the JPanel and display.
+>>>>>>> refs/remotes/origin/master
 	 */
 	public void draw(){
 		removeAll();
@@ -47,14 +51,27 @@ public class StockView extends JPanel {
 		revalidate();
 	}
 	
+	/**
+	 * getter function for the pieceViews
+	 * @return array of pieceViews
+	 */
+
 	public PieceView[] getPieceViews() {
 		return pieceViews;
 	}
 
+	/**
+	 * Sets the pieceViews 
+	 * @param pieceViews the new PieceViews
+	 */
 	public void setPieceViews(PieceView pieceViews[]) {
 		this.pieceViews = pieceViews;
 	}
 
+	/**
+	 * getter function for the stock entity
+	 * @return stock entity
+	 */
 	public Stock getStock(){
 		return this.s;
 	}

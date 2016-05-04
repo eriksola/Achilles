@@ -60,7 +60,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 		
 		//if there is a selected piece
 		if (view.getSelectedPiece() != null){
-
+			
 			System.out.println("Mouse clicked to board");
 			System.out.println(p.x);
 			System.out.println(p.y);
@@ -84,7 +84,7 @@ public class BoardController extends java.awt.event.MouseAdapter{
 			PieceView pv = view.getSelectedPiece();
 			Board brd = bv.getBoard();
 			
-			if(view instanceof PuzzleLevelPanel || isBuilder){
+			if (view instanceof PuzzleLevelPanel || isBuilder){
 				
 				HashMap<Tile,Piece> piecesOnBoard = bv.getBoard().getPieces();
 				Piece selectedPiece = view.getSelectedPiece().getP();
@@ -111,17 +111,18 @@ public class BoardController extends java.awt.event.MouseAdapter{
 					if (notMove){
 						view.removeSelected();
 						bv.getBoard().deselectPiece(oldRow, oldCol, pv);
+						if (view instanceof KabaSujiBuilder){
+							((KabaSujiBuilder) view).addLevelModel();
+						}
 						bv.draw();
 						return;
 					}
 					
 					//add the piece to the board in the new location
 					if(brd.isValidToAdd(row,col,pv)){
-						if (view instanceof KabaSujiBuilder){
-							((KabaSujiBuilder) view).addLevelModel();
-						}
 						
 						brd.addPiece(row,col,pv);
+						
 						//remove the piece from the old location
 						brd.removePiece(oldRow, oldCol, pv);
 					
@@ -148,10 +149,6 @@ public class BoardController extends java.awt.event.MouseAdapter{
 							
 			//check if the piece is coming from the bullpen
 			if(brd.isValidToAdd(row, col, pv)){
-				if (view instanceof KabaSujiBuilder){
-					((KabaSujiBuilder) view).addLevelModel();
-				}
-						
 				if (bpv.getPieceViews().contains(pv)){
 					if(brd.addPiece(row,col,pv)){
 						//redraw the board
@@ -185,13 +182,11 @@ public class BoardController extends java.awt.event.MouseAdapter{
 							}
 						}	
 					}
+					return;
 				}
 				
 				//otherwise the piece must be coming from the stock
 				else if (view instanceof KabaSujiBuilder){
-					if(brd.isValidToAdd(row,col,pv)){
-						((KabaSujiBuilder) view).addLevelModel();
-					}
 					brd.addPiece(row,col,pv);
 					bv.draw();
 					KabaSujiBuilder buildView = (KabaSujiBuilder) view;
@@ -203,15 +198,17 @@ public class BoardController extends java.awt.event.MouseAdapter{
 					}
 					stockView.draw();
 					view.removeSelected();
+				
 				}
 			}
 		}
-			
-			
-		// if there is no selected piece and this is a puzzle level
-		else if (view instanceof PuzzleLevelPanel || isBuilder){
+		
+		
+		// if there is no selected piece and this is a puzzle level or the level builder
+		else if(view instanceof PuzzleLevelPanel || isBuilder){
 			
 			System.out.println("Mouse clicked from board");
+			
 			//pieces can be removed from the board while no piece is selected
 			HashMap<Tile, Piece> piecesOnBoard = bv.getBoard().getPieces();
 			int row = -1;
@@ -230,22 +227,15 @@ public class BoardController extends java.awt.event.MouseAdapter{
 					}
 				}
 			}
-				
+			
 			Tile t = bv.getBoard().getTiles()[row][col];
-				
-			//if that tile is the selected tile, unselect it 
-			if (t == bv.getSelectedTile()){
-				bv.deselectTile();
-			}
-				
-			//otherwise make that tile the selected tile
-			else {
-				bv.setSelectedTile(t);
-			}	
-				
+			
 			//if theres a piece at that tile, select that piece
 			if (piecesOnBoard.containsKey(t)){
-				
+				bv.deselectTile();
+				if (view instanceof KabaSujiBuilder){
+					((KabaSujiBuilder) view).addLevelModel();
+				}
 				Piece piece = piecesOnBoard.get(t);
 				PieceView pv1 = new PieceView(piece, this.view);
 				view.setSelected(pv1);
@@ -253,10 +243,31 @@ public class BoardController extends java.awt.event.MouseAdapter{
 				col = c.x;
 				row = c.y;
 				bv.getBoard().selectPiece(row, col, pv1);
+				bv.draw();
+				return;
 			}
+			//if this is the builder, the player can select tiles
+			else if (isBuilder){
 				
-			//redraw board to display selected piece/tile
-			bv.draw();		
-		}
+				//if that tile is the selected tile, unselect it 
+				if (t == bv.getSelectedTile()){
+					bv.deselectTile();
+					if (view instanceof KabaSujiBuilder){
+						((KabaSujiBuilder) view).addLevelModel();
+					}
+				}
+					
+				//otherwise make that tile the selected tile
+				else {
+					if (view instanceof KabaSujiBuilder){
+						((KabaSujiBuilder) view).addLevelModel();
+					}
+					bv.setSelectedTile(t);
+				}	
+					
+				//redraw board to display selected piece/tile
+				bv.draw();
+			}
+		}		
 	}
 }

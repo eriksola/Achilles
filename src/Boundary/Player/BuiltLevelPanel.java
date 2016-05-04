@@ -153,19 +153,25 @@ public class BuiltLevelPanel extends JPanel {
 		
 		//activate controllers for buttons
 		menuBtn.addActionListener(new ReturnToPlayerMenuController(mainframe));
+		
+		//if there are levels from the builder
 		if(mainframe.hasBuiltLevels()){			
 			
+			//Load array of puzzle level files
 			int puzzleLevels = mainframe.getBuiltPuzzles();
 			File puzzlePath = new File("./src/BuiltLevels/PuzzleLevels");
 			ArrayList<File> puzzleFiles = new ArrayList<File>(Arrays.asList(puzzlePath.listFiles()));
 			
+			//Load array of lightning level files
 			int lightningLevels = mainframe.getBuiltLightning();
 			File lightningPath = new File("./src/BuiltLevels/LightningLevels");
 			ArrayList<File> lightningFiles = new ArrayList<File>(Arrays.asList(lightningPath.listFiles()));
 			
+			//Load array of release level files
 			int releaseLevels = mainframe.getBuiltRelease();
 			File releasePath = new File("./src/BuiltLevels/ReleaseLevels");
 			ArrayList<File> releaseFiles = new ArrayList<File>(Arrays.asList(releasePath.listFiles()));
+			
 			
 			for(int i = 0; i < puzzleLevels; i++){
 				Deserialization d = new Deserialization();
@@ -186,6 +192,7 @@ public class BuiltLevelPanel extends JPanel {
 					System.err.println("Error in serialization importing process!");
 				}
 			}
+			
 			for(int i = 0; i < lightningLevels; i++){
 				Deserialization d = new Deserialization();
 				String levelName;
@@ -205,6 +212,7 @@ public class BuiltLevelPanel extends JPanel {
 					System.err.println("Error in serialization importing process!");
 				}
 			}
+			
 			for(int i = 0; i < releaseLevels; i++){
 				Deserialization d = new Deserialization();
 				String levelName;

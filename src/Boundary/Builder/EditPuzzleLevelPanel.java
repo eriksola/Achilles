@@ -2,7 +2,6 @@ package Boundary.Builder;
 
 import javax.swing.JPanel;
 
-
 import java.awt.Color;
 
 import javax.swing.border.EmptyBorder;
@@ -40,6 +39,7 @@ import Controller.VflipController;
 import Game.Board;
 import Game.BullPen;
 import Game.LevelModel;
+import Game.LightningLevelModel;
 import Game.Piece;
 import Game.PuzzleScore;
 import Game.Stock;
@@ -60,30 +60,29 @@ import java.awt.event.InputMethodEvent;
  */
 public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 	
-	ArrayList<Object> entities;
-	Stack<PuzzleLevelModel> levelModels;
-	Stack<PuzzleLevelModel> redoModels;
+	ArrayList<Object> entities; /** array of objects for serializing the level **/
+	Stack<PuzzleLevelModel> levelModels; /** stack of level models for undoing any actions **/
+	Stack<PuzzleLevelModel> redoModels; /** stack of level modesl for redoing any undo **/
 	
-	BullPen bp;
-	Board board;
-	Stock stock;
-	String name;
-	int numMoves;
+	JFrame mainFrame; /** frame of the application **/
+	JTextField x; /** x parameter for the board setter **/
+	JTextField y; /** y parameter for the board setter **/
+	JButton exit; /** button for exiting the puzzle builder **/
+	JButton btnEnter; /** button for setting the board **/
+	JButton save; /** button for saving the puzzle level **/
+	BullPenView bullPenView; /** boundary for the bullpen **/
+	StockView stockView; /** boundary for the stock **/
+	BoardView boardView; /** boundary for the board **/
+	JScrollPane scrollPane; /** scrollpane for the bullpen **/
+	private JTextField txtMoves; /** parameter for the num move setter **/
+	GetMovesController gmController; /** controller for the num move button **/
 	
-	JTextField x;
-	JTextField y;
-	JButton exit;
-	JButton btnEnter;
-	JButton save;
+	BullPen bp; /** the bullpen entity **/
+	Board board; /** the board entity **/
+	Stock stock; /** the stock entity **/
+	String name; /** the name of the level **/
+	int numMoves; /** the number of moves entity **/
 	
-	BullPenView bullPenView;
-	StockView stockView;
-	BoardView boardView;
-	JScrollPane scrollPane;
-	JFrame mainFrame;
-	private JTextField txtMoves;
-	
-	GetMovesController gmController;
 	/**
 	 * Create the panel.
 	 */
@@ -100,14 +99,11 @@ public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
 		
-		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
-		
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, bp, this);
 		scrollPane.setViewportView(bullPenView);
 		
-		//bullPenView was previously null, set it to actual view
-		this.boardView.setBullPenView(bullPenView);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
 		
 		setBackground(new Color(173, 216, 230));
 		this.mainFrame = f;
@@ -264,6 +260,13 @@ public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 	
 	}
 	
+	/**
+	 * constructor for undoing/redoing moves
+	 * @param f the frame of the application
+	 * @param model the level model after the undo/redo
+	 * @param levelModels stack of undo models
+	 * @param redoModels stack of redo models
+	 */
 	public EditPuzzleLevelPanel(JFrame f, PuzzleLevelModel model, Stack<PuzzleLevelModel> levelModels, Stack<PuzzleLevelModel> redoModels) {
 
 		this.bp = model.getBullPen();
@@ -278,14 +281,11 @@ public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setViewportView(stockView);
 		
-		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
-		
 		this.scrollPane = new JScrollPane();
 		this.bullPenView = new BullPenView(mainFrame, bp, this);
 		scrollPane.setViewportView(bullPenView);
 		
-		//bullPenView was previously null, set it to actual view
-		this.boardView.setBullPenView(bullPenView);
+		this.boardView = new BoardView(mainFrame, this.board, this, bullPenView);
 		
 		this.mainFrame = f;
 		
@@ -445,6 +445,9 @@ public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 		delete.addActionListener(new DeleteTileController(this));
 	}
 	
+	/**
+	 * gets the entities for the save controller
+	 */
 	public void getEntities() {
 		entities = new ArrayList<Object>();
 		entities.add(bp);
@@ -459,43 +462,68 @@ public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 		entities.add(addition);			
 	}
 	
+	/**
+	 * getter function for the bullPenView
+	 */
 	public BullPenView getBullPenView(){
 		return this.bullPenView;
 	}
 	
+	/** 
+	 * getter function for the boardView
+	 */
 	public BoardView getBoardView(){
 		return this.boardView;
 	}
 	
+	/** getter functionfor the scrollpane of the bullpen **/
 	public JScrollPane getScrollPane(){
 		return this.scrollPane;
 	}
 
-
+	/** getter function for the stockView **/
 	@Override
 	public StockView getStockView() {
 		return this.stockView;
 	}
 	
+	/**
+	 * getter function for the undo models
+	 * @return undo models
+	 */
 	public Stack<PuzzleLevelModel> getLevelModels(){
 		return this.levelModels;
 	}
 	
+	/**
+	 * getter function for the redo models
+	 * @return redo models
+	 */
 	public Stack<PuzzleLevelModel> getRedoModels(){
 		return this.redoModels;
 	}
 	
+	/**
+	 * adds a level model to the stack of undo models
+	 */
 	public void addLevelModel(){
 		System.out.println("level model pushed.");
 		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.stock, this.numMoves);
 		this.levelModels.push(changedLevel);
 	}
 
+	/** 
+	 * adds a level model to the stack of redo models
+	 */
 	public void addModelForRedo() {
 		System.out.println("level model pushed for redo purposes.");
 		PuzzleLevelModel changedLevel = new PuzzleLevelModel(this.board, this.bp, this.name, null, this.stock, this.numMoves);
 		this.redoModels.push(changedLevel);
 	}
+	
+	/**
+	 * gets the last undo model
+	 */
 	public LevelModel getLastLevelModel(){
 		if (!this.levelModels.isEmpty()){
 			return this.levelModels.pop();
@@ -503,6 +531,9 @@ public class EditPuzzleLevelPanel extends KabaSujiBuilder {
 		else return null;
 	}
 	
+	/**
+	 * gets the last redo model
+	 */
 	public LevelModel getLastRedoModel(){
 		if (!this.redoModels.isEmpty()){
 			return this.redoModels.pop();

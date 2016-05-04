@@ -24,8 +24,7 @@ import java.util.Random;
  */
 public class Stock implements Serializable{
 	
-	/** Set of pieces */
-	List<Piece> setOfPieces;
+	List<Piece> setOfPieces; /** Set of pieces **/
 	
 	/**
 	 * Constructs a Stock that has all of the coordinates and pieces used in <b> Kabasuji. </b> 
@@ -94,41 +93,41 @@ public class Stock implements Serializable{
 		
 		
 		// Now define all of the 35 pieces
-		p1 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c3, c2}, 0);
-		p2 = new Piece(new Coordinate[] {c1, c2, c8, c_1, c_2, c_3} , 0);
-		p3 = new Piece(new Coordinate[] {c1, c2, c7, c_1, c_2, c_3} , 0);
-		p4 = new Piece(new Coordinate[] {c1, c7, c8, c_1, c_2, c_3} , 0);
-		p5 = new Piece(new Coordinate[] {c1, c7, c_1, c_7, c_2, c_3} , 0);
-		p6 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c7, c_8} , 0);
-		p7 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c_9, c7} , 0);
-		p8 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c_7, c_8} , 0);
-		p9 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c7, c13} , 0);
-		p10 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c_7, c_13} , 0);
-		p11 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_7, c7} , 0);
-		p12 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_8, c7} , 0);
-		p13 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_9, c7} , 0);
-		p14 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_10, c7} , 0);
-		p15 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_9, c_7} , 0);
-		p16 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_8, c_7} , 0);
-		p17 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c13, c8} , 0);
-		p18 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c_8, c8} , 0);
-		p19 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c8, c9} , 0);
-		p20 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c8, c_7} , 0);
-		p21 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c_7, c_8} , 0);
-		p22 = new Piece(new Coordinate[] {c1, c_1, c_2, neg_c_7, c7, c8 } , 0);
-		p23 = new Piece(new Coordinate[] {c1, c_1, c_2, neg_c_7, c7, c_7} , 0);
-		p24 = new Piece(new Coordinate[] {c1, c_1, c_2, neg_c_8, c7, c8} , 0);
-		p25 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c13, c14} , 0);
-		p26 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c8, c14} , 0);
-		p27 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c13, c_13} , 0);
-		p28 = new Piece(new Coordinate[] {c1, c_1, c_2, c_7, c_13, c13} , 0);
-		p29 = new Piece(new Coordinate[] {c1, c_1, c_8, c_7, c_13, c13} , 0);
-		p30 = new Piece(new Coordinate[] {c1, c_1, c_2, neg_c_9, neg_c_10, c7} , 0);
-		p31 = new Piece(new Coordinate[] {c1, c_1, c_2, c_7, c_8, c_14} , 0);
-		p32 = new Piece(new Coordinate[] {c1, c_1, c_2, neg_c_8, neg_c_9, c_7} , 0);
-		p33 = new Piece(new Coordinate[] {c1, c_1, neg_c_8, neg_c_13, neg_c_14, neg_c_9} , 0);
-		p34 = new Piece(new Coordinate[] {c1, c_1, neg_c_8, neg_c_9, neg_c_14, neg_c_15 } , 0);
-		p35 = new Piece(new Coordinate[] {c1, c2, c_1, c_2, c_3, c_7} , 0);
+		p1 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c3, c2});
+		p2 = new Piece(new Coordinate[] {c1, c2, c8, c_1, c_2, c_3});
+		p3 = new Piece(new Coordinate[] {c1, c2, c7, c_1, c_2, c_3});
+		p4 = new Piece(new Coordinate[] {c1, c7, c8, c_1, c_2, c_3});
+		p5 = new Piece(new Coordinate[] {c1, c7, c_1, c_7, c_2, c_3});
+		p6 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c7, c_8});
+		p7 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c_9, c7});
+		p8 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c_7, c_8});
+		p9 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c7, c13});
+		p10 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, c_7, c_13});
+		p11 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_7, c7});
+		p12 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_8, c7});
+		p13 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_9, c7});
+		p14 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_10, c7});
+		p15 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_9, c_7});
+		p16 = new Piece(new Coordinate[] {c1, c_1, c_2, c_3, neg_c_8, c_7});
+		p17 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c13, c8});
+		p18 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c_8, c8});
+		p19 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c8, c9});
+		p20 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c8, c_7});
+		p21 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c_7, c_8});
+		p22 = new Piece(new Coordinate[] {c1, c_1, c_2, neg_c_7, c7, c8 });
+		p23 = new Piece(new Coordinate[] {c1, c_1, c_2, neg_c_7, c7, c_7});
+		p24 = new Piece(new Coordinate[] {c1, c_1, c_2, neg_c_8, c7, c8});
+		p25 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c13, c14});
+		p26 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c8, c14});
+		p27 = new Piece(new Coordinate[] {c1, c_1, c_2, c7, c13, c_13});
+		p28 = new Piece(new Coordinate[] {c1, c_1, c_2, c_7, c_13, c13});
+		p29 = new Piece(new Coordinate[] {c1, c_1, c_8, c_7, c_13, c13});
+		p30 = new Piece(new Coordinate[] {c1, c_1, c_2, neg_c_9, neg_c_10, c7});
+		p31 = new Piece(new Coordinate[] {c1, c_1, c_2, c_7, c_8, c_14});
+		p32 = new Piece(new Coordinate[] {c1, c_1, c_2, neg_c_8, neg_c_9, c_7});
+		p33 = new Piece(new Coordinate[] {c1, c_1, neg_c_8, neg_c_13, neg_c_14, neg_c_9});
+		p34 = new Piece(new Coordinate[] {c1, c_1, neg_c_8, neg_c_9, neg_c_14, neg_c_15 });
+		p35 = new Piece(new Coordinate[] {c1, c2, c_1, c_2, c_3, c_7});
 		
 		// Now add the pieces to the list
 		setOfPieces = new ArrayList<Piece>();

@@ -26,10 +26,11 @@ import Controller.SwitchWindowController;
  */
 public class LevelBuilderMainMenuPanel extends JPanel {
 
-	LevelBuilderFrame mainFrame;
-	JButton lightning;
-	JButton puzzle;
-	JButton release;
+	LevelBuilderFrame mainFrame; /** The frame of the application **/
+	JButton lightning; /** Button to lightning level builder **/
+	JButton puzzle; /** Button to puzzle level builder **/
+	JButton release; /** Button to release level builder **/
+	
 	/**
 	 * Create the panel.
 	 */
@@ -102,6 +103,7 @@ public class LevelBuilderMainMenuPanel extends JPanel {
 		);
 		setLayout(groupLayout);
 		
+		//activate controllers on boundary objects
 		puzzle.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderPuzzlePanel(mainFrame)));
 		lightning.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderLightningPanel(mainFrame)));
 		release.addActionListener(new SwitchWindowController(mainFrame, new LevelBuilderReleasePanel(mainFrame)));

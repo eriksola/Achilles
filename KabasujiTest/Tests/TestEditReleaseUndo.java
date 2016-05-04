@@ -46,10 +46,10 @@ public class TestEditReleaseUndo extends TestCase {
 	Coordinate c7 = new Coordinate(-2,0);
 	Coordinate c8 = new Coordinate(2,0);
 
-	Piece p1 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c6},0);
-	Piece p2 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c7},0);
-	Piece p3 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c8},0);
-	Piece p4 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c6},0);
+	Piece p1 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c6});
+	Piece p2 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c7});
+	Piece p3 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c8});
+	Piece p4 = new Piece(new Coordinate[]{c1,c2,c3,c4,c5,c6});
 	
 	/*
 	 *    #  

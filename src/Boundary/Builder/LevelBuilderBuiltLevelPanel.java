@@ -43,12 +43,13 @@ import java.awt.GridLayout;
  */
 public class LevelBuilderBuiltLevelPanel extends JPanel {
 
-	LevelBuilderFrame mainframe;
-	JButton menuBtn;
+	LevelBuilderFrame mainframe; /** the frame of the application **/
+	JButton menuBtn; /** button for returning to the main menu **/
 
-	HashMap<String, JLabel> puzzleLevelsLabels = new HashMap<String, JLabel>();
-	HashMap<String, JLabel> lightningLevelsLabels = new HashMap<String, JLabel>();
-	HashMap<String, JLabel> releaseLevelsLabels = new HashMap<String, JLabel>();
+	HashMap<String, JLabel> puzzleLevelsLabels = new HashMap<String, JLabel>(); /** HashMap of puzzle level names and their respective labels for edit/delete **/
+	HashMap<String, JLabel> lightningLevelsLabels = new HashMap<String, JLabel>(); /** HashMap of lightning level names and their respective labels for edit/delete **/
+	HashMap<String, JLabel> releaseLevelsLabels = new HashMap<String, JLabel>(); /** HashMap of release level names and their respective labels for edit/delete **/
+	
 	/**
 	 * Create the panel.
 	 */
@@ -235,6 +236,11 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * removes a level from the proper HashMap
+	 * @param levelName the name of the level (key to HashMap)
+	 * @param levelType Puzzle - 1, Lightning - 2, Release - 3
+	 */
 	public void removeLevel(String levelName, int levelType) {
 		if(levelType == 1){
 			puzzleLevelsLabels.get(levelName).setVisible(false);
@@ -254,10 +260,18 @@ public class LevelBuilderBuiltLevelPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * getter function for the return to menu button
+	 * @return return to menu button
+	 */
 	public JButton getMenuButton(){
 		return this.menuBtn;
 	}
-
+	
+	/**
+	 * getter function for the frame of the application
+	 * @return app frame
+	 */
 	public LevelBuilderFrame getMainFrame(){
 		return this.mainframe;
 	}

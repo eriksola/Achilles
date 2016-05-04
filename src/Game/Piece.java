@@ -12,20 +12,18 @@ import Game.Coordinate;
  */
 public class Piece implements Serializable{
 
-	private Coordinate[] coords = new Coordinate[6];
-	private Coordinate anchorOnBoard = null; /** Represents the location of the anchor if the piece is on the board **/
-	int bpIndex;
-
-	public Piece(Coordinate[] coords, int bp){
+	Coordinate[] coords = new Coordinate[6]; /** Array of coordinates that make up the piece **/
+	Coordinate anchorOnBoard = null; /** Represents the location of the anchor coordinate (0,0) if the piece is on the board **/
+	
+	/**
+	 * constructor for the piece
+	 * @param coords array of coordinates
+	 */
+	public Piece(Coordinate[] coords){
 		for (int i = 0; i < coords.length; i++) {
 			this.coords[i] = new Coordinate(coords[i]);
 		}
-		this.bpIndex = bp;
 	}	
-	
-	public Coordinate[] getCoordinates(){
-		return this.coords;
-	}
 	
 	/**
 	 * Rotates the selected piece ninety degrees counterclockwise.
@@ -81,10 +79,26 @@ public class Piece implements Serializable{
 		return s;
 	}
 	
+	/**
+	 * Getter function for the array of coordinates
+	 * @return the array of coordinates
+	 */
+	public Coordinate[] getCoordinates(){
+		return this.coords;
+	}
+	
+	/**
+	 * getter function for the anchor coordinate of this piece (while on the board)
+	 * @return
+	 */
 	public Coordinate getAnchorOnBoard(){
 		return this.anchorOnBoard;
 	}
 	
+	/**
+	 * setter function for the anchor coordinate of this piece (while on the board)
+	 * @param c Coordinate on the board of the anchor coordinate (0,0) of the piece
+	 */
 	public void setAnchorOnBoard(Coordinate c){
 		this.anchorOnBoard = c;
 	}
